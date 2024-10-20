@@ -1,0 +1,35 @@
+{
+  "name": "csc13008-mini-threads",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd frontend && npm run dev\" \"cd backend && npm start\"",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "lint-staged": {
+    "*.{css, scss}": [
+      "prettier --ignore-path .eslintignore --single-quote --tab-width 4 --write"
+    ],
+    "*.{js, jsx, ts, tsx}": [
+      "prettier --ignore-path .eslintignore --single-quote --tab-width 4 --trailing-comma all --write"
+    ],
+    "*.json": [
+      "prettier --ignore-path .eslintignore --write"
+    ],
+    "*.{html, md, yml, ejs}": [
+      "prettier --ignore-path .eslintignore --single-quote --tab-width 4 --write"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
