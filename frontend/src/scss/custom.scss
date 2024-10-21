@@ -1,0 +1,10 @@
+@use '../../node_modules/bootstrap/scss/bootstrap' as *;
+@use 'mixins';
+@use 'variables';
+@use 'reset';
+
+$primary-color: black;
+
+body {
+    background-color: $primary-color;
+}
