@@ -10,3 +10,54 @@ body {
     background-color: $primary-color;
     font-family: 'Roboto', sans-serif;
 }
+
+
+@mixin lg-desktop {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin md-desktop {
+  @media (min-width: 1100px) and (max-width: 1199px) {
+    @content;
+  }
+}
+
+@mixin sm-desktop {
+  @media (min-width: 956px) and (max-width: 1099px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) and (max-width: 955px) {
+    @content;
+  }
+}
+
+@mixin landscape-mobile {
+	@media (max-width: 767px) {
+		@content;
+	}
+}
+
+@mixin sm-tablet {
+  @media (min-width: 520px) {
+    @content;
+  }
+}
+
+@mixin potrait-mobile {
+  @media (max-width: 519px) {
+    @content;
+  }
+}
+
+
+@mixin flexible-decoration {
+  @media (max-height: 860px) {
+    @content;
+  }
+}
+
