@@ -1,4 +1,6 @@
 @use 'reset';
+@use 'base';
 @use 'variables';
 @use 'mixins';
-@use './homepage';
+@use 'homepage';
+@use 'activitypage';
