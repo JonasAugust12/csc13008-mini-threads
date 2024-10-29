@@ -144,7 +144,7 @@
     position: sticky;
     z-index: 1;
     top: 0;
-    background-color: black;
+    background-color: #101010;
 }
 
 .refresh-btn {
@@ -173,9 +173,11 @@
     position: fixed;
     top: 60px;
     width: 600px;
-    height: 2px;
+    height: 1px;
     border: 1px solid #353636;
     border-bottom: none;
+    border-left: none;
+    border-right: none;
     background-color: #181818;
     left: 50%;
     transform: translateX(-50%);
@@ -200,7 +202,7 @@
     top: 60px;
     width: 20px;
     height: 20px;
-    background-color: black;
+    background-color: #101010;
     z-index: 2;
 }
 
@@ -224,7 +226,7 @@
     top: 60px;
     width: 20px;
     height: 20px;
-    background-color: black;
+    background-color: #101010;
     z-index: 2;
 }
 
