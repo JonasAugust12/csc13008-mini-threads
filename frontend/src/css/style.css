@@ -290,9 +290,27 @@ template {
 }
 
 body {
-    background-color: black;
+    background-color: #101010;
     font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
     color: white;
+}
+
+.home__nav--on path,
+.profile__nav--on circle,
+.profile__nav--on path,
+.activity__nav--on path,
+.search__nav--on path,
+.create__nav-on:hover path {
+    stroke: white;
+    fill: white;
+}
+
+.create__nav-on {
+    background-color: #171717;
+}
+
+.app {
+    background-color: #0a0a0a;
 }
 
 .app__login-btn {
@@ -351,7 +369,9 @@ body {
 
 .navbar-vertical {
     height: 100vh;
-    width: 80px;
+    width: 76px;
+    backdrop-filter: blur(15px);
+    overflow-y: visible;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -382,22 +402,26 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    row-gap: 4px;
+    flex-grow: 1;
     align-items: center;
 }
 
 .app__utilities-btn {
     display: block;
-    width: 26px;
-    padding: 10px 20px;
-    margin-top: 3px;
-    margin-bottom: 3px;
+    width: 24px;
+    height: 24px;
+    padding: 12px 18px;
+    margin: 5px 0;
     border-radius: 20%;
     box-sizing: content-box;
     transition: background-color 0.3s ease;
 }
 
 .app__utilities-btn svg {
-    transform: translateY(2.5px);
+    width: 24px;
+    height: 24px;
+    fill: #0a0a0a;
 }
 
 .app__utilities-btn:hover {
@@ -422,6 +446,14 @@ body {
     margin-bottom: 3px;
     border-radius: 20%;
     box-sizing: content-box;
+    cursor: pointer;
+}
+
+.app__setting-btn:hover,
+.app__setting-btn:hover path,
+.app__setting-btn:hover rect {
+    stroke: white;
+    fill: white;
 }
 
 .app__container {
@@ -435,12 +467,14 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
+    height: 60px;
+    box-sizing: border-box;
     font-weight: 600;
     color: white;
     position: sticky;
     z-index: 1;
     top: 0;
-    background-color: #101010;
+    background-color: #0a0a0a;
 }
 
 .refresh-btn {
@@ -452,6 +486,24 @@ body {
     color: #f3f5f7;
     text-decoration: none;
     text-align: center;
+}
+
+.refresh-option {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 16px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #363737;
+    background-color: #181818;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.refresh-option svg {
+    width: 12px;
+    height: 12px;
 }
 
 .content__section {
@@ -484,9 +536,9 @@ body {
     position: fixed;
     top: 60px;
     width: 20px;
-    height: 20px;
+    height: 50px;
     border: 1px solid #353636;
-    border-top-left-radius: 20px;
+    border-top-left-radius: 24px;
     border-right: none;
     border-bottom: none;
     background-color: #181818;
@@ -498,7 +550,7 @@ body {
     top: 60px;
     width: 20px;
     height: 20px;
-    background-color: #101010;
+    background-color: #0a0a0a;
     z-index: 2;
 }
 
@@ -507,9 +559,9 @@ body {
     right: calc(50% - 320px);
     top: 60px;
     width: 20px;
-    height: 20px;
+    height: 50px;
     border: 1px solid #353636;
-    border-top-right-radius: 20px;
+    border-top-right-radius: 24px;
     border-left: none;
     border-bottom: none;
     background-color: #181818;
@@ -522,7 +574,7 @@ body {
     top: 60px;
     width: 20px;
     height: 20px;
-    background-color: #101010;
+    background-color: #0a0a0a;
     z-index: 2;
 }
 
@@ -730,23 +782,6 @@ body {
     fill: transparent;
 }
 
-.activity-option {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 16px;
-    width: 24px;
-    height: 24px;
-    border: 1px solid #363737;
-    background-color: #181818;
-    border-radius: 100%;
-}
-
-.activity-option svg {
-    width: 12px;
-    height: 12px;
-}
-
 .activity__post {
     width: 100%;
     min-height: 124px;
@@ -765,7 +800,7 @@ body {
 }
 
 .activity__post-avatar {
-    width: 11%;
+    width: 13.2%;
     padding: 12px 0;
 }
 
@@ -811,7 +846,7 @@ body {
     display: block;
     margin-top: 6px;
     color: rgba(243, 245, 247, 0.937254902);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 16px;
     line-height: 21px;
 }
@@ -1429,6 +1464,333 @@ body {
         sans-serif;
     font-size: 15px;
     line-height: 1.4em;
+}
+
+.refresh-btn {
+    font-size: 15px;
+}
+
+.content__section {
+    color: white;
+    position: relative;
+}
+
+.content__heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.information {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-left: 26px;
+}
+
+.information__name {
+    font-size: 23px;
+    font-weight: 650;
+    margin-bottom: 4px;
+}
+
+.information__nickname {
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.information__bio {
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.information__follower {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    width: 130px;
+    color: rgb(153, 153, 153);
+}
+
+.follower__img {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.follower__img__item {
+    height: 18px;
+    width: 18px;
+    background-size: cover;
+    background-image: url(../assets/img/fl1.png);
+    border-radius: 50%;
+    margin-right: 4px;
+    position: relative;
+}
+
+.follower__img__item:nth-child(2) {
+    background-image: url(../assets/img/fl2.png);
+    right: 8px;
+}
+
+.follower__img__item:nth-child(3) {
+    background-image: url(../assets/img/fl3.png);
+    right: 16px;
+}
+
+.follower__number {
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 4px;
+    position: relative;
+    right: 8px;
+}
+
+.follower__text {
+    font-size: 14px;
+    font-weight: 400;
+    position: relative;
+    right: 8px;
+}
+
+.utility {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    height: 196px;
+    margin-top: 20px;
+    margin-right: 26px;
+}
+
+.utility__avatar {
+    height: 86px;
+    width: 86px;
+    background-size: cover;
+    background-image: url(../assets/img/avt.png);
+    border-radius: 50%;
+    margin-bottom: 56px;
+}
+
+.utility__avatar:hover {
+    cursor: pointer;
+}
+
+.fa-instagram {
+    font-size: 24px;
+}
+
+.fa-instagram:hover {
+    cursor: pointer;
+}
+
+.edit-btn {
+    display: block;
+    height: 34px;
+    width: 586px;
+    font-size: 14px;
+    font-weight: 650;
+    border-radius: 10px;
+    margin-left: 26px;
+    margin-right: 26px;
+    text-align: center;
+    border: 1px solid rgba(243, 245, 247, 0.15);
+}
+
+.edit-btn:hover {
+    cursor: pointer;
+}
+
+.edit-btn p {
+    margin-top: 8px;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-weight: 500;
+    margin-top: 30px;
+    font-size: 15px;
+    list-style: none;
+}
+
+.navigation__item {
+    width: 33.3333333333%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.navigation__item:hover {
+    cursor: pointer;
+}
+
+.item__line {
+    margin-top: 14px;
+    border-bottom: 1px solid rgba(243, 245, 247, 0.15);
+    width: 100%;
+}
+
+.navigation__item--on {
+    color: white;
+}
+.navigation__item--on .item__line {
+    border-bottom-color: white; /* Change the color to white */
+}
+
+.navigation__item--off {
+    color: rgb(153, 153, 153);
+}
+
+.post-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 70px;
+    align-items: center;
+    border-bottom: 1px solid rgba(243, 245, 247, 0.15);
+}
+
+.post-section__avatar {
+    margin-left: 26px;
+    height: 40px;
+    width: 40px;
+    background-size: cover;
+    background-image: url(../assets/img/avt.png);
+    border-radius: 50%;
+}
+
+.post-section__input {
+    font-size: 15px;
+    color: rgba(243, 245, 247, 0.3);
+    margin-left: 12px;
+}
+
+.post-section__btn {
+    height: 36px;
+    width: 62px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1px solid rgba(243, 245, 247, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 26px;
+}
+
+.post-section__btn:hover {
+    cursor: pointer;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+}
+
+.edit-profile {
+    display: none;
+    width: 36%;
+    height: 516px;
+    background-color: black;
+    border-radius: 18px;
+    position: fixed;
+    z-index: 6;
+    top: 20%;
+    left: 32%;
+    list-style: none;
+    border: 1px solid rgba(243, 245, 247, 0.15);
+    overflow: auto;
+    background-color: #101010;
+}
+
+#pop-up-profile-box {
+    display: none;
+}
+
+#pop-up-profile-box:checked ~ .overlay {
+    display: block;
+}
+
+#pop-up-profile-box:checked ~ .edit-profile {
+    display: block;
+}
+
+.edit-profile__field {
+    font-size: 16px;
+    height: 16.6666666667%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 26px;
+    margin-right: 26px;
+    border-bottom: 1px solid rgba(243, 245, 247, 0.15);
+}
+
+.field__title {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.field__content {
+    font-weight: 400;
+    color: rgba(243, 245, 247, 0.3);
+}
+
+.field__content__ig {
+    font-size: 12px;
+}
+
+.field__content__private {
+    font-size: 12px;
+}
+
+.edit-profile__button {
+    height: 54px;
+    width: 90%;
+    margin-left: 26px;
+    background-color: white;
+    border-radius: 12px;
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-profile__button:hover {
+    cursor: pointer;
+}
+
+.edit-profile__avatar {
+    height: 54px;
+    width: 54px;
+    border-radius: 50%;
+    background-image: url(../assets/img/avt.png);
+    background-size: cover;
+    position: absolute;
+    top: 26px;
+    right: 26px;
+    z-index: 3;
+}
+
+.avatar-mask {
+    height: 70px;
+    width: 70px;
+    background-color: #101010;
+    position: absolute;
+    top: 26px;
+    right: 26px;
 }
 
 /*# sourceMappingURL=style.css.map */

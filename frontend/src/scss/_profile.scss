@@ -1,22 +1,9 @@
-.profile__nav--on
-{
-    fill: white;
-}
-.profile__nav--on circle
-{
-    stroke: white;
-}
-.profile__nav--on path
-{
-    stroke: white;
-}
 .refresh-btn
 {
     font-size: 15px;
 }
 .content__section
 {
-    font-family: system-ui,Helvetica, Arial, sans-serif;
     color: white;
     position: relative;
     
@@ -80,19 +67,19 @@
     height: 18px;
     width: 18px;
     background-size: cover;
-    background-image: url(/frontend/src/assets/img/fl1.png);
+    background-image: url(../assets/img/fl1.png);
     border-radius: 50%;
     margin-right: 4px;
     position: relative;
 }
 .follower__img__item:nth-child(2)
 {
-    background-image: url(/frontend/src/assets/img/fl2.png);
+    background-image: url(../assets/img/fl2.png);
     right: 8px;
 }
 .follower__img__item:nth-child(3)
 {
-    background-image: url(/frontend/src/assets/img/fl3.png);
+    background-image: url(../assets/img/fl3.png);
     right: 16px;
 }
 .follower__number
@@ -131,7 +118,7 @@
     height: 86px;
     width: 86px;
     background-size: cover;
-    background-image: url(/frontend/src/assets/img/avt.png);
+    background-image: url(../assets/img/avt.png);
     border-radius: 50%;
     margin-bottom: 56px;
 }
@@ -149,6 +136,7 @@
 }
 .edit-btn
 {
+    display: block;
     height: 34px;
     width: 586px;
     font-size: 14px;
@@ -239,7 +227,7 @@
     height: 40px;
     width: 40px;
     background-size: cover;
-    background-image: url(/frontend/src/assets/img/avt.png);
+    background-image: url(../assets/img/avt.png);
     border-radius: 50%;
 }
 .post-section__input
@@ -270,34 +258,44 @@
 
 // edit profile
 .overlay{
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    
-    // display: none;
-    
+    z-index: 5;
 }
 .edit-profile
 {
+    display: none;
     width: 36%;
     height: 516px;
-   
     background-color: black;
     border-radius: 18px;
     position: fixed;
-    z-index: 2;
+    z-index: 6;
     top: 20%;
     left: 32%;
     list-style: none;
     border: 1px solid rgba(243,245,247,0.15);
     overflow: auto;
-    
-    // display: none;
+    background-color: #101010;
 }
+#pop-up-profile-box
+{
+    display: none;
+}
+#pop-up-profile-box:checked ~ .overlay
+{
+    display: block;
+}
+#pop-up-profile-box:checked ~ .edit-profile
+{
+    display: block;
+}
+
 .edit-profile__field
 {
     
@@ -366,7 +364,7 @@
     height: 54px;
     width: 54px;
     border-radius: 50%;
-    background-image: url(/frontend/src/assets/img/avt.png);
+    background-image: url(../assets/img/avt.png);
     background-size: cover;
     position: absolute;
     top: 26px;
@@ -377,8 +375,7 @@
 {
     height: 70px;
     width: 70px;
-    background-color: black;
-   
+    background-color: #101010;
     position: absolute;
     top: 26px;
     right: 26px;
