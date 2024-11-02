@@ -1,16 +1,19 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon --inspect src/server.js"
+    "start": "nodemon --inspect src/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.1"
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-ejs-layouts": "^2.5.1",
+    "mongoose": "^8.8.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
