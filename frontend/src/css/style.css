@@ -536,5 +536,27 @@ body {
     cursor: pointer;
     background-color: #202020;
 }
+.content__section .thread__content__container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.content__section .thread__image-content {
+    display: flex;
+    gap: 5px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: hidden;
+    margin-right: 0px;
+    width: 550px;
+    scrollbar-width: none;
+}
+.content__section .thread__image-content::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+.content__section .thread__image-content img {
+    width: 224px;
+    height: 280px;
+    border-radius: 10px;
+}
 
 /*# sourceMappingURL=style.css.map */

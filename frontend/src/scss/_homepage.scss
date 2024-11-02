@@ -381,5 +381,31 @@
             }
         }
 
+        &__content__container{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        &__image-content{
+            display: flex;
+            gap: 5px;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            overflow-y: hidden; 
+            margin-right: 0px;
+            width: 550px;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none; /* For Chrome, Safari, and Opera */
+            }
+
+            img{
+                width: 224px;
+                height: 280px;
+                border-radius: 10px;
+            }
+        }
+
     }
 }
