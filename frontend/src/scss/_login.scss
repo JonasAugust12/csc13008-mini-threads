@@ -89,26 +89,6 @@ body {
         background-color: $barcelona-elevated-background;
         border-radius: 16px;
 
-        @include lg-desktop {
-            height: 141px;
-            width: 141px;
-        }
-
-        @include md-desktop {
-            height: 123px;
-            width: 123px;
-        }
-
-        @include sm-desktop {
-            height: 106px;
-            width: 106px;
-        }
-
-        @include tablet {
-            height: 86px;
-            width: 86px;
-        }
-
         & svg {
 
             @include lg-desktop {
@@ -159,7 +139,6 @@ body {
         }
 
         @include flexible-decoration {
-            // margin-top = 0 if vh > 860px
             margin-top: calc(100vh - 860px);
         }
 
@@ -354,6 +333,106 @@ body {
 }
 
 
+
+.overlay-container {
+    z-index: 3;
+    position: relative;
+    display: none;
+
+    .overlay {
+        z-index: 0;
+        position: fixed;
+        box-sizing: border-box;
+        min-height: 100vh;
+        @supports (min-height: 100dvh) {
+            min-height: 100dvh;
+        }
+        display: flex;
+        flex-direction: column;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        background-color: $barcelona-dialog-backdrop-background;
+        backdrop-filter: blur(28.5px);
+
+        
+        .close-button {
+            top: 24px;
+            left: 24px;
+            position: fixed;
+            display: flex;
+            z-index: 1;
+            height: 44px;
+            width: 44px;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform .2s;
+            border: 0px;
+            background-color: $barcelona-tertiary-background;
+
+            & svg {
+                height: 18px;
+                width: 18px;
+                stroke-width: 2;
+                fill: none;
+                position: relative;
+                stroke: $barcelona-secondary-text;
+
+            }
+        }
+    }
+
+    .qr-modal {
+        max-width: calc(100vw - 32px);
+        padding: 42px;
+        display: flex;
+        flex-direction: column;
+
+        &__wrapper {
+            height: 310px;
+            width: 310px;
+            border: .5px solid $barcelona-primary-outline;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 100%;
+            background-color: $barcelona-elevated-background;
+            border-radius: 28px;
+            
+        }
+
+        &__inner {
+            padding: 4px;
+            background-color: $barcelona-elevated-background;
+            border-radius: 16px;
+
+            & svg {
+                height: 244px;
+                width: 244px;
+            }
+    
+        }
+
+        &__text {
+            margin-top: 16px;
+            color: $barcelona-primary-text;
+            font-size: 16px;
+            text-align: center;
+            font-weight: 700;
+            word-wrap: break-word;
+            position: relative;
+            font-family: $system-font-family;
+            line-height: calc(1.3125 * 1em);
+        }
+    }
+
+}
 
 
 
