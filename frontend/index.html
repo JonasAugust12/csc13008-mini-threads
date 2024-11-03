@@ -263,7 +263,47 @@
                 <div class="content__section-border-top-right"></div>
                 <div class="content__section-border-hide-top-right"></div>
 
-                <div class="content__section"></div>
+                <div class="content__section">
+                    <div class="content__newfeed">
+                        <div class="start__thread">
+                            <div class="start__thread__user__icon">
+                                <img src="./src/assets/img/UserIcon.jpg" alt="" />
+                            </div>
+                            <div class="start__thread__title">Start a thread...</div>
+                            <div class="start__thread__button">
+                                <button>Post</button>
+                            </div>
+                        </div>
+                        <div class="contents">
+                            <script type="module">
+                                import threads from './src/assets/dummyData/dummyData.js';
+
+                                document.addEventListener('DOMContentLoaded', async () => {
+                                    const contents = document.querySelector('.contents');
+
+                                    // Fetch the template content
+                                    const response = await fetch('./src/template/threads.html');
+                                    const templateText = await response.text();
+
+                                    // Create a temporary container to hold the template
+                                    const tempContainer = document.createElement('div');
+                                    tempContainer.innerHTML = templateText;
+                                    const template = tempContainer.querySelector('#thread-template').content;
+
+                                    threads.forEach((thread) => {
+                                        const threadClone = document.importNode(template, true);
+                                        threadClone.querySelector('.thread__user-avatar').src = thread.user.avatar;
+                                        threadClone.querySelector('.thread__user-name').textContent = thread.user.name;
+                                        threadClone.querySelector('.thread__text-content').textContent = thread.content;
+                                        threadClone.querySelector('.thread__timestamp').textContent = thread.timestamp;
+
+                                        contents.appendChild(threadClone);
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

@@ -508,8 +508,6 @@ body {
 
 .content__section {
     background-color: #181818;
-    display: flex;
-    flex-direction: column;
     width: 100%;
     min-height: calc(100vh - 62px);
     border: 1px solid #353636;
@@ -782,6 +780,235 @@ body {
     height: 20px;
     stroke: white;
     fill: transparent;
+}
+
+.content__newfeed {
+    display: flex;
+    flex-direction: column;
+}
+.content__newfeed .start__thread {
+    top: 0px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    width: 100%;
+    height: 36px;
+    border-bottom: 1px solid #353636;
+}
+.content__newfeed .start__thread .start__thread__user__icon {
+    width: 36px;
+    height: 36px;
+}
+.content__newfeed .start__thread .start__thread__user__icon img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.content__newfeed .start__thread .start__thread__title {
+    flex: 10;
+    width: 300px;
+    /* Set the desired width */
+    height: 36px;
+    /* Set the desired height */
+    padding: 10px;
+    /* Optional: Add padding for better appearance */
+    color: #777777;
+    /* Set the text color */
+    box-sizing: border-box;
+    /* Ensure padding is included in the width and height */
+    cursor: text;
+    /* Change cursor to pointer to indicate interactivity */
+    display: flex;
+    /* Center the text */
+    align-items: center;
+    /* Center the text vertically */
+    justify-content: flex-start;
+    /* Center the text horizontally */
+}
+.content__newfeed .start__thread .start__thread__button {
+    flex: 1;
+    text-align: center;
+    /* Center the button horizontally */
+    height: 36px;
+}
+.content__newfeed .start__thread .start__thread__button button {
+    height: 36px;
+    padding: 0px 16px;
+    /* Add padding to the button */
+    font-size: 15px;
+    /* Increase the font size */
+    background-color: #181818;
+    /* Set the background color */
+    color: white;
+    /* Set the text color */
+    border: 1px solid #353636;
+    /* Remove the border */
+    border-radius: 10px;
+    /* Add rounded corners */
+    cursor: pointer;
+    /* Change the cursor to a pointer */
+}
+.content__newfeed .start__thread .start__thread__button button:active {
+    transform: scale(0.95);
+    /* Scale down the button slightly */
+}
+.content__newfeed .contents {
+    flex: 10;
+    display: flex;
+    flex-direction: column;
+}
+.content__newfeed .thread {
+    display: flex;
+    padding: 16px 24px;
+    width: 100%;
+    background-color: #181818;
+    /* Background color for the thread */
+    border-bottom: 1px solid #353636;
+    /* Border for the thread */
+}
+.content__newfeed .thread__user-icon {
+    height: 45px;
+    width: 48px;
+    padding-top: 11.25px;
+    display: flex;
+    justify-content: flex-start;
+}
+.content__newfeed .thread__user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    /* Make the avatar circular */
+}
+.content__newfeed .thread__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 3px;
+}
+.content__newfeed .thread__top {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.content__newfeed .thread__user-info {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+.content__newfeed .thread__user-name {
+    font-weight: bold;
+    color: #ffffff;
+    /* Text color for the user name */
+    font-size: 15px;
+    margin-right: 8px;
+    /* Space between the name and the timestamp */
+}
+.content__newfeed .thread__timestamp {
+    font-size: 15px;
+    color: #777777;
+    /* Text color for the timestamp */
+}
+.content__newfeed .thread__more {
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50%;
+    /* Make the container circular */
+    overflow: hidden;
+    transition: background-color 0.4s ease;
+    /* Smooth transition for the glow effect */
+}
+.content__newfeed .thread__more img {
+    width: 20px;
+    height: 20px;
+}
+.content__newfeed .thread__more:hover {
+    cursor: pointer;
+    /* Change the cursor to a pointer */
+    background-color: #202020;
+    /* Change background color on hover */
+}
+.content__newfeed .thread__text-content {
+    flex: 1;
+    margin-left: 10px;
+    display: flex;
+    color: #cccccc;
+    /* Text color for the content */
+}
+.content__newfeed .thread__actions {
+    flex: 1;
+    display: flex;
+    gap: 5px;
+}
+.content__newfeed .thread__action__num {
+    padding: 10px;
+    display: flex;
+    gap: 5px;
+    min-height: 20px;
+    min-width: 60;
+    border-radius: 20px;
+    transition: background-color 0.4s ease;
+}
+.content__newfeed .thread__action__num:hover {
+    cursor: pointer;
+    background-color: #202020;
+}
+.content__newfeed .thread__action__num__img {
+    width: 20px;
+    height: 20px;
+}
+.content__newfeed .thread__action__num__data {
+    color: #ffffff;
+    font-size: 13px;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0px;
+}
+.content__newfeed .thread__action__share {
+    min-width: 40px;
+    padding: 10px;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0px;
+    border-radius: 20px;
+    transition: background-color 0.4s ease;
+}
+.content__newfeed .thread__action__share:hover {
+    cursor: pointer;
+    background-color: #202020;
+}
+.content__newfeed .thread__content__container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.content__newfeed .thread__image-content {
+    display: flex;
+    gap: 5px;
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+    overflow-y: hidden;
+    margin-right: 0px;
+    width: 550px;
+    scrollbar-width: none;
+}
+.content__newfeed .thread__image-content::-webkit-scrollbar {
+    display: none;
+    /* For Chrome, Safari, and Opera */
+}
+.content__newfeed .thread__image-content img {
+    width: 224px;
+    height: 280px;
+    border-radius: 10px;
 }
 
 .activity__post {
