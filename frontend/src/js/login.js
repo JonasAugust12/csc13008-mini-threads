@@ -1,43 +1,36 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-const inputs = $$(".login-form__input");
-const loginButton = $(".login-form__button");
-const loginText = $(".login-form__button-text");
-
-
-
+const inputs = $$('.login-form__input');
+const loginButton = $('.login-form__button');
+const loginText = $('.login-form__button-text');
 
 function toggleLoginButton() {
-    const allFilled = Array.from(inputs).every(input => input.value.trim() !== '');
+    const allFilled = Array.from(inputs).every((input) => input.value.trim() !== '');
 
     if (allFilled) {
-        loginButton.style.cursor = "pointer";
+        loginButton.style.cursor = 'pointer';
         loginText.style.opacity = 1;
-    }
-    else {
-        loginButton.style.cursor = "not-allowed";
+    } else {
+        loginButton.style.cursor = 'not-allowed';
         loginText.style.opacity = 0.4;
     }
 }
 
-inputs.forEach(input => {
-    input.addEventListener("input", toggleLoginButton);
+inputs.forEach((input) => {
+    input.addEventListener('input', toggleLoginButton);
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    const overlay = $(".overlay-container");
-    const qr = $(".qr-section");
-    const closeButton = $(".close-button");
+document.addEventListener('DOMContentLoaded', function () {
+    const overlay = $('.overlay-container');
+    const qr = $('.qr-section');
+    const closeButton = $('.close-button');
 
-    qr.addEventListener("click", function() {
-        overlay.style.display = "flex";
+    qr.addEventListener('click', function () {
+        overlay.style.display = 'flex';
     });
-    
-    
-    closeButton.onclick = function() {
-        overlay.style.display = "none";
-    };
-    
-});
 
+    closeButton.onclick = function () {
+        overlay.style.display = 'none';
+    };
+});
