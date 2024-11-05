@@ -174,19 +174,20 @@
     }
 }
 
-.app__setting-menu {
-    // display: none;
-    // margin-right: -9999px;
+
+.app__setting-more-menu {
+    display: none;
     transform: translate(258px, 660px) translate(-100%, -100%);
     left: 0;
     top: 0;
     position: absolute;
-    animation: fade-in-scale .15s ease-in-out;
-    transform-origin: bottom left;
     width: fit-content;
     box-shadow: 0 10.5px 21px rgba(0, 0, 0, 0.08);
     
+    
     .menu {
+        animation: fade-in-scale .15s ease-in-out;
+        transform-origin: bottom left;
         overflow: hidden;
         margin: 4px 0px -48px 10px;
         background-color: $barcelona-elevated-background;
@@ -195,14 +196,10 @@
         height: 240.578px;
         width: 240px;
         position: relative;
-        transform: translate(0%) translateZ(1px);
-        top: 0;
         box-sizing: border-box;
         transform: transform opacity 200ms;
         transition-timing-function: cubic-bezier(.08,.52,1);
-        z-index: 0;
         opacity: 1;
-        left: 0;
 
         &__upper {
             padding: 8px;
