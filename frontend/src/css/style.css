@@ -456,6 +456,118 @@ body {
     fill: white;
 }
 
+@keyframes fade-in-scale {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.app__setting-menu {
+    transform: translate(258px, 660px) translate(-100%, -100%);
+    left: 0;
+    top: 0;
+    position: absolute;
+    animation: fade-in-scale 0.15s ease-in-out;
+    transform-origin: bottom left;
+    width: fit-content;
+    box-shadow: 0 10.5px 21px rgba(0, 0, 0, 0.08);
+}
+.app__setting-menu .menu {
+    overflow: hidden;
+    margin: 4px 0px -48px 10px;
+    background-color: #181818;
+    border-radius: 16px;
+    outline: 0.5px solid #2d2d2d;
+    height: 240.578px;
+    width: 240px;
+    position: relative;
+    transform: translate(0%) translateZ(1px);
+    top: 0;
+    box-sizing: border-box;
+    transform: transform opacity 200ms;
+    transition-timing-function: cubic-bezier(0.08, 0.52, 1);
+    z-index: 0;
+    opacity: 1;
+    left: 0;
+}
+.app__setting-menu .menu__upper {
+    padding: 8px;
+    border-bottom: 1px solid #333638;
+}
+.app__setting-menu .menu__btn {
+    padding: 12px;
+    min-height: 24px;
+    width: 100%;
+    min-width: 0;
+    height: 52px;
+    background-color: transparent;
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    border-radius: 12px;
+    position: relative;
+    transition: transform 0.1s;
+    align-items: center;
+    z-index: 1;
+}
+.app__setting-menu .menu__btn:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+.app__setting-menu .menu__btn-text {
+    overflow: visible;
+    max-width: 100%;
+    color: #f3f5f7;
+    font-size: 15px;
+    text-align: start;
+    word-wrap: break-word;
+    font-weight: 600;
+    position: relative;
+    display: block;
+    flex-grow: 1;
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+    line-height: 1.4em;
+}
+.app__setting-menu .menu__btn-text::before {
+    margin-top: -3px;
+}
+.app__setting-menu .menu__btn-text::after {
+    margin-bottom: -4px;
+}
+.app__setting-menu .menu__btn-text--logout {
+    color: #ff3040;
+}
+.app__setting-menu .menu__btn-icon {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+    transform: rotate(180deg);
+}
+.app__setting-menu .menu__btn-icon svg {
+    height: 16px;
+    width: 16px;
+    stroke-width: 2;
+    fill: none;
+    stroke: #777777;
+    flex-shrink: 0;
+    position: relative;
+    display: block;
+}
+.app__setting-menu .menu__lower {
+    padding: 8px;
+}
+
 .app__container {
     margin-left: auto;
     margin-right: auto;
