@@ -1927,6 +1927,41 @@ body {
     line-height: 1.4em;
 }
 
+.result-options {
+    margin: 12px 24px 0 24px;
+    column-gap: 6px;
+    display: flex;
+    align-self: stretch;
+}
+.result-options__link {
+    border: 1px solid rgba(243, 245, 247, 0.1490196078);
+    height: 34px;
+    transition: transform 0.1s ease-in-out;
+    flex-shrink: 1;
+    color: #f3f5f7;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    user-select: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 10px;
+    flex-direction: row;
+    padding: 0 16px;
+    flex-basis: 100%;
+    position: relative;
+}
+.result-options__link:active {
+    transform: scale(0.96);
+}
+.result-options__link.chosen {
+    background-color: white;
+    border: 1px solid white;
+    color: black;
+}
+
 .refresh-btn {
     font-size: 15px;
 }
