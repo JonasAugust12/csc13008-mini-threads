@@ -49,7 +49,7 @@ body {
         margin-bottom: 20px;
         border: 1px solid white;
         position: relative;
-        border-image: linear-gradient(to right, black, white, black) 1;
+        border-image: linear-gradient(to right, #0a0a0a, white, #0a0a0a) 1;
 
         .signup-form {
             margin: 20px 0;
@@ -153,13 +153,9 @@ body {
     }
 
     &__login-redirect {
-
-
-        .login-link {
-            color: white;
-            text-decoration: none;
-        }
-    }   
+        color: white;
+        text-decoration: none;
+    }
 }
 
 
@@ -167,6 +163,10 @@ body {
     position: absolute;
     width: 100%;
     bottom: 0;
+
+    @include signup-footer {
+        display: none;
+    }
 
     .footer {
         height: 70px;
@@ -178,22 +178,22 @@ body {
         text-align: center;
         padding: 0px 16px;
         position: absolute;
-    
-    
+
+
         &__list {
             margin: 0 auto;
             list-style-type: none;
             display: block;
         }
-    
+
         &__item {
             display: inline-block;
-    
+
             &:not(:first-of-type) {
                 margin-left: 12px;
             }
         }
-    
+
         &__text {
             display: block;
             overflow: visible;
@@ -207,22 +207,23 @@ body {
             line-height: calc(1.4 * 1em);
             color: $barcelona-secondary-text;
         }
-    
+
         &__link {
             display: inline;
             color: $barcelona-secondary-text;
             cursor: pointer;
             text-decoration: none;
-    
+
             &:hover {
                 text-decoration: underline;
             }
-            
+
         }
-    
+
         &__button {
             cursor: pointer;
             user-select: none;
+
             &:hover {
                 text-decoration: underline;
                 text-decoration-color: $barcelona-secondary-text;
@@ -230,4 +231,3 @@ body {
         }
     }
 }
-

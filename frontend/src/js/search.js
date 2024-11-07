@@ -49,7 +49,7 @@ function formatFollowers(followers) {
     } else if (followers >= 100_000) {
         return Math.floor(followers / 1000) + 'K';
     } else if (followers >= 10_000) {
-        return (followers / 1000).toFixed + 'K';
+        return (followers / 1000).toFixed(1) + 'K';
     } else if (followers >= 1000) {
         return followers.toLocaleString();
     } else {

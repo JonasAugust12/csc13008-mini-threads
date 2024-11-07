@@ -62,3 +62,9 @@ body {
     @content;
   }
 }
+
+@mixin signup-footer {
+  @media (max-height: 680px) {
+    @content;
+  }
+}

@@ -468,7 +468,7 @@ body {
 }
 .app__setting-more-menu {
     display: none;
-    transform: translate(258px, 660px) translate(-100%, -100%);
+    transform: translate(258px, calc(100vh - 70px)) translate(-100%, -100%);
     left: 0;
     top: 0;
     position: absolute;
@@ -1380,7 +1380,6 @@ body {
     cursor: pointer;
 }
 .container .page-container .account {
-    margin-top: 15vh;
     margin-bottom: 52px;
     padding: 24px;
     width: 100%;
@@ -1460,11 +1459,10 @@ body {
     margin: 0;
     opacity: 1;
     transition: transform 0.1s;
-    cursor: not-allowed;
+    cursor: pointer;
 }
-.container .page-container .account .login-form__button-text {
-    line-height: 140%;
-    opacity: 0.4;
+.container .page-container .account .login-form__button:disabled {
+    cursor: not-allowed;
 }
 .container .page-container .account .login-form__forgot-password {
     margin-top: 16px;
@@ -2340,7 +2338,7 @@ body {
     margin-bottom: 20px;
     border: 1px solid white;
     position: relative;
-    border-image: linear-gradient(to right, black, white, black) 1;
+    border-image: linear-gradient(to right, #0a0a0a, white, #0a0a0a) 1;
 }
 .signup__box .signup-form {
     margin: 20px 0;
@@ -2443,7 +2441,7 @@ body {
     cursor: not-allowed;
     opacity: 0.7;
 }
-.signup__login-redirect .login-link {
+.signup__login-redirect {
     color: white;
     text-decoration: none;
 }
@@ -2452,6 +2450,11 @@ body {
     position: absolute;
     width: 100%;
     bottom: 0;
+}
+@media (max-height: 680px) {
+    .footer-wrapper {
+        display: none;
+    }
 }
 .footer-wrapper .footer {
     height: 70px;
@@ -2716,7 +2719,7 @@ body {
 }
 .settings-overlay {
     display: none;
-    z-index: 3;
+    z-index: 5;
     position: fixed;
     box-sizing: border-box;
     min-height: 100vh;

@@ -7,14 +7,7 @@ const loginText = $('.login-form__button-text');
 
 function toggleLoginButton() {
     const allFilled = Array.from(inputs).every((input) => input.value.trim() !== '');
-
-    if (allFilled) {
-        loginButton.style.cursor = 'pointer';
-        loginText.style.opacity = 1;
-    } else {
-        loginButton.style.cursor = 'not-allowed';
-        loginText.style.opacity = 0.4;
-    }
+    loginButton.disabled = !allFilled;
 }
 
 inputs.forEach((input) => {

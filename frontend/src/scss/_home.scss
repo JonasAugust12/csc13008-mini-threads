@@ -177,7 +177,7 @@
 
 .app__setting-more-menu {
     display: none;
-    transform: translate(258px, 660px) translate(-100%, -100%);
+    transform: translate(258px, calc(100vh - 70px)) translate(-100%, -100%);
     left: 0;
     top: 0;
     position: absolute;

@@ -126,56 +126,55 @@ body {
         width: 100%;
         overflow: hidden;
         z-index: 1;
-    
-    
+
+
         .decoration {
             position: absolute;
             top: 0;
             overflow: hidden;
-    
+
             @include potrait-mobile {
                 display: none;
             }
-    
+
             @include flexible-decoration {
                 margin-top: calc(100vh - 860px);
             }
-    
+
         }
-    
+
         .icon {
             width: 60px;
-    
+
             @include sm-tablet {
                 display: none;
             }
-    
+
             & svg {
                 cursor: pointer;
             }
         }
-    
+
         .account {
-            margin-top: 15vh;
             margin-bottom: 52px;
             padding: 24px;
             width: 100%;
             max-width: 370px;
-    
+
             @include flexible-decoration {
                 margin-top: 0;
             }
-    
+
             @include potrait-mobile {
                 margin-top: 0;
             }
-    
-    
+
+
             .login-form {
                 display: flex;
                 flex-direction: column;
                 width: 100%;
-    
+
                 &__title {
                     display: block;
                     position: relative;
@@ -190,12 +189,12 @@ body {
                     font-family: $system-font-family;
                     line-height: calc(1.3125*1em);
                 }
-    
+
                 &__group {
                     margin-bottom: 8px;
                     position: relative;
                 }
-    
+
                 &__input {
                     width: 100%;
                     padding: 16px;
@@ -208,9 +207,9 @@ body {
                     text-align: start;
                     line-height: 140%;
                     outline: none;
-    
+
                 }
-    
+
                 &__button {
                     display: inline-flex;
                     flex-direction: row;
@@ -232,20 +231,19 @@ body {
                     margin: 0;
                     opacity: 1;
                     transition: transform .1s;
-                    cursor: not-allowed;
-    
+                    cursor: pointer;
+
+                    &:disabled {
+                        cursor: not-allowed;
+                    }
+
                 }
-    
-                &__button-text {
-                    line-height: 140%;
-                    opacity: .4;
-                }
-    
+
                 &__forgot-password {
                     margin-top: 16px;
                 }
-    
-    
+
+
                 &__forgot-password-link {
                     overflow: visible;
                     display: block;
@@ -260,7 +258,7 @@ body {
                     text-decoration: none;
                 }
             }
-    
+
             .sign-up {
                 margin-top: 40px;
                 padding: 24px;
@@ -274,18 +272,18 @@ body {
                 cursor: pointer;
                 flex-direction: row;
                 transition: transform .1s;
-    
+
                 &__icon {
                     height: 45px;
                     width: 45px;
                 }
-    
+
                 &__text-wrapper {
                     display: flex;
                     justify-content: center;
                     flex-grow: 1;
                 }
-    
+
                 &__text {
                     color: $barcelona-primary-text;
                     font-size: 16px;
@@ -295,15 +293,15 @@ body {
                     position: relative;
                     font-family: $system-font-family;
                     line-height: calc(1.3125 * 1em);
-    
+
                 }
-    
+
                 &__arrow {
                     padding: 8px;
                     display: flex;
                     align-items: center;
                     transform: rotate(180deg);
-    
+
                     & svg {
                         height: 16px;
                         width: 16px;
@@ -314,12 +312,12 @@ body {
                 }
             }
         }
-    
+
         .footer-wrapper {
             position: absolute;
             width: 100%;
             bottom: 0;
-    
+
             .footer {
                 height: 70px;
                 width: 100%;
@@ -330,22 +328,22 @@ body {
                 text-align: center;
                 padding: 0px 16px;
                 position: absolute;
-    
-    
+
+
                 &__list {
                     margin: 0 auto;
                     list-style-type: none;
                     display: block;
                 }
-    
+
                 &__item {
                     display: inline-block;
-    
+
                     &:not(:first-of-type) {
                         margin-left: 12px;
                     }
                 }
-    
+
                 &__text {
                     display: block;
                     overflow: visible;
@@ -359,24 +357,24 @@ body {
                     line-height: calc(1.4 * 1em);
                     color: $barcelona-secondary-text;
                 }
-    
+
                 &__link {
                     display: inline;
                     color: $barcelona-secondary-text;
                     cursor: pointer;
                     text-decoration: none;
-    
+
                     &:hover {
                         text-decoration: underline;
-    
+
                     }
-    
+
                 }
-    
+
                 &__button {
                     cursor: pointer;
                     user-select: none;
-    
+
                     &:hover {
                         text-decoration: underline;
                         text-decoration-color: $barcelona-secondary-text;
@@ -385,7 +383,7 @@ body {
             }
         }
     }
-    
+
 }
 
 .overlay-container {
