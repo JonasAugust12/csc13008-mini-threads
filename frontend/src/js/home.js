@@ -3,6 +3,7 @@ const $$ = document.querySelectorAll.bind(document);
 
 const moreButton = $('.app__setting-btn--more');
 const moreMenu = $('.app__setting-more-menu');
+const settingsButton = $('.menu__btn--settings');
 
 moreButton.addEventListener('click', function () {
     moreMenu.style.display = 'flex';

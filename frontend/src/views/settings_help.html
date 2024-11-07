@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mini Threads</title>
         <link rel="icon" href="./src/assets/img/Threads_favicon.svg" type="image/svg+xml" />
-        <link rel="stylesheet" href="src/css/style.css" />
+        <link rel="stylesheet" href="../css/style.css" />
     </head>
 
     <body>
@@ -143,9 +143,7 @@
             </div>
 
             <div class="app__login-btn">
-                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#loginModal" onclick="window.location.href='./src/views/login.html';">
-                    Log in
-                </button>
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#loginModal" onclick="window.location.href='login.html';">Log in</button>
             </div>
 
             <label for="app__pop-up-create-post" class="app__create-btn">
@@ -183,7 +181,7 @@
                                 ></path>
                             </svg>
                         </a>
-                        <a href="./src/views/search.html" class="app__utilities-btn">
+                        <a href="search.html" class="app__utilities-btn">
                             <svg aria-label="Search" role="img" viewBox="0 0 26 26">
                                 <title>Search</title>
                                 <path
@@ -200,7 +198,7 @@
                                 <path d="M6 2v8m4-4H2" stroke="#7e7e7e" stroke-linecap="round" stroke-width="1.5"></path>
                             </svg>
                         </label>
-                        <a href="./src/views/activity.html" class="app__utilities-btn">
+                        <a href="activity.html" class="app__utilities-btn">
                             <svg aria-label="Notifications" role="img" viewBox="0 0 32 32" style="transform: scale(1.25)">
                                 <title>Notifications</title>
                                 <path
@@ -210,7 +208,7 @@
                                 ></path>
                             </svg>
                         </a>
-                        <a href="./src/views/profile.html" class="app__utilities-btn">
+                        <a href="profile.html" class="app__utilities-btn">
                             <svg aria-label="Profile" role="img" viewBox="0 0 26 26">
                                 <title>Profile</title>
                                 <circle cx="13" cy="7.25" r="4" stroke="#7e7e7e" stroke-width="2.5"></circle>
@@ -254,7 +252,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="menu__btn menu__btn--settings" onclick="window.location.href='./src/views/settings_privacy.html'">
+                                <div class="menu__btn menu__btn--settings" onclick="window.location.href='settings_privacy.html'">
                                     <span class="menu__btn-text">Settings</span>
                                 </div>
                             </div>
@@ -274,13 +272,7 @@
             <div class="app__container">
                 <div class="heading__section">
                     <div>
-                        <a href="#" class="refresh-btn">For you</a>
-                        <div class="refresh-option">
-                            <svg aria-label="All" role="img" viewBox="0 0 13 12">
-                                <title>All</title>
-                                <path d="m2.5 4.2 4 4 4-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-                            </svg>
-                        </div>
+                        <a href="#" class="refresh-btn">Settings</a>
                     </div>
                 </div>
 
@@ -291,49 +283,134 @@
                 <div class="content__section-border-hide-top-right"></div>
 
                 <div class="content__section">
-                    <div class="content__newfeed">
-                        <div class="start__thread">
-                            <div class="start__thread__user__icon">
-                                <img src="./src/assets/img/UserIcon.jpg" alt="" />
+                    <div class="settings">
+                        <div class="settings__header">
+                            <div class="settings__tab settings__tab--privacy" role="tab" aria-selected="true">
+                                <a href="settings_privacy.html" class="settings__link settings__link--privacy">Privacy</a>
                             </div>
-                            <div class="start__thread__title">Start a thread...</div>
-                            <div class="start__thread__button">
-                                <button>Post</button>
+                            <div class="settings__tab settings__tab--account" role="tab" aria-selected="false">
+                                <a href="#" class="settings__link settings__link--account">Account</a>
+                            </div>
+                            <div class="settings__tab settings__tab--help" role="tab" aria-selected="false">
+                                <a href="settings_help.html" class="settings__link settings__link--help chosen">Help</a>
+                                <div class="settings__underline"></div>
                             </div>
                         </div>
-                        <div class="contents">
-                            <script type="module">
-                                import threads from './src/assets/dummyData/dummyData.js';
+                        <!-- Privacy and Security Help -->
+                        <div class="settings__option settings__option--privacy-security-help">
+                            <div class="settings__option-text">Privacy and Security Help</div>
+                            <div class="settings__option-status">
+                                <span class="settings__option-arrow">
+                                    <svg aria-label="Next" role="img" viewBox="0 0 24 24" style="--fill: currentColor; --height: 16px; --width: 16px">
+                                        <title>Next</title>
+                                        <polyline points="16.502 3 7.498 12 16.502 21"></polyline>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
 
-                                document.addEventListener('DOMContentLoaded', async () => {
-                                    const contents = document.querySelector('.contents');
+                        <!-- Support Requests -->
+                        <div class="settings__option settings__option--support-requests">
+                            <div class="settings__option-text">Support Requests</div>
+                            <div class="settings__option-status">
+                                <span class="settings__option-arrow">
+                                    <svg aria-label="Next" role="img" viewBox="0 0 24 24" style="--fill: currentColor; --height: 16px; --width: 16px">
+                                        <title>Next</title>
+                                        <polyline points="16.502 3 7.498 12 16.502 21"></polyline>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
 
-                                    // Fetch the template content
-                                    const response = await fetch('./src/template/threads.html');
-                                    const templateText = await response.text();
+                        <!-- Help Centre -->
+                        <div class="settings__option settings__option--help-centre">
+                            <div class="settings__option-text">Help Centre</div>
+                            <div class="settings__option-status">
+                                <span class="settings__option-arrow">
+                                    <svg aria-label="Next" role="img" viewBox="0 0 24 24" style="--fill: currentColor; --height: 16px; --width: 16px">
+                                        <title>Next</title>
+                                        <polyline points="16.502 3 7.498 12 16.502 21"></polyline>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
 
-                                    // Create a temporary container to hold the template
-                                    const tempContainer = document.createElement('div');
-                                    tempContainer.innerHTML = templateText;
-                                    const template = tempContainer.querySelector('#thread-template').content;
+                        <!-- Privacy Policy -->
+                        <div class="settings__option settings__option--privacy-policy">
+                            <div class="settings__option-text">Privacy Policy</div>
+                            <div class="settings__option-status">
+                                <span class="settings__option-arrow">
+                                    <svg aria-label="Next" role="img" viewBox="0 0 24 24" style="--fill: currentColor; --height: 16px; --width: 16px">
+                                        <title>Next</title>
+                                        <polyline points="16.502 3 7.498 12 16.502 21"></polyline>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
 
-                                    threads.forEach((thread) => {
-                                        const threadClone = document.importNode(template, true);
-                                        threadClone.querySelector('.thread__user-avatar').src = thread.user.avatar;
-                                        threadClone.querySelector('.thread__user-name').textContent = thread.user.name;
-                                        threadClone.querySelector('.thread__text-content').textContent = thread.content;
-                                        threadClone.querySelector('.thread__timestamp').textContent = thread.timestamp;
+                        <!-- Terms of Use -->
+                        <div class="settings__option settings__option--terms-of-use">
+                            <div class="settings__option-text">Terms of Use</div>
+                            <div class="settings__option-status">
+                                <span class="settings__option-arrow">
+                                    <svg aria-label="Next" role="img" viewBox="0 0 24 24" style="--fill: currentColor; --height: 16px; --width: 16px">
+                                        <title>Next</title>
+                                        <polyline points="16.502 3 7.498 12 16.502 21"></polyline>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
 
-                                        contents.appendChild(threadClone);
-                                    });
-                                });
-                            </script>
+                        <!-- Overlay Popups for each section -->
+                        <div class="settings-overlay settings-overlay--privacy-security-help">
+                            <div class="settings-overlay__popup">
+                                <div class="settings-overlay__header">Privacy and Security Help</div>
+                                <div class="settings-overlay__description">
+                                    <span class="settings-overlay__text-main">Find privacy and security help here.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-overlay settings-overlay--support-requests">
+                            <div class="settings-overlay__popup">
+                                <div class="settings-overlay__header">Support Requests</div>
+                                <div class="settings-overlay__description">
+                                    <span class="settings-overlay__text-main">Manage your support requests here.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-overlay settings-overlay--help-centre">
+                            <div class="settings-overlay__popup">
+                                <div class="settings-overlay__header">Help Centre</div>
+                                <div class="settings-overlay__description">
+                                    <span class="settings-overlay__text-main">Get help and FAQs here.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-overlay settings-overlay--privacy-policy">
+                            <div class="settings-overlay__popup">
+                                <div class="settings-overlay__header">Privacy Policy</div>
+                                <div class="settings-overlay__description">
+                                    <span class="settings-overlay__text-main">Read the Privacy Policy here.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-overlay settings-overlay--terms-of-use">
+                            <div class="settings-overlay__popup">
+                                <div class="settings-overlay__header">Terms of Use</div>
+                                <div class="settings-overlay__description">
+                                    <span class="settings-overlay__text-main">Read the Terms of Use here.</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <script src="./src/js/home.js"></script>
+        <script src="../js/settings_help.js"></script>
     </body>
 </html>
