@@ -9,24 +9,28 @@
     </head>
 
     <body>
-        <div class="app">
-            <input type="checkbox" id="app__pop-up-create-post" />
-            <label for="app__pop-up-create-post" class="app__overlay"></label>
-            <div class="app__create-post-modal">
+        <div class="container">
+            <input type="checkbox" id="create-post__checkbox" />
+            <label for="create-post__checkbox" class="create-post__overlay"></label>
+            <div class="create-post-modal">
                 <div class="create-post__header">
-                    <button class="create-post__cancel-btn">Cancel</button>
-                    <div class="create-post__title">New thread</div>
-                    <div class="create-post__balance"></div>
+                    <button class="create-post__header__cancel-btn">Cancel</button>
+                    <div class="create-post__header__title">New thread</div>
+                    <div class="create-post__header__balance"></div>
                 </div>
                 <div class="create-post__content">
-                    <div class="create-post__info-section">
-                        <div class="create-post__avatar">
-                            <img class="create-post__avatar-img1" src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png" alt="" />
-                            <div class="create-post__straight-line"></div>
+                    <div class="create-post__info">
+                        <div class="create-post__info-avatar">
+                            <img
+                                class="create-post__info-avatar__img1"
+                                src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                alt=""
+                            />
+                            <div class="create-post__info-avatar__straight-line"></div>
                         </div>
                         <div class="create-post__info-post">
-                            <div class="create-post__username">cas.nothingtosay</div>
-                            <textarea rows="4" class="create-post__status" placeholder="What's new?"></textarea>
+                            <div class="create-post__info-post__username">cas.nothingtosay</div>
+                            <textarea rows="4" class="create-post__info-post__status" placeholder="What's new?"></textarea>
                             <div class="create-post__utilities">
                                 <div class="create-post__utilities-icon">
                                     <svg aria-label="Attach media" role="img" viewBox="0 0 24 24">
@@ -40,7 +44,16 @@
                                             ></path>
                                             <g>
                                                 <g clip-path="url(#:r1c:)">
-                                                    <rect fill="none" height="15.5" rx="3.75" stroke="currentColor" stroke-width="1.5" width="15.5" x="6.75" y="5.8894"></rect>
+                                                    <rect
+                                                        fill="none"
+                                                        height="15.5"
+                                                        rx="3.75"
+                                                        stroke="currentColor"
+                                                        stroke-width="1.5"
+                                                        width="15.5"
+                                                        x="6.75"
+                                                        y="5.8894"
+                                                    ></rect>
                                                     <path
                                                         d="M6.6546 17.8894L8.59043 15.9536C9.1583 15.3857 10.0727 15.3658 10.6647 15.9085L12.5062 17.5966C12.9009 17.9584 13.5105 17.9451 13.8891 17.5665L17.8181 13.6376C18.4038 13.0518 19.3536 13.0518 19.9394 13.6375L22.0663 15.7644"
                                                         fill="none"
@@ -65,8 +78,6 @@
                                         <g clip-path="url(#clipPathID)">
                                             <path
                                                 d="M20.6472 13.7545L21.2766 14.1623L20.6472 13.7545C20.4715 14.0256 20.2404 14.2752 19.647 14.9058L15.4667 19.3473C14.7767 20.0804 14.5029 20.3659 14.1962 20.5791C13.785 20.8649 13.3208 21.0655 12.8308 21.169C12.4654 21.2462 12.0698 21.25 11.0631 21.25C9.62515 21.25 8.58506 21.2496 7.76313 21.1923C6.94813 21.1356 6.40373 21.0256 5.95094 20.8336C4.69662 20.3019 3.69812 19.3034 3.16638 18.0491C2.97444 17.5963 2.86444 17.0519 2.80767 16.2369C2.75042 15.4149 2.75 14.3748 2.75 12.9369V11.6C2.75 9.90747 2.75058 8.68317 2.82925 7.72029C2.90721 6.76615 3.05809 6.13493 3.32222 5.61655C3.82555 4.6287 4.6287 3.82555 5.61655 3.32222C6.13493 3.05809 6.76615 2.90721 7.72029 2.82925C8.68317 2.75058 9.90747 2.75 11.6 2.75H13.1363C14.48 2.75 15.4519 2.75037 16.2211 2.80049C16.984 2.8502 17.4953 2.94657 17.9222 3.11455C19.2784 3.64817 20.3518 4.72155 20.8855 6.07779C21.0534 6.50473 21.1498 7.01596 21.1995 7.77888C21.2496 8.54813 21.25 9.52002 21.25 10.8637C21.25 11.7295 21.2472 12.0697 21.1893 12.3875C21.1006 12.8745 20.9163 13.3391 20.6472 13.7545Z"
-                                                stroke="currentColor"
-                                                stroke-width="1.5"
                                             ></path>
                                             <path
                                                 d="M13 21V19.3784C13 15.8557 15.8557 13.0001 19.3784 13.0002H21"
@@ -130,36 +141,54 @@
                         </div>
                     </div>
                     <div class="create-post__next-post">
-                        <div class="create-post__avatar-container">
-                            <img class="create-post__avatar-img2" src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png" alt="" />
+                        <div class="create-post__next-post__avatar">
+                            <img
+                                class="create-post__next-post__avatar-img2"
+                                src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                alt=""
+                            />
                         </div>
                         <div class="create-post__next-post-info">Add to thread</div>
                     </div>
                 </div>
                 <div class="create-post__footer">
-                    <button class="create-post__privacy">Anyone can reply & quote</button>
-                    <button class="create-post__post-btn">Post</button>
+                    <button class="create-post__footer__privacy">Anyone can reply & quote</button>
+                    <button class="create-post__footer__post-btn">Post</button>
                 </div>
             </div>
 
-            <div class="app__login-btn">
-                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#loginModal" onclick="window.location.href='login.html';">Log in</button>
+            <div class="login-btn">
+                <button
+                    type="button"
+                    class="login-btn__inner"
+                    data-bs-toggle="modal"
+                    data-bs-target="#loginModal"
+                    onclick="window.location.href='./src/views/login.html';"
+                >
+                    Log in
+                </button>
             </div>
 
-            <label for="app__pop-up-create-post" class="app__create-btn">
-                <div class="big-create-btn">
-                    <svg aria-label="Create" role="img" viewBox="0 0 12 12">
-                        <title>Create</title>
-                        <path d="M6 2v8m4-4H2" stroke="#f3f5f7" stroke-linecap="round" stroke-width="1.5"></path>
-                    </svg>
-                </div>
+            <label for="create-post__checkbox" class="create-btn">
+                <svg aria-label="Create" role="img" viewBox="0 0 12 12">
+                    <title>Create</title>
+                    <path d="M6 2v8m4-4H2" stroke="#f3f5f7" stroke-linecap="round" stroke-width="1.5"></path>
+                </svg>
             </label>
 
-            <div class="app__navbar">
+            <div class="navbar">
                 <nav class="navbar-vertical">
-                    <div class="app__icon">
+                    <div class="navbar__app-icon">
                         <a href="../../index.html">
-                            <svg aria-label="Threads" fill="white" height="100%" role="img" viewBox="0 0 192 192" width="100%" xmlns="http://www.w3.org/2000/svg">
+                            <svg
+                                aria-label="Threads"
+                                fill="white"
+                                height="100%"
+                                role="img"
+                                viewBox="0 0 192 192"
+                                width="100%"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
                                 <title>Threads</title>
                                 <path
                                     d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881 72.2328C81.6116 63.5383 90.6052 61.6848 97.2286 61.6848C97.3051 61.6848 97.3819 61.6848 97.4576 61.6855C105.707 61.7381 111.932 64.1366 115.961 68.814C118.893 72.2193 120.854 76.925 121.825 82.8638C114.511 81.6207 106.601 81.2385 98.145 81.7233C74.3247 83.0954 59.0111 96.9879 60.0396 116.292C60.5615 126.084 65.4397 134.508 73.775 140.011C80.8224 144.663 89.899 146.938 99.3323 146.423C111.79 145.74 121.563 140.987 128.381 132.296C133.559 125.696 136.834 117.143 138.28 106.366C144.217 109.949 148.617 114.664 151.047 120.332C155.179 129.967 155.42 145.8 142.501 158.708C131.182 170.016 117.576 174.908 97.0135 175.059C74.2042 174.89 56.9538 167.575 45.7381 153.317C35.2355 139.966 29.8077 120.682 29.6052 96C29.8077 71.3178 35.2355 52.0336 45.7381 38.6827C56.9538 24.4249 74.2039 17.11 97.0132 16.9405C119.988 17.1113 137.539 24.4614 149.184 38.788C154.894 45.8136 159.199 54.6488 162.037 64.9503L178.184 60.6422C174.744 47.9622 169.331 37.0357 161.965 27.974C147.036 9.60668 125.202 0.195148 97.0695 0H96.9569C68.8816 0.19447 47.2921 9.6418 32.7883 28.0793C19.8819 44.4864 13.2244 67.3157 13.0007 95.9325L13 96L13.0007 96.0675C13.2244 124.684 19.8819 147.514 32.7883 163.921C47.2921 182.358 68.8816 191.806 96.9569 192H97.0695C122.03 191.827 139.624 185.292 154.118 170.811C173.081 151.866 172.51 128.119 166.26 113.541C161.776 103.087 153.227 94.5962 141.537 88.9883ZM98.4405 129.507C88.0005 130.095 77.1544 125.409 76.6196 115.372C76.2232 107.93 81.9158 99.626 99.0812 98.6368C101.047 98.5234 102.976 98.468 104.871 98.468C111.106 98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z"
@@ -168,8 +197,8 @@
                         </a>
                     </div>
 
-                    <div class="app__utilities">
-                        <a href="../../index.html" class="app__utilities-btn">
+                    <div class="navbar__utilities">
+                        <a href="../../index.html" class="navbar__utilities-btn">
                             <svg aria-label="Home" role="img" viewBox="0 0 26 26">
                                 <title>Home</title>
                                 <path
@@ -181,7 +210,7 @@
                                 ></path>
                             </svg>
                         </a>
-                        <div class="app__utilities-btn search__nav--on">
+                        <div class="navbar__utilities-btn search__nav--on">
                             <svg aria-label="Search" role="img" viewBox="0 0 26 26">
                                 <title>Search</title>
                                 <path
@@ -192,13 +221,13 @@
                                 ></path>
                             </svg>
                         </div>
-                        <label for="app__pop-up-create-post" class="app__utilities-btn create__nav-on">
+                        <label for="create-post__checkbox" class="navbar__utilities-btn create__nav-on">
                             <svg aria-label="Create" role="img" viewBox="0 0 12 12">
                                 <title>Create</title>
                                 <path d="M6 2v8m4-4H2" stroke="#7e7e7e" stroke-linecap="round" stroke-width="1.5"></path>
                             </svg>
                         </label>
-                        <a href="./activity.html" class="app__utilities-btn">
+                        <a href="./activity.html" class="navbar__utilities-btn">
                             <svg aria-label="Notifications" role="img" viewBox="0 0 32 32" style="transform: scale(1.25)">
                                 <title>Notifications</title>
                                 <path
@@ -208,7 +237,7 @@
                                 ></path>
                             </svg>
                         </a>
-                        <a href="./profile.html" class="app__utilities-btn">
+                        <a href="./profile.html" class="navbar__utilities-btn">
                             <svg aria-label="Profile" role="img" viewBox="0 0 26 26">
                                 <title>Profile</title>
                                 <circle cx="13" cy="7.25" r="4" stroke="#7e7e7e" stroke-width="2.5"></circle>
@@ -221,8 +250,8 @@
                         </a>
                     </div>
 
-                    <div class="app__setting">
-                        <div class="app__setting-btn">
+                    <div class="navbar__setting">
+                        <div class="navbar__setting-btn">
                             <svg aria-label="Pin to home" role="img" viewBox="0 0 24 24">
                                 <title>Pin to home</title>
                                 <path
@@ -231,7 +260,7 @@
                                 ></path>
                             </svg>
                         </div>
-                        <div class="app__setting-btn">
+                        <div class="navbar__setting-btn">
                             <svg aria-label="More" role="img" viewBox="0 0 24 24">
                                 <title>More</title>
                                 <rect width="24" height="2.5" rx="1.25" x="3" y="7" fill="#7e7e7e"></rect>
@@ -242,16 +271,16 @@
                 </nav>
             </div>
 
-            <div class="app__container">
+            <div class="content-wrapper">
                 <div class="heading__section">
-                    <a href="#" class="refresh-btn">For you</a>
+                    <a href="#" class="refresh-btn">Search</a>
                 </div>
 
                 <div class="content__section-border-top"></div>
                 <div class="content__section-border-top-left"></div>
-                <div class="content__section-border-hide-top-left"></div>
+                <div class="content__section-border-top-hide-left"></div>
                 <div class="content__section-border-top-right"></div>
-                <div class="content__section-border-hide-top-right"></div>
+                <div class="content__section-border-top-hide-right"></div>
 
                 <div class="content__section">
                     <div class="search-box">
@@ -267,7 +296,15 @@
                                         ></path>
                                     </svg>
                                 </div>
-                                <input type="search" class="search-box__input" placeholder="Search" autocapitalize="off" autocomplete="off" spellcheck="false" dir="ltr" />
+                                <input
+                                    type="search"
+                                    class="search-box__input"
+                                    placeholder="Search"
+                                    autocapitalize="off"
+                                    autocomplete="off"
+                                    spellcheck="false"
+                                    dir="ltr"
+                                />
                                 <button type="button" class="search-box__clear-btn">
                                     <svg aria-label="Clear" role="img" viewBox="0 0 24 24">
                                         <title>Clear</title>
