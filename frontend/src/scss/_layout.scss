@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 .create__nav-on {
     background-color: #171717;
@@ -13,7 +14,7 @@
     fill: white;
 }
 
-.container {
+.app__container {
     background-color: #0a0a0a;
 }
 
@@ -21,6 +22,11 @@
     position: fixed;
     top: 24px;
     right: 28px;
+    z-index: 5;
+    @include mobile {
+        top: calc((60px - 34px) / 2);
+        display: none;
+    }
 
     &__inner {
         height: 34px;
@@ -51,6 +57,11 @@
     padding: 0;
     transition: transform 0.3s ease;
 
+    @include mobile {
+        display: none;
+    }
+
+
     & svg {
         width: 24px;
         height: 24px;
@@ -62,11 +73,63 @@
     }
 }
 
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 60px;
+    z-index: 1;
+    background-color: #101010d9;
+    backdrop-filter: blur(15px);
+    display: none;
+    @include mobile {
+         display: grid;
+        grid-template-columns: 1fr 50vw 1fr;
+        grid-template-rows: 1fr;
+    }
+
+    &__middle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & svg {
+            width: 32px;
+            height: 32px;
+        }
+    }
+    &__right {
+        &__setting-btn {
+            @include mobile {
+                display: flex;
+                height: 100%;
+                align-items: center;
+                justify-content: right;
+
+            }
+
+            & svg {
+                @include mobile {
+                    margin-right: 28px;
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+    }
+    
+}
+
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 5;
+    @include mobile {
+        bottom: 0;
+        top: auto;
+    }
 
     &-vertical {
         height: 100vh;
@@ -78,12 +141,22 @@
         align-items: center;
         padding-top: 0;
         padding-bottom: 0;
+        @include mobile {
+            flex-direction: row;
+            width: 100vw;
+            height: 68px;
+            padding: 0;
+            background-color: #101010d9;
+        }
     }
 
     &__app-icon {
         height: 10%;
         padding-top: 15px;
         padding-bottom: 15px;
+        @include mobile {
+            display: none;
+        }
 
         & a {
             display: block;
@@ -106,6 +179,12 @@
         row-gap: 4px;
         flex-grow: 1;
         align-items: center;
+        @include mobile {
+            flex-direction: row;
+            justify-content: space-around;
+            row-gap: 0;
+            height: 100%;
+        }
 
         &-btn {
             display: block;
@@ -116,6 +195,17 @@
             border-radius: 20%;
             box-sizing: content-box;
             transition: background-color 0.3s ease;
+            @include mobile {
+                padding: 0px;
+                margin: 0px;
+                width: 20%;
+                height: 100%;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: unset;
+                background-color: transparent;
+            }
 
             & svg {
                 width: 24px;
@@ -129,29 +219,32 @@
             }
         }
     }
-}
 
-.navbar__setting {
-    height: 20%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+    .navbar__setting {
+        height: 20%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        @include mobile {
+            display: none;
+        }
 
-    &-btn {
-        display: block;
-        width: 26px;
-        padding: 10px 20px;
-        margin-top: 3px;
-        margin-bottom: 3px;
-        border-radius: 20%;
-        box-sizing: content-box;
-        cursor: pointer;
+        &-btn {
+            display: block;
+            width: 26px;
+            padding: 10px 20px;
+            margin-top: 3px;
+            margin-bottom: 3px;
+            border-radius: 20%;
+            box-sizing: content-box;
+            cursor: pointer;
 
-        &:hover, &:hover path, &:hover rect {
-            stroke: white;
-            fill: white;
+            &:hover, &:hover path, &:hover rect {
+                stroke: white;
+                fill: white;
+            }
         }
     }
 }
@@ -279,11 +372,15 @@
     margin-right: auto;
     width: 640px;
     height: calc(100vh - 60px);
+    @include mobile {
+        width: 100%;
+    }
 }
 
 .heading__section {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 50% 1fr;
+    grid-template-rows: 1fr;
     width: 640px;
     height: 60px;
     box-sizing: border-box;
@@ -293,36 +390,58 @@
     z-index: 1;
     top: 0;
     background-color: #0a0a0a;
+    @include mobile {
+        display: none;
+    }
 
-    .refresh {
+    &__left {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        padding-left: 16px;
+    }
 
-        &-btn {
-            display: inline-block;
-            padding-top: 22px;
-            padding-bottom: 22px;
-            font-weight: 500;
-            font-style: normal;
-            color: #f3f5f7;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        &-option {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 16px;
-            width: 24px;
-            height: 24px;
-            border: 1px solid #363737;
-            background-color: #181818;
-            border-radius: 100%;
-            cursor: pointer;
-
-            & svg {
-                width: 12px;
-                height: 12px;
+    &__middle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .refresh {
+        
+                &-btn {
+                    display: inline-block;
+                    padding-top: 22px;
+                    padding-bottom: 22px;
+                    font-weight: 500;
+                    font-style: normal;
+                    color: #f3f5f7;
+                    text-decoration: none;
+                    text-align: center;
+                    margin-right: 16px;
+                }
             }
+    }
+
+    &__right {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        padding-right: 16px;
+    }
+
+    .heading-btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        border: 1px solid #363737;
+        background-color: #181818;
+        border-radius: 100%;
+        cursor: pointer;
+    
+        & svg {
+            width: 12px;
+            height: 12px;
         }
     }
 }
@@ -337,10 +456,18 @@
     padding-top: 18px;
     margin-top: 60px;
     overflow-y: auto;
+    @include mobile {
+        background-color: #101010;
+        border: none;
+        padding-top: 0;
+    }
 
     &-border {
         position: fixed;
         top: 60px;
+        @include mobile {
+            display: none;
+        }
 
         &-top {
             @extend .content__section-border;
@@ -354,6 +481,9 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
+            @include mobile {
+                display: none;
+            }
 
             &-left {
                 @extend .content__section-border;
@@ -365,6 +495,9 @@
                 border-bottom: none;
                 background-color: #181818;
                 z-index: 4;
+                @include mobile {
+                    display: none;
+                }
             }
 
             &-right {
@@ -378,6 +511,9 @@
                 border-bottom: none;
                 background-color: #181818;
                 z-index: 4;
+                @include mobile {
+                    display: none;
+                }
             }
             &-hide {
                 &-left {
@@ -386,6 +522,9 @@
                     height: 20px;
                     background-color: #0a0a0a;
                     z-index: 2;
+                    @include mobile {
+                        display: none;
+                    }
                 }
                 &-right {
                     @extend .content__section-border;
@@ -394,6 +533,9 @@
                     height: 20px;
                     background-color: #0a0a0a;
                     z-index: 2;
+                    @include mobile {
+                        display: none;
+                    }
                 }
             }
         }

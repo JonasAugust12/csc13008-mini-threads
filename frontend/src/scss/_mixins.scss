@@ -69,3 +69,9 @@ body {
     @content;
   }
 }
+
+@mixin mobile {
+  @media (max-width: 700px) {
+    @content;
+  }
+}
