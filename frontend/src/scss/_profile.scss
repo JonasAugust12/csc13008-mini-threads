@@ -118,7 +118,7 @@
     height: 86px;
     width: 86px;
     background-size: cover;
-    background-image: url(../assets/img/avt.png);
+    background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
     border-radius: 50%;
     margin-bottom: 56px;
 }
@@ -138,7 +138,7 @@
 {
     display: block;
     height: 34px;
-    width: 586px;
+    width: calc(586px/640px);
     font-size: 14px;
     font-weight: 650;
     border-radius: 10px;
@@ -227,7 +227,7 @@
     height: 40px;
     width: 40px;
     background-size: cover;
-    background-image: url(../assets/img/avt.png);
+    background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
     border-radius: 50%;
 }
 .post-section__input
@@ -364,7 +364,7 @@
     height: 54px;
     width: 54px;
     border-radius: 50%;
-    background-image: url(../assets/img/avt.png);
+    background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
     background-size: cover;
     position: absolute;
     top: 26px;
