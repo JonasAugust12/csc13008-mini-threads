@@ -1,0 +1,100 @@
+<!-- popup Edit profile -->
+            <input type="checkbox" id="pop-up-profile-box" />
+            <label for="pop-up-profile-box" class="overlay"></label>
+            <ul class="edit-profile">
+                <li class="edit-profile__avatar"></li>
+                <div class="avatar-mask"></div>
+                <li class="edit-profile__field">
+                    <div class="field__title">Name</div>
+                    <div class="field__content field__content__name">
+                        <p>Minh Toàn (cas.nothingtosay)</p>
+                    </div>
+                </li>
+                <li class="edit-profile__field">
+                    <div class="field__title">Bio</div>
+                    <div class="field__content field__content__bio">
+                        <p>Vietnamese gang</p>
+                    </div>
+                </li>
+                <li class="edit-profile__field">
+                    <div class="field__title">Link</div>
+                    <div class="field__content field__content__link">
+                        <p>+ Add link</p>
+                    </div>
+                </li>
+                <li class="edit-profile__field">
+                    <div class="field__title">Show Instagram badge</div>
+                    <div class="field__content field__content__ig">
+                        <p>When turned off, the Threads badge on your Instagram profile will also disappear.</p>
+                    </div>
+                </li>
+                <li class="edit-profile__field">
+                    <div class="field__title">Private profile</div>
+
+                    <div class="field__content field__content__private">
+                        <p>If you switch to private, you won't be able to reply to others unless they follow you.</p>
+                    </div>
+                </li>
+                <li class="edit-profile__button">
+                    <p>Done</p>
+                </li>
+            </ul>
+            
+                
+
+                <div class="content__section-border-top"></div>
+                <div class="content__section-border-top-left"></div>
+                <div class="content__section-border-hide-top-left"></div>
+                <div class="content__section-border-top-right"></div>
+                <div class="content__section-border-hide-top-right"></div>
+
+                <div class="content__section">
+                    <div class="content__heading">
+                        <div class="information">
+                            <div class="information__name">Minh Toàn</div>
+                            <div class="information__nickname">cas.nothingtosay</div>
+                            <div class="information__bio">Vietnamese gang</div>
+                            <div class="information__follower">
+                                <ul class="follower__img">
+                                    <li class="follower__img__item"></li>
+                                    <li class="follower__img__item"></li>
+                                    <li class="follower__img__item"></li>
+                                </ul>
+                                <div class="follower__number">100</div>
+                                <div class="follower__text">followers</div>
+                            </div>
+                        </div>
+                        <div class="utility">
+                            <div class="utility__avatar"></div>
+                            <div class="utility__insta">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label for="pop-up-profile-box" class="edit-btn">
+                        <p>Edit profile</p>
+                    </label>
+                    <ul class="navigation">
+                        <li class="navigation__item navigation__news <%= body_content === 'profile_post.ejs' ? 'navigation__item--on' : 'navigation__item--off' %>"data-content="profile_post.ejs">
+                            <div class="item__text">Threads</div>
+                            <div class="item__line"></div>
+                        </li>
+                        <li class="navigation__item navigation__replies  <%= body_content === 'profile_reply.ejs' ? 'navigation__item--on' : 'navigation__item--off' %>" data-content="profile_reply.ejs">
+                            <div class="item__text">Replies</div>
+                            <div class="item__line"></div>
+                        </li>
+                        <li class="navigation__item navigation__reposts <%= body_content === 'profile_repost.ejs' ? 'navigation__item--on' : 'navigation__item--off' %>" data-content="profile_repost.ejs">
+                            <div class="item__text">Reposts</div>
+                            <div class="item__line"></div>
+                        </li>
+                    </ul>
+                    <div class="content__body">
+                       
+                        <!-- truyền vào 1 biến body để có thể tùy biến thay đổi -->
+                          <%- include(body_content) %>
+                    </div>
+                </div>
+            
+
+            <script src="js/profile.js"></script>
