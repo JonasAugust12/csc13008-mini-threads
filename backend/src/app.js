@@ -5,6 +5,7 @@ const app = express();
 const searchRoutes = require('./routes/searchRoutes');
 const { title } = require('process');
 const profileRoutes = require('./routes/profileRoutes');
+const userProfileRoutes = require('./routes/userProfileRoutes');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -16,7 +17,7 @@ app.use(express.static(path.join(__dirname, '../../frontend/src')));
 // Cài đặt route
 app.use('/search', searchRoutes);
 app.use('/profile', profileRoutes);
-
+app.use('/userProfile', userProfileRoutes);
 // Route chính để hiển thị layout
 app.get('/', (req, res) => {
     res.render('layout', {
@@ -41,7 +42,11 @@ app.get('/profile', (req, res) => {
         body: 'profile',
     });
 });
-
+app.get('/userProfile', (req, res) => {
+    res.render('layout', {
+        title: 'Profile1',
+    });
+});
 // Khởi động server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

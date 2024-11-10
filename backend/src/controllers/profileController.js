@@ -6,3 +6,10 @@ exports.getProfile = (req, res) => {
         body_content: content,
     });
 };
+exports.getUserProfile = (req, res) => {
+    res.render('user_profile', {
+        title: 'Profile12',
+        //
+        body_content: 'profile_post.ejs',
+    });
+};

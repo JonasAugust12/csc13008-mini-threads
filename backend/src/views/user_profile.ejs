@@ -1,0 +1,59 @@
+ <div class="content__heading">
+                        <div class="information">
+                            <div class="information__name">Hoàng Diễn</div>
+                            <div class="information__nickname">shmilys_18</div>
+                            <div class="information__bio">HCMUS - IT - 20 🧑🏻‍💻.</div>
+                            <div class="information__follower">
+                                <ul class="follower__img">
+                                    <li class="follower__img__item"></li>
+                                    <li class="follower__img__item"></li>
+                                    <li class="follower__img__item"></li>
+                                </ul>
+                                <div class="follower__number">100</div>
+                                <div class="follower__text">followers</div>
+                            </div>
+                        </div>
+                        <div class="utility">
+                            <div class="utility__avatar"></div>
+                            <div class="utility__insta">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label for="pop-up-profile-box" class="edit-btn-temp">
+                        <p>Follow</p>
+                    </label>
+                    <ul class="navigation">
+                        <li class="navigation__item navigation__news navigation__item--on">
+                            <div class="item__text">Threads</div>
+                            <div class="item__line"></div>
+                        </li>
+                        <li class="navigation__item navigation__replies navigation__item--off">
+                            <div class="item__text">Replies</div>
+                            <div class="item__line"></div>
+                        </li>
+                        <li class="navigation__item navigation__reposts navigation__item--off">
+                            <div class="item__text">Reposts</div>
+                            <div class="item__line"></div>
+                        </li>
+                    </ul>
+
+                    <script>
+    var edit_temp = document.querySelector('.edit-btn-temp');
+    var edit_temp_text = edit_temp.querySelector('p');
+
+    edit_temp.addEventListener('click', function () {
+        if (edit_temp_text.textContent === 'Follow') {
+            edit_temp.style.backgroundColor = 'black';
+            edit_temp.style.color = 'white';
+            edit_temp_text.textContent = 'Followed';
+            console.log('Followed');
+        } else if (edit_temp_text.textContent === 'Followed') {
+            edit_temp.style.backgroundColor = 'white';
+            edit_temp.style.color = 'black';
+            edit_temp_text.textContent = 'Follow';
+            console.log('Follow');
+        }
+    });
+</script>
