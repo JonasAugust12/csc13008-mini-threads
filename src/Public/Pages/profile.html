@@ -4,7 +4,16 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mini Threads</title>
+
         <link href="../Css/output.css" rel="stylesheet" />
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
     </head>
 
     <body>
@@ -114,9 +123,114 @@
             </nav>
 
             <div class="content-wrapper w-screen h-screen bg-main-bg">
-                <div class="content-section w-full h-full overflow-y-auto"></div>
+                <div class="content-section w-full h-full overflow-auto text-white">
+                    <!-- edit profile -->
+                    <div
+                        class="edit-profile bg-black text-white p-8 mt-20 ml-6 mr-6 rounded-lg hidden"
+                        style="border: 1px solid rgba(147, 140, 140, 0.4)"
+                    >
+                        <div
+                            class="edit-profile__avatar h-12 w-12 bg-cover absolute rounded-full right-16"
+                            style="
+                                background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
+                                z-index: 2;
+                            "
+                        ></div>
+                        <div class="avatar-mask bg-black h-20 w-16 bg-cover absolute right-16" style="z-index: 1"></div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold mb-2">Name</div>
+                            <div class="field__content field__content__name font-normal">
+                                <p>Hoàng Diễn (@shmilys_18)</p>
+                            </div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Bio</div>
+                            <div class="field__content field__content__bio">
+                                <p>HCMUS - IT - 20 🧑🏻‍💻.</p>
+                            </div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Link</div>
+                            <div class="field__content field__content__link">
+                                <p>+ Add link</p>
+                            </div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Show Instagram badge</div>
+                            <div class="field__content field__content__ig text-xs">
+                                <p>When turned off, the Threads badge on your Instagram profile will also disappear.</p>
+                            </div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Private profile</div>
+
+                            <div class="field__content field__content__private text-xs">
+                                <p>If you switch to private, you won't be able to reply to others unless they follow you.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="edit-profile__button h-12 mt-8 bg-white text-black text-base font-semibold flex justify-center items-center cursor-pointer rounded-lg"
+                        >
+                            <p>Done</p>
+                        </div>
+                    </div>
+
+                    <!-- profile -->
+                    <div class="profile__info">
+                        <div class="content__heading flex justify-between mt-20">
+                            <div class="information flex flex-col ml-6 font-bold">
+                                <div class="information__name text-2xl mb-1">Minh Toàn</div>
+                                <div class="information__nickname text-sm font-normal mb-6">cas.nothingtosay</div>
+                                <div class="information__bio text-sm font-normal mb-4">Vietnamese gang</div>
+                                <div class="information__follower flex flex-row justify-around mb-8 text-gray-500">
+                                    <ul class="follower__img flex flex-row cursor-pointer">
+                                        <li
+                                            class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full absolute"
+                                            style="
+                                                background-image: url('https://th.bing.com/th/id/OIP.P6RqRgE_lh77mF6mktc_LgHaLH?rs=1&pid=ImgDetMain');
+                                                left: 2px;
+                                            "
+                                        ></li>
+                                        <li
+                                            class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full absolute"
+                                            style="
+                                                background-image: url('https://th.bing.com/th/id/R.b28868904888f28f32264a83f29d5b4a?rik=MeIviuEyQSaLbw&pid=ImgRaw&r=0');
+                                                left: -10px;
+                                            "
+                                        ></li>
+                                        <li
+                                            class="follower__img__item h-4 w-4 bg-cover relative rounded-full absolute"
+                                            style="background-image: url('https://dailytrust.com/wp-content/uploads/2022/12/Neymar.jpg'); left: -20px"
+                                        ></li>
+                                    </ul>
+                                    <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer">100</div>
+                                    <div class="follower__text text-sm font-normal relative cursor-pointer">followers</div>
+                                </div>
+                            </div>
+                            <div class="utility flex flex-col items-end h-48 mr-6">
+                                <div
+                                    class="utility__avatar h-20 w-20 bg-cover mb-8 rounded-full cursor-pointer"
+                                    style="background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png)"
+                                ></div>
+                                <div class="utility__insta cursor-pointer mr-2">
+                                    <i class="fa-brands fa-instagram text-2xl cursor-pointer"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="edit-btn block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
+                            style="border: 2px solid rgba(147, 140, 140, 0.4)"
+                        >
+                            <p class="mt-1">Edit profile</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
-    <!-- script -->
+    <script src="../../profile.js"></script>
 </html>
