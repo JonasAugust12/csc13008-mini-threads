@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mini Threads</title>
+        <link href="../Css/output.css" rel="stylesheet" />
+    </head>
+
+    <body>
+        <div class="app-container font-main-font">
+            <nav class="top-nav fixed top-0 left-0 w-screen h-[60px] z-[1] bg-mobile-nav backdrop-blur-lg grid grid-cols-[1fr_50vw_1fr] grid-rows-1">
+                <div class="top-nav__left">
+                    <div class="top-nav__left-back-btn flex h-full items-center justify-start">
+                        <svg aria-label="Back" role="img" viewBox="0 0 24 24" class="ml-7 w-6 h-6">
+                            <title>Back</title>
+                            <line x1="2.909" x2="22.001" y1="12.004" y2="12.004" stroke="white"></line>
+                            <polyline points="9.276 4.726 2.001 12.004 9.276 19.274" stroke="white" fill="transparent"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="top-nav__middle flex justify-center items-center">
+                    <a href="#">
+                        <svg
+                            aria-label="Threads"
+                            fill="white"
+                            height="100%"
+                            role="img"
+                            viewBox="0 0 192 192"
+                            width="100%"
+                            class="w-8 h-8"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <title>Threads</title>
+                            <path
+                                d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881 72.2328C81.6116 63.5383 90.6052 61.6848 97.2286 61.6848C97.3051 61.6848 97.3819 61.6848 97.4576 61.6855C105.707 61.7381 111.932 64.1366 115.961 68.814C118.893 72.2193 120.854 76.925 121.825 82.8638C114.511 81.6207 106.601 81.2385 98.145 81.7233C74.3247 83.0954 59.0111 96.9879 60.0396 116.292C60.5615 126.084 65.4397 134.508 73.775 140.011C80.8224 144.663 89.899 146.938 99.3323 146.423C111.79 145.74 121.563 140.987 128.381 132.296C133.559 125.696 136.834 117.143 138.28 106.366C144.217 109.949 148.617 114.664 151.047 120.332C155.179 129.967 155.42 145.8 142.501 158.708C131.182 170.016 117.576 174.908 97.0135 175.059C74.2042 174.89 56.9538 167.575 45.7381 153.317C35.2355 139.966 29.8077 120.682 29.6052 96C29.8077 71.3178 35.2355 52.0336 45.7381 38.6827C56.9538 24.4249 74.2039 17.11 97.0132 16.9405C119.988 17.1113 137.539 24.4614 149.184 38.788C154.894 45.8136 159.199 54.6488 162.037 64.9503L178.184 60.6422C174.744 47.9622 169.331 37.0357 161.965 27.974C147.036 9.60668 125.202 0.195148 97.0695 0H96.9569C68.8816 0.19447 47.2921 9.6418 32.7883 28.0793C19.8819 44.4864 13.2244 67.3157 13.0007 95.9325L13 96L13.0007 96.0675C13.2244 124.684 19.8819 147.514 32.7883 163.921C47.2921 182.358 68.8816 191.806 96.9569 192H97.0695C122.03 191.827 139.624 185.292 154.118 170.811C173.081 151.866 172.51 128.119 166.26 113.541C161.776 103.087 153.227 94.5962 141.537 88.9883ZM98.4405 129.507C88.0005 130.095 77.1544 125.409 76.6196 115.372C76.2232 107.93 81.9158 99.626 99.0812 98.6368C101.047 98.5234 102.976 98.468 104.871 98.468C111.106 98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z"
+                            ></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="top-nav__right">
+                    <div class="top-nav__right-setting flex h-full items-center justify-end">
+                        <svg aria-label="More" role="img" viewBox="0 0 24 24" class="mr-7 w-6 h-6 scale-x-[-1]">
+                            <title>More</title>
+                            <rect width="24" height="2.5" rx="1.25" x="3" y="7" fill="#4d4d4d"></rect>
+                            <rect width="14" height="2.5" rx="1.25" x="3" y="15" fill="#4d4d4d"></rect>
+                        </svg>
+                    </div>
+                </div>
+            </nav>
+
+            <nav class="bottom-nav fixed bottom-0 left-0 w-screen h-[68px] z-[1] bg-mobile-nav backdrop-blur-lg">
+                <div class="nav-utilities w-full h-full flex items-center justify-around flex-nowrap">
+                    <a href="./index.html" class="nav-utility-home w-1/5 h-full inline-flex justify-center items-center">
+                        <svg aria-label="Home" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px]">
+                            <title>Home</title>
+                            <path
+                                d="M2.25 12.8855V20.7497C2.25 21.8543 3.14543 22.7497 4.25 22.7497H9.25C9.52614 22.7497 9.75 22.5258 9.75 22.2497V17.6822V16.4997C9.75 14.7048 11.2051 13.2497 13 13.2497C14.7949 13.2497 16.25 14.7048 16.25 16.4997V17.6822V22.2497C16.25 22.5258 16.4739 22.7497 16.75 22.7497H21.75C22.8546 22.7497 23.75 21.8543 23.75 20.7497V12.8855C23.75 11.3765 23.0685 9.94814 21.8954 8.99882L16.1454 4.34539C14.3112 2.86094 11.6888 2.86094 9.85455 4.34539L4.10455 8.99882C2.93153 9.94814 2.25 11.3765 2.25 12.8855Z"
+                                fill="none"
+                                stroke="#4d4d4d"
+                                stroke-linecap="round"
+                                stroke-width="2.5"
+                            ></path>
+                        </svg>
+                    </a>
+                    <a href="./search.html" class="nav-utility-search w-1/5 h-full inline-flex justify-center items-center">
+                        <svg aria-label="Search" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px]">
+                            <title>Search</title>
+                            <path
+                                clip-rule="evenodd"
+                                d="M3.5 11.5C3.5 7.08172 7.08172 3.5 11.5 3.5C15.9183 3.5 19.5 7.08172 19.5 11.5C19.5 15.9183 15.9183 19.5 11.5 19.5C7.08172 19.5 3.5 15.9183 3.5 11.5ZM11.5 1C5.70101 1 1 5.70101 1 11.5C1 17.299 5.70101 22 11.5 22C13.949 22 16.2023 21.1615 17.9883 19.756L22.3661 24.1339C22.8543 24.622 23.6457 24.622 24.1339 24.1339C24.622 23.6457 24.622 22.8543 24.1339 22.3661L19.756 17.9883C21.1615 16.2023 22 13.949 22 11.5C22 5.70101 17.299 1 11.5 1Z"
+                                fill="#4d4d4d"
+                                fill-rule="evenodd"
+                            ></path>
+                        </svg>
+                    </a>
+                    <label for="create-post__checkbox" class="nav-utility-create w-1/5 h-full inline-flex justify-center items-center">
+                        <svg aria-label="Create" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px]">
+                            <title>Create</title>
+                            <path
+                                d="M22.75 13L22.75 13.15C22.75 16.5103 22.75 18.1905 22.096 19.4739C21.5208 20.6029 20.6029 21.5208 19.4739 22.096C18.1905 22.75 16.5103 22.75 13.15 22.75L12.85 22.75C9.48969 22.75 7.80953 22.75 6.52606 22.096C5.39708 21.5208 4.4792 20.6029 3.90396 19.4739C3.25 18.1905 3.25 16.5103 3.25 13.15L3.25 12.85C3.25 9.48968 3.25 7.80953 3.90396 6.52606C4.4792 5.39708 5.39708 4.4792 6.52606 3.90396C7.80953 3.25 9.48968 3.25 12.85 3.25L13 3.25"
+                                stroke="#4d4d4d"
+                                stroke-linecap="round"
+                                stroke-width="2.5"
+                                fill="transparent"
+                            ></path>
+                            <path d="M21.75 4.25L13.75 12.25" stroke="#4d4d4d" stroke-linecap="round" stroke-width="2.5"></path>
+                        </svg>
+                    </label>
+                    <a href="#" class="nav-utility-noti w-1/5 h-full inline-flex justify-center items-center">
+                        <svg aria-label="Notifications" role="img" viewBox="0 0 32 32" style="transform: scale(1.25)" class="w-[26px] h-[26px]">
+                            <title>Notifications</title>
+                            <path
+                                d="M5.5 12.8568C5.5 17.224 9.22178 21.5299 15.0332 25.2032C15.3554 25.397 15.7401 25.5909 16 25.5909C16.2703 25.5909 16.655 25.397 16.9668 25.2032C22.7782 21.5299 26.5 17.224 26.5 12.8568C26.5 9.11212 23.8698 6.5 20.4599 6.5C18.4847 6.5 16.9356 7.39792 16 8.74479C15.0851 7.40812 13.5257 6.5 11.5401 6.5C8.14059 6.5 5.5 9.11212 5.5 12.8568Z"
+                                stroke="#4d4d4d"
+                                fill="transparent"
+                                stroke-width="2.5"
+                            ></path>
+                        </svg>
+                    </a>
+                    <a href="./profile.html" class="nav-utility-profile w-1/5 h-full inline-flex justify-center items-center">
+                        <svg aria-label="Profile" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px]">
+                            <title>Profile</title>
+                            <circle cx="13" cy="7.25" r="4" stroke="white" stroke-width="2.5" fill="white"></circle>
+                            <path
+                                d="M6.26678 23.75H19.744C21.603 23.75 22.5 23.2186 22.5 22.0673C22.5 19.3712 18.8038 15.75 13 15.75C7.19625 15.75 3.5 19.3712 3.5 22.0673C3.5 23.2186 4.39704 23.75 6.26678 23.75Z"
+                                stroke="white"
+                                fill="white"
+                                stroke-width="2.5"
+                            ></path>
+                        </svg>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="content-wrapper w-screen min-h-screen bg-main-bg pb-[50px]">
+                <div class="content-section w-full min-h-full overflow-y-auto text-primary-text pt-[60px]">
+                    <div class="detail-post-wrapper w-full h-full">
+                        <div class="main-post-wrapper pt-1 pb-3 px-3">
+                            <div class="first-thread flex item-center pl-3 pb-3">
+                                <svg
+                                    aria-label=""
+                                    role="img"
+                                    viewBox="0 0 24 24"
+                                    class="w-[18px] h-[18px] pr-3 box-content transform translate-y-[1px]"
+                                >
+                                    <title></title>
+                                    <path
+                                        fill="#777"
+                                        d="M18.18054,22.51074a.99029.99029,0,0,1-.51367-.14258l-5.667-3.39355-5.667,3.39355a.99946.99946,0,0,1-1.49219-1.0625l1.37012-6.54394L1.33484,10.415A.99881.99881,0,0,1,1.871,8.67773l6.55371-.85449,2.668-5.75488a1.00019,1.00019,0,0,1,1.81446,0l2.668,5.75488,6.55372.85449a.99881.99881,0,0,1,.53613,1.73731l-4.876,4.34668,1.37012,6.54394a.99991.99991,0,0,1-.97852,1.20508Zm-6.18066-5.70215a.99973.99973,0,0,1,.51367.14258l4.21973,2.52735-1.02051-4.873a.99823.99823,0,0,1,.31348-.95117L19.702,10.37793l-4.93164-.64355a.9995.9995,0,0,1-.77832-.57032L11.99988,4.86719,10.00769,9.16406a.9995.9995,0,0,1-.77832.57032l-4.93164.64355L7.97351,13.6543a.99823.99823,0,0,1,.31348.95117l-1.02051,4.873,4.21973-2.52735A.9997.9997,0,0,1,11.99988,16.80859Z"
+                                    ></path>
+                                </svg>
+                                <span class="text-secondary-text text-start font-normal text-[13px]">First thread</span>
+                            </div>
+                            <div class="main-post">
+                                <div class="main-post-info flex flex-nowrap items-center">
+                                    <img
+                                        src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                        alt=""
+                                        class="main-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover"
+                                    />
+                                    <div class="inline-block pl-3 flex-grow">
+                                        <a href="#" class="main-post-username inline-block text-[15px] font-user-weight">cas.nothingtosay</a>
+                                        <p class="main-post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
+                                    </div>
+                                    <div class="main-post-more-btn w-5 h-5">
+                                        <svg aria-label="More" role="img" viewBox="0 0 12 12">
+                                            <title>More</title>
+                                            <path
+                                                clip-rule="evenodd"
+                                                d="M2 7.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z"
+                                                fill="#777"
+                                                fill-rule="evenodd"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="main-post-content pt-[10px] w-full">
+                                    <div class="text-primary-text font-normal break-words text-[15px]">I'm Ammar. I'm the best in the world!</div>
+                                    <div class="main-post-action ml-[-12px]">
+                                        <button class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Like</title>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M1.34375 7.53125L1.34375 7.54043C1.34374 8.04211 1.34372 8.76295 1.6611 9.65585C1.9795 10.5516 2.60026 11.5779 3.77681 12.7544C5.59273 14.5704 7.58105 16.0215 8.33387 16.5497C8.73525 16.8313 9.26573 16.8313 9.66705 16.5496C10.4197 16.0213 12.4074 14.5703 14.2232 12.7544C15.3997 11.5779 16.0205 10.5516 16.3389 9.65585C16.6563 8.76296 16.6563 8.04211 16.6562 7.54043V7.53125C16.6562 5.23466 15.0849 3.25 12.6562 3.25C11.5214 3.25 10.6433 3.78244 9.99228 4.45476C9.59009 4.87012 9.26356 5.3491 9 5.81533C8.73645 5.3491 8.40991 4.87012 8.00772 4.45476C7.35672 3.78244 6.47861 3.25 5.34375 3.25C2.9151 3.25 1.34375 5.23466 1.34375 7.53125Z"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">267</span>
+                                        </button>
+                                        <button class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Reply" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Reply</title>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M15.376 13.2177L16.2861 16.7955L12.7106 15.8848C12.6781 15.8848 12.6131 15.8848 12.5806 15.8848C11.3779 16.5678 9.94767 16.8931 8.41995 16.7955C4.94194 16.5353 2.08152 13.7381 1.72397 10.2578C1.2689 5.63919 5.13697 1.76863 9.75264 2.22399C13.2307 2.58177 16.0261 5.41151 16.2861 8.92429C16.4161 10.453 16.0586 11.8841 15.376 13.0876C15.376 13.1526 15.376 13.1852 15.376 13.2177Z"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">6</span>
+                                        </button>
+                                        <button class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Repost" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Repost</title>
+                                                <path
+                                                    fill="#ccc"
+                                                    d="M6.41256 1.23531C6.6349 0.971277 7.02918 0.937481 7.29321 1.15982L9.96509 3.40982C10.1022 3.52528 10.1831 3.69404 10.1873 3.87324C10.1915 4.05243 10.1186 4.2248 9.98706 4.34656L7.31518 6.81971C7.06186 7.05419 6.66643 7.03892 6.43196 6.7856C6.19748 6.53228 6.21275 6.13685 6.46607 5.90237L7.9672 4.51289H5.20312C3.68434 4.51289 2.45312 5.74411 2.45312 7.26289V9.51289V11.7629C2.45312 13.2817 3.68434 14.5129 5.20312 14.5129C5.5483 14.5129 5.82812 14.7927 5.82812 15.1379C5.82812 15.4831 5.5483 15.7629 5.20312 15.7629C2.99399 15.7629 1.20312 13.972 1.20312 11.7629V9.51289V7.26289C1.20312 5.05375 2.99399 3.26289 5.20312 3.26289H7.85002L6.48804 2.11596C6.22401 1.89362 6.19021 1.49934 6.41256 1.23531Z"
+                                                ></path>
+                                                <path
+                                                    fill="#ccc"
+                                                    d="M11.5874 17.7904C11.3651 18.0545 10.9708 18.0883 10.7068 17.8659L8.03491 15.6159C7.89781 15.5005 7.81687 15.3317 7.81267 15.1525C7.80847 14.9733 7.8814 14.801 8.01294 14.6792L10.6848 12.206C10.9381 11.9716 11.3336 11.9868 11.568 12.2402C11.8025 12.4935 11.7872 12.8889 11.5339 13.1234L10.0328 14.5129H12.7969C14.3157 14.5129 15.5469 13.2816 15.5469 11.7629V9.51286V7.26286C15.5469 5.74408 14.3157 4.51286 12.7969 4.51286C12.4517 4.51286 12.1719 4.23304 12.1719 3.88786C12.1719 3.54269 12.4517 3.26286 12.7969 3.26286C15.006 3.26286 16.7969 5.05373 16.7969 7.26286V9.51286V11.7629C16.7969 13.972 15.006 15.7629 12.7969 15.7629H10.15L11.512 16.9098C11.776 17.1321 11.8098 17.5264 11.5874 17.7904Z"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">10</span>
+                                        </button>
+                                        <button class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Share" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Share</title>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M15.6097 4.09082L6.65039 9.11104"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M7.79128 14.439C8.00463 15.3275 8.11131 15.7718 8.33426 15.932C8.52764 16.071 8.77617 16.1081 9.00173 16.0318C9.26179 15.9438 9.49373 15.5501 9.95761 14.7628L15.5444 5.2809C15.8883 4.69727 16.0603 4.40546 16.0365 4.16566C16.0159 3.95653 15.9071 3.76612 15.7374 3.64215C15.5428 3.5 15.2041 3.5 14.5267 3.5H3.71404C2.81451 3.5 2.36474 3.5 2.15744 3.67754C1.97758 3.83158 1.88253 4.06254 1.90186 4.29856C1.92415 4.57059 2.24363 4.88716 2.88259 5.52032L6.11593 8.7243C6.26394 8.87097 6.33795 8.94431 6.39784 9.02755C6.451 9.10144 6.4958 9.18101 6.53142 9.26479C6.57153 9.35916 6.59586 9.46047 6.64451 9.66309L7.79128 14.439Z"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">100</span>
+                                        </button>
+                                    </div>
+                                    <div class="main-post-replies-title flex flex-nowrap pt-4 pb-1 mt-2 border-t-[1px] border-border-color">
+                                        <span class="text-[15px] font-semibold text-primary-text flex-grow">Replies</span>
+                                        <span class="text-[15px] font-normal text-secondary-text">View activity ></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="replies-post p-3 border-t-[1px] border-border-color">
+                            <div class="replies-post-info flex flex-nowrap items-center relative">
+                                <div class="replies-post-more-btn w-5 h-5 absolute top-0 right-0">
+                                    <svg aria-label="More" role="img" viewBox="0 0 12 12">
+                                        <title>More</title>
+                                        <path
+                                            clip-rule="evenodd"
+                                            d="M2 7.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z"
+                                            fill="#777"
+                                            fill-rule="evenodd"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <img
+                                    src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                    alt=""
+                                    class="replies-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover self-start"
+                                />
+                                <div class="flex flex-col pl-3 w-[calc(100%-36px)]">
+                                    <div class="block">
+                                        <a href="#" class="replies-post-username inline-block text-[15px] font-user-weight">cas.nothingtosay</a>
+                                        <p class="replies-post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
+                                    </div>
+                                    <span
+                                        class="replies-post-content block text-[15px] font-normal text-primary-text break-words whitespace-normal mt-[3px]"
+                                    >
+                                        CSC13008-Mini-Threadsssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+                                    </span>
+
+                                    <div class="replies-post-action ml-[-12px] mt-[3px]">
+                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Like</title>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M1.34375 7.53125L1.34375 7.54043C1.34374 8.04211 1.34372 8.76295 1.6611 9.65585C1.9795 10.5516 2.60026 11.5779 3.77681 12.7544C5.59273 14.5704 7.58105 16.0215 8.33387 16.5497C8.73525 16.8313 9.26573 16.8313 9.66705 16.5496C10.4197 16.0213 12.4074 14.5703 14.2232 12.7544C15.3997 11.5779 16.0205 10.5516 16.3389 9.65585C16.6563 8.76296 16.6563 8.04211 16.6562 7.54043V7.53125C16.6562 5.23466 15.0849 3.25 12.6562 3.25C11.5214 3.25 10.6433 3.78244 9.99228 4.45476C9.59009 4.87012 9.26356 5.3491 9 5.81533C8.73645 5.3491 8.40991 4.87012 8.00772 4.45476C7.35672 3.78244 6.47861 3.25 5.34375 3.25C2.9151 3.25 1.34375 5.23466 1.34375 7.53125Z"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">267</span>
+                                        </button>
+                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Reply" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Reply</title>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M15.376 13.2177L16.2861 16.7955L12.7106 15.8848C12.6781 15.8848 12.6131 15.8848 12.5806 15.8848C11.3779 16.5678 9.94767 16.8931 8.41995 16.7955C4.94194 16.5353 2.08152 13.7381 1.72397 10.2578C1.2689 5.63919 5.13697 1.76863 9.75264 2.22399C13.2307 2.58177 16.0261 5.41151 16.2861 8.92429C16.4161 10.453 16.0586 11.8841 15.376 13.0876C15.376 13.1526 15.376 13.1852 15.376 13.2177Z"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">6</span>
+                                        </button>
+                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Repost" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Repost</title>
+                                                <path
+                                                    fill="#ccc"
+                                                    d="M6.41256 1.23531C6.6349 0.971277 7.02918 0.937481 7.29321 1.15982L9.96509 3.40982C10.1022 3.52528 10.1831 3.69404 10.1873 3.87324C10.1915 4.05243 10.1186 4.2248 9.98706 4.34656L7.31518 6.81971C7.06186 7.05419 6.66643 7.03892 6.43196 6.7856C6.19748 6.53228 6.21275 6.13685 6.46607 5.90237L7.9672 4.51289H5.20312C3.68434 4.51289 2.45312 5.74411 2.45312 7.26289V9.51289V11.7629C2.45312 13.2817 3.68434 14.5129 5.20312 14.5129C5.5483 14.5129 5.82812 14.7927 5.82812 15.1379C5.82812 15.4831 5.5483 15.7629 5.20312 15.7629C2.99399 15.7629 1.20312 13.972 1.20312 11.7629V9.51289V7.26289C1.20312 5.05375 2.99399 3.26289 5.20312 3.26289H7.85002L6.48804 2.11596C6.22401 1.89362 6.19021 1.49934 6.41256 1.23531Z"
+                                                ></path>
+                                                <path
+                                                    fill="#ccc"
+                                                    d="M11.5874 17.7904C11.3651 18.0545 10.9708 18.0883 10.7068 17.8659L8.03491 15.6159C7.89781 15.5005 7.81687 15.3317 7.81267 15.1525C7.80847 14.9733 7.8814 14.801 8.01294 14.6792L10.6848 12.206C10.9381 11.9716 11.3336 11.9868 11.568 12.2402C11.8025 12.4935 11.7872 12.8889 11.5339 13.1234L10.0328 14.5129H12.7969C14.3157 14.5129 15.5469 13.2816 15.5469 11.7629V9.51286V7.26286C15.5469 5.74408 14.3157 4.51286 12.7969 4.51286C12.4517 4.51286 12.1719 4.23304 12.1719 3.88786C12.1719 3.54269 12.4517 3.26286 12.7969 3.26286C15.006 3.26286 16.7969 5.05373 16.7969 7.26286V9.51286V11.7629C16.7969 13.972 15.006 15.7629 12.7969 15.7629H10.15L11.512 16.9098C11.776 17.1321 11.8098 17.5264 11.5874 17.7904Z"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">10</span>
+                                        </button>
+                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Share" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Share</title>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M15.6097 4.09082L6.65039 9.11104"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M7.79128 14.439C8.00463 15.3275 8.11131 15.7718 8.33426 15.932C8.52764 16.071 8.77617 16.1081 9.00173 16.0318C9.26179 15.9438 9.49373 15.5501 9.95761 14.7628L15.5444 5.2809C15.8883 4.69727 16.0603 4.40546 16.0365 4.16566C16.0159 3.95653 15.9071 3.76612 15.7374 3.64215C15.5428 3.5 15.2041 3.5 14.5267 3.5H3.71404C2.81451 3.5 2.36474 3.5 2.15744 3.67754C1.97758 3.83158 1.88253 4.06254 1.90186 4.29856C1.92415 4.57059 2.24363 4.88716 2.88259 5.52032L6.11593 8.7243C6.26394 8.87097 6.33795 8.94431 6.39784 9.02755C6.451 9.10144 6.4958 9.18101 6.53142 9.26479C6.57153 9.35916 6.59586 9.46047 6.64451 9.66309L7.79128 14.439Z"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">100</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="replies-post p-3 border-t-[1px] border-border-color">
+                            <div class="replies-post-info flex flex-nowrap items-center relative">
+                                <div class="replies-post-more-btn w-5 h-5 absolute top-0 right-0">
+                                    <svg aria-label="More" role="img" viewBox="0 0 12 12">
+                                        <title>More</title>
+                                        <path
+                                            clip-rule="evenodd"
+                                            d="M2 7.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z"
+                                            fill="#777"
+                                            fill-rule="evenodd"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <img
+                                    src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                    alt=""
+                                    class="replies-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover self-start"
+                                />
+                                <div class="flex flex-col pl-3 w-[calc(100%-36px)]">
+                                    <div class="block">
+                                        <a href="#" class="replies-post-username inline-block text-[15px] font-user-weight">cas.nothingtosay</a>
+                                        <p class="replies-post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
+                                    </div>
+                                    <span
+                                        class="replies-post-content block text-[15px] font-normal text-primary-text break-words whitespace-normal mt-[3px]"
+                                    >
+                                        CSC13008-Mini-Threadsssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+                                    </span>
+                                    <div class="replies-img max-w-[calc(100%+48px)] mt-2 flex space-x-2 overflow-x-auto ml-[-48px]">
+                                        <img
+                                            src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                            alt=""
+                                            class="replies-user-img m-h-[430px] rounded-lg object-cover ml-[48px]"
+                                        />
+                                        <img
+                                            src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                            alt=""
+                                            class="replies-user-img m-h-[430px] rounded-lg object-cover"
+                                        />
+                                        <img
+                                            src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                            alt=""
+                                            class="replies-user-img m-h-[430px] rounded-lg object-cover"
+                                        />
+                                        <img
+                                            src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                            alt=""
+                                            class="replies-user-img m-h-[430px] rounded-lg object-cover"
+                                        />
+                                        <img
+                                            src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                            alt=""
+                                            class="replies-user-img m-h-[430px] rounded-lg object-cover"
+                                        />
+                                    </div>
+
+                                    <div class="replies-post-action ml-[-12px] mt-[3px]">
+                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Like</title>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M1.34375 7.53125L1.34375 7.54043C1.34374 8.04211 1.34372 8.76295 1.6611 9.65585C1.9795 10.5516 2.60026 11.5779 3.77681 12.7544C5.59273 14.5704 7.58105 16.0215 8.33387 16.5497C8.73525 16.8313 9.26573 16.8313 9.66705 16.5496C10.4197 16.0213 12.4074 14.5703 14.2232 12.7544C15.3997 11.5779 16.0205 10.5516 16.3389 9.65585C16.6563 8.76296 16.6563 8.04211 16.6562 7.54043V7.53125C16.6562 5.23466 15.0849 3.25 12.6562 3.25C11.5214 3.25 10.6433 3.78244 9.99228 4.45476C9.59009 4.87012 9.26356 5.3491 9 5.81533C8.73645 5.3491 8.40991 4.87012 8.00772 4.45476C7.35672 3.78244 6.47861 3.25 5.34375 3.25C2.9151 3.25 1.34375 5.23466 1.34375 7.53125Z"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">267</span>
+                                        </button>
+                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Reply" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Reply</title>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M15.376 13.2177L16.2861 16.7955L12.7106 15.8848C12.6781 15.8848 12.6131 15.8848 12.5806 15.8848C11.3779 16.5678 9.94767 16.8931 8.41995 16.7955C4.94194 16.5353 2.08152 13.7381 1.72397 10.2578C1.2689 5.63919 5.13697 1.76863 9.75264 2.22399C13.2307 2.58177 16.0261 5.41151 16.2861 8.92429C16.4161 10.453 16.0586 11.8841 15.376 13.0876C15.376 13.1526 15.376 13.1852 15.376 13.2177Z"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">6</span>
+                                        </button>
+                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Repost" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Repost</title>
+                                                <path
+                                                    fill="#ccc"
+                                                    d="M6.41256 1.23531C6.6349 0.971277 7.02918 0.937481 7.29321 1.15982L9.96509 3.40982C10.1022 3.52528 10.1831 3.69404 10.1873 3.87324C10.1915 4.05243 10.1186 4.2248 9.98706 4.34656L7.31518 6.81971C7.06186 7.05419 6.66643 7.03892 6.43196 6.7856C6.19748 6.53228 6.21275 6.13685 6.46607 5.90237L7.9672 4.51289H5.20312C3.68434 4.51289 2.45312 5.74411 2.45312 7.26289V9.51289V11.7629C2.45312 13.2817 3.68434 14.5129 5.20312 14.5129C5.5483 14.5129 5.82812 14.7927 5.82812 15.1379C5.82812 15.4831 5.5483 15.7629 5.20312 15.7629C2.99399 15.7629 1.20312 13.972 1.20312 11.7629V9.51289V7.26289C1.20312 5.05375 2.99399 3.26289 5.20312 3.26289H7.85002L6.48804 2.11596C6.22401 1.89362 6.19021 1.49934 6.41256 1.23531Z"
+                                                ></path>
+                                                <path
+                                                    fill="#ccc"
+                                                    d="M11.5874 17.7904C11.3651 18.0545 10.9708 18.0883 10.7068 17.8659L8.03491 15.6159C7.89781 15.5005 7.81687 15.3317 7.81267 15.1525C7.80847 14.9733 7.8814 14.801 8.01294 14.6792L10.6848 12.206C10.9381 11.9716 11.3336 11.9868 11.568 12.2402C11.8025 12.4935 11.7872 12.8889 11.5339 13.1234L10.0328 14.5129H12.7969C14.3157 14.5129 15.5469 13.2816 15.5469 11.7629V9.51286V7.26286C15.5469 5.74408 14.3157 4.51286 12.7969 4.51286C12.4517 4.51286 12.1719 4.23304 12.1719 3.88786C12.1719 3.54269 12.4517 3.26286 12.7969 3.26286C15.006 3.26286 16.7969 5.05373 16.7969 7.26286V9.51286V11.7629C16.7969 13.972 15.006 15.7629 12.7969 15.7629H10.15L11.512 16.9098C11.776 17.1321 11.8098 17.5264 11.5874 17.7904Z"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">10</span>
+                                        </button>
+                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                            <svg aria-label="Share" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
+                                                <title>Share</title>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M15.6097 4.09082L6.65039 9.11104"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                                <path
+                                                    stroke="#ccc"
+                                                    fill="none"
+                                                    d="M7.79128 14.439C8.00463 15.3275 8.11131 15.7718 8.33426 15.932C8.52764 16.071 8.77617 16.1081 9.00173 16.0318C9.26179 15.9438 9.49373 15.5501 9.95761 14.7628L15.5444 5.2809C15.8883 4.69727 16.0603 4.40546 16.0365 4.16566C16.0159 3.95653 15.9071 3.76612 15.7374 3.64215C15.5428 3.5 15.2041 3.5 14.5267 3.5H3.71404C2.81451 3.5 2.36474 3.5 2.15744 3.67754C1.97758 3.83158 1.88253 4.06254 1.90186 4.29856C1.92415 4.57059 2.24363 4.88716 2.88259 5.52032L6.11593 8.7243C6.26394 8.87097 6.33795 8.94431 6.39784 9.02755C6.451 9.10144 6.4958 9.18101 6.53142 9.26479C6.57153 9.35916 6.59586 9.46047 6.64451 9.66309L7.79128 14.439Z"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.25"
+                                                ></path>
+                                            </svg>
+                                            <span class="text-[#ccc] text-[13px] font-normal pl-1">100</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <!-- script -->
+</html>

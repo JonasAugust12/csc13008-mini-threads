@@ -8,8 +8,8 @@ module.exports = {
                 'main-bg': '#0a0a0a',
                 'content-bg': '#181818',
                 'primary-text': '#f3f5f7', // màu cho phần tên user hay nội dung
-                'secondary-text': '#f3f5f7', // màu cho phần timestamp 1 day hay Picked for you
-                'border-color': '##2d2d2d',
+                'secondary-text': '#777', // màu cho phần timestamp 1 day hay Picked for you
+                'border-color': '#2d2d2d',
             },
             fontFamily: {
                 'main-font': ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
