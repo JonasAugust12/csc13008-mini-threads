@@ -57,7 +57,7 @@
                 <div
                     class="navbar__app-icon w-[34px] h-[34px] py-[15px] overflow-x-hidden overflow-y-hidden hidden tbl:flex tbl:justify-center tbl:box-content"
                 >
-                    <a href="#" class="w-[34px] h-[34px] transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer">
+                    <a href="./index.html" class="w-[34px] h-[34px] transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer">
                         <svg
                             aria-label="Threads"
                             fill="white"
@@ -78,14 +78,14 @@
 
                 <div class="nav-utilities w-full h-full flex items-center justify-around flex-nowrap tbl:flex-col tbl:justify-center tbl:gap-y-1">
                     <a
-                        href="#"
+                        href="./index.html"
                         class="nav-utility-home w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]"
                     >
                         <svg aria-label="Home" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px] tbl:w-6 tbl:h-6">
                             <title>Home</title>
                             <path
                                 d="M2.25 12.8855V20.7497C2.25 21.8543 3.14543 22.7497 4.25 22.7497H9.25C9.52614 22.7497 9.75 22.5258 9.75 22.2497V17.6822V16.4997C9.75 14.7048 11.2051 13.2497 13 13.2497C14.7949 13.2497 16.25 14.7048 16.25 16.4997V17.6822V22.2497C16.25 22.5258 16.4739 22.7497 16.75 22.7497H21.75C22.8546 22.7497 23.75 21.8543 23.75 20.7497V12.8855C23.75 11.3765 23.0685 9.94814 21.8954 8.99882L16.1454 4.34539C14.3112 2.86094 11.6888 2.86094 9.85455 4.34539L4.10455 8.99882C2.93153 9.94814 2.25 11.3765 2.25 12.8855Z"
-                                fill="#4d4d4d"
+                                fill="transparent"
                                 stroke="#4d4d4d"
                                 stroke-linecap="round"
                                 stroke-width="2.5"
@@ -147,7 +147,7 @@
                         </svg>
                     </a>
                     <a
-                        href="./profile.html"
+                        href="#"
                         class="nav-utility-profile w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]"
                     >
                         <svg aria-label="Profile" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px] tbl:w-6 tbl:h-6">
@@ -176,138 +176,214 @@
                 </div>
             </nav>
 
-            <div
-                class="content-wrapper w-screen h-screen tbl:shadow-[0_0_10px_5px_rgba(10,10,10,0.7)] tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:mx-[76px] tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:bg-content-bg pc:w-[640px] pc:fixed pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0"
-            >
-                <div class="overlay fixed bg-[rgba(0,0,0,0.5)] z-[5] inset-0 hidden"></div>
-                <div
-                    class="content-border z-1 border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:h-[calc(100vh-60px)] pc:w-[640px] pc:fixed pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
-                ></div>
-                <!-- edit profile  -->
-
-                <div
-                    class="edit-profile bg-black text-white p-8 mt-20 rounded-3xl hidden fixed inset-0 m-auto bottom-auto w-[calc(80%)] z-[10]"
-                    style="border: 1px solid rgba(147, 140, 140, 0.4)"
+            <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden tbl:block">
+                <button
+                    type="button"
+                    class="login-btn__inner h-[34px] leading-[34px] w-[82px] bg-[#ffffff] rounded-[10px] font-medium text-[16px] p-0 border-none cursor-pointer"
+                    data-bs-toggle="modal"
+                    data-bs-target="#loginModal"
+                    onclick="window.location.href='./login.html';"
                 >
-                    <div
-                        class="edit-profile__avatar h-12 w-12 bg-cover absolute rounded-full right-14"
-                        style="background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png); z-index: 2"
-                    ></div>
-                    <div class="avatar-mask bg-black h-20 w-16 bg-cover absolute right-14" style="z-index: 1"></div>
-                    <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                        <div class="field__title font-bold mb-2">Name</div>
-                        <div class="field__content field__content__name font-normal">
-                            <p>Minh Toàn (@cas.nothingtosay)</p>
-                        </div>
-                        <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
-                    </div>
-                    <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                        <div class="field__title font-bold">Bio</div>
-                        <div class="field__content field__content__bio">
-                            <p>Vietnamese gang</p>
-                        </div>
-                        <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
-                    </div>
-                    <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                        <div class="field__title font-bold">Link</div>
-                        <div class="field__content field__content__link">
-                            <p>+ Add link</p>
-                        </div>
-                        <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
-                    </div>
-                    <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                        <div class="field__title font-bold">Show Instagram badge</div>
-                        <div class="field__content field__content__ig text-xs">
-                            <p>When turned off, the Threads badge on your Instagram profile will also disappear.</p>
-                        </div>
-                        <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
-                    </div>
-                    <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                        <div class="field__title font-bold">Private profile</div>
+                    Log in
+                </button>
+            </div>
 
-                        <div class="field__content field__content__private text-xs">
-                            <p>If you switch to private, you won't be able to reply to others unless they follow you.</p>
+            <label
+                for="create-post__checkbox"
+                class="create-btn fixed bottom-6 right-7 hidden tbl:flex justify-center items-center h-[68px] w-[82px] bg-content-bg border-[1px] border-[#353636] rounded-xl p-0 z-[2] cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-105"
+            >
+                <svg aria-label="Create" role="img" viewBox="0 0 12 12" class="w-6 h-6">
+                    <title>Create</title>
+                    <path d="M6 2v8m4-4H2" stroke="#f3f5f7" stroke-linecap="round" stroke-width="1.5"></path>
+                </svg>
+            </label>
+
+            <div
+                class="content-wrapper w-screen h-screen tbl:shadow-[0_0_10px_5px_rgba(10,10,10,0.7)] tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:mx-[76px] tbl:h-[calc(100vh-60px)] pc:w-[640px] pc:ml-auto pc:mr-auto pc:mx-0"
+            >
+                <div
+                    class="content-border z-1 border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
+                ></div>
+
+                <div
+                    class="heading__section hidden h-[60px] fixed z-[1] top-0 bg-main-bg box-border tbl:grid tbl:grid-cols-[1fr_50%_1fr] tbl:grid-rows-[1fr]"
+                >
+                    <div class="heading__section__left flex items-center justify-start pl-4">
+                        <div
+                            class="back-btn inline-flex justify-center items-center w-6 h-6 border-[1px] border-[#363737] bg-[#181818] rounded-full cursor-pointer"
+                        >
+                            <svg aria-label="Back" role="img" viewBox="0 0 12 12" class="w-3 h-3">
+                                <title>Back</title>
+                                <path
+                                    d="M1 6h10M1 6l4-4M1 6l4 4"
+                                    stroke="white"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                ></path>
+                            </svg>
                         </div>
                     </div>
-                    <div
-                        class="edit-profile__button h-12 mt-8 bg-white text-black text-base font-semibold flex justify-center items-center cursor-pointer rounded-lg"
-                    >
-                        <p>Done</p>
+                    <div class="heading__section__middle flex justify-center items-center">
+                        <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center">For you</a>
+                        <div
+                            class="refresh-option inline-flex justify-center items-center w-6 h-6 border-[1px] border-[#363737] bg-[#181818] rounded-full cursor-pointer"
+                        >
+                            <svg aria-label="All" role="img" viewBox="0 0 13 12" class="w-3 h-3">
+                                <title>All</title>
+                                <path
+                                    d="m2.5 4.2 4 4 4-4"
+                                    fill="none"
+                                    stroke="white"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                ></path>
+                            </svg>
+                        </div>
                     </div>
+                    <div class="heading__section__right flex justify-end items-center pr-4"></div>
                 </div>
-                <div class="content-section w-full h-full overflow-y-auto custom-scrollbar text-primary-text pt-[60px]">
-                    <!-- profile -->
-                    <div class="profile__info relative z-[9]">
-                        <div class="content__heading flex justify-between">
-                            <div class="information flex flex-col ml-6 font-bold">
-                                <div class="information__name text-2xl mb-1">Minh Toàn</div>
-                                <div class="information__nickname text-sm font-normal mb-6">cas.nothingtosay</div>
-                                <div class="information__bio text-sm font-normal mb-4">Vietnamese gang</div>
-                                <div class="information__follower flex flex-row justify-around mb-8 text-gray-500">
-                                    <ul class="follower__img flex flex-row cursor-pointer">
-                                        <li
-                                            class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full absolute"
-                                            style="
-                                                background-image: url('https://th.bing.com/th/id/OIP.P6RqRgE_lh77mF6mktc_LgHaLH?rs=1&pid=ImgDetMain');
-                                                left: 2px;
-                                            "
-                                        ></li>
-                                        <li
-                                            class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full absolute"
-                                            style="
-                                                background-image: url('https://th.bing.com/th/id/R.b28868904888f28f32264a83f29d5b4a?rik=MeIviuEyQSaLbw&pid=ImgRaw&r=0');
-                                                left: -10px;
-                                            "
-                                        ></li>
-                                        <li
-                                            class="follower__img__item h-4 w-4 bg-cover relative rounded-full absolute"
-                                            style="background-image: url('https://dailytrust.com/wp-content/uploads/2022/12/Neymar.jpg'); left: -20px"
-                                        ></li>
-                                    </ul>
-                                    <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer">100</div>
-                                    <div class="follower__text text-sm font-normal relative cursor-pointer">followers</div>
-                                </div>
+
+                <div
+                    class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] tbl:pt-6 tbl:bg-content-bg"
+                >
+                    <!-- edit profile  -->
+                    <div
+                        class="edit-profile bg-black text-white p-8 mt-20 rounded-3xl hidden fixed inset-0 m-auto bottom-auto w-[calc(80%)] z-[10]"
+                        style="border: 1px solid rgba(147, 140, 140, 0.4)"
+                    >
+                        <div
+                            class="edit-profile__avatar h-12 w-12 bg-cover absolute rounded-full right-14"
+                            style="
+                                background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
+                                z-index: 2;
+                            "
+                        ></div>
+                        <div class="avatar-mask bg-black h-20 w-16 bg-cover absolute right-14" style="z-index: 1"></div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold mb-2">Name</div>
+                            <div class="field__content field__content__name font-normal">
+                                <p>Minh Toàn (@cas.nothingtosay)</p>
                             </div>
-                            <div class="utility flex flex-col items-end h-48 mr-6">
-                                <div
-                                    class="utility__avatar h-20 w-20 bg-cover mb-8 rounded-full cursor-pointer"
-                                    style="background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png)"
-                                ></div>
-                                <div class="utility__insta cursor-pointer mr-2">
-                                    <i class="fa-brands fa-instagram text-2xl cursor-pointer"></i>
-                                </div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Bio</div>
+                            <div class="field__content field__content__bio">
+                                <p>Vietnamese gang</p>
+                            </div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Link</div>
+                            <div class="field__content field__content__link">
+                                <p>+ Add link</p>
+                            </div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Show Instagram badge</div>
+                            <div class="field__content field__content__ig text-xs">
+                                <p>When turned off, the Threads badge on your Instagram profile will also disappear.</p>
+                            </div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Private profile</div>
+
+                            <div class="field__content field__content__private text-xs">
+                                <p>If you switch to private, you won't be able to reply to others unless they follow you.</p>
                             </div>
                         </div>
                         <div
-                            class="edit-btn block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
-                            style="border: 2px solid rgba(147, 140, 140, 0.4)"
+                            class="edit-profile__button h-12 mt-8 bg-white text-black text-base font-semibold flex justify-center items-center cursor-pointer rounded-lg"
                         >
-                            <p class="mt-1">Edit profile</p>
+                            <p>Done</p>
                         </div>
-                        <ul class="navigation flex flex-row justify-around font-medium text-[15px] mt-[30px] ;list-style: none">
-                            <li
-                                class="navigation__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__news navigation__item--on text-[white]"
+                    </div>
+                    <div class="content-section w-full h-full overflow-y-auto custom-scrollbar text-primary-text pt-[60px]">
+                        <!-- profile -->
+                        <div class="profile__info relative z-[9]">
+                            <div class="content__heading flex justify-between">
+                                <div class="information flex flex-col ml-6 font-bold">
+                                    <div class="information__name text-2xl mb-1">Minh Toàn</div>
+                                    <div class="information__nickname text-sm font-normal mb-6">cas.nothingtosay</div>
+                                    <div class="information__bio text-sm font-normal mb-4">Vietnamese gang</div>
+                                    <div class="information__follower flex flex-row justify-around mb-8 text-gray-500">
+                                        <ul class="follower__img flex flex-row cursor-pointer">
+                                            <li
+                                                class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
+                                                style="
+                                                    background-image: url('https://th.bing.com/th/id/OIP.P6RqRgE_lh77mF6mktc_LgHaLH?rs=1&pid=ImgDetMain');
+                                                    left: 2px;
+                                                "
+                                            ></li>
+                                            <li
+                                                class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
+                                                style="
+                                                    background-image: url('https://th.bing.com/th/id/R.b28868904888f28f32264a83f29d5b4a?rik=MeIviuEyQSaLbw&pid=ImgRaw&r=0');
+                                                    left: -10px;
+                                                "
+                                            ></li>
+                                            <li
+                                                class="follower__img__item h-4 w-4 bg-cover relative rounded-full"
+                                                style="
+                                                    background-image: url('https://dailytrust.com/wp-content/uploads/2022/12/Neymar.jpg');
+                                                    left: -20px;
+                                                "
+                                            ></li>
+                                        </ul>
+                                        <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer">100</div>
+                                        <div class="follower__text text-sm font-normal relative cursor-pointer">followers</div>
+                                    </div>
+                                </div>
+                                <div class="utility flex flex-col items-end h-48 mr-6">
+                                    <div
+                                        class="utility__avatar h-20 w-20 bg-cover mb-8 rounded-full cursor-pointer"
+                                        style="
+                                            background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
+                                        "
+                                    ></div>
+                                    <div class="utility__insta cursor-pointer mr-2">
+                                        <i class="fa-brands fa-instagram text-2xl cursor-pointer"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="edit-btn block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
+                                style="border: 2px solid rgba(147, 140, 140, 0.4)"
                             >
-                                <div class="item__text">Threads</div>
-                                <div class="item__line w-full mt-3.5 border-b-[rgba(243,245,247,0.15)] border-b border-solid border-b-[white]"></div>
-                            </li>
-                            <li
-                                class="navigation__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__replies navigation__item--off text-[rgb(153,153,153)]"
-                            >
-                                <div class="item__text">Replies</div>
-                                <div class="item__line w-full mt-3.5 border-b-[rgba(243,245,247,0.15)] border-b border-solid"></div>
-                            </li>
-                            <li
-                                class="navigation__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__reposts navigation__item--off text-[rgb(153,153,153)]"
-                            >
-                                <div class="item__text">Reposts</div>
-                                <div class="item__line w-full mt-3.5 border-b-[rgba(243,245,247,0.15)] border-b border-solid"></div>
-                            </li>
-                        </ul>
+                                <p class="mt-1">Edit profile</p>
+                            </div>
+                            <ul class="navigation flex flex-row justify-around font-medium text-[15px] mt-[30px] ;list-style: none">
+                                <li
+                                    class="navigation__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__news navigation__item--on text-[white]"
+                                >
+                                    <div class="item__text">Threads</div>
+                                    <div
+                                        class="item__line w-full mt-3.5 border-b-[rgba(243,245,247,0.15)] border-b border-solid border-b-[white]"
+                                    ></div>
+                                </li>
+                                <li
+                                    class="navigation__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__replies navigation__item--off text-[rgb(153,153,153)]"
+                                >
+                                    <div class="item__text">Replies</div>
+                                    <div class="item__line w-full mt-3.5 border-b-[rgba(243,245,247,0.15)] border-b border-solid"></div>
+                                </li>
+                                <li
+                                    class="navigation__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__reposts navigation__item--off text-[rgb(153,153,153)]"
+                                >
+                                    <div class="item__text">Reposts</div>
+                                    <div class="item__line w-full mt-3.5 border-b-[rgba(243,245,247,0.15)] border-b border-solid"></div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="../Js/layout.js"></script>
+        <script src="../Js/profile.js"></script>
     </body>
-    <script src="../../profile.js"></script>
 </html>
