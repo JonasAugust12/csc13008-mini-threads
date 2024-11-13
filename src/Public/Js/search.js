@@ -26,3 +26,17 @@ function formatFollowers(followers) {
         return followers.toString();
     }
 }
+
+const followBtns = $$('.user-profile__follow-btn');
+
+followBtns.forEach(function (followBtn) {
+    followBtn.addEventListener('click', function () {
+        if (followBtn.innerText === 'Follow') {
+            followBtn.innerText = 'Following';
+            followBtn.style.color = '#777777';
+        } else {
+            followBtn.innerText = 'Follow';
+            followBtn.style.color = '#f3f5f7';
+        }
+    });
+});
