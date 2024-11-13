@@ -4,21 +4,14 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mini Threads</title>
-
         <link href="../Css/output.css" rel="stylesheet" />
-
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
     </head>
 
-    <body>
+    <body class="bg-main-bg">
         <div class="app-container font-main-font">
-            <nav class="top-nav fixed top-0 left-0 w-screen h-[60px] z-[1] bg-mobile-nav backdrop-blur-lg grid grid-cols-[1fr_50vw_1fr] grid-rows-1">
+            <nav
+                class="top-nav fixed top-0 left-0 w-screen h-[60px] z-[1] bg-mobile-nav backdrop-blur-lg grid grid-cols-[1fr_50vw_1fr] grid-rows-1 tbl:hidden"
+            >
                 <div class="top-nav__left">
                     <div class="top-nav__left-back-btn flex h-full items-center justify-start">
                         <svg aria-label="Back" role="img" viewBox="0 0 24 24" class="ml-7 w-6 h-6">
@@ -58,22 +51,52 @@
                 </div>
             </nav>
 
-            <nav class="bottom-nav fixed bottom-0 left-0 w-screen h-[68px] z-[1] bg-mobile-nav backdrop-blur-lg">
-                <div class="nav-utilities w-full h-full flex items-center justify-around flex-nowrap">
-                    <a href="./index.html" class="nav-utility-home w-1/5 h-full inline-flex justify-center items-center">
-                        <svg aria-label="Home" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px]">
+            <nav
+                class="bottom-nav fixed bottom-0 left-0 w-screen h-[68px] z-[1] bg-mobile-nav backdrop-blur-lg flex items-center flex-col tbl:bg-nav tbl:bottom-auto tbl:h-screen tbl:top-0 tbl:w-[76px]"
+            >
+                <div
+                    class="navbar__app-icon w-[34px] h-[34px] py-[15px] overflow-x-hidden overflow-y-hidden hidden tbl:flex tbl:justify-center tbl:box-content"
+                >
+                    <a href="./index.html" class="w-[34px] h-[34px] transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer">
+                        <svg
+                            aria-label="Threads"
+                            fill="white"
+                            height="100%"
+                            role="img"
+                            viewBox="0 0 192 192"
+                            width="100%"
+                            class="w-[34px] h-[34px]"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <title>Threads</title>
+                            <path
+                                d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881 72.2328C81.6116 63.5383 90.6052 61.6848 97.2286 61.6848C97.3051 61.6848 97.3819 61.6848 97.4576 61.6855C105.707 61.7381 111.932 64.1366 115.961 68.814C118.893 72.2193 120.854 76.925 121.825 82.8638C114.511 81.6207 106.601 81.2385 98.145 81.7233C74.3247 83.0954 59.0111 96.9879 60.0396 116.292C60.5615 126.084 65.4397 134.508 73.775 140.011C80.8224 144.663 89.899 146.938 99.3323 146.423C111.79 145.74 121.563 140.987 128.381 132.296C133.559 125.696 136.834 117.143 138.28 106.366C144.217 109.949 148.617 114.664 151.047 120.332C155.179 129.967 155.42 145.8 142.501 158.708C131.182 170.016 117.576 174.908 97.0135 175.059C74.2042 174.89 56.9538 167.575 45.7381 153.317C35.2355 139.966 29.8077 120.682 29.6052 96C29.8077 71.3178 35.2355 52.0336 45.7381 38.6827C56.9538 24.4249 74.2039 17.11 97.0132 16.9405C119.988 17.1113 137.539 24.4614 149.184 38.788C154.894 45.8136 159.199 54.6488 162.037 64.9503L178.184 60.6422C174.744 47.9622 169.331 37.0357 161.965 27.974C147.036 9.60668 125.202 0.195148 97.0695 0H96.9569C68.8816 0.19447 47.2921 9.6418 32.7883 28.0793C19.8819 44.4864 13.2244 67.3157 13.0007 95.9325L13 96L13.0007 96.0675C13.2244 124.684 19.8819 147.514 32.7883 163.921C47.2921 182.358 68.8816 191.806 96.9569 192H97.0695C122.03 191.827 139.624 185.292 154.118 170.811C173.081 151.866 172.51 128.119 166.26 113.541C161.776 103.087 153.227 94.5962 141.537 88.9883ZM98.4405 129.507C88.0005 130.095 77.1544 125.409 76.6196 115.372C76.2232 107.93 81.9158 99.626 99.0812 98.6368C101.047 98.5234 102.976 98.468 104.871 98.468C111.106 98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z"
+                            ></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="nav-utilities w-full h-full flex items-center justify-around flex-nowrap tbl:flex-col tbl:justify-center tbl:gap-y-1">
+                    <a
+                        href="./index.html"
+                        class="nav-utility-home w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]"
+                    >
+                        <svg aria-label="Home" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px] tbl:w-6 tbl:h-6">
                             <title>Home</title>
                             <path
                                 d="M2.25 12.8855V20.7497C2.25 21.8543 3.14543 22.7497 4.25 22.7497H9.25C9.52614 22.7497 9.75 22.5258 9.75 22.2497V17.6822V16.4997C9.75 14.7048 11.2051 13.2497 13 13.2497C14.7949 13.2497 16.25 14.7048 16.25 16.4997V17.6822V22.2497C16.25 22.5258 16.4739 22.7497 16.75 22.7497H21.75C22.8546 22.7497 23.75 21.8543 23.75 20.7497V12.8855C23.75 11.3765 23.0685 9.94814 21.8954 8.99882L16.1454 4.34539C14.3112 2.86094 11.6888 2.86094 9.85455 4.34539L4.10455 8.99882C2.93153 9.94814 2.25 11.3765 2.25 12.8855Z"
-                                fill="none"
+                                fill="transparent"
                                 stroke="#4d4d4d"
                                 stroke-linecap="round"
                                 stroke-width="2.5"
                             ></path>
                         </svg>
                     </a>
-                    <a href="./search.html" class="nav-utility-search w-1/5 h-full inline-flex justify-center items-center">
-                        <svg aria-label="Search" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px]">
+                    <a
+                        href="./search.html"
+                        class="nav-utility-search w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]"
+                    >
+                        <svg aria-label="Search" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px] tbl:w-6 tbl:h-6">
                             <title>Search</title>
                             <path
                                 clip-rule="evenodd"
@@ -83,8 +106,11 @@
                             ></path>
                         </svg>
                     </a>
-                    <label for="create-post__checkbox" class="nav-utility-create w-1/5 h-full inline-flex justify-center items-center">
-                        <svg aria-label="Create" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px]">
+                    <label
+                        for="create-post__checkbox"
+                        class="nav-utility-create w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl tbl:bg-[#171717] group"
+                    >
+                        <svg aria-label="Create" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px] tbl:hidden">
                             <title>Create</title>
                             <path
                                 d="M22.75 13L22.75 13.15C22.75 16.5103 22.75 18.1905 22.096 19.4739C21.5208 20.6029 20.6029 21.5208 19.4739 22.096C18.1905 22.75 16.5103 22.75 13.15 22.75L12.85 22.75C9.48969 22.75 7.80953 22.75 6.52606 22.096C5.39708 21.5208 4.4792 20.6029 3.90396 19.4739C3.25 18.1905 3.25 16.5103 3.25 13.15L3.25 12.85C3.25 9.48968 3.25 7.80953 3.90396 6.52606C4.4792 5.39708 5.39708 4.4792 6.52606 3.90396C7.80953 3.25 9.48968 3.25 12.85 3.25L13 3.25"
@@ -95,9 +121,22 @@
                             ></path>
                             <path d="M21.75 4.25L13.75 12.25" stroke="#4d4d4d" stroke-linecap="round" stroke-width="2.5"></path>
                         </svg>
+                        <svg aria-label="Create" role="img" viewBox="0 0 12 12" class="hidden tbl:inline-block tbl:w-6 tbl:h-6">
+                            <title>Create</title>
+                            <path d="M6 2v8m4-4H2" stroke="#4d4d4d" stroke-linecap="round" stroke-width="1.5" class="group-hover:stroke-white"></path>
+                        </svg>
                     </label>
-                    <a href="./activity.html" class="nav-utility-noti w-1/5 h-full inline-flex justify-center items-center">
-                        <svg aria-label="Notifications" role="img" viewBox="0 0 32 32" style="transform: scale(1.25)" class="w-[26px] h-[26px]">
+                    <a
+                        href="./activity.html"
+                        class="nav-utility-noti w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]"
+                    >
+                        <svg
+                            aria-label="Notifications"
+                            role="img"
+                            viewBox="0 0 32 32"
+                            style="transform: scale(1.25)"
+                            class="w-[26px] h-[26px] tbl:w-6 tbl:h-6"
+                        >
                             <title>Notifications</title>
                             <path
                                 d="M5.5 12.8568C5.5 17.224 9.22178 21.5299 15.0332 25.2032C15.3554 25.397 15.7401 25.5909 16 25.5909C16.2703 25.5909 16.655 25.397 16.9668 25.2032C22.7782 21.5299 26.5 17.224 26.5 12.8568C26.5 9.11212 23.8698 6.5 20.4599 6.5C18.4847 6.5 16.9356 7.39792 16 8.74479C15.0851 7.40812 13.5257 6.5 11.5401 6.5C8.14059 6.5 5.5 9.11212 5.5 12.8568Z"
@@ -107,8 +146,11 @@
                             ></path>
                         </svg>
                     </a>
-                    <a href="#" class="nav-utility-profile w-1/5 h-full inline-flex justify-center items-center">
-                        <svg aria-label="Profile" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px]">
+                    <a
+                        href="#"
+                        class="nav-utility-profile w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]"
+                    >
+                        <svg aria-label="Profile" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px] tbl:w-6 tbl:h-6">
                             <title>Profile</title>
                             <circle cx="13" cy="7.25" r="4" stroke="white" stroke-width="2.5" fill="white"></circle>
                             <path
@@ -120,34 +162,116 @@
                         </svg>
                     </a>
                 </div>
+
+                <div class="navbar__setting mb-[22px] h-fit hidden tbl:block">
+                    <div
+                        class="navbar__setting-btn navbar__setting-btn--more w-[54px] h-[54px] flex items-center justify-center group cursor-pointer"
+                    >
+                        <svg aria-label="More" role="img" viewBox="0 0 24 24" class="w-6 h-6">
+                            <title>More</title>
+                            <rect width="24" height="2.5" rx="1.25" x="3" y="7" fill="#4d4d4d" class="group-hover:fill-white"></rect>
+                            <rect width="14" height="2.5" rx="1.25" x="3" y="15" fill="#4d4d4d" class="group-hover:fill-white"></rect>
+                        </svg>
+                    </div>
+                </div>
             </nav>
 
-            <div class="content-wrapper w-screen h-screen bg-main-bg">
-                <div class="content-section w-full h-full overflow-auto text-white">
-                    <!-- edit profile -->
+            <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden tbl:block">
+                <button
+                    type="button"
+                    class="login-btn__inner h-[34px] leading-[34px] w-[82px] bg-[#ffffff] rounded-[10px] font-medium text-[16px] p-0 border-none cursor-pointer"
+                    data-bs-toggle="modal"
+                    data-bs-target="#loginModal"
+                    onclick="window.location.href='./login.html';"
+                >
+                    Log in
+                </button>
+            </div>
+
+            <label
+                for="create-post__checkbox"
+                class="create-btn fixed bottom-6 right-7 hidden tbl:flex justify-center items-center h-[68px] w-[82px] bg-content-bg border-[1px] border-[#353636] rounded-xl p-0 z-[2] cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-105"
+            >
+                <svg aria-label="Create" role="img" viewBox="0 0 12 12" class="w-6 h-6">
+                    <title>Create</title>
+                    <path d="M6 2v8m4-4H2" stroke="#f3f5f7" stroke-linecap="round" stroke-width="1.5"></path>
+                </svg>
+            </label>
+
+            <div
+                class="content-wrapper w-screen h-screen tbl:shadow-[0_0_10px_5px_rgba(10,10,10,0.7)] tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:mx-[76px] tbl:h-[calc(100vh-60px)] pc:w-[640px] pc:ml-auto pc:mr-auto pc:mx-0"
+            >
+                <div
+                    class="content-border z-1 border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
+                ></div>
+
+                <div
+                    class="heading__section hidden h-[60px] fixed z-[1] top-0 bg-main-bg box-border tbl:grid tbl:grid-cols-[1fr_50%_1fr] tbl:grid-rows-[1fr] tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px]"
+                >
+                    <div class="heading__section__left flex items-center justify-start pl-4">
+                        <div
+                            class="back-btn inline-flex justify-center items-center w-6 h-6 border-[1px] border-[#363737] bg-[#181818] rounded-full cursor-pointer"
+                        >
+                            <svg aria-label="Back" role="img" viewBox="0 0 12 12" class="w-3 h-3">
+                                <title>Back</title>
+                                <path
+                                    d="M1 6h10M1 6l4-4M1 6l4 4"
+                                    stroke="white"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="heading__section__middle flex justify-center items-center">
+                        <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center">For you</a>
+                        <div
+                            class="refresh-option inline-flex justify-center items-center w-6 h-6 border-[1px] border-[#363737] bg-[#181818] rounded-full cursor-pointer"
+                        >
+                            <svg aria-label="All" role="img" viewBox="0 0 13 12" class="w-3 h-3">
+                                <title>All</title>
+                                <path
+                                    d="m2.5 4.2 4 4 4-4"
+                                    fill="none"
+                                    stroke="white"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="heading__section__right flex justify-end items-center pr-4"></div>
+                </div>
+
+                <div
+                    class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] tbl:pt-6 tbl:bg-content-bg"
+                >
+                    <!-- edit profile  -->
                     <div
-                        class="edit-profile bg-black text-white p-8 mt-20 ml-6 mr-6 rounded-lg hidden"
+                        class="edit-profile bg-black text-white p-8 mt-20 rounded-3xl hidden fixed inset-0 m-auto bottom-auto w-[calc(80%)] z-[10]"
                         style="border: 1px solid rgba(147, 140, 140, 0.4)"
                     >
                         <div
-                            class="edit-profile__avatar h-12 w-12 bg-cover absolute rounded-full right-16"
+                            class="edit-profile__avatar h-12 w-12 bg-cover absolute rounded-full right-14"
                             style="
                                 background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
                                 z-index: 2;
                             "
                         ></div>
-                        <div class="avatar-mask bg-black h-20 w-16 bg-cover absolute right-16" style="z-index: 1"></div>
+                        <div class="avatar-mask bg-black h-20 w-16 bg-cover absolute right-14" style="z-index: 1"></div>
                         <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
                             <div class="field__title font-bold mb-2">Name</div>
                             <div class="field__content field__content__name font-normal">
-                                <p>Hoàng Diễn (@shmilys_18)</p>
+                                <p>Minh Toàn (@cas.nothingtosay)</p>
                             </div>
                             <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
                         </div>
                         <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
                             <div class="field__title font-bold">Bio</div>
                             <div class="field__content field__content__bio">
-                                <p>HCMUS - IT - 20 🧑🏻‍💻.</p>
+                                <p>Vietnamese gang</p>
                             </div>
                             <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
                         </div>
@@ -178,59 +302,88 @@
                             <p>Done</p>
                         </div>
                     </div>
-
-                    <!-- profile -->
-                    <div class="profile__info">
-                        <div class="content__heading flex justify-between mt-20">
-                            <div class="information flex flex-col ml-6 font-bold">
-                                <div class="information__name text-2xl mb-1">Minh Toàn</div>
-                                <div class="information__nickname text-sm font-normal mb-6">cas.nothingtosay</div>
-                                <div class="information__bio text-sm font-normal mb-4">Vietnamese gang</div>
-                                <div class="information__follower flex flex-row justify-around mb-8 text-gray-500">
-                                    <ul class="follower__img flex flex-row cursor-pointer">
-                                        <li
-                                            class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full absolute"
-                                            style="
-                                                background-image: url('https://th.bing.com/th/id/OIP.P6RqRgE_lh77mF6mktc_LgHaLH?rs=1&pid=ImgDetMain');
-                                                left: 2px;
-                                            "
-                                        ></li>
-                                        <li
-                                            class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full absolute"
-                                            style="
-                                                background-image: url('https://th.bing.com/th/id/R.b28868904888f28f32264a83f29d5b4a?rik=MeIviuEyQSaLbw&pid=ImgRaw&r=0');
-                                                left: -10px;
-                                            "
-                                        ></li>
-                                        <li
-                                            class="follower__img__item h-4 w-4 bg-cover relative rounded-full absolute"
-                                            style="background-image: url('https://dailytrust.com/wp-content/uploads/2022/12/Neymar.jpg'); left: -20px"
-                                        ></li>
-                                    </ul>
-                                    <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer">100</div>
-                                    <div class="follower__text text-sm font-normal relative cursor-pointer">followers</div>
+                    <div class="content-section w-full h-full overflow-y-auto custom-scrollbar text-primary-text pt-[60px]">
+                        <!-- profile -->
+                        <div class="profile__info relative z-[9]">
+                            <div class="content__heading flex justify-between">
+                                <div class="information flex flex-col ml-6 font-bold">
+                                    <div class="information__name text-2xl mb-1">Minh Toàn</div>
+                                    <div class="information__nickname text-sm font-normal mb-6">cas.nothingtosay</div>
+                                    <div class="information__bio text-sm font-normal mb-4">Vietnamese gang</div>
+                                    <div class="information__follower flex flex-row justify-around mb-8 text-gray-500">
+                                        <ul class="follower__img flex flex-row cursor-pointer">
+                                            <li
+                                                class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
+                                                style="
+                                                    background-image: url('https://th.bing.com/th/id/OIP.P6RqRgE_lh77mF6mktc_LgHaLH?rs=1&pid=ImgDetMain');
+                                                    left: 2px;
+                                                "
+                                            ></li>
+                                            <li
+                                                class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
+                                                style="
+                                                    background-image: url('https://th.bing.com/th/id/R.b28868904888f28f32264a83f29d5b4a?rik=MeIviuEyQSaLbw&pid=ImgRaw&r=0');
+                                                    left: -10px;
+                                                "
+                                            ></li>
+                                            <li
+                                                class="follower__img__item h-4 w-4 bg-cover relative rounded-full"
+                                                style="
+                                                    background-image: url('https://dailytrust.com/wp-content/uploads/2022/12/Neymar.jpg');
+                                                    left: -20px;
+                                                "
+                                            ></li>
+                                        </ul>
+                                        <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer">100</div>
+                                        <div class="follower__text text-sm font-normal relative cursor-pointer">followers</div>
+                                    </div>
+                                </div>
+                                <div class="utility flex flex-col items-end h-48 mr-6">
+                                    <div
+                                        class="utility__avatar h-20 w-20 bg-cover mb-8 rounded-full cursor-pointer"
+                                        style="
+                                            background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
+                                        "
+                                    ></div>
+                                    <div class="utility__insta cursor-pointer mr-2">
+                                        <i class="fa-brands fa-instagram text-2xl cursor-pointer"></i>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="utility flex flex-col items-end h-48 mr-6">
-                                <div
-                                    class="utility__avatar h-20 w-20 bg-cover mb-8 rounded-full cursor-pointer"
-                                    style="background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png)"
-                                ></div>
-                                <div class="utility__insta cursor-pointer mr-2">
-                                    <i class="fa-brands fa-instagram text-2xl cursor-pointer"></i>
-                                </div>
+                            <div
+                                class="edit-btn block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
+                                style="border: 2px solid rgba(147, 140, 140, 0.4)"
+                            >
+                                <p class="mt-1">Edit profile</p>
                             </div>
-                        </div>
-                        <div
-                            class="edit-btn block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
-                            style="border: 2px solid rgba(147, 140, 140, 0.4)"
-                        >
-                            <p class="mt-1">Edit profile</p>
+                            <ul class="navigation flex flex-row justify-around font-medium text-[15px] mt-[30px] ;list-style: none">
+                                <li
+                                    class="navigation__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__news navigation__item--on text-[white]"
+                                >
+                                    <div class="item__text">Threads</div>
+                                    <div
+                                        class="item__line w-full mt-3.5 border-b-[rgba(243,245,247,0.15)] border-b border-solid border-b-[white]"
+                                    ></div>
+                                </li>
+                                <li
+                                    class="navigation__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__replies navigation__item--off text-[rgb(153,153,153)]"
+                                >
+                                    <div class="item__text">Replies</div>
+                                    <div class="item__line w-full mt-3.5 border-b-[rgba(243,245,247,0.15)] border-b border-solid"></div>
+                                </li>
+                                <li
+                                    class="navigation__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__reposts navigation__item--off text-[rgb(153,153,153)]"
+                                >
+                                    <div class="item__text">Reposts</div>
+                                    <div class="item__line w-full mt-3.5 border-b-[rgba(243,245,247,0.15)] border-b border-solid"></div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="../Js/layout.js"></script>
+        <script src="../Js/profile.js"></script>
     </body>
-    <script src="../../profile.js"></script>
 </html>

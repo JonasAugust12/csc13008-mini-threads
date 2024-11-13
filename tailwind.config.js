@@ -5,6 +5,7 @@ module.exports = {
         extend: {
             colors: {
                 'mobile-nav': '#101010d9',
+                nav: '#0a0a0ad9',
                 'main-bg': '#0a0a0a',
                 'content-bg': '#181818',
                 'primary-text': '#f3f5f7', // màu cho phần tên user hay nội dung
@@ -20,6 +21,10 @@ module.exports = {
             fontWeight: {
                 'content-weight': '400', // font ở vùng nội dung status
                 'user-weight': '600', // font ở vùng tên user
+            },
+            screens: {
+                tbl: '700px',
+                pc: '792px',
             },
         },
     },
