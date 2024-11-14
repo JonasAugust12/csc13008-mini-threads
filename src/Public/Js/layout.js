@@ -9,7 +9,7 @@ function adjustHeadingWidth() {
 
     if (window.innerWidth > tabletBreakpoint) {
         const contentWidth = window.getComputedStyle(contentSection).width;
-        // headingSection.style.minWidth = contentWidth;
+        headingSection.style.minWidth = contentWidth;
         contentBorder.style.minWidth = contentWidth;
     } else {
         headingSection.style.minWidth = '';

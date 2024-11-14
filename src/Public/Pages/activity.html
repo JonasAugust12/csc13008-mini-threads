@@ -176,7 +176,7 @@
                 </div>
             </nav>
 
-            <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden tbl:block">
+            <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden select-none tbl:block">
                 <button
                     type="button"
                     class="login-btn__inner h-[34px] leading-[34px] w-[82px] bg-[#ffffff] rounded-[10px] font-medium text-[16px] p-0 border-none cursor-pointer"
@@ -198,9 +198,16 @@
                 </svg>
             </label>
 
-            <div class="create-post-modal fixed top-0 left-0 w-screen min-h-screen bg-content-bg z-[2] text-primary-text hidden">
-                <div class="create-post__header grid px-6 h-14 grid-cols-[64px_minmax(0,1fr)_64px] items-center">
-                    <button class="create-post__header__cancel-btn text-primary-text font-normal text-[1.0625rem] p-2">Cancel</button>
+            <div class="overlay fixed top-0 left-0 bottom-0 right-0 bg-black opacity-65 z-[3] hidden"></div>
+            <div
+                class="create-post-modal fixed top-0 left-0 w-screen min-h-screen bg-content-bg z-[4] text-primary-text hidden tbl:top-1/2 tbl:left-1/2 tbl:transform tbl:-translate-x-1/2 tbl:-translate-y-1/2 tbl:animate-zoomIn tbl:w-[620px] tbl:border-[0.5px] tbl:border-[#f3f5f726] tbl:rounded-2xl tbl:min-h-px"
+            >
+                <div
+                    class="create-post__header grid px-6 h-14 grid-cols-[64px_minmax(0,1fr)_64px] items-center tbl:border-b-[0.5px] tbl:border-[#f3f5f726]"
+                >
+                    <button class="create-post__header__cancel-btn text-primary-text font-normal text-[1.0625rem] p-2 tbl:overflow-hidden">
+                        Cancel
+                    </button>
                     <div class="create-post__header__title text-[16px] font-bold text-center">New thread</div>
                     <div class="create-post__header__balance"></div>
                 </div>
@@ -356,10 +363,14 @@
                         <div class="create-post__next-post-info text-[16px] cursor-not-allowed leading-6 text-[#353535] mt-[-4px]">Add to thread</div>
                     </div>
                 </div>
-                <div class="create-post__footer fixed right-0 left-0 bottom-0 z-[3] p-[14px] flex justify-between">
-                    <button class="create-post__footer__privacy text-[15px] text-secondary-text flex-grow text-left">Anyone can reply & quote</button>
+                <div
+                    class="create-post__footer fixed right-0 left-0 bottom-0 z-[3] p-[14px] flex justify-between tbl:relative tbl:p-6 tbl:block tbl:right-auto tbl:left-auto tbl:bottom-auto tbl:z-auto"
+                >
+                    <button class="create-post__footer__privacy text-[15px] text-secondary-text flex-grow text-left cursor-pointer">
+                        Anyone can reply & quote
+                    </button>
                     <button
-                        class="create-post__footer__post-btn h-9 text-black font-semibold px-4 border-[1px] border-[#0006] rounded-[243px] bg-white"
+                        class="create-post__footer__post-btn h-9 text-black font-semibold px-4 border-[1px] border-[#0006] rounded-[243px] bg-white tbl:absolute tbl:py-2 tbl:px-4 tbl:right-[26px] tbl:top-1/2 tbl:transform tbl:-translate-y-1/2 tbl:rounded-[10px] tbl:text-[14px] tbl:text-[#5a5b5b] tbl:bg-[#181818] tbl:cursor-not-all0.5wed tbl:border-[#f3f5f726] tbl:overflow-hidden"
                     >
                         Post
                     </button>
@@ -370,7 +381,7 @@
                 class="content-wrapper w-screen h-screen tbl:shadow-[0_0_10px_5px_rgba(10,10,10,0.7)] tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:mx-[76px] tbl:h-[calc(100vh-60px)] pc:w-[640px] pc:ml-auto pc:mr-auto pc:mx-0"
             >
                 <div
-                    class="content-border z-1 border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
+                    class="content-border border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
                 ></div>
 
                 <div
@@ -393,7 +404,9 @@
                         </div>
                     </div>
                     <div class="heading__section__middle flex justify-center items-center">
-                        <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center">For you</a>
+                        <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center select-none"
+                            >Activity</a
+                        >
                         <div
                             class="refresh-option inline-flex justify-center items-center w-6 h-6 border-[1px] border-[#363737] bg-[#181818] rounded-full cursor-pointer"
                         >
@@ -416,7 +429,7 @@
                 <div
                     class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] tbl:pt-6 tbl:bg-content-bg"
                 >
-                    <div class="activity-wrapper w-full h-full">
+                    <div class="activity-wrapper w-full h-full relative">
                         <div
                             class="activity-filter bg-main-bg fixed top-[60px] left-0 w-full h-[42px] overflow-x-auto overflow-y-hidden custom-scrollbar py-1 px-3 flex z-[1] box-border gap-x-[6px] self-center flex-nowrap tbl:hidden"
                         >
@@ -445,9 +458,9 @@
                                 <div class="font-semibold select-none text-white">Replies</div>
                             </a>
                         </div>
-                        <div class="activity-post-container w-full mt-[42px] tbl:mt-0 relative">
-                            <div class="activity-post w-full flex mt-4px">
-                                <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2">
+                        <div class="activity-post-container w-full mt-[42px] tbl:mt-0">
+                            <div class="activity-post w-full flex mt-4px relative cursor-pointer">
+                                <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2 tbl:hidden">
                                     <svg aria-label="More" role="img" viewBox="0 0 12 12">
                                         <title>More</title>
                                         <path
@@ -458,7 +471,7 @@
                                         ></path>
                                     </svg>
                                 </div>
-                                <div class="activity__post-avatar py-3 pl-3 pr-0">
+                                <div class="activity__post-avatar py-3 pl-3 pr-0 tbl:pl-6 select-none">
                                     <a href="" class="block w-[41px] relative">
                                         <img
                                             src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
@@ -468,16 +481,20 @@
                                     </a>
                                 </div>
                                 <div class="activity__post-content-container-1 w-full border-b-[1px] border-border-color pr-6">
-                                    <div class="activity__post-content-container-2 py-3 pl-[2px]">
-                                        <a href="#" class="activity__post-username inline-block text-[15px] font-user-weight">cas.nothingtosay</a>
+                                    <div class="activity__post-content-container-2 py-3 pl-1">
+                                        <a
+                                            href="#"
+                                            class="activity__post-username inline-block text-[15px] font-user-weight break-words hover:underline"
+                                            >cas.nothingtosay</a
+                                        >
                                         <p class="activity__post-timestamp inline-block text-[15px] text-secondary-text">24m</p>
                                         <p class="activity__post-pickedtag text-[15px] font-normal text-secondary-text">Picked for you</p>
                                         <span class="activity__post-content block text-[15px] font-normal text-primary-text">Ok sốp</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="activity-post w-full flex mt-4px relative">
-                                <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2">
+                            <div class="activity-post w-full flex mt-4px relative cursor-pointer">
+                                <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2 tbl:hidden">
                                     <svg aria-label="More" role="img" viewBox="0 0 12 12">
                                         <title>More</title>
                                         <path
@@ -488,15 +505,15 @@
                                         ></path>
                                     </svg>
                                 </div>
-                                <div class="activity__post-avatar py-3 pl-3 pr-0">
+                                <div class="activity__post-avatar py-3 pl-3 pr-0 tbl:pl-6 select-none">
                                     <a href="" class="block w-[41px] relative">
-                                        <div class="w-9 h-9">
+                                        <div class="w-9 h-9 relative">
                                             <img
                                                 src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
                                                 alt="avatar"
                                                 class="w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover"
                                             />
-                                            <div class="activity__avatar-action absolute top-5 right-[-3px]">
+                                            <div class="activity__avatar-action absolute top-5 right-[-4px]">
                                                 <div class="bg-[#24C3FF] w-[18px] h-[18px] border-[1px] border-[#101010] rounded-full box-content">
                                                     <svg aria-label="" role="img" viewBox="0 0 18 18" fill="white">
                                                         <title></title>
@@ -510,8 +527,12 @@
                                     </a>
                                 </div>
                                 <div class="activity__post-content-container-1 w-full border-b-[1px] border-border-color pr-6">
-                                    <div class="activity__post-content-container-2 py-3 pl-[2px]">
-                                        <a href="#" class="activity__post-username inline-block text-[15px] font-user-weight">cas.nothingtosay</a>
+                                    <div class="activity__post-content-container-2 py-3 pl-1">
+                                        <a
+                                            href="#"
+                                            class="activity__post-username inline-block text-[15px] font-user-weight break-words hover:underline"
+                                            >cas.nothingtosay</a
+                                        >
                                         <p class="activity__post-timestamp inline-block text-[15px] text-secondary-text">24m</p>
                                         <p class="activity__post-pickedtag text-[15px] font-normal text-secondary-text">Picked for you</p>
                                         <span class="activity__post-content block text-[15px] font-normal text-primary-text"
@@ -520,8 +541,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="activity-post w-full flex mt-4px relative">
-                                <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2">
+                            <div class="activity-post w-full flex mt-4px relative cursor-pointer">
+                                <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2 tbl:hidden">
                                     <svg aria-label="More" role="img" viewBox="0 0 12 12">
                                         <title>More</title>
                                         <path
@@ -532,7 +553,7 @@
                                         ></path>
                                     </svg>
                                 </div>
-                                <div class="activity__post-avatar py-3 pl-3 pr-0">
+                                <div class="activity__post-avatar py-3 pl-3 pr-0 tbl:pl-6 select-none">
                                     <a href="" class="block w-[41px]">
                                         <div class="w-9 h-9 relative">
                                             <img
@@ -540,7 +561,7 @@
                                                 alt="avatar"
                                                 class="w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover"
                                             />
-                                            <div class="activity__avatar-action absolute top-5 right-[-3px]">
+                                            <div class="activity__avatar-action absolute top-5 right-[-4px]">
                                                 <div class="bg-[#FF007A] w-[18px] h-[18px] border-[1px] border-[#101010] rounded-full box-content">
                                                     <svg aria-label="" role="img" viewBox="0 0 18 18">
                                                         <title></title>
@@ -555,8 +576,12 @@
                                     </a>
                                 </div>
                                 <div class="activity__post-content-container-1 w-full border-b-[1px] border-border-color pr-6">
-                                    <div class="activity__post-content-container-2 py-3 pl-[2px]">
-                                        <a href="#" class="activity__post-username inline-block text-[15px] font-user-weight">cas.nothingtosay</a>
+                                    <div class="activity__post-content-container-2 py-3 pl-1">
+                                        <a
+                                            href="#"
+                                            class="activity__post-username inline-block text-[15px] font-user-weight break-words hover:underline"
+                                            >cas.nothingtosay</a
+                                        >
                                         <p class="activity__post-timestamp inline-block text-[15px] text-secondary-text">24m</p>
                                         <span class="activity__post-content block text-[15px] font-normal text-secondary-text"
                                             >CSC13008-Mini-Threads</span
@@ -564,8 +589,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="activity-post w-full flex mt-4px relative">
-                                <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2">
+                            <div class="activity-post w-full flex mt-4px relative cursor-pointer">
+                                <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2 tbl:hidden">
                                     <svg aria-label="More" role="img" viewBox="0 0 12 12">
                                         <title>More</title>
                                         <path
@@ -576,7 +601,7 @@
                                         ></path>
                                     </svg>
                                 </div>
-                                <div class="activity__post-avatar py-3 pl-3 pr-0">
+                                <div class="activity__post-avatar py-3 pl-3 pr-0 tbl:pl-6 select-none">
                                     <a href="" class="block w-[41px]">
                                         <div class="w-9 h-9 relative">
                                             <img
@@ -584,7 +609,7 @@
                                                 alt="avatar"
                                                 class="w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover"
                                             />
-                                            <div class="activity__avatar-action absolute top-5 right-[-3px]">
+                                            <div class="activity__avatar-action absolute top-5 right-[-4px]">
                                                 <div class="bg-[#6E3DEF] w-[18px] h-[18px] border-[1px] border-[#101010] rounded-full box-content">
                                                     <svg aria-label="" role="img" viewBox="0 0 18 18">
                                                         <title></title>
@@ -599,24 +624,26 @@
                                     </a>
                                 </div>
                                 <div class="activity__post-content-container-1 w-full border-b-[1px] border-border-color pr-6">
-                                    <div class="activity__post-content-container-2 py-3 pl-[2px] flex justify-between items-center">
+                                    <div class="activity__post-content-container-2 py-3 pl-1 flex justify-between items-center">
                                         <div>
-                                            <a href="#" class="activity__post-username inline-block text-[15px] font-user-weight break-words"
+                                            <a
+                                                href="#"
+                                                class="activity__post-username inline-block text-[15px] font-user-weight break-words hover:underline"
                                                 >cas.nothingtosayyyyy</a
                                             >
                                             <p class="activity__post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
                                             <p class="activity__post-pickedtag text-[15px] font-normal text-secondary-text">Followed you</p>
                                         </div>
                                         <div
-                                            class="activity__post-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight px-4 mr-5"
+                                            class="activity__post-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight px-4 mr-5 select-none"
                                         >
                                             Follow back
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="activity-post w-full flex mt-4px relative">
-                                <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2">
+                            <div class="activity-post w-full flex mt-4px relative cursor-pointer">
+                                <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2 tbl:hidden">
                                     <svg aria-label="More" role="img" viewBox="0 0 12 12">
                                         <title>More</title>
                                         <path
@@ -627,7 +654,7 @@
                                         ></path>
                                     </svg>
                                 </div>
-                                <div class="activity__post-avatar py-3 pl-3 pr-0">
+                                <div class="activity__post-avatar py-3 pl-3 pr-0 tbl:pl-6 select-none">
                                     <a href="" class="block w-[41px]">
                                         <div class="w-9 h-9 relative">
                                             <img
@@ -635,7 +662,7 @@
                                                 alt="avatar"
                                                 class="w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover"
                                             />
-                                            <div class="activity__avatar-action absolute top-5 right-[-3px]">
+                                            <div class="activity__avatar-action absolute top-5 right-[-4px]">
                                                 <div class="bg-[#6E3DEF] w-[18px] h-[18px] border-[1px] border-[#101010] rounded-full box-content">
                                                     <svg aria-label="" role="img" viewBox="0 0 18 18">
                                                         <title></title>
@@ -650,14 +677,18 @@
                                     </a>
                                 </div>
                                 <div class="activity__post-content-container-1 w-full border-b-[1px] border-border-color pr-6">
-                                    <div class="activity__post-content-container-2 py-3 pl-[2px] flex justify-between items-center">
+                                    <div class="activity__post-content-container-2 py-3 pl-1 flex justify-between items-center">
                                         <div>
-                                            <a href="#" class="activity__post-username inline-block text-[15px] font-user-weight">cas.nothingtosay</a>
+                                            <a
+                                                href="#"
+                                                class="activity__post-username inline-block text-[15px] font-user-weight break-words hover:underline"
+                                                >cas.nothingtosay</a
+                                            >
                                             <p class="activity__post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
                                             <p class="activity__post-pickedtag text-[15px] font-normal text-secondary-text">Followed you</p>
                                         </div>
                                         <div
-                                            class="activity__post-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight px-4 mr-5 text-secondary-text"
+                                            class="activity__post-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight px-4 mr-5 text-secondary-text select-none"
                                         >
                                             Following
                                         </div>

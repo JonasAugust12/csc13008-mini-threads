@@ -177,7 +177,7 @@
                 </div>
             </nav>
 
-            <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden tbl:block">
+            <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden select-none tbl:block">
                 <button
                     type="button"
                     class="login-btn__inner h-[34px] leading-[34px] w-[82px] bg-[#ffffff] rounded-[10px] font-medium text-[16px] p-0 border-none cursor-pointer"
@@ -203,7 +203,7 @@
                 class="content-wrapper w-screen h-screen tbl:shadow-[0_0_10px_5px_rgba(10,10,10,0.7)] tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:mx-[76px] tbl:h-[calc(100vh-60px)] pc:w-[640px] pc:ml-auto pc:mr-auto pc:mx-0"
             >
                 <div
-                    class="content-border z-1 border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
+                    class="content-border border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
                 ></div>
 
                 <div
@@ -226,7 +226,9 @@
                         </div>
                     </div>
                     <div class="heading__section__middle flex justify-center items-center">
-                        <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center">For you</a>
+                        <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center select-none"
+                            >Search</a
+                        >
                         <div
                             class="refresh-option inline-flex justify-center items-center w-6 h-6 border-[1px] border-[#363737] bg-[#181818] rounded-full cursor-pointer"
                         >
@@ -249,897 +251,920 @@
                 <div
                     class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] tbl:pt-6 tbl:bg-content-bg"
                 >
-                    <div class="search-box w-full">
-                        <div class="search-box__bar flex w-full p-[12px_16px_13px] box-border items-center justify-center bg-content-bg">
-                            <label
-                                class="search-box__input-wrapper flex w-full p-[12px_16px] items-center border border-[#353636] rounded-[16px] h-[44px] bg-black"
+                    <div class="search-wrapper relative w-full h-full">
+                        <div class="search-box w-full">
+                            <div
+                                class="search-box__bar flex w-full p-[12px_16px_13px] box-border items-center justify-center bg-content-bg tbl:bg-transparent"
                             >
-                                <div class="search-box__icon p-2">
-                                    <svg aria-label="Search" role="img" viewBox="0 0 26 26" class="w-4 h-4 fill-[#7e7e7e]">
-                                        <path
-                                            clip-rule="evenodd"
-                                            d="M3.5 11.5C3.5 7.08172 7.08172 3.5 11.5 3.5C15.9183 3.5 19.5 7.08172 19.5 11.5C19.5 15.9183 15.9183 19.5 11.5 19.5C7.08172 19.5 3.5 15.9183 3.5 11.5ZM11.5 1C5.70101 1 1 5.70101 1 11.5C1 17.299 5.70101 22 11.5 22C13.949 22 16.2023 21.1615 17.9883 19.756L22.3661 24.1339C22.8543 24.622 23.6457 24.622 24.1339 24.1339C24.622 23.6457 24.622 22.8543 24.1339 22.3661L19.756 17.9883C21.1615 16.2023 22 13.949 22 11.5C22 5.70101 17.299 1 11.5 1Z"
-                                            fill-rule="evenodd"
-                                        ></path>
-                                    </svg>
-                                </div>
-                                <input
-                                    type="search"
-                                    class="search-box__input w-full h-full bg-black border-0 p-[1px_2px] text-[#f3f5f7] outline-none text-[15px] font-sans"
-                                    placeholder="Search"
-                                    autocapitalize="off"
-                                    autocomplete="off"
-                                    spellcheck="false"
-                                    dir="ltr"
-                                />
-                                <!-- <button type="button" class="search-box__clear-btn flex p-2 bg-transparent border-0 cursor-pointer">
-                                                    <svg aria-label="Clear" role="img" viewBox="0 0 24 24" class="h-4 w-4 fill-[#4d4d4d]">
-                                                        <title>Clear</title>
-                                                        <path
-                                                            d="M12 0a12 12 0 1 0 12 12A12 12 0 0 0 12 0Zm5.139 16.056a.766.766 0 1 1-1.083 1.083L12 13.083 7.944 17.14a.766.766 0 0 1-1.083-1.083L10.917 12 6.86 7.944a.766.766 0 0 1 1.083-1.083L12 10.917l4.056-4.056a.766.766 0 0 1 1.083 1.083L13.083 12Z"
-                                                        ></path>
-                                                    </svg>
-                                                </button> -->
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="suggestion-box flex flex-col">
-                        <div class="suggestion-box__heading flex w-full px-6 pt-4 pb-1">
-                            <span class="suggestion-box__title block max-w-full font-semibold text-[#777777] leading-[1.4em] text-start">
-                                Follow suggestions
-                            </span>
-                        </div>
-
-                        <!-- User Profile 1 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/1.jpg"
-                                        alt="Profile picture"
+                                <label
+                                    class="search-box__input-wrapper flex w-full p-[12px_16px] items-center border border-[#353636] rounded-[16px] h-[44px] bg-black"
+                                >
+                                    <div class="search-box__icon p-2">
+                                        <svg aria-label="Search" role="img" viewBox="0 0 26 26" class="w-4 h-4 fill-[#7e7e7e]">
+                                            <path
+                                                clip-rule="evenodd"
+                                                d="M3.5 11.5C3.5 7.08172 7.08172 3.5 11.5 3.5C15.9183 3.5 19.5 7.08172 19.5 11.5C19.5 15.9183 15.9183 19.5 11.5 19.5C7.08172 19.5 3.5 15.9183 3.5 11.5ZM11.5 1C5.70101 1 1 5.70101 1 11.5C1 17.299 5.70101 22 11.5 22C13.949 22 16.2023 21.1615 17.9883 19.756L22.3661 24.1339C22.8543 24.622 23.6457 24.622 24.1339 24.1339C24.622 23.6457 24.622 22.8543 24.1339 22.3661L19.756 17.9883C21.1615 16.2023 22 13.949 22 11.5C22 5.70101 17.299 1 11.5 1Z"
+                                                fill-rule="evenodd"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                    <input
+                                        type="search"
+                                        class="search-box__input w-full h-full bg-black border-0 p-[1px_2px] text-[#f3f5f7] outline-none text-[15px] font-sans"
+                                        placeholder="Search"
+                                        autocapitalize="off"
+                                        autocomplete="off"
+                                        spellcheck="false"
+                                        dir="ltr"
                                     />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >john_doe</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >John Doe</span
-                                            >
-                                        </div>
-                                    </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
-                                </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >2542342 followers</span
-                                        >
-                                    </div>
-                                </div>
+                                    <!-- <button type="button" class="search-box__clear-btn flex p-2 bg-transparent border-0 cursor-pointer">
+                                                                            <svg aria-label="Clear" role="img" viewBox="0 0 24 24" class="h-4 w-4 fill-[#4d4d4d]">
+                                                                                <title>Clear</title>
+                                                                                <path
+                                                                                    d="M12 0a12 12 0 1 0 12 12A12 12 0 0 0 12 0Zm5.139 16.056a.766.766 0 1 1-1.083 1.083L12 13.083 7.944 17.14a.766.766 0 0 1-1.083-1.083L10.917 12 6.86 7.944a.766.766 0 0 1 1.083-1.083L12 10.917l4.056-4.056a.766.766 0 0 1 1.083 1.083L13.083 12Z"
+                                                                                ></path>
+                                                                            </svg>
+                                                                        </button> -->
+                                </label>
                             </div>
                         </div>
 
-                        <!-- User Profile 2 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/women/2.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
+                        <div class="suggestion-box flex flex-col">
+                            <div class="suggestion-box__heading flex w-full px-6 pt-4 pb-1">
+                                <span class="suggestion-box__title block max-w-full font-semibold text-[#777777] leading-[1.4em] text-start">
+                                    Follow suggestions
+                                </span>
                             </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >anna_maria</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Anna Maria</span
-                                            >
-                                        </div>
-                                    </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
-                                </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >18345 followers</span
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- User Profile 3 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/3.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >mike23</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Mike Thompson</span
-                                            >
-                                        </div>
+                            <!-- User Profile 1 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/1.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >8000 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >john_doe</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >John Doe</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >2542342 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 4 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/4.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >james_w</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >James Williams</span
-                                            >
-                                        </div>
+                            <!-- User Profile 2 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/women/2.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >12234 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >anna_maria</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Anna Maria</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >18345 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 5 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/women/5.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >lucy_joy</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Lucy Joy</span
-                                            >
-                                        </div>
+                            <!-- User Profile 3 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/3.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >5453 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >mike23</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Mike Thompson</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >8000 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 6 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/6.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >richard_77</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Richard Lee</span
-                                            >
-                                        </div>
+                            <!-- User Profile 4 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/4.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >15692 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >james_w</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >James Williams</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >12234 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 7 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/women/6.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >sophie_23</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Sophie Brown</span
-                                            >
-                                        </div>
+                            <!-- User Profile 5 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/women/5.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >304234 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >lucy_joy</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Lucy Joy</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >5453 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 8 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/7.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >daniel_09</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Daniel Harris</span
-                                            >
-                                        </div>
+                            <!-- User Profile 6 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/6.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >945 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >richard_77</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Richard Lee</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >15692 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 9 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/women/7.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >emily_rose</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Emily Rose</span
-                                            >
-                                        </div>
+                            <!-- User Profile 7 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/women/6.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >2342342 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >sophie_23</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Sophie Brown</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >304234 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 10 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/8.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >jason_45</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Jason Lee</span
-                                            >
-                                        </div>
+                            <!-- User Profile 8 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/7.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >182343 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >daniel_09</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Daniel Harris</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- User Profile 11 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/9.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >jake_92</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
                                             <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Jake Thompson</span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >945 followers</span
                                             >
                                         </div>
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
-                                </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >17340 followers</span
-                                        >
-                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 12 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/women/8.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >martha_21</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Martha Stevens</span
-                                            >
-                                        </div>
+                            <!-- User Profile 9 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/women/7.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >55620 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >emily_rose</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Emily Rose</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >2342342 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 13 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/10.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >david_87</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >David Green</span
-                                            >
-                                        </div>
+                            <!-- User Profile 10 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/8.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >7410 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >jason_45</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Jason Lee</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >182343 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <!-- User Profile 11 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/9.jpg"
+                                            alt="Profile picture"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >jake_92</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Jake Thompson</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
+                                        >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >17340 followers</span
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <!-- User Profile 14 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/women/9.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >susan_88</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Susan Morris</span
-                                            >
-                                        </div>
+                            <!-- User Profile 12 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/women/8.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >423960 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >martha_21</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Martha Stevens</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >55620 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 15 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/11.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >alex_56</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Alex Walker</span
-                                            >
-                                        </div>
+                            <!-- User Profile 13 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/10.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >9510 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >david_87</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >David Green</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >7410 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 16 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/12.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >michael_22</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Michael Brooks</span
-                                            >
-                                        </div>
+                            <!-- User Profile 14 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/women/9.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >6370 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >susan_88</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Susan Morris</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >423960 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 17 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/women/10.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >julia_13</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Julia Foster</span
-                                            >
-                                        </div>
+                            <!-- User Profile 15 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/11.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >8210 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >alex_56</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Alex Walker</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >9510 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 18 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/13.jpg"
-                                        alt="Profile picture"
-                                    />
-                                </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >anthony_94</a
-                                            >
-                                        </div>
-                                        <div class="user-profile__name flex items-center">
-                                            <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Anthony Clark</span
-                                            >
-                                        </div>
+                            <!-- User Profile 16 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/12.jpg"
+                                            alt="Profile picture"
+                                        />
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >10050 followers</span
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >michael_22</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Michael Brooks</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >6370 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- User Profile 19 -->
-                        <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
-                            <div class="user-profile__avatar px-3 py-1">
-                                <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-                                    <img
-                                        class="user-profile__avatar-img rounded-full"
-                                        src="https://randomuser.me/api/portraits/women/11.jpg"
-                                        alt="Profile picture"
-                                    />
+                            <!-- User Profile 17 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/women/10.jpg"
+                                            alt="Profile picture"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
-                                <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
-                                    <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
-                                        <div class="user-profile__username flex items-center">
-                                            <a
-                                                href="#"
-                                                class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
-                                                >olivia_32</a
-                                            >
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >julia_13</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Julia Foster</span
+                                                >
+                                            </div>
                                         </div>
-                                        <div class="user-profile__name flex items-center">
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
+                                        >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
                                             <span
-                                                class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
-                                                >Olivia Ramirez</span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >8210 followers</span
                                             >
                                         </div>
                                     </div>
-                                    <button
-                                        type="button"
-                                        class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-                                    >
-                                        Follow
-                                    </button>
                                 </div>
-                                <div class="user-profile__followers pb-3">
-                                    <div class="user-profile__followers-wrapper flex items-center">
-                                        <span class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
-                                            >7890 followers</span
+                            </div>
+
+                            <!-- User Profile 18 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/13.jpg"
+                                            alt="Profile picture"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >anthony_94</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Anthony Clark</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
                                         >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >10050 followers</span
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- User Profile 19 -->
+                            <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
+                                <div class="user-profile__avatar px-3 py-1">
+                                    <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
+                                        <img
+                                            class="user-profile__avatar-img rounded-full"
+                                            src="https://randomuser.me/api/portraits/women/11.jpg"
+                                            alt="Profile picture"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
+                                    <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
+                                        <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
+                                            <div class="user-profile__username flex items-center">
+                                                <a
+                                                    href="#"
+                                                    class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline"
+                                                    >olivia_32</a
+                                                >
+                                            </div>
+                                            <div class="user-profile__name flex items-center">
+                                                <span
+                                                    class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]"
+                                                    >Olivia Ramirez</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
+                                        >
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="user-profile__followers pb-3">
+                                        <div class="user-profile__followers-wrapper flex items-center">
+                                            <span
+                                                class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]"
+                                                >7890 followers</span
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>

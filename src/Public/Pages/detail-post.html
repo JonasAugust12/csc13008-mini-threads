@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mini Threads</title>
         <link href="../Css/output.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../Css/scroll.css" />
     </head>
 
     <body class="bg-main-bg">
@@ -22,7 +23,7 @@
                     </div>
                 </div>
                 <div class="top-nav__middle flex justify-center items-center">
-                    <a href="#">
+                    <a href="./index.html">
                         <svg
                             aria-label="Threads"
                             fill="white"
@@ -176,7 +177,7 @@
                 </div>
             </nav>
 
-            <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden tbl:block">
+            <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden select-none tbl:block">
                 <button
                     type="button"
                     class="login-btn__inner h-[34px] leading-[34px] w-[82px] bg-[#ffffff] rounded-[10px] font-medium text-[16px] p-0 border-none cursor-pointer"
@@ -202,7 +203,7 @@
                 class="content-wrapper w-screen h-screen tbl:shadow-[0_0_10px_5px_rgba(10,10,10,0.7)] tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:mx-[76px] tbl:h-[calc(100vh-60px)] pc:w-[640px] pc:ml-auto pc:mr-auto pc:mx-0"
             >
                 <div
-                    class="content-border z-1 border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
+                    class="content-border border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
                 ></div>
 
                 <div
@@ -225,7 +226,9 @@
                         </div>
                     </div>
                     <div class="heading__section__middle flex justify-center items-center">
-                        <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center">For you</a>
+                        <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center select-none"
+                            >Thread</a
+                        >
                         <div
                             class="refresh-option inline-flex justify-center items-center w-6 h-6 border-[1px] border-[#363737] bg-[#181818] rounded-full cursor-pointer"
                         >
@@ -248,8 +251,8 @@
                 <div
                     class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] tbl:pt-6 tbl:bg-content-bg"
                 >
-                    <div class="detail-post-wrapper w-full h-full">
-                        <div class="main-post-wrapper pt-1 pb-3 px-3">
+                    <div class="detail-post-wrapper w-full h-full relative">
+                        <div class="main-post-wrapper pt-1 pb-3 px-3 tbl:px-6">
                             <div class="first-thread flex item-center pl-3 pb-3">
                                 <svg
                                     aria-label=""
@@ -270,28 +273,29 @@
                                     <img
                                         src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
                                         alt=""
-                                        class="main-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover"
+                                        class="main-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover select-none"
                                     />
                                     <div class="inline-block pl-3 flex-grow">
-                                        <a href="#" class="main-post-username inline-block text-[15px] font-user-weight">cas.nothingtosay</a>
+                                        <a href="#" class="main-post-username inline-block text-[15px] font-user-weight hover:underline"
+                                            >cas.nothingtosay</a
+                                        >
                                         <p class="main-post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
                                     </div>
-                                    <div class="main-post-more-btn w-5 h-5">
-                                        <svg aria-label="More" role="img" viewBox="0 0 12 12">
+                                    <div class="main-post-more-btn w-5 h-5 cursor-pointer">
+                                        <svg aria-label="More" role="img" viewBox="0 0 24 24" fill="#777">
                                             <title>More</title>
-                                            <path
-                                                clip-rule="evenodd"
-                                                d="M2 7.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z"
-                                                fill="#777"
-                                                fill-rule="evenodd"
-                                            ></path>
+                                            <circle cx="12" cy="12" r="1.5"></circle>
+                                            <circle cx="6" cy="12" r="1.5"></circle>
+                                            <circle cx="18" cy="12" r="1.5"></circle>
                                         </svg>
                                     </div>
                                 </div>
                                 <div class="main-post-content pt-[10px] w-full">
                                     <div class="text-primary-text font-normal break-words text-[15px]">I'm Ammar. I'm the best in the world!</div>
-                                    <div class="main-post-action ml-[-12px]">
-                                        <button class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                    <div class="main-post-action ml-[-12px] select-none">
+                                        <button
+                                            class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Like</title>
                                                 <path
@@ -303,7 +307,9 @@
                                             </svg>
                                             <span class="text-[#ccc] text-[13px] font-normal pl-1">267</span>
                                         </button>
-                                        <button class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                        <button
+                                            class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Reply" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Reply</title>
                                                 <path
@@ -316,7 +322,9 @@
                                             </svg>
                                             <span class="text-[#ccc] text-[13px] font-normal pl-1">6</span>
                                         </button>
-                                        <button class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                        <button
+                                            class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Repost" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Repost</title>
                                                 <path
@@ -330,7 +338,9 @@
                                             </svg>
                                             <span class="text-[#ccc] text-[13px] font-normal pl-1">10</span>
                                         </button>
-                                        <button class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                        <button
+                                            class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Share" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Share</title>
                                                 <path
@@ -353,33 +363,32 @@
                                     </div>
                                     <div class="main-post-replies-title flex flex-nowrap pt-4 pb-1 mt-2 border-t-[1px] border-border-color">
                                         <span class="text-[15px] font-semibold text-primary-text flex-grow">Replies</span>
-                                        <span class="text-[15px] font-normal text-secondary-text">View activity ></span>
+                                        <span class="text-[15px] font-normal text-secondary-text cursor-pointer select-none">View activity ></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="replies-post p-3 border-t-[1px] border-border-color">
+                        <div class="replies-post p-3 border-t-[1px] border-border-color tbl:px-6">
                             <div class="replies-post-info flex flex-nowrap items-center relative">
-                                <div class="replies-post-more-btn w-5 h-5 absolute top-0 right-0">
-                                    <svg aria-label="More" role="img" viewBox="0 0 12 12">
+                                <div class="replies-post-more-btn w-5 h-5 absolute top-0 right-0 cursor-pointer cursor-pointer">
+                                    <svg aria-label="More" role="img" viewBox="0 0 24 24" fill="#777">
                                         <title>More</title>
-                                        <path
-                                            clip-rule="evenodd"
-                                            d="M2 7.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z"
-                                            fill="#777"
-                                            fill-rule="evenodd"
-                                        ></path>
+                                        <circle cx="12" cy="12" r="1.5"></circle>
+                                        <circle cx="6" cy="12" r="1.5"></circle>
+                                        <circle cx="18" cy="12" r="1.5"></circle>
                                     </svg>
                                 </div>
                                 <img
                                     src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
                                     alt=""
-                                    class="replies-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover self-start"
+                                    class="replies-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover self-start select-none"
                                 />
                                 <div class="flex flex-col pl-3 w-[calc(100%-36px)]">
                                     <div class="block">
-                                        <a href="#" class="replies-post-username inline-block text-[15px] font-user-weight">cas.nothingtosay</a>
+                                        <a href="#" class="replies-post-username inline-block text-[15px] font-user-weight hover:underline"
+                                            >cas.nothingtosay</a
+                                        >
                                         <p class="replies-post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
                                     </div>
                                     <span
@@ -388,8 +397,10 @@
                                         CSC13008-Mini-Threadsssssssssssssssssssssssssssssssssssssssssssssssssssssssss
                                     </span>
 
-                                    <div class="replies-post-action ml-[-12px] mt-[3px]">
-                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                    <div class="replies-post-action ml-[-12px] mt-[3px] select-none">
+                                        <button
+                                            class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Like</title>
                                                 <path
@@ -401,7 +412,9 @@
                                             </svg>
                                             <span class="text-[#ccc] text-[13px] font-normal pl-1">267</span>
                                         </button>
-                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                        <button
+                                            class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Reply" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Reply</title>
                                                 <path
@@ -414,7 +427,9 @@
                                             </svg>
                                             <span class="text-[#ccc] text-[13px] font-normal pl-1">6</span>
                                         </button>
-                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                        <button
+                                            class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Repost" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Repost</title>
                                                 <path
@@ -428,7 +443,9 @@
                                             </svg>
                                             <span class="text-[#ccc] text-[13px] font-normal pl-1">10</span>
                                         </button>
-                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                        <button
+                                            class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Share" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Share</title>
                                                 <path
@@ -453,27 +470,26 @@
                             </div>
                         </div>
 
-                        <div class="replies-post p-3 border-t-[1px] border-border-color">
+                        <div class="replies-post p-3 border-t-[1px] border-border-color tbl:px-6">
                             <div class="replies-post-info flex flex-nowrap items-center relative">
-                                <div class="replies-post-more-btn w-5 h-5 absolute top-0 right-0">
-                                    <svg aria-label="More" role="img" viewBox="0 0 12 12">
+                                <div class="replies-post-more-btn w-5 h-5 absolute top-0 right-0 cursor-pointer">
+                                    <svg aria-label="More" role="img" viewBox="0 0 24 24" fill="#777">
                                         <title>More</title>
-                                        <path
-                                            clip-rule="evenodd"
-                                            d="M2 7.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm4 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z"
-                                            fill="#777"
-                                            fill-rule="evenodd"
-                                        ></path>
+                                        <circle cx="12" cy="12" r="1.5"></circle>
+                                        <circle cx="6" cy="12" r="1.5"></circle>
+                                        <circle cx="18" cy="12" r="1.5"></circle>
                                     </svg>
                                 </div>
                                 <img
                                     src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
                                     alt=""
-                                    class="replies-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover self-start"
+                                    class="replies-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover self-start select-none"
                                 />
                                 <div class="flex flex-col pl-3 w-[calc(100%-36px)]">
                                     <div class="block">
-                                        <a href="#" class="replies-post-username inline-block text-[15px] font-user-weight">cas.nothingtosay</a>
+                                        <a href="#" class="replies-post-username inline-block text-[15px] font-user-weight hover:underline"
+                                            >cas.nothingtosay</a
+                                        >
                                         <p class="replies-post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
                                     </div>
                                     <span
@@ -481,36 +497,40 @@
                                     >
                                         CSC13008-Mini-Threadsssssssssssssssssssssssssssssssssssssssssssssssssssssssss
                                     </span>
-                                    <div class="replies-img max-w-[calc(100%+48px)] mt-2 flex space-x-2 overflow-x-auto ml-[-48px]">
+                                    <div
+                                        class="replies-img max-w-[calc(100%+48px)] m-h-[430px] mt-2 flex space-x-[6px] overflow-x-auto custom-scrollbar ml-[-48px]"
+                                    >
                                         <img
                                             src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
                                             alt=""
-                                            class="replies-user-img m-h-[430px] rounded-lg object-cover ml-[48px]"
+                                            class="replies-user-img rounded-lg max-w-full max-h-full object-cover outline-1 outline-[#f3f5f726] border-none select-none ml-[48px]"
                                         />
                                         <img
                                             src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
                                             alt=""
-                                            class="replies-user-img m-h-[430px] rounded-lg object-cover"
+                                            class="replies-user-img rounded-lg max-w-full max-h-full object-cover outline-1 outline-[#f3f5f726] border-none select-none"
                                         />
                                         <img
                                             src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
                                             alt=""
-                                            class="replies-user-img m-h-[430px] rounded-lg object-cover"
+                                            class="replies-user-img rounded-lg max-w-full max-h-full object-cover outline-1 outline-[#f3f5f726] border-none select-none"
                                         />
                                         <img
                                             src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
                                             alt=""
-                                            class="replies-user-img m-h-[430px] rounded-lg object-cover"
+                                            class="replies-user-img rounded-lg max-w-full max-h-full object-cover outline-1 outline-[#f3f5f726] border-none select-none"
                                         />
                                         <img
                                             src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
                                             alt=""
-                                            class="replies-user-img m-h-[430px] rounded-lg object-cover"
+                                            class="replies-user-img rounded-lg max-w-full max-h-full object-cover outline-1 outline-[#f3f5f726] border-none select-none"
                                         />
                                     </div>
 
-                                    <div class="replies-post-action ml-[-12px] mt-[3px]">
-                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                    <div class="replies-post-action ml-[-12px] mt-[3px] select-none">
+                                        <button
+                                            class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Like</title>
                                                 <path
@@ -522,7 +542,9 @@
                                             </svg>
                                             <span class="text-[#ccc] text-[13px] font-normal pl-1">267</span>
                                         </button>
-                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                        <button
+                                            class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Reply" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Reply</title>
                                                 <path
@@ -535,7 +557,9 @@
                                             </svg>
                                             <span class="text-[#ccc] text-[13px] font-normal pl-1">6</span>
                                         </button>
-                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                        <button
+                                            class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Repost" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Repost</title>
                                                 <path
@@ -549,7 +573,9 @@
                                             </svg>
                                             <span class="text-[#ccc] text-[13px] font-normal pl-1">10</span>
                                         </button>
-                                        <button class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3">
+                                        <button
+                                            class="replies-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                        >
                                             <svg aria-label="Share" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                 <title>Share</title>
                                                 <path

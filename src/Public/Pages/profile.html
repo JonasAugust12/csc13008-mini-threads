@@ -176,7 +176,7 @@
                 </div>
             </nav>
 
-            <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden tbl:block">
+            <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden select-none tbl:block">
                 <button
                     type="button"
                     class="login-btn__inner h-[34px] leading-[34px] w-[82px] bg-[#ffffff] rounded-[10px] font-medium text-[16px] p-0 border-none cursor-pointer"
@@ -202,7 +202,7 @@
                 class="content-wrapper w-screen h-screen tbl:shadow-[0_0_10px_5px_rgba(10,10,10,0.7)] tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:mx-[76px] tbl:h-[calc(100vh-60px)] pc:w-[640px] pc:ml-auto pc:mr-auto pc:mx-0"
             >
                 <div
-                    class="content-border z-1 border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
+                    class="content-border border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
                 ></div>
 
                 <div
@@ -225,7 +225,9 @@
                         </div>
                     </div>
                     <div class="heading__section__middle flex justify-center items-center">
-                        <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center">For you</a>
+                        <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center select-none"
+                            >Profile</a
+                        >
                         <div
                             class="refresh-option inline-flex justify-center items-center w-6 h-6 border-[1px] border-[#363737] bg-[#181818] rounded-full cursor-pointer"
                         >
@@ -248,63 +250,63 @@
                 <div
                     class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] tbl:pt-6 tbl:bg-content-bg"
                 >
-                    <!-- edit profile  -->
-                    <div
-                        class="edit-profile bg-black text-white p-8 mt-20 rounded-3xl hidden fixed inset-0 m-auto bottom-auto w-[calc(80%)] z-[10]"
-                        style="border: 1px solid rgba(147, 140, 140, 0.4)"
-                    >
+                    <div class="profile-wrapper relative w-full h-full">
+                        <!-- edit profile  -->
                         <div
-                            class="edit-profile__avatar h-12 w-12 bg-cover absolute rounded-full right-14"
-                            style="
-                                background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
-                                z-index: 2;
-                            "
-                        ></div>
-                        <div class="avatar-mask bg-black h-20 w-16 bg-cover absolute right-14" style="z-index: 1"></div>
-                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                            <div class="field__title font-bold mb-2">Name</div>
-                            <div class="field__content field__content__name font-normal">
-                                <p>Minh Toàn (@cas.nothingtosay)</p>
-                            </div>
-                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
-                        </div>
-                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                            <div class="field__title font-bold">Bio</div>
-                            <div class="field__content field__content__bio">
-                                <p>Vietnamese gang</p>
-                            </div>
-                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
-                        </div>
-                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                            <div class="field__title font-bold">Link</div>
-                            <div class="field__content field__content__link">
-                                <p>+ Add link</p>
-                            </div>
-                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
-                        </div>
-                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                            <div class="field__title font-bold">Show Instagram badge</div>
-                            <div class="field__content field__content__ig text-xs">
-                                <p>When turned off, the Threads badge on your Instagram profile will also disappear.</p>
-                            </div>
-                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
-                        </div>
-                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                            <div class="field__title font-bold">Private profile</div>
-
-                            <div class="field__content field__content__private text-xs">
-                                <p>If you switch to private, you won't be able to reply to others unless they follow you.</p>
-                            </div>
-                        </div>
-                        <div
-                            class="edit-profile__button h-12 mt-8 bg-white text-black text-base font-semibold flex justify-center items-center cursor-pointer rounded-lg"
+                            class="edit-profile bg-black text-white p-8 mt-20 rounded-3xl hidden fixed inset-0 m-auto bottom-auto w-[calc(80%)] z-[10]"
+                            style="border: 1px solid rgba(147, 140, 140, 0.4)"
                         >
-                            <p>Done</p>
+                            <div
+                                class="edit-profile__avatar h-12 w-12 bg-cover absolute rounded-full right-14"
+                                style="
+                                    background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
+                                    z-index: 2;
+                                "
+                            ></div>
+                            <div class="avatar-mask bg-black h-20 w-16 bg-cover absolute right-14" style="z-index: 1"></div>
+                            <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                                <div class="field__title font-bold mb-2">Name</div>
+                                <div class="field__content field__content__name font-normal">
+                                    <p>Minh Toàn (@cas.nothingtosay)</p>
+                                </div>
+                                <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                            </div>
+                            <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                                <div class="field__title font-bold">Bio</div>
+                                <div class="field__content field__content__bio">
+                                    <p>Vietnamese gang</p>
+                                </div>
+                                <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                            </div>
+                            <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                                <div class="field__title font-bold">Link</div>
+                                <div class="field__content field__content__link">
+                                    <p>+ Add link</p>
+                                </div>
+                                <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                            </div>
+                            <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                                <div class="field__title font-bold">Show Instagram badge</div>
+                                <div class="field__content field__content__ig text-xs">
+                                    <p>When turned off, the Threads badge on your Instagram profile will also disappear.</p>
+                                </div>
+                                <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                            </div>
+                            <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                                <div class="field__title font-bold">Private profile</div>
+
+                                <div class="field__content field__content__private text-xs">
+                                    <p>If you switch to private, you won't be able to reply to others unless they follow you.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="edit-profile__button h-12 mt-8 bg-white text-black text-base font-semibold flex justify-center items-center cursor-pointer rounded-lg"
+                            >
+                                <p>Done</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="content-section w-full h-full overflow-y-auto custom-scrollbar text-primary-text pt-[60px]">
                         <!-- profile -->
-                        <div class="profile__info relative z-[9]">
+                        <div class="profile__info">
                             <div class="content__heading flex justify-between">
                                 <div class="information flex flex-col ml-6 font-bold">
                                     <div class="information__name text-2xl mb-1">Minh Toàn</div>
