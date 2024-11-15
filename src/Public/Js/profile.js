@@ -15,7 +15,7 @@ button_done.addEventListener('click', function () {
 // click button edit -> display form and overlay block
 edit.addEventListener('click', function () {
     //kiểm tra thiết thị
-    if (window.innerWidth < 870) {
+    if (window.innerWidth < 700) {
         // add class hidden to form block
         edit_form.classList.remove('hidden');
         profile_info.classList.add('hidden');
@@ -27,7 +27,7 @@ edit.addEventListener('click', function () {
 });
 
 window.addEventListener('resize', function () {
-    if (window.innerWidth < 870) {
+    if (window.innerWidth < 700) {
         if (!edit_form.classList.contains('hidden')) {
             profile_info.classList.add('hidden');
             overlay.classList.add('hidden');

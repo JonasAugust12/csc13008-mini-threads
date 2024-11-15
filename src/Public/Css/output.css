@@ -641,6 +641,14 @@ video {
     z-index: 4;
 }
 
+.z-\[50\] {
+    z-index: 50;
+}
+
+.z-\[9\] {
+    z-index: 9;
+}
+
 .m-auto {
     margin: auto;
 }
@@ -1052,6 +1060,58 @@ video {
 
 .w-screen {
     width: 100vw;
+}
+
+.w-\[calc\(60\%\)\] {
+    width: calc(60%);
+}
+
+.w-\[calc\(0\%\)\] {
+    width: calc(0%);
+}
+
+.w-\[calc\(40\%\)\] {
+    width: calc(40%);
+}
+
+.w-\[calc\(578\)\] {
+    width: calc(578);
+}
+
+.w-\[calc\(578px\/\)\] {
+    width: calc(578px /);
+}
+
+.w-\[calc\(578px\/640px\)\] {
+    width: calc(578px / 640px);
+}
+
+.w-\[calc\(578\/640px\)\] {
+    width: calc(578 / 640px);
+}
+
+.w-\[calc\(578\/640\)\] {
+    width: calc(578 / 640);
+}
+
+.w-\[calc\(5\)\] {
+    width: calc(5);
+}
+
+.w-\[calc\(\)\] {
+    width: calc();
+}
+
+.w-\[calc\(50\%\)\] {
+    width: calc(50%);
+}
+
+.w-\[calc\(30\%\)\] {
+    width: calc(30%);
+}
+
+.w-\[calc\(36\%\)\] {
+    width: calc(36%);
 }
 
 .min-w-0 {
@@ -1889,6 +1949,10 @@ video {
     opacity: 0.65;
 }
 
+.opacity-\[\] {
+    opacity:;
+}
+
 .shadow-\[0_0_12px_0_rgba\(0\2c 0\2c 0\2c 0\.04\)\2c _0_0_0_48px_rgb\(10\2c 10\2c 10\)\] {
     --tw-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.04), 0 0 0 48px rgb(10, 10, 10);
     --tw-shadow-colored: 0 0 12px 0 var(--tw-shadow-color), 0 0 0 48px var(--tw-shadow-color);
@@ -2118,6 +2182,10 @@ video {
         height: 100vh;
     }
 
+    .tbl\:h-\[calc\(80\%\)\] {
+        height: calc(80%);
+    }
+
     .tbl\:min-h-px {
         min-height: 1px;
     }
@@ -2140,6 +2208,18 @@ video {
 
     .tbl\:w-auto {
         width: auto;
+    }
+
+    .tbl\:w-\[\] {
+        width:;
+    }
+
+    .tbl\:w-\[calc\(\)\] {
+        width: calc();
+    }
+
+    .tbl\:w-\[calc\(80\%\)\] {
+        width: calc(80%);
     }
 
     .tbl\:min-w-\[546px\] {
@@ -2321,8 +2401,32 @@ video {
         margin-right: auto;
     }
 
+    .pc\:flex {
+        display: flex;
+    }
+
     .pc\:w-\[640px\] {
         width: 640px;
+    }
+
+    .pc\:w-\[calc\(36\%\)\] {
+        width: calc(36%);
+    }
+
+    .pc\:w-\[calc\(80s\%\)\] {
+        width: calc(80s%);
+    }
+
+    .pc\:w-\[calc\(80\%\)\] {
+        width: calc(80%);
+    }
+
+    .pc\:w-\[calc\(\%\)\] {
+        width: calc(%);
+    }
+
+    .pc\:w-\[580px\] {
+        width: 580px;
     }
 
     .pc\:-translate-x-1\/2 {
