@@ -39,6 +39,32 @@ function hideModal() {
 createBtn.addEventListener('click', showModal);
 navUtilityCreate.addEventListener('click', showModal);
 
-// Thêm sự kiện click để ẩn modal khi bấm vào overlay hoặc cancelBtn
-overlay.addEventListener('click', hideModal);
-cancelBtn.addEventListener('click', hideModal);
+// // Thêm sự kiện click để ẩn modal khi bấm vào overlay hoặc cancelBtn
+// overlay.addEventListener('click', hideModal);
+// cancelBtn.addEventListener('click', hideModal);
+
+const moreBtn = document.querySelector('.navbar__setting-btn--more');
+const moreMenu = document.querySelector('.navbar__setting-more-menu');
+
+moreBtn.addEventListener('click', function () {
+    moreMenu.style.display = 'flex';
+});
+
+document.addEventListener('click', function (event) {
+    if (!moreMenu.contains(event.target) && !moreBtn.contains(event.target)) {
+        moreMenu.style.display = 'none';
+    }
+});
+
+const moreBtnTbl = document.querySelector('.top-nav__right-setting');
+const moreMenuTbl = document.querySelector('.top-nav__setting-more-menu');
+
+moreBtnTbl.addEventListener('click', function () {
+    moreMenuTbl.style.display = 'flex';
+});
+
+document.addEventListener('click', function (event) {
+    if (!moreMenuTbl.contains(event.target) && !moreBtnTbl.contains(event.target)) {
+        moreMenuTbl.style.display = 'none';
+    }
+});

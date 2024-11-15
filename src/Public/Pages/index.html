@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mini Threads</title>
         <link href="../Css/output.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../Css/bundle.css" />
     </head>
 
     <body class="bg-main-bg">
@@ -41,12 +42,88 @@
                     </a>
                 </div>
                 <div class="top-nav__right">
-                    <div class="top-nav__right-setting flex h-full items-center justify-end">
+                    <div class="top-nav__right-setting flex h-full items-center justify-end cursor-pointer">
                         <svg aria-label="More" role="img" viewBox="0 0 24 24" class="mr-7 w-6 h-6 scale-x-[-1]">
                             <title>More</title>
                             <rect width="24" height="2.5" rx="1.25" x="3" y="7" fill="#4d4d4d"></rect>
                             <rect width="14" height="2.5" rx="1.25" x="3" y="15" fill="#4d4d4d"></rect>
                         </svg>
+                    </div>
+                </div>
+
+                <div class="top-nav__setting-more-menu hidden absolute left-0 top-0 w-fit">
+                    <div class="menu bg-[#181818]">
+                        <div class="menu__upper p-2 border-b border-[#333638]">
+                            <div
+                                class="menu__btn menu__btn--appearance flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Appearance
+                                </span>
+                                <div class="menu__btn-icon flex items-center ml-2 rotate-180">
+                                    <svg
+                                        class="w-[16px] h-[16px] stroke-[2px] fill-none stroke-[#777]"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <title>Next</title>
+                                        <polyline points="16.502 3 7.498 12 16.502 21"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--settings flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                                onclick="window.location.href='./src/views/settings_privacy.html'"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Settings
+                                </span>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--saved flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                                onclick="window.location.href='#'"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Saved
+                                </span>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--liked flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                                onclick="window.location.href='#'"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Liked
+                                </span>
+                            </div>
+                        </div>
+                        <div class="menu__lower p-2">
+                            <div
+                                class="menu__btn menu__btn--report flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative"
+                                >
+                                    Report a problem
+                                </span>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--logout flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text menu__btn-text--logout max-w-full text-[#ff3040] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative"
+                                >
+                                    Log out
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -172,6 +249,62 @@
                             <rect width="24" height="2.5" rx="1.25" x="3" y="7" fill="#4d4d4d" class="group-hover:fill-white"></rect>
                             <rect width="14" height="2.5" rx="1.25" x="3" y="15" fill="#4d4d4d" class="group-hover:fill-white"></rect>
                         </svg>
+                    </div>
+                </div>
+
+                <div class="navbar__setting-more-menu hidden absolute left-0 top-0 w-fit">
+                    <div class="menu bg-[#181818]">
+                        <div class="menu__upper p-2 border-b border-[#333638]">
+                            <div
+                                class="menu__btn menu__btn--appearance flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Appearance
+                                </span>
+                                <div class="menu__btn-icon flex items-center ml-2 rotate-180">
+                                    <svg
+                                        class="w-[16px] h-[16px] stroke-[2px] fill-none stroke-[#777]"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <title>Next</title>
+                                        <polyline points="16.502 3 7.498 12 16.502 21"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--settings flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                                onclick="window.location.href='./src/views/settings_privacy.html'"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Settings
+                                </span>
+                            </div>
+                        </div>
+                        <div class="menu__lower p-2">
+                            <div
+                                class="menu__btn menu__btn--report flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative"
+                                >
+                                    Report a problem
+                                </span>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--logout flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text menu__btn-text--logout max-w-full text-[#ff3040] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative"
+                                >
+                                    Log out
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>
