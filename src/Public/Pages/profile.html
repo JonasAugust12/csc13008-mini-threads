@@ -41,7 +41,7 @@
                     </a>
                 </div>
                 <div class="top-nav__right">
-                    <div class="top-nav__right-setting flex h-full items-center justify-end">
+                    <div class="top-nav__right-setting flex h-full items-center justify-end hidden">
                         <svg aria-label="More" role="img" viewBox="0 0 24 24" class="mr-7 w-6 h-6 scale-x-[-1]">
                             <title>More</title>
                             <rect width="24" height="2.5" rx="1.25" x="3" y="7" fill="#4d4d4d"></rect>
@@ -246,65 +246,65 @@
                     </div>
                     <div class="heading__section__right flex justify-end items-center pr-4"></div>
                 </div>
-
+                <div class="overlay fixed inset-0 bg-black opacity-65 z-[9] hidden"></div>
                 <div
                     class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] tbl:pt-6 tbl:bg-content-bg"
                 >
-                    <div class="profile-wrapper relative w-full h-full">
-                        <!-- edit profile  -->
+                    <!-- edit profile  -->
+                    <div
+                        class="edit-profile bg-black text-white p-8 mt-20 rounded-3xl hidden fixed inset-0 m-auto bottom-auto pc:w-[580px] z-[10] tbl:w-[calc(80%)]"
+                        style="border: 1px solid rgba(147, 140, 140, 0.4)"
+                    >
                         <div
-                            class="edit-profile bg-black text-white p-8 mt-20 rounded-3xl hidden fixed inset-0 m-auto bottom-auto w-[calc(80%)] z-[10]"
-                            style="border: 1px solid rgba(147, 140, 140, 0.4)"
-                        >
-                            <div
-                                class="edit-profile__avatar h-12 w-12 bg-cover absolute rounded-full right-14"
-                                style="
-                                    background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
-                                    z-index: 2;
-                                "
-                            ></div>
-                            <div class="avatar-mask bg-black h-20 w-16 bg-cover absolute right-14" style="z-index: 1"></div>
-                            <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                                <div class="field__title font-bold mb-2">Name</div>
-                                <div class="field__content field__content__name font-normal">
-                                    <p>Minh Toàn (@cas.nothingtosay)</p>
-                                </div>
-                                <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                            class="edit-profile__avatar h-12 w-12 bg-cover absolute rounded-full right-14"
+                            style="
+                                background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
+                                z-index: 2;
+                            "
+                        ></div>
+                        <div class="avatar-mask bg-black h-20 w-16 bg-cover absolute right-14" style="z-index: 1"></div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold mb-2">Name</div>
+                            <div class="field__content field__content__name font-normal">
+                                <p>Minh Toàn (@cas.nothingtosay)</p>
                             </div>
-                            <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                                <div class="field__title font-bold">Bio</div>
-                                <div class="field__content field__content__bio">
-                                    <p>Vietnamese gang</p>
-                                </div>
-                                <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Bio</div>
+                            <div class="field__content field__content__bio">
+                                <p>Vietnamese gang</p>
                             </div>
-                            <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                                <div class="field__title font-bold">Link</div>
-                                <div class="field__content field__content__link">
-                                    <p>+ Add link</p>
-                                </div>
-                                <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Link</div>
+                            <div class="field__content field__content__link">
+                                <p>+ Add link</p>
                             </div>
-                            <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                                <div class="field__title font-bold">Show Instagram badge</div>
-                                <div class="field__content field__content__ig text-xs">
-                                    <p>When turned off, the Threads badge on your Instagram profile will also disappear.</p>
-                                </div>
-                                <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Show Instagram badge</div>
+                            <div class="field__content field__content__ig text-xs">
+                                <p>When turned off, the Threads badge on your Instagram profile will also disappear.</p>
                             </div>
-                            <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-                                <div class="field__title font-bold">Private profile</div>
+                            <div class="line mt-4" style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"></div>
+                        </div>
+                        <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+                            <div class="field__title font-bold">Private profile</div>
 
-                                <div class="field__content field__content__private text-xs">
-                                    <p>If you switch to private, you won't be able to reply to others unless they follow you.</p>
-                                </div>
-                            </div>
-                            <div
-                                class="edit-profile__button h-12 mt-8 bg-white text-black text-base font-semibold flex justify-center items-center cursor-pointer rounded-lg"
-                            >
-                                <p>Done</p>
+                            <div class="field__content field__content__private text-xs">
+                                <p>If you switch to private, you won't be able to reply to others unless they follow you.</p>
                             </div>
                         </div>
+                        <div
+                            class="edit-profile__button hidden tbl:flex pc:flex h-12 mt-8 bg-white text-black text-base font-semibold flex justify-center items-center cursor-pointer rounded-lg"
+                        >
+                            <p class="">Done</p>
+                        </div>
+                    </div>
+                    <div class="profile-wrapper relative w-full h-full">
                         <!-- profile -->
                         <div class="profile__info">
                             <div class="content__heading flex justify-between">
