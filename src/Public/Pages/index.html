@@ -391,7 +391,7 @@
                             <div class="start-thread w-11/12 flex flex-col gap-1 pr-5">
                                 <div class="start-thread-username sm:hidden">Binh</div>
                                 <div class="start-thread-title sm:mt-2 flex justify-between">
-                                    <div class="start-thread-text text-[#777777]">Start a thread...</div>
+                                    <div class="start-thread-text text-[#777777]">What's new?</div>
                                     <button class="hidden sm:block bg-[#181818] border border-border-color px-4 py-1 rounded-lg">POST</button>
                                 </div>
                                 <div class="start-thread-icons mt-4 flex justify-between sm:hidden">
@@ -1198,6 +1198,196 @@
                                 </div>
                             </div>
 
+                            <div class="suggest-container px-4 py-6 border-t border-border-color">
+                                <div class="suggestion-text text-[#777777]">Suggested for you</div>
+                                <div class="suggestion-row flex mt-1 gap-2 overflow-hidden overflow-x-auto">
+                                    <style>
+                                        .suggestion-row::-webkit-scrollbar {
+                                            display: none; /* Safari and Chrome */
+                                        }
+                                    </style>
+                                    <div class="suggestion-profile">
+                                        <div
+                                            class="profile-container p-3 flex flex-col justify-center items-center relative bg-[#1E1E1E] rounded-xl w-[156px] h-[204px]"
+                                        >
+                                            <svg
+                                                aria-label="Close"
+                                                role="img"
+                                                viewBox="0 0 24 24"
+                                                class="absolute top-1 right-1 m-2 w-2 h-2 text-[#939393]"
+                                                style="--fill: currentColor"
+                                            >
+                                                <title>Đóng</title>
+                                                <polyline
+                                                    points="20.643 3.357 12 12 3.353 20.647"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-width="1.25"
+                                                ></polyline>
+                                                <line
+                                                    x1="20.649"
+                                                    x2="3.354"
+                                                    y1="20.649"
+                                                    y2="3.354"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-width="1.25"
+                                                ></line>
+                                            </svg>
+                                            <img src="../Img/UserIcon.jpg" class="w-20 h-20 rounded-full" alt="" />
+                                            <div class="first-title text-ellipsis overflow-hidden whitespace-nowrap w-full text-center">
+                                                Reading book store
+                                            </div>
+                                            <div
+                                                class="second-title text-ellipsis overflow-hidden whitespace-nowrap w-full text-center text-[#777777]"
+                                            >
+                                                kho.sach.doc
+                                            </div>
+                                            <button
+                                                id="monitorBtn"
+                                                class="monitor-btn px-8 py-1 border border-border-color bg-white text-black font-semibold rounded-md mt-2"
+                                            >
+                                                Monitor
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="suggestion-profile">
+                                        <div
+                                            class="profile-container p-3 flex flex-col justify-center items-center relative bg-[#1E1E1E] rounded-xl w-[156px] h-[204px]"
+                                        >
+                                            <svg
+                                                aria-label="Close"
+                                                role="img"
+                                                viewBox="0 0 24 24"
+                                                class="absolute top-1 right-1 m-2 w-2 h-2 text-[#939393]"
+                                                style="--fill: currentColor"
+                                            >
+                                                <title>Đóng</title>
+                                                <polyline
+                                                    points="20.643 3.357 12 12 3.353 20.647"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-width="1.25"
+                                                ></polyline>
+                                                <line
+                                                    x1="20.649"
+                                                    x2="3.354"
+                                                    y1="20.649"
+                                                    y2="3.354"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-width="1.25"
+                                                ></line>
+                                            </svg>
+                                            <img src="../Img/UserIcon.jpg" class="w-20 h-20 rounded-full" alt="" />
+                                            <div class="first-title text-ellipsis overflow-hidden whitespace-nowrap w-full text-center">Donkey</div>
+                                            <div
+                                                class="second-title text-ellipsis overflow-hidden whitespace-nowrap w-full text-center text-[#777777]"
+                                            >
+                                                Dragon Slayer
+                                            </div>
+                                            <button
+                                                id="monitorBtn"
+                                                class="monitor-btn px-8 py-1 border border-border-color bg-white text-black font-semibold rounded-md mt-2"
+                                            >
+                                                Monitor
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="suggestion-profile">
+                                        <div
+                                            class="profile-container p-3 flex flex-col justify-center items-center relative bg-[#1E1E1E] rounded-xl w-[156px] h-[204px]"
+                                        >
+                                            <svg
+                                                aria-label="Close"
+                                                role="img"
+                                                viewBox="0 0 24 24"
+                                                class="absolute top-1 right-1 m-2 w-2 h-2 text-[#939393]"
+                                                style="--fill: currentColor"
+                                            >
+                                                <title>Đóng</title>
+                                                <polyline
+                                                    points="20.643 3.357 12 12 3.353 20.647"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-width="1.25"
+                                                ></polyline>
+                                                <line
+                                                    x1="20.649"
+                                                    x2="3.354"
+                                                    y1="20.649"
+                                                    y2="3.354"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-width="1.25"
+                                                ></line>
+                                            </svg>
+                                            <img src="../Img/UserIcon.jpg" class="w-20 h-20 rounded-full" alt="" />
+                                            <div class="first-title text-ellipsis overflow-hidden whitespace-nowrap w-full text-center">Wermacht</div>
+                                            <div
+                                                class="second-title text-ellipsis overflow-hidden whitespace-nowrap w-full text-center text-[#777777]"
+                                            >
+                                                Blitzrieg
+                                            </div>
+                                            <button
+                                                id="monitorBtn"
+                                                class="monitor-btn px-8 py-1 border border-border-color bg-white text-black font-semibold rounded-md mt-2"
+                                            >
+                                                Monitor
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="suggestion-profile">
+                                        <div
+                                            class="profile-container p-3 flex flex-col justify-center items-center relative bg-[#1E1E1E] rounded-xl w-[156px] h-[204px]"
+                                        >
+                                            <svg
+                                                aria-label="Close"
+                                                role="img"
+                                                viewBox="0 0 24 24"
+                                                class="absolute top-1 right-1 m-2 w-2 h-2 text-[#939393]"
+                                                style="--fill: currentColor"
+                                            >
+                                                <title>Đóng</title>
+                                                <polyline
+                                                    points="20.643 3.357 12 12 3.353 20.647"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-width="1.25"
+                                                ></polyline>
+                                                <line
+                                                    x1="20.649"
+                                                    x2="3.354"
+                                                    y1="20.649"
+                                                    y2="3.354"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-width="1.25"
+                                                ></line>
+                                            </svg>
+                                            <img src="../Img/UserIcon.jpg" class="w-20 h-20 rounded-full" alt="" />
+                                            <div class="first-title text-ellipsis overflow-hidden whitespace-nowrap w-full text-center">
+                                                Reading book store
+                                            </div>
+                                            <div
+                                                class="second-title text-ellipsis overflow-hidden whitespace-nowrap w-full text-center text-[#777777]"
+                                            >
+                                                kho.sach.doc
+                                            </div>
+                                            <button
+                                                id="monitorBtn"
+                                                class="monitor-btn px-8 py-1 border border-border-color bg-white text-black font-semibold rounded-md mt-2"
+                                            >
+                                                Monitor
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="post-container flex px-4 py-6 border-t border-border-color">
                                 <div class="user-icon">
                                     <img src="../Img/UserIcon.jpg" class="w-9 h-9 rounded-full" alt="" />
@@ -1451,5 +1641,15 @@
             </div>
         </div>
         <script src="../Js/layout.js"></script>
+        <script>
+            document.querySelectorAll('.monitor-btn').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    this.classList.toggle('bg-[#1E1E1E]');
+                    this.classList.toggle('text-[#777777]');
+                    this.classList.toggle('bg-white');
+                    this.classList.toggle('text-black');
+                });
+            });
+        </script>
     </body>
 </html>
