@@ -44,6 +44,41 @@ const settings = [
         statusElement: null,
         optionsSelector: null,
     },
+    {
+        option: '.settings__option--privacy-policy',
+        overlay: '.settings-overlay--privacy-policy',
+        menu: '.settings-overlay__popup',
+        statusElement: null,
+        optionsSelector: null,
+    },
+    {
+        option: '.settings__option--terms-of-use',
+        overlay: '.settings-overlay--terms-of-use',
+        menu: '.settings-overlay__popup',
+        statusElement: null,
+        optionsSelector: null,
+    },
+    {
+        option: '.settings__option--help-centre',
+        overlay: '.settings-overlay--help-centre',
+        menu: '.settings-overlay__popup',
+        statusElement: null,
+        optionsSelector: null,
+    },
+    {
+        option: '.settings__option--support-requests',
+        overlay: '.settings-overlay--support-requests',
+        menu: '.settings-overlay__popup',
+        statusElement: null,
+        optionsSelector: null,
+    },
+    {
+        option: '.settings__option--privacy-security-help',
+        overlay: '.settings-overlay--privacy-security-help',
+        menu: '.settings-overlay__popup',
+        statusElement: null,
+        optionsSelector: null,
+    },
 ];
 
 function toggleOverlay(overlay) {
