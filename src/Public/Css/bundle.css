@@ -45,3 +45,22 @@
     height: 341px;
     width: 240px;
 }
+
+.settings-overlay__links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 0 15px;
+}
+
+.settings-overlay__link {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.settings-overlay__link:hover {
+    color: #ccc;
+    text-decoration: underline;
+}
