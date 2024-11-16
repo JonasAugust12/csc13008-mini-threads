@@ -200,7 +200,7 @@
             </label>
 
             <div
-                class="content-wrapper w-screen h-screen tbl:shadow-[0_0_10px_5px_rgba(10,10,10,0.7)] tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:mx-[76px] tbl:h-[calc(100vh-60px)] pc:w-[640px] pc:ml-auto pc:mr-auto pc:mx-0"
+                class="content-wrapper w-screen tbl:shadow-[0_0_10px_5px_rgba(10,10,10,0.7)] tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:mx-[76px] tbl:h-[calc(100vh-60px)] pc:w-[640px] pc:ml-auto pc:mr-auto pc:mx-0"
             >
                 <div
                     class="content-border border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]"
@@ -249,9 +249,176 @@
                 </div>
 
                 <div
-                    class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] tbl:pt-6 tbl:bg-content-bg"
+                    class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] box-border pb-[68px] tbl:pt-6 tbl:bg-content-bg"
                 >
                     <div class="detail-post-wrapper w-full h-full relative">
+                        <div
+                            class="post-activity-wrapper fixed z-[4] top-0 bottom-0 right-0 left-0 bg-[#00000080] text-primary-text items-end justify-center hidden tbl:items-center"
+                        >
+                            <div
+                                class="post-activity w-screen box-border bg-content-bg rounded-t-3xl border-[1px] border-[#f3f5f726] tbl:w-[522px] tbl:pb-3 tbl:rounded-b-3xl"
+                            >
+                                <div class="post-activity-header flex justify-between items-center tbl:justify-center">
+                                    <div class="post-activity-back-btn p-[18px] cursor-pointer tbl:hidden">
+                                        <svg aria-label="Back" role="img" viewBox="0 0 24 24" class="w-5 h-5">
+                                            <title>Back</title>
+                                            <line x1="2.909" x2="22.001" y1="12.004" y2="12.004" stroke="white" fill="none"></line>
+                                            <polyline points="9.276 4.726 2.001 12.004 9.276 19.274" stroke="white" fill="none"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="post-activity-title p-[18px] text-[16px] font-semibold">Post activity</div>
+                                    <div class="w-5 h-5 p-[18px] box-content tbl:hidden"></div>
+                                </div>
+                                <div class="mini-post-wrapper pb-2 px-6">
+                                    <div class="mini-post p-4 rounded-lg border-[1px] border-[#f3f5f726]">
+                                        <div class="mini-post-info flex flex-nowrap items-center">
+                                            <img
+                                                src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                                alt=""
+                                                class="main-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover select-none"
+                                            />
+                                            <div class="inline-block pl-3 flex-grow">
+                                                <a href="#" class="mini-post-username inline-block text-[15px] font-user-weight hover:underline"
+                                                    >cas.nothingtosay</a
+                                                >
+                                                <p class="mini-post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
+                                            </div>
+                                        </div>
+                                        <div class="mini-post-content pt-[10px] w-full">
+                                            <div class="text-primary-text font-normal break-words text-[15px]">
+                                                I'm Ammar. I'm the best in the world!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-view w-full flex items-center">
+                                    <svg aria-label="Views" role="img" viewBox="0 0 24 24" class="w-6 h-6 box-content pl-[30px] mr-[18px]">
+                                        <title>Views</title>
+                                        <path
+                                            fill="white"
+                                            stroke="white"
+                                            d="M23.44141,11.81885C23.41309,11.74072,20.542,4,12,4S.58691,11.74072.55859,11.81885a1,1,0,0,0,1.88184.67724,10.28206,10.28206,0,0,1,19.11914-.00048.99992.99992,0,0,0,1.88184-.67676Zm-7.124,2.36853a3.35859,3.35859,0,0,1-1.541-.101,3.55981,3.55981,0,0,1-2.364-2.361,3.35086,3.35086,0,0,1-.103-1.542.99093.99093,0,0,0-1.134-1.107,5.42733,5.42733,0,0,0-3.733,2.339,5.50019,5.50019,0,0,0,8.44605,6.971,5.402,5.402,0,0,0,1.53595-3.091A.98311.98311,0,0,0,16.31738,14.18738Z"
+                                        ></path>
+                                    </svg>
+                                    <div class="flex w-full justify-between py-3 pr-6 text-15px font-semibold">
+                                        <span>Views</span>
+                                        <span>61</span>
+                                    </div>
+                                </div>
+                                <div class="post-like w-full flex items-center">
+                                    <svg aria-label="Likes" role="img" viewBox="0 0 18 18" class="w-6 h-6 box-content pl-[30px] mr-[18px]">
+                                        <title>Likes</title>
+                                        <path
+                                            stroke="white"
+                                            fill="none"
+                                            d="M1.34375 7.53125L1.34375 7.54043C1.34374 8.04211 1.34372 8.76295 1.6611 9.65585C1.9795 10.5516 2.60026 11.5779 3.77681 12.7544C5.59273 14.5704 7.58105 16.0215 8.33387 16.5497C8.73525 16.8313 9.26573 16.8313 9.66705 16.5496C10.4197 16.0213 12.4074 14.5703 14.2232 12.7544C15.3997 11.5779 16.0205 10.5516 16.3389 9.65585C16.6563 8.76296 16.6563 8.04211 16.6562 7.54043V7.53125C16.6562 5.23466 15.0849 3.25 12.6562 3.25C11.5214 3.25 10.6433 3.78244 9.99228 4.45476C9.59009 4.87012 9.26356 5.3491 9 5.81533C8.73645 5.3491 8.40991 4.87012 8.00772 4.45476C7.35672 3.78244 6.47861 3.25 5.34375 3.25C2.9151 3.25 1.34375 5.23466 1.34375 7.53125Z"
+                                            stroke-width="1.25"
+                                        ></path>
+                                    </svg>
+                                    <div class="flex w-full justify-between py-3 pr-6 text-15px font-semibold border-t-[1px] border-[#f3f5f726]">
+                                        <span>Like</span>
+                                        <span>2</span>
+                                    </div>
+                                </div>
+                                <div class="post-user-liked w-full flex mt-4px relative cursor-pointer">
+                                    <div class="user-liked-avatar py-3 pl-6 pr-0 tbl:pl-6 select-none">
+                                        <a href="" class="block w-[41px] pt-1">
+                                            <div class="w-9 h-9 relative">
+                                                <img
+                                                    src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                                    alt="avatar"
+                                                    class="w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover"
+                                                />
+                                                <div class="absolute top-5 right-[-4px]">
+                                                    <div
+                                                        class="bg-[#FF007A] w-[18px] h-[18px] border-[1px] border-[#101010] rounded-full box-content"
+                                                    >
+                                                        <svg aria-label="" role="img" viewBox="0 0 18 18">
+                                                            <title></title>
+                                                            <path
+                                                                fill="white"
+                                                                d="M5 8.33956C5 6.84296 6.07645 5.75 7.48174 5.75C8.08884 5.75 8.61175 5.95938 9.00094 6.30299C9.3914 5.95863 9.91188 5.75 10.5183 5.75C11.9276 5.75 13 6.84345 13 8.33956C13 9.20812 12.6297 10.037 12.0266 10.7947C11.4237 11.5521 10.5712 12.2609 9.5565 12.9023L9.55379 12.904C9.48997 12.9437 9.41108 12.9882 9.32747 13.0242C9.25284 13.0563 9.1332 13.1001 9 13.1001C8.86687 13.1001 8.74693 13.0551 8.67518 13.0242C8.59318 12.9889 8.51482 12.9453 8.45151 12.9072L8.44748 12.9048L8.4435 12.9023C7.42882 12.2609 6.57626 11.5521 5.97338 10.7947C5.37032 10.037 5 9.20812 5 8.33956Z"
+                                                            ></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="user-liked-content-container-1 w-full border-t-[1px] border-border-color pr-6">
+                                        <div class="user-liked-content-container-2 py-3 pl-1 flex justify-between items-center">
+                                            <div class="flex-grow">
+                                                <a
+                                                    href="#"
+                                                    class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"
+                                                    >cas.nothingtosay</a
+                                                >
+                                                <p
+                                                    class="user-liked-timestamp overflow-hidden leading-[22.5px] inline-block text-[15px] text-secondary-text"
+                                                >
+                                                    34m
+                                                </p>
+                                                <p class="user-liked-pickedtag text-[15px] font-normal text-secondary-text">Nothingtosay</p>
+                                            </div>
+                                            <div
+                                                class="user-liked-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight text-primary-text select-none"
+                                            >
+                                                Follow
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-user-liked w-full flex mt-4px relative cursor-pointer">
+                                    <div class="user-liked-avatar py-3 pl-6 pr-0 tbl:pl-6 select-none">
+                                        <a href="" class="block w-[41px] pt-1">
+                                            <div class="w-9 h-9 relative">
+                                                <img
+                                                    src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
+                                                    alt="avatar"
+                                                    class="w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover"
+                                                />
+                                                <div class="absolute top-5 right-[-4px]">
+                                                    <div
+                                                        class="bg-[#FF007A] w-[18px] h-[18px] border-[1px] border-[#101010] rounded-full box-content"
+                                                    >
+                                                        <svg aria-label="" role="img" viewBox="0 0 18 18">
+                                                            <title></title>
+                                                            <path
+                                                                fill="white"
+                                                                d="M5 8.33956C5 6.84296 6.07645 5.75 7.48174 5.75C8.08884 5.75 8.61175 5.95938 9.00094 6.30299C9.3914 5.95863 9.91188 5.75 10.5183 5.75C11.9276 5.75 13 6.84345 13 8.33956C13 9.20812 12.6297 10.037 12.0266 10.7947C11.4237 11.5521 10.5712 12.2609 9.5565 12.9023L9.55379 12.904C9.48997 12.9437 9.41108 12.9882 9.32747 13.0242C9.25284 13.0563 9.1332 13.1001 9 13.1001C8.86687 13.1001 8.74693 13.0551 8.67518 13.0242C8.59318 12.9889 8.51482 12.9453 8.45151 12.9072L8.44748 12.9048L8.4435 12.9023C7.42882 12.2609 6.57626 11.5521 5.97338 10.7947C5.37032 10.037 5 9.20812 5 8.33956Z"
+                                                            ></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="user-liked-content-container-1 w-full border-t-[1px] border-border-color pr-6">
+                                        <div class="user-liked-content-container-2 py-3 pl-1 flex justify-between items-center">
+                                            <div class="flex-grow">
+                                                <a
+                                                    href="#"
+                                                    class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"
+                                                    >cas.nothingtosay</a
+                                                >
+                                                <p
+                                                    class="user-liked-timestamp overflow-hidden leading-[22.5px] inline-block text-[15px] text-secondary-text"
+                                                >
+                                                    34m
+                                                </p>
+                                                <p class="user-liked-pickedtag text-[15px] font-normal text-secondary-text">Nothingtosay</p>
+                                            </div>
+                                            <div
+                                                class="user-liked-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight text-secondary-text select-none"
+                                            >
+                                                Following
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="main-post-wrapper pt-1 pb-3 px-3 tbl:px-6">
                             <div class="first-thread flex item-center pl-3 pb-3">
                                 <svg
@@ -281,13 +448,109 @@
                                         >
                                         <p class="main-post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
                                     </div>
-                                    <div class="main-post-more-btn w-5 h-5 cursor-pointer">
+                                    <div class="main-post-more-btn w-5 h-5 cursor-pointer relative">
                                         <svg aria-label="More" role="img" viewBox="0 0 24 24" fill="#777">
                                             <title>More</title>
                                             <circle cx="12" cy="12" r="1.5"></circle>
                                             <circle cx="6" cy="12" r="1.5"></circle>
                                             <circle cx="18" cy="12" r="1.5"></circle>
                                         </svg>
+                                        <div
+                                            class="main-post-more-list hidden select-none overflow-hidden fixed z-[4] top-0 bottom-0 right-0 left-0 bg-[#00000080] items-end text-primary-text text-[15px] font-semibold border-[1px] border-border-color rounded-t-2xl shadow-[0_10.5px_21px_rgba(0,_0,_0,_0.078)] tbl:absolute tbl:top-full tbl:z-[1] tbl:w-[224px] tbl:right-0 tbl:my-2 tbl:mr-[-19px] tbl:bg-content-bg tbl:left-auto tbl:bottom-auto tbl:rounded-b-2xl"
+                                        >
+                                            <div
+                                                class="w-screen box-border p-4 pt-0 bg-content-bg rounded-t-3xl border-[1px] border-[#f3f5f726] border-b-0 tbl:p-0 tbl:rounded-none tbl:border-0 tbl:w-full"
+                                            >
+                                                <div class="w-full py-3 flex justify-center tbl:hidden">
+                                                    <div class="w-10 h-1 bg-secondary-text rounded-full"></div>
+                                                </div>
+                                                <div
+                                                    class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent"
+                                                >
+                                                    <div
+                                                        class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer border-b-[1px] border-[#f3f5f726] hover:bg-[#212121] tbl:p-3 tbl:border-b-0"
+                                                    >
+                                                        <span>Save</span>
+                                                        <svg aria-label="" role="img" viewBox="0 0 20 20" class="w-5 h-5">
+                                                            <title></title>
+                                                            <path
+                                                                stroke="white"
+                                                                fill="none"
+                                                                d="M3.40039 17.7891V3.94995C3.40039 2.43117 4.6316 1.19995 6.15039 1.19995H13.8448C15.3636 1.19995 16.5948 2.43117 16.5948 3.94995V17.6516C16.5948 18.592 15.4579 19.063 14.7929 18.398L10.6201 14.2252C10.4198 14.0249 10.097 14.0184 9.88889 14.2106L5.17191 18.5647C4.49575 19.1888 3.40039 18.7093 3.40039 17.7891Z"
+                                                            ></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div
+                                                        class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] tbl:p-3"
+                                                    >
+                                                        <span>Who can reply & quote</span>
+                                                        <svg aria-label="" role="img" viewBox="0 0 24 24" class="w-5 h-5 rotate-180">
+                                                            <title></title>
+                                                            <polyline points="16.502 3 7.498 12 16.502 21" stroke="white" fill="none"></polyline>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-t-[1px] tbl:border-border-color"
+                                                >
+                                                    <div
+                                                        class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] text-red-600 tbl:p-3"
+                                                    >
+                                                        <span>Delete</span>
+                                                        <svg aria-label="" role="img" viewBox="0 0 20 20" class="w-5 h-5">
+                                                            <title></title>
+                                                            <path
+                                                                d="M6.75 3.5V2.5C6.75 1.67157 7.42157 1 8.25 1H11.75C12.5784 1 13.25 1.67157 13.25 2.5V3.5"
+                                                                fill="none"
+                                                                stroke="red"
+                                                                stroke-linecap="round"
+                                                                stroke-width="1.5"
+                                                            ></path>
+                                                            <path
+                                                                d="M3.75 4L4.54449 15.5202C4.61689 16.57 4.6531 17.0949 4.88062 17.4928C5.08095 17.8431 5.38256 18.1246 5.74584 18.3004C6.15846 18.5 6.68461 18.5 7.73691 18.5H12.2631C13.3154 18.5 13.8415 18.5 14.2542 18.3004C14.6174 18.1246 14.9191 17.8431 15.1194 17.4928C15.3469 17.0949 15.3831 16.57 15.4555 15.5202L16.25 4M3.75 4H16.25M3.75 4H1.75M16.25 4H18.25"
+                                                                fill="none"
+                                                                stroke="red"
+                                                                stroke-linecap="round"
+                                                                stroke-width="1.5"
+                                                            ></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-t-[1px] tbl:border-border-color"
+                                                >
+                                                    <div
+                                                        class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] tbl:p-3"
+                                                    >
+                                                        <span>Copy link</span>
+                                                        <svg aria-label="" role="img" viewBox="0 0 18 18" class="w-5 h-5">
+                                                            <title></title>
+                                                            <path
+                                                                d="M8.39992 5.44993L9.50669 4.34316C11.2046 2.64524 13.9575 2.64524 15.6554 4.34316V4.34316V4.34316C17.3533 6.04108 17.3533 8.79396 15.6554 10.4919L14.5486 11.5987"
+                                                                stroke="white"
+                                                                fill="none"
+                                                                stroke-linecap="round"
+                                                                stroke-width="1.65"
+                                                            ></path>
+                                                            <path
+                                                                d="M5.44773 8.40114L4.34096 9.50791C2.64304 11.2058 2.64304 13.9587 4.34096 15.6566V15.6566V15.6566C6.03889 17.3546 8.79176 17.3546 10.4897 15.6566L11.5965 14.5499"
+                                                                stroke="white"
+                                                                fill="none"
+                                                                stroke-linecap="round"
+                                                                stroke-width="1.65"
+                                                            ></path>
+                                                            <path
+                                                                d="M12.7051 7.29565L7.2942 12.7065"
+                                                                stroke="white"
+                                                                fill="none"
+                                                                stroke-linecap="round"
+                                                                stroke-width="1.65"
+                                                            ></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="main-post-content pt-[10px] w-full">
@@ -363,7 +626,9 @@
                                     </div>
                                     <div class="main-post-replies-title flex flex-nowrap pt-4 pb-1 mt-2 border-t-[1px] border-border-color">
                                         <span class="text-[15px] font-semibold text-primary-text flex-grow">Replies</span>
-                                        <span class="text-[15px] font-normal text-secondary-text cursor-pointer select-none">View activity ></span>
+                                        <span class="view-activity-btn text-[15px] font-normal text-secondary-text cursor-pointer select-none"
+                                            >View activity ></span
+                                        >
                                     </div>
                                 </div>
                             </div>
@@ -371,13 +636,145 @@
 
                         <div class="replies-post p-3 border-t-[1px] border-border-color tbl:px-6">
                             <div class="replies-post-info flex flex-nowrap items-center relative">
-                                <div class="replies-post-more-btn w-5 h-5 absolute top-0 right-0 cursor-pointer cursor-pointer">
+                                <div class="replies-post-more-btn w-5 h-5 absolute top-0 right-0 cursor-pointer">
                                     <svg aria-label="More" role="img" viewBox="0 0 24 24" fill="#777">
                                         <title>More</title>
                                         <circle cx="12" cy="12" r="1.5"></circle>
                                         <circle cx="6" cy="12" r="1.5"></circle>
                                         <circle cx="18" cy="12" r="1.5"></circle>
                                     </svg>
+                                    <div
+                                        class="replies-post-more-list hidden select-none overflow-hidden fixed z-[4] top-0 bottom-0 right-0 left-0 bg-[#00000080] items-end text-primary-text text-[15px] font-semibold border-[1px] border-border-color rounded-t-2xl shadow-[0_10.5px_21px_rgba(0,_0,_0,_0.078)] tbl:absolute tbl:top-full tbl:z-[1] tbl:w-[224px] tbl:right-0 tbl:my-2 tbl:mr-[-19px] tbl:bg-content-bg tbl:left-auto tbl:bottom-auto tbl:rounded-b-2xl"
+                                    >
+                                        <div
+                                            class="w-screen box-border p-4 pt-0 bg-content-bg rounded-t-3xl border-[1px] border-[#f3f5f726] border-b-0 tbl:p-0 tbl:rounded-none tbl:border-0 tbl:w-full"
+                                        >
+                                            <div class="w-full py-3 flex justify-center tbl:hidden">
+                                                <div class="w-10 h-1 bg-secondary-text rounded-full"></div>
+                                            </div>
+                                            <div
+                                                class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent"
+                                            >
+                                                <div
+                                                    class="replies-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer border-b-[1px] border-[#f3f5f726] hover:bg-[#212121] tbl:p-3 tbl:border-b-0"
+                                                >
+                                                    <span>Save</span>
+                                                    <svg aria-label="" role="img" viewBox="0 0 20 20" class="w-5 h-5">
+                                                        <title></title>
+                                                        <path
+                                                            stroke="white"
+                                                            fill="none"
+                                                            d="M3.40039 17.7891V3.94995C3.40039 2.43117 4.6316 1.19995 6.15039 1.19995H13.8448C15.3636 1.19995 16.5948 2.43117 16.5948 3.94995V17.6516C16.5948 18.592 15.4579 19.063 14.7929 18.398L10.6201 14.2252C10.4198 14.0249 10.097 14.0184 9.88889 14.2106L5.17191 18.5647C4.49575 19.1888 3.40039 18.7093 3.40039 17.7891Z"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <div
+                                                    class="replies-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] tbl:p-3"
+                                                >
+                                                    <span>Hide for everyone</span>
+                                                    <svg aria-label="" role="img" viewBox="0 0 20 20" class="w-5 h-5">
+                                                        <title></title>
+                                                        <path
+                                                            d="M1.5 1.75L18.5 18.25"
+                                                            stroke="white"
+                                                            stroke-linecap="round"
+                                                            stroke-width="1.5"
+                                                        ></path>
+                                                        <path
+                                                            d="M3.47414 6.27892C3.20456 6.01727 2.78029 5.99602 2.50117 6.24747C1.41059 7.22999 0.587673 8.33683 0.139959 9.36712C-0.0338603 9.76712 -0.0300002 10.2108 0.129836 10.601C1.24049 13.3126 4.48326 16.75 10.0001 16.75C10.8741 16.75 11.68 16.6639 12.4235 16.5086C13.0002 16.3882 13.1633 15.6831 12.7405 15.2728V15.2728C12.5453 15.0833 12.2667 15.0101 11.9998 15.0626C11.3839 15.1836 10.7188 15.25 10.0001 15.25C5.18515 15.25 2.43521 12.272 1.51791 10.0325C1.50596 10.0033 1.50888 9.98059 1.51568 9.96494C1.85715 9.17913 2.51757 8.26748 3.43478 7.42578C3.76747 7.12048 3.79816 6.59341 3.47414 6.27892V6.27892ZM16.5428 13.7373C16.2272 13.431 16.2465 12.9204 16.5569 12.6088C17.3554 11.8075 17.9704 10.9194 18.4571 10.0897C18.4939 10.0269 18.489 9.95912 18.4597 9.91192C17.0155 7.58585 14.0306 4.75 10.0001 4.75C9.33037 4.75 8.67997 4.82776 8.05567 4.96835C7.78456 5.02941 7.49807 4.95861 7.29866 4.76506V4.76506C6.8837 4.36231 7.03604 3.66842 7.59858 3.53444C8.36334 3.35229 9.16684 3.25 10.0001 3.25C14.7628 3.25 18.1518 6.57225 19.734 9.12072C20.066 9.65543 20.0607 10.3204 19.7509 10.8485C19.206 11.7776 18.4889 12.8103 17.5356 13.7488C17.26 14.0201 16.8203 14.0067 16.5428 13.7373V13.7373Z"
+                                                            fill="white"
+                                                        ></path>
+                                                        <path
+                                                            d="M6.36296 9.08288C6.28918 9.37637 6.25 9.68361 6.25 10C6.25 12.0711 7.92893 13.75 10 13.75C10.3555 13.75 10.6994 13.7005 11.0253 13.6081L6.36296 9.08288ZM13.637 10.9171C13.7108 10.6236 13.75 10.3164 13.75 10C13.75 7.92893 12.0711 6.25 10 6.25C9.6445 6.25 9.30056 6.29947 8.97468 6.39189L13.637 10.9171Z"
+                                                            fill="white"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-t-[1px] tbl:border-border-color"
+                                            >
+                                                <div
+                                                    class="replies-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer border-b-[1px] border-[#f3f5f726] hover:bg-[#212121] tbl:p-3 tbl:border-b-0"
+                                                >
+                                                    <span>Unfollow</span>
+                                                    <svg aria-label="" role="img" class="w-5 h-5">
+                                                        <title></title>
+                                                        <circle cx="10" cy="4.5" fill="none" r="3.75" stroke="white" stroke-width="1.5"></circle>
+                                                        <path
+                                                            d="M11.5 19C11.5 19.4142 11.8358 19.75 12.25 19.75H16.5C17.7426 19.75 18.75 18.7426 18.75 17.5V16.5C18.75 13.6005 16.3995 11.25 13.5 11.25H12.25C11.8358 11.25 11.5 11.5858 11.5 12V12C11.5 12.4142 11.8358 12.75 12.25 12.75H13.5C15.5711 12.75 17.25 14.4289 17.25 16.5V17.5C17.25 17.9142 16.9142 18.25 16.5 18.25H12.25C11.8358 18.25 11.5 18.5858 11.5 19V19Z"
+                                                            fill="white"
+                                                        ></path>
+                                                        <rect
+                                                            fill="none"
+                                                            height="8.5"
+                                                            rx="4.25"
+                                                            stroke="white"
+                                                            stroke-width="1.5"
+                                                            transform="rotate(-180 9.25 19)"
+                                                            width="8.5"
+                                                            x="9.25"
+                                                            y="19"
+                                                        ></rect>
+                                                        <path
+                                                            d="M3.40918 14.75H6.591"
+                                                            fill="none"
+                                                            stroke="white"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="1.5"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <div
+                                                    class="replies-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] text-red-600 tbl:p-3"
+                                                >
+                                                    <span>Report</span>
+                                                    <svg aria-label="" role="img" viewBox="0 0 24 24" class="w-5 h-5">
+                                                        <title></title>
+                                                        <path
+                                                            stroke="red"
+                                                            fill="red"
+                                                            d="M18.001 1h-12a5.006 5.006 0 0 0-5 5v9.005a5.006 5.006 0 0 0 5 5h2.514l2.789 2.712a1 1 0 0 0 1.394 0l2.787-2.712h2.516a5.006 5.006 0 0 0 5-5V6a5.006 5.006 0 0 0-5-5Zm3 14.005a3.003 3.003 0 0 1-3 3h-2.936a1 1 0 0 0-.79.387l-2.274 2.212-2.276-2.212a1 1 0 0 0-.79-.387H6a3.003 3.003 0 0 1-3-3V6a3.003 3.003 0 0 1 3-3h12a3.003 3.003 0 0 1 3 3Zm-9-1.66a1.229 1.229 0 1 0 1.228 1.228A1.23 1.23 0 0 0 12 13.344Zm0-8.117a1.274 1.274 0 0 0-.933.396 1.108 1.108 0 0 0-.3.838l.347 4.861a.892.892 0 0 0 1.77 0l.348-4.86a1.106 1.106 0 0 0-.3-.838A1.272 1.272 0 0 0 12 5.228Z"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-t-[1px] tbl:border-border-color"
+                                            >
+                                                <div
+                                                    class="replies-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] tbl:p-3"
+                                                >
+                                                    <span>Copy link</span>
+                                                    <svg aria-label="" role="img" viewBox="0 0 18 18" class="w-5 h-5">
+                                                        <title></title>
+                                                        <path
+                                                            d="M8.39992 5.44993L9.50669 4.34316C11.2046 2.64524 13.9575 2.64524 15.6554 4.34316V4.34316V4.34316C17.3533 6.04108 17.3533 8.79396 15.6554 10.4919L14.5486 11.5987"
+                                                            stroke="white"
+                                                            fill="none"
+                                                            stroke-linecap="round"
+                                                            stroke-width="1.65"
+                                                        ></path>
+                                                        <path
+                                                            d="M5.44773 8.40114L4.34096 9.50791C2.64304 11.2058 2.64304 13.9587 4.34096 15.6566V15.6566V15.6566C6.03889 17.3546 8.79176 17.3546 10.4897 15.6566L11.5965 14.5499"
+                                                            stroke="white"
+                                                            fill="none"
+                                                            stroke-linecap="round"
+                                                            stroke-width="1.65"
+                                                        ></path>
+                                                        <path
+                                                            d="M12.7051 7.29565L7.2942 12.7065"
+                                                            stroke="white"
+                                                            fill="none"
+                                                            stroke-linecap="round"
+                                                            stroke-width="1.65"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <img
                                     src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
@@ -479,6 +876,138 @@
                                         <circle cx="6" cy="12" r="1.5"></circle>
                                         <circle cx="18" cy="12" r="1.5"></circle>
                                     </svg>
+                                    <div
+                                        class="replies-post-more-list hidden select-none overflow-hidden fixed z-[4] top-0 bottom-0 right-0 left-0 bg-[#00000080] items-end text-primary-text text-[15px] font-semibold border-[1px] border-border-color rounded-t-2xl shadow-[0_10.5px_21px_rgba(0,_0,_0,_0.078)] tbl:absolute tbl:top-full tbl:z-[1] tbl:w-[224px] tbl:right-0 tbl:my-2 tbl:mr-[-19px] tbl:bg-content-bg tbl:left-auto tbl:bottom-auto tbl:rounded-b-2xl"
+                                    >
+                                        <div
+                                            class="w-screen box-border p-4 pt-0 bg-content-bg rounded-t-3xl border-[1px] border-[#f3f5f726] border-b-0 tbl:p-0 tbl:rounded-none tbl:border-0 tbl:w-full"
+                                        >
+                                            <div class="w-full py-3 flex justify-center tbl:hidden">
+                                                <div class="w-10 h-1 bg-secondary-text rounded-full"></div>
+                                            </div>
+                                            <div
+                                                class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent"
+                                            >
+                                                <div
+                                                    class="replies-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer border-b-[1px] border-[#f3f5f726] hover:bg-[#212121] tbl:p-3 tbl:border-b-0"
+                                                >
+                                                    <span>Save</span>
+                                                    <svg aria-label="" role="img" viewBox="0 0 20 20" class="w-5 h-5">
+                                                        <title></title>
+                                                        <path
+                                                            stroke="white"
+                                                            fill="none"
+                                                            d="M3.40039 17.7891V3.94995C3.40039 2.43117 4.6316 1.19995 6.15039 1.19995H13.8448C15.3636 1.19995 16.5948 2.43117 16.5948 3.94995V17.6516C16.5948 18.592 15.4579 19.063 14.7929 18.398L10.6201 14.2252C10.4198 14.0249 10.097 14.0184 9.88889 14.2106L5.17191 18.5647C4.49575 19.1888 3.40039 18.7093 3.40039 17.7891Z"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <div
+                                                    class="replies-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] tbl:p-3"
+                                                >
+                                                    <span>Hide for everyone</span>
+                                                    <svg aria-label="" role="img" viewBox="0 0 20 20" class="w-5 h-5">
+                                                        <title></title>
+                                                        <path
+                                                            d="M1.5 1.75L18.5 18.25"
+                                                            stroke="white"
+                                                            stroke-linecap="round"
+                                                            stroke-width="1.5"
+                                                        ></path>
+                                                        <path
+                                                            d="M3.47414 6.27892C3.20456 6.01727 2.78029 5.99602 2.50117 6.24747C1.41059 7.22999 0.587673 8.33683 0.139959 9.36712C-0.0338603 9.76712 -0.0300002 10.2108 0.129836 10.601C1.24049 13.3126 4.48326 16.75 10.0001 16.75C10.8741 16.75 11.68 16.6639 12.4235 16.5086C13.0002 16.3882 13.1633 15.6831 12.7405 15.2728V15.2728C12.5453 15.0833 12.2667 15.0101 11.9998 15.0626C11.3839 15.1836 10.7188 15.25 10.0001 15.25C5.18515 15.25 2.43521 12.272 1.51791 10.0325C1.50596 10.0033 1.50888 9.98059 1.51568 9.96494C1.85715 9.17913 2.51757 8.26748 3.43478 7.42578C3.76747 7.12048 3.79816 6.59341 3.47414 6.27892V6.27892ZM16.5428 13.7373C16.2272 13.431 16.2465 12.9204 16.5569 12.6088C17.3554 11.8075 17.9704 10.9194 18.4571 10.0897C18.4939 10.0269 18.489 9.95912 18.4597 9.91192C17.0155 7.58585 14.0306 4.75 10.0001 4.75C9.33037 4.75 8.67997 4.82776 8.05567 4.96835C7.78456 5.02941 7.49807 4.95861 7.29866 4.76506V4.76506C6.8837 4.36231 7.03604 3.66842 7.59858 3.53444C8.36334 3.35229 9.16684 3.25 10.0001 3.25C14.7628 3.25 18.1518 6.57225 19.734 9.12072C20.066 9.65543 20.0607 10.3204 19.7509 10.8485C19.206 11.7776 18.4889 12.8103 17.5356 13.7488C17.26 14.0201 16.8203 14.0067 16.5428 13.7373V13.7373Z"
+                                                            fill="white"
+                                                        ></path>
+                                                        <path
+                                                            d="M6.36296 9.08288C6.28918 9.37637 6.25 9.68361 6.25 10C6.25 12.0711 7.92893 13.75 10 13.75C10.3555 13.75 10.6994 13.7005 11.0253 13.6081L6.36296 9.08288ZM13.637 10.9171C13.7108 10.6236 13.75 10.3164 13.75 10C13.75 7.92893 12.0711 6.25 10 6.25C9.6445 6.25 9.30056 6.29947 8.97468 6.39189L13.637 10.9171Z"
+                                                            fill="white"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-t-[1px] tbl:border-border-color"
+                                            >
+                                                <div
+                                                    class="replies-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer border-b-[1px] border-[#f3f5f726] hover:bg-[#212121] tbl:p-3 tbl:border-b-0"
+                                                >
+                                                    <span>Unfollow</span>
+                                                    <svg aria-label="" role="img" class="w-5 h-5">
+                                                        <title></title>
+                                                        <circle cx="10" cy="4.5" fill="none" r="3.75" stroke="white" stroke-width="1.5"></circle>
+                                                        <path
+                                                            d="M11.5 19C11.5 19.4142 11.8358 19.75 12.25 19.75H16.5C17.7426 19.75 18.75 18.7426 18.75 17.5V16.5C18.75 13.6005 16.3995 11.25 13.5 11.25H12.25C11.8358 11.25 11.5 11.5858 11.5 12V12C11.5 12.4142 11.8358 12.75 12.25 12.75H13.5C15.5711 12.75 17.25 14.4289 17.25 16.5V17.5C17.25 17.9142 16.9142 18.25 16.5 18.25H12.25C11.8358 18.25 11.5 18.5858 11.5 19V19Z"
+                                                            fill="white"
+                                                        ></path>
+                                                        <rect
+                                                            fill="none"
+                                                            height="8.5"
+                                                            rx="4.25"
+                                                            stroke="white"
+                                                            stroke-width="1.5"
+                                                            transform="rotate(-180 9.25 19)"
+                                                            width="8.5"
+                                                            x="9.25"
+                                                            y="19"
+                                                        ></rect>
+                                                        <path
+                                                            d="M3.40918 14.75H6.591"
+                                                            fill="none"
+                                                            stroke="white"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="1.5"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <div
+                                                    class="replies-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] text-red-600 tbl:p-3"
+                                                >
+                                                    <span>Report</span>
+                                                    <svg aria-label="" role="img" viewBox="0 0 24 24" class="w-5 h-5">
+                                                        <title></title>
+                                                        <path
+                                                            stroke="red"
+                                                            fill="red"
+                                                            d="M18.001 1h-12a5.006 5.006 0 0 0-5 5v9.005a5.006 5.006 0 0 0 5 5h2.514l2.789 2.712a1 1 0 0 0 1.394 0l2.787-2.712h2.516a5.006 5.006 0 0 0 5-5V6a5.006 5.006 0 0 0-5-5Zm3 14.005a3.003 3.003 0 0 1-3 3h-2.936a1 1 0 0 0-.79.387l-2.274 2.212-2.276-2.212a1 1 0 0 0-.79-.387H6a3.003 3.003 0 0 1-3-3V6a3.003 3.003 0 0 1 3-3h12a3.003 3.003 0 0 1 3 3Zm-9-1.66a1.229 1.229 0 1 0 1.228 1.228A1.23 1.23 0 0 0 12 13.344Zm0-8.117a1.274 1.274 0 0 0-.933.396 1.108 1.108 0 0 0-.3.838l.347 4.861a.892.892 0 0 0 1.77 0l.348-4.86a1.106 1.106 0 0 0-.3-.838A1.272 1.272 0 0 0 12 5.228Z"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-t-[1px] tbl:border-border-color"
+                                            >
+                                                <div
+                                                    class="replies-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] tbl:p-3"
+                                                >
+                                                    <span>Copy link</span>
+                                                    <svg aria-label="" role="img" viewBox="0 0 18 18" class="w-5 h-5">
+                                                        <title></title>
+                                                        <path
+                                                            d="M8.39992 5.44993L9.50669 4.34316C11.2046 2.64524 13.9575 2.64524 15.6554 4.34316V4.34316V4.34316C17.3533 6.04108 17.3533 8.79396 15.6554 10.4919L14.5486 11.5987"
+                                                            stroke="white"
+                                                            fill="none"
+                                                            stroke-linecap="round"
+                                                            stroke-width="1.65"
+                                                        ></path>
+                                                        <path
+                                                            d="M5.44773 8.40114L4.34096 9.50791C2.64304 11.2058 2.64304 13.9587 4.34096 15.6566V15.6566V15.6566C6.03889 17.3546 8.79176 17.3546 10.4897 15.6566L11.5965 14.5499"
+                                                            stroke="white"
+                                                            fill="none"
+                                                            stroke-linecap="round"
+                                                            stroke-width="1.65"
+                                                        ></path>
+                                                        <path
+                                                            d="M12.7051 7.29565L7.2942 12.7065"
+                                                            stroke="white"
+                                                            fill="none"
+                                                            stroke-linecap="round"
+                                                            stroke-width="1.65"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <img
                                     src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
@@ -604,5 +1133,6 @@
             </div>
         </div>
         <script src="../Js/layout.js"></script>
+        <script src="../Js/detail-post.js"></script>
     </body>
 </html>

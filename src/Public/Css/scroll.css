@@ -21,3 +21,24 @@
     background-color: #555;
     border-radius: 10px;
 }
+
+@media (max-width: 700px) {
+    .custom-scrollbar {
+        scrollbar-color: transparent transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}
+
+.activity__post-username {
+    display: inline-block; /* Cần thiết để giới hạn chiều rộng */
+    white-space: nowrap; /* Ngăn văn bản xuống dòng */
+    overflow: hidden; /* Ẩn phần văn bản vượt quá */
+    text-overflow: ellipsis; /* Thêm dấu "..." khi văn bản bị cắt */
+}
