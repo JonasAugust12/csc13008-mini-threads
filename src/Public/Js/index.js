@@ -7,31 +7,36 @@ document.querySelectorAll('.monitor-btn').forEach(function (button) {
     });
 });
 
-const moreButtons = document.querySelectorAll('.main-post-more-btn');
-const moreLists = document.querySelectorAll('.main-post-more-list');
+document.addEventListener('DOMContentLoaded', () => {
+    // Lấy tất cả các nút và danh sách liên quan
+    const buttons = document.querySelectorAll('.main-post-more-btn');
 
-// Hàm để hiển thị và ẩn danh sách
-function toggleMoreList(moreList) {
-    if (moreList.style.display === 'flex') {
-        moreList.style.display = 'none';
-    } else {
-        moreList.style.display = 'flex';
-    }
-}
+    buttons.forEach((button) => {
+        const dropdown = button.querySelector('.main-post-more-list');
 
-// Ẩn danh sách khi bấm ra ngoài hoặc cuộn
-document.addEventListener('click', (event) => {
-    moreLists.forEach((moreList) => {
-        moreList.style.display = 'none';
+        // Gắn sự kiện click vào nút
+        button.addEventListener('click', (event) => {
+            event.stopPropagation();
+
+            // Ẩn tất cả các danh sách khác
+            buttons.forEach((btn) => {
+                const otherDropdown = btn.querySelector('.main-post-more-list');
+                if (otherDropdown !== dropdown) {
+                    otherDropdown.style.display = 'none'; // Ẩn danh sách khác
+                }
+            });
+
+            // Toggle trạng thái hiện/ẩn danh sách của nút hiện tại
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
     });
-});
 
-// Thêm sự kiện click vào nút More để hiển thị danh sách
-moreButtons.forEach((moreButton, index) => {
-    const moreList = moreLists[index];
-    moreButton.addEventListener('click', (event) => {
-        event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
-        toggleMoreList(moreList);
+    // Khi bấm ra ngoài, ẩn tất cả danh sách
+    document.addEventListener('click', () => {
+        buttons.forEach((button) => {
+            const dropdown = button.querySelector('.main-post-more-list');
+            dropdown.style.display = 'none'; // Ẩn tất cả danh sách
+        });
     });
 });
 
@@ -60,35 +65,54 @@ document.querySelectorAll('.post-username').forEach((username) => {
         userCard.classList.add('hidden');
     });
 });
-// document.addEventListener('DOMContentLoaded', () => {
-//     // Lấy tất cả các nút và danh sách liên quan
-//     const buttons = document.querySelectorAll('.replies-post-more-btn');
 
-//     buttons.forEach((button) => {
-//         const dropdown = button.querySelector('.replies-post-more-list');
+document.addEventListener('DOMContentLoaded', () => {
+    const refreshOption = document.getElementById('refresh-option');
+    const refreshList = document.getElementById('refresh-list');
 
-//         // Gắn sự kiện click vào nút
-//         button.addEventListener('click', (event) => {
-//             event.stopPropagation();
+    // Hiển thị hoặc ẩn danh sách khi nhấn vào nút
+    refreshOption.addEventListener('click', (event) => {
+        event.stopPropagation(); // Ngăn không cho sự kiện lan ra ngoài
+        const isVisible = refreshList.classList.contains('opacity-100');
 
-//             // Ẩn tất cả các danh sách khác
-//             buttons.forEach((btn) => {
-//                 const otherDropdown = btn.querySelector('.replies-post-more-list');
-//                 if (otherDropdown !== dropdown) {
-//                     otherDropdown.style.display = 'none'; // Ẩn danh sách khác
-//                 }
-//             });
+        // Đặt trạng thái ẩn/hiện
+        if (isVisible) {
+            refreshList.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            refreshList.classList.add('opacity-0', '-translate-y-2', 'pointer-events-none');
+        } else {
+            refreshList.classList.remove('opacity-0', '-translate-y-2', 'pointer-events-none');
+            refreshList.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        }
+    });
 
-//             // Toggle trạng thái hiện/ẩn danh sách của nút hiện tại
-//             dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-//         });
-//     });
+    // Ẩn danh sách khi nhấn ra ngoài
+    document.addEventListener('click', () => {
+        refreshList.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        refreshList.classList.add('opacity-0', '-translate-y-2', 'pointer-events-none');
+    });
+});
 
-//     // Khi bấm ra ngoài, ẩn tất cả danh sách
-//     document.addEventListener('click', () => {
-//         buttons.forEach((button) => {
-//             const dropdown = button.querySelector('.replies-post-more-list');
-//             dropdown.style.display = 'none'; // Ẩn tất cả danh sách
-//         });
-//     });
-// });
+document.addEventListener('DOMContentLoaded', () => {
+    const postLikes = document.querySelectorAll('.post-like');
+
+    postLikes.forEach((postLike) => {
+        postLike.addEventListener('click', () => {
+            const svg = postLike.querySelector('svg path');
+            const likeNum = postLike.querySelector('.like-num');
+            const currentLikes = parseInt(likeNum.textContent.trim(), 10);
+
+            // Kiểm tra trạng thái hiện tại của nút
+            if (svg.getAttribute('fill') === 'red') {
+                // Nếu đang thích -> Bỏ thích
+                svg.setAttribute('fill', 'none');
+                svg.setAttribute('stroke', 'currentColor');
+                likeNum.textContent = currentLikes - 1;
+            } else {
+                // Nếu chưa thích -> Thích
+                svg.setAttribute('fill', 'red');
+                svg.setAttribute('stroke', 'red');
+                likeNum.textContent = currentLikes + 1;
+            }
+        });
+    });
+});

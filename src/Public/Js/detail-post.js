@@ -85,3 +85,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const followButtons = document.querySelectorAll('.user-liked-follow-btn');
+
+    followButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            if (button.textContent.trim() === 'Following') {
+                button.textContent = 'Follow';
+                button.classList.remove('text-secondary-text');
+                button.classList.add('text-primary-text');
+            } else {
+                button.textContent = 'Following';
+                button.classList.remove('text-primary-text');
+                button.classList.add('text-secondary-text');
+            }
+        });
+    });
+});

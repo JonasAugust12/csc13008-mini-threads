@@ -6,6 +6,7 @@
         <title>Mini Threads</title>
         <link href="../Css/output.css" rel="stylesheet" />
         <link rel="stylesheet" href="../Css/scroll.css" />
+        <link rel="stylesheet" href="../Css/bundle.css" />
     </head>
 
     <body class="bg-main-bg">
@@ -23,7 +24,7 @@
                     </div>
                 </div>
                 <div class="top-nav__middle flex justify-center items-center">
-                    <a href="#">
+                    <a href="../../../index.html">
                         <svg
                             aria-label="Threads"
                             fill="white"
@@ -42,12 +43,117 @@
                     </a>
                 </div>
                 <div class="top-nav__right">
-                    <div class="top-nav__right-setting flex h-full items-center justify-end">
+                    <div class="top-nav__right-setting flex h-full items-center justify-end cursor-pointer">
                         <svg aria-label="More" role="img" viewBox="0 0 24 24" class="mr-7 w-6 h-6 scale-x-[-1]">
                             <title>More</title>
                             <rect width="24" height="2.5" rx="1.25" x="3" y="7" fill="#4d4d4d"></rect>
                             <rect width="14" height="2.5" rx="1.25" x="3" y="15" fill="#4d4d4d"></rect>
                         </svg>
+                    </div>
+                </div>
+
+                <div
+                    class="activity-filter bg-main-bg fixed top-[60px] left-0 w-full h-[42px] overflow-x-auto overflow-y-hidden custom-scrollbar py-1 px-3 flex z-[1] box-border gap-x-[6px] self-center flex-nowrap tbl:hidden"
+                >
+                    <a
+                        href="#"
+                        class="activity-option min-w-[100px] h-[34px] inline-flex justify-center items-center border-border-color border-[1px] rounded-[10px] px-4 bg-white"
+                    >
+                        <div class="font-semibold select-none text-black">All</div>
+                    </a>
+                    <a
+                        href="#"
+                        class="activity-option min-w-[100px] h-[34px] inline-flex justify-center items-center border-border-color border-[1px] rounded-[10px] px-4"
+                    >
+                        <div class="font-semibold select-none text-white">Follows</div>
+                    </a>
+                    <a
+                        href="#"
+                        class="activity-option min-w-[100px] h-[34px] inline-flex justify-center items-center border-border-color border-[1px] rounded-[10px] px-4"
+                    >
+                        <div class="font-semibold select-none text-white">Like</div>
+                    </a>
+                    <a
+                        href="#"
+                        class="activity-option min-w-[100px] h-[34px] inline-flex justify-center items-center border-border-color border-[1px] rounded-[10px] px-4"
+                    >
+                        <div class="font-semibold select-none text-white">Replies</div>
+                    </a>
+                </div>
+
+                <div class="top-nav__setting-more-menu hidden absolute left-0 top-0 w-fit z-[2]">
+                    <div class="menu bg-[#181818]">
+                        <div class="menu__upper p-2 border-b border-[#333638]">
+                            <div
+                                class="menu__btn menu__btn--appearance flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Appearance
+                                </span>
+                                <div class="menu__btn-icon flex items-center ml-2 rotate-180">
+                                    <svg
+                                        class="w-[16px] h-[16px] stroke-[2px] fill-none stroke-[#777]"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <title>Next</title>
+                                        <polyline points="16.502 3 7.498 12 16.502 21"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--settings flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                                onclick="window.location.href='settings_privacy.html'"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Settings
+                                </span>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--saved flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                                onclick="window.location.href='#'"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Saved
+                                </span>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--liked flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                                onclick="window.location.href='#'"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Liked
+                                </span>
+                            </div>
+                        </div>
+                        <div class="menu__lower p-2">
+                            <div
+                                class="menu__btn menu__btn--report flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative"
+                                >
+                                    Report a problem
+                                </span>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--logout flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text menu__btn-text--logout max-w-full text-[#ff3040] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative"
+                                >
+                                    Log out
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -58,7 +164,10 @@
                 <div
                     class="navbar__app-icon w-[34px] h-[34px] py-[15px] overflow-x-hidden overflow-y-hidden hidden tbl:flex tbl:justify-center tbl:box-content"
                 >
-                    <a href="./index.html" class="w-[34px] h-[34px] transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer">
+                    <a
+                        href="../../../index.html"
+                        class="w-[34px] h-[34px] transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer"
+                    >
                         <svg
                             aria-label="Threads"
                             fill="white"
@@ -79,14 +188,14 @@
 
                 <div class="nav-utilities w-full h-full flex items-center justify-around flex-nowrap tbl:flex-col tbl:justify-center tbl:gap-y-1">
                     <a
-                        href="./index.html"
+                        href="../../../index.html"
                         class="nav-utility-home w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]"
                     >
                         <svg aria-label="Home" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px] tbl:w-6 tbl:h-6">
                             <title>Home</title>
                             <path
                                 d="M2.25 12.8855V20.7497C2.25 21.8543 3.14543 22.7497 4.25 22.7497H9.25C9.52614 22.7497 9.75 22.5258 9.75 22.2497V17.6822V16.4997C9.75 14.7048 11.2051 13.2497 13 13.2497C14.7949 13.2497 16.25 14.7048 16.25 16.4997V17.6822V22.2497C16.25 22.5258 16.4739 22.7497 16.75 22.7497H21.75C22.8546 22.7497 23.75 21.8543 23.75 20.7497V12.8855C23.75 11.3765 23.0685 9.94814 21.8954 8.99882L16.1454 4.34539C14.3112 2.86094 11.6888 2.86094 9.85455 4.34539L4.10455 8.99882C2.93153 9.94814 2.25 11.3765 2.25 12.8855Z"
-                                fill="transparent"
+                                fill="none"
                                 stroke="#4d4d4d"
                                 stroke-linecap="round"
                                 stroke-width="2.5"
@@ -107,7 +216,8 @@
                             ></path>
                         </svg>
                     </a>
-                    <div
+                    <label
+                        for="create-post__checkbox"
                         class="nav-utility-create w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl tbl:bg-[#171717] group"
                     >
                         <svg aria-label="Create" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px] tbl:hidden">
@@ -125,9 +235,9 @@
                             <title>Create</title>
                             <path d="M6 2v8m4-4H2" stroke="#4d4d4d" stroke-linecap="round" stroke-width="1.5" class="group-hover:stroke-white"></path>
                         </svg>
-                    </div>
+                    </label>
                     <a
-                        href="#"
+                        href="./activity.html"
                         class="nav-utility-noti w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]"
                     >
                         <svg
@@ -172,6 +282,62 @@
                             <rect width="24" height="2.5" rx="1.25" x="3" y="7" fill="#4d4d4d" class="group-hover:fill-white"></rect>
                             <rect width="14" height="2.5" rx="1.25" x="3" y="15" fill="#4d4d4d" class="group-hover:fill-white"></rect>
                         </svg>
+                    </div>
+                </div>
+
+                <div class="navbar__setting-more-menu hidden absolute left-0 top-0 w-fit">
+                    <div class="menu bg-[#181818]">
+                        <div class="menu__upper p-2 border-b border-[#333638]">
+                            <div
+                                class="menu__btn menu__btn--appearance flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Appearance
+                                </span>
+                                <div class="menu__btn-icon flex items-center ml-2 rotate-180">
+                                    <svg
+                                        class="w-[16px] h-[16px] stroke-[2px] fill-none stroke-[#777]"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <title>Next</title>
+                                        <polyline points="16.502 3 7.498 12 16.502 21"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--settings flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                                onclick="window.location.href='settings_privacy.html'"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative"
+                                >
+                                    Settings
+                                </span>
+                            </div>
+                        </div>
+                        <div class="menu__lower p-2">
+                            <div
+                                class="menu__btn menu__btn--report flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative"
+                                >
+                                    Report a problem
+                                </span>
+                            </div>
+                            <div
+                                class="menu__btn menu__btn--logout flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
+                            >
+                                <span
+                                    class="menu__btn-text menu__btn-text--logout max-w-full text-[#ff3040] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative"
+                                >
+                                    Log out
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -397,22 +563,7 @@
                 <div
                     class="heading__section hidden h-[60px] fixed z-[1] top-0 bg-main-bg box-border tbl:grid tbl:grid-cols-[1fr_50%_1fr] tbl:grid-rows-[1fr] tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px]"
                 >
-                    <div class="heading__section__left flex items-center justify-start pl-4">
-                        <div
-                            class="back-btn inline-flex justify-center items-center w-6 h-6 border-[1px] border-[#363737] bg-[#181818] rounded-full cursor-pointer"
-                        >
-                            <svg aria-label="Back" role="img" viewBox="0 0 12 12" class="w-3 h-3">
-                                <title>Back</title>
-                                <path
-                                    d="M1 6h10M1 6l4-4M1 6l4 4"
-                                    stroke="white"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                ></path>
-                            </svg>
-                        </div>
-                    </div>
+                    <div class="heading__section__left flex items-center justify-start pl-4"></div>
                     <div class="heading__section__middle flex justify-center items-center">
                         <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center select-none"
                             >Activity</a
@@ -479,7 +630,7 @@
                 </div>
 
                 <div
-                    class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] tbl:pt-6 tbl:bg-content-bg"
+                    class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] box-border pb-[68px] tbl:pb-0 tbl:pt-6 tbl:bg-content-bg"
                 >
                     <div class="activity-wrapper w-full h-full relative">
                         <div class="activity-actions-wrapper fixed z-[4] top-0 bottom-0 right-0 left-0 bg-[#00000080] items-end hidden tbl:hidden">
@@ -524,36 +675,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div
-                            class="activity-filter bg-main-bg fixed top-[60px] left-0 w-full h-[42px] overflow-x-auto overflow-y-hidden custom-scrollbar py-1 px-3 flex z-[1] box-border gap-x-[6px] self-center flex-nowrap tbl:hidden"
-                        >
-                            <a
-                                href="#"
-                                class="activity-option min-w-[100px] h-[34px] inline-flex justify-center items-center border-border-color border-[1px] rounded-[10px] px-4 bg-white"
-                            >
-                                <div class="font-semibold select-none text-black">All</div>
-                            </a>
-                            <a
-                                href="#"
-                                class="activity-option min-w-[100px] h-[34px] inline-flex justify-center items-center border-border-color border-[1px] rounded-[10px] px-4"
-                            >
-                                <div class="font-semibold select-none text-white">Follows</div>
-                            </a>
-                            <a
-                                href="#"
-                                class="activity-option min-w-[100px] h-[34px] inline-flex justify-center items-center border-border-color border-[1px] rounded-[10px] px-4"
-                            >
-                                <div class="font-semibold select-none text-white">Like</div>
-                            </a>
-                            <a
-                                href="#"
-                                class="activity-option min-w-[100px] h-[34px] inline-flex justify-center items-center border-border-color border-[1px] rounded-[10px] px-4"
-                            >
-                                <div class="font-semibold select-none text-white">Replies</div>
-                            </a>
-                        </div>
-
                         <div class="activity-post-container w-full mt-[42px] tbl:mt-0">
                             <div class="activity-post w-full flex mt-4px relative cursor-pointer">
                                 <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2 tbl:hidden">
@@ -581,7 +702,7 @@
                                         <a
                                             href="#"
                                             class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"
-                                            >cas.nothingtosay</a
+                                            >justinbieber</a
                                         >
                                         <p
                                             class="activity__post-timestamp leading-[22.5px] overflow-hidden inline-block text-[15px] text-secondary-text"
@@ -589,10 +710,10 @@
                                             24m
                                         </p>
                                         <p class="activity__post-pickedtag text-[15px] font-normal text-secondary-text">CSC13008-Mini-Threads</p>
-                                        <span class="activity__post-content block text-[15px] font-normal text-primary-text">Ok sốp</span>
+                                        <span class="activity__post-content block text-[15px] font-normal text-primary-text">Bieber em fan anh</span>
                                         <div class="activity__post-action ml-[-12px] mt-[3px] select-none">
                                             <button
-                                                class="activity__post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                                class="activity__post-action-like h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
                                             >
                                                 <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                     <title>Like</title>
@@ -603,7 +724,7 @@
                                                         stroke-width="1.25"
                                                     ></path>
                                                 </svg>
-                                                <span class="text-[#ccc] text-[13px] font-normal pl-1">267</span>
+                                                <span class="like-num text-[#ccc] text-[13px] font-normal pl-1">267</span>
                                             </button>
                                             <button
                                                 class="activity__post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
@@ -700,7 +821,7 @@
                                         <a
                                             href="#"
                                             class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"
-                                            >cas.nothingtosay</a
+                                            >justinbieber</a
                                         >
                                         <p
                                             class="activity__post-timestamp leading-[22.5px] overflow-hidden inline-block text-[15px] text-secondary-text"
@@ -713,7 +834,7 @@
                                         >
                                         <div class="activity__post-action ml-[-12px] mt-[3px] select-none">
                                             <button
-                                                class="activity__post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                                                class="activity__post-action-like h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
                                             >
                                                 <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                                                     <title>Like</title>
@@ -724,7 +845,7 @@
                                                         stroke-width="1.25"
                                                     ></path>
                                                 </svg>
-                                                <span class="text-[#ccc] text-[13px] font-normal pl-1">267</span>
+                                                <span class="like-num text-[#ccc] text-[13px] font-normal pl-1">2</span>
                                             </button>
                                             <button
                                                 class="activity__post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
@@ -739,7 +860,7 @@
                                                         stroke-width="1.25"
                                                     ></path>
                                                 </svg>
-                                                <span class="text-[#ccc] text-[13px] font-normal pl-1">6</span>
+                                                <span class="text-[#ccc] text-[13px] font-normal pl-1">3</span>
                                             </button>
                                             <button
                                                 class="activity__post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
@@ -755,7 +876,7 @@
                                                         d="M11.5874 17.7904C11.3651 18.0545 10.9708 18.0883 10.7068 17.8659L8.03491 15.6159C7.89781 15.5005 7.81687 15.3317 7.81267 15.1525C7.80847 14.9733 7.8814 14.801 8.01294 14.6792L10.6848 12.206C10.9381 11.9716 11.3336 11.9868 11.568 12.2402C11.8025 12.4935 11.7872 12.8889 11.5339 13.1234L10.0328 14.5129H12.7969C14.3157 14.5129 15.5469 13.2816 15.5469 11.7629V9.51286V7.26286C15.5469 5.74408 14.3157 4.51286 12.7969 4.51286C12.4517 4.51286 12.1719 4.23304 12.1719 3.88786C12.1719 3.54269 12.4517 3.26286 12.7969 3.26286C15.006 3.26286 16.7969 5.05373 16.7969 7.26286V9.51286V11.7629C16.7969 13.972 15.006 15.7629 12.7969 15.7629H10.15L11.512 16.9098C11.776 17.1321 11.8098 17.5264 11.5874 17.7904Z"
                                                     ></path>
                                                 </svg>
-                                                <span class="text-[#ccc] text-[13px] font-normal pl-1">10</span>
+                                                <span class="text-[#ccc] text-[13px] font-normal pl-1">50</span>
                                             </button>
                                             <button
                                                 class="activity__post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
@@ -777,7 +898,7 @@
                                                         stroke-width="1.25"
                                                     ></path>
                                                 </svg>
-                                                <span class="text-[#ccc] text-[13px] font-normal pl-1">100</span>
+                                                <span class="text-[#ccc] text-[13px] font-normal pl-1"></span>
                                             </button>
                                         </div>
                                     </div>
@@ -822,7 +943,7 @@
                                         <a
                                             href="#"
                                             class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"
-                                            >cas.nothingtosay</a
+                                            >justinbieber</a
                                         >
                                         <p
                                             class="activity__post-timestamp leading-[22.5px] overflow-hidden inline-block text-[15px] text-secondary-text"
@@ -875,7 +996,7 @@
                                             <a
                                                 href="#"
                                                 class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"
-                                                >cas.nothingtosayyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy</a
+                                                >justinbieber</a
                                             >
                                             <p
                                                 class="activity__post-timestamp leading-[22.5px] overflow-hidden inline-block text-[15px] text-secondary-text"
@@ -887,7 +1008,7 @@
                                         <div
                                             class="activity__post-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight px-4 mr-5 select-none whitespace-nowrap"
                                         >
-                                            Follow back
+                                            Follow
                                         </div>
                                     </div>
                                 </div>
@@ -932,7 +1053,7 @@
                                             <a
                                                 href="#"
                                                 class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"
-                                                >cas.nothingtosay</a
+                                                >justinbieber</a
                                             >
                                             <p
                                                 class="activity__post-timestamp leading-[22.5px] overflow-hidden inline-block text-[15px] text-secondary-text"
