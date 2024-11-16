@@ -421,8 +421,8 @@
                             </div>
                         </div>
 
-                        <div class="settings__option settings__option--security">
-                            <div class="settings__option-text">Security</div>
+                        <div class="settings__option settings__option--change-password">
+                            <div class="settings__option-text">Change password</div>
                             <div class="settings__option-status">
                                 <span class="settings__option-arrow">
                                     <svg aria-label="Next" role="img" viewBox="0 0 24 24" style="--fill: currentColor; --height: 16px; --width: 16px">
@@ -524,7 +524,7 @@
                         </div>
                     </div>
 
-                    <div class="settings-overlay settings-overlay--security">
+                    <div class="settings-overlay settings-overlay--change-password">
                         <div class="settings-overlay__popup">
                             <div class="settings-overlay__header-tbl">
                                 <button class="settings-overlay__header-back">
@@ -557,15 +557,37 @@
                                 </a>
                             </div>
                             <div class="settings-overlay__content">
-                                <div class="settings-overlay__header">Security</div>
+                                <div class="settings-overlay__header">Change password</div>
                                 <div class="settings-overlay__description">
-                                    <span class="settings-overlay__text-main">Manage your security settings here.</span>
+                                    <span class="settings-overlay__text-main"
+                                        >Your password must be at least 6 characters and should include a combination of numbers, letters and special
+                                        characters(!$@%).</span
+                                    >
                                 </div>
-                                <div class="settings-overlay__actions">
-                                    <button class="settings-overlay__button settings-overlay__button--change-password">Change Password</button>
-                                    <button class="settings-overlay__button settings-overlay__button--enable-2fa">Enable 2FA</button>
-                                    <button class="settings-overlay__button settings-overlay__button--update-recovery">Update Recovery Info</button>
+
+                                <div class="settings-overlay__input-box">
+                                    <input type="password" class="settings-overlay__input" value="" placeholder="Current password" />
                                 </div>
+                                <div class="settings-overlay__input-box">
+                                    <input type="password" class="settings-overlay__input" value="" placeholder="New password" />
+                                </div>
+                                <div class="settings-overlay__input-box">
+                                    <input type="password" class="settings-overlay__input" value="" placeholder="Retype new password" />
+                                </div>
+                                <div class="settings-overlay__forgot-password mt-[16px]">
+                                    <a
+                                        href="forgotten_password.html"
+                                        class="settings-overlay__forgot-password-link block relative text-[15px] text-[#777777] no-underline"
+                                        target="_blank"
+                                    >
+                                        Forgotten password?
+                                    </a>
+                                </div>
+                                <button
+                                    class="settings-overlay__change-password mr-4 ml-4 mb-4 fixed bottom-0 left-0 right-0 h-[44px] bg-[#ffffff] rounded-[20px] font-semibold leading-[140%] text-[#101010] disabled:cursor-not-allowed disabled:text-[#10101066]"
+                                >
+                                    Change password
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -38,8 +38,8 @@ const settings = [
         optionsSelector: null,
     },
     {
-        option: '.settings__option--security',
-        overlay: '.settings-overlay--security',
+        option: '.settings__option--change-password',
+        overlay: '.settings-overlay--change-password',
         menu: '.settings-overlay__popup',
         statusElement: null,
         optionsSelector: null,

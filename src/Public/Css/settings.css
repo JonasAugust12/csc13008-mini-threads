@@ -451,3 +451,44 @@
 .settings-overlay__radio-input:checked + .settings-overlay__option-content .settings-overlay__option-radio-inner {
     background-color: black;
 }
+
+.settings-overlay__links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 0 15px;
+}
+
+.settings-overlay__link {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.settings-overlay__link:hover {
+    color: #ccc;
+    text-decoration: underline;
+}
+
+.settings-overlay__input-box {
+    margin-top: 16px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    max-width: 100%;
+    width: 100%;
+}
+
+.settings-overlay__input {
+    padding: 10px 16px 10px 16px;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #555555;
+    background-color: #0a0a0a;
+    border-radius: 12px;
+    color: #f3f5f7;
+}
+
+.settings-overlay__input:focus {
+    border-color: #f3f5f7;
+}
