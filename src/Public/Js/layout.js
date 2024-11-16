@@ -80,3 +80,9 @@ document.addEventListener('click', function (event) {
         moreMenuTbl.style.display = 'none';
     }
 });
+
+const logoutBtn = document.querySelector('.menu__btn--logout');
+
+logoutBtn.addEventListener('click', function () {
+    window.location.href = '../Pages/login.html';
+});
