@@ -2,7 +2,6 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 const settings = [
-    // Đã có các cấu hình trước đó:
     {
         option: '.settings__option--mentions',
         overlay: '.settings-overlay--mentions',
@@ -24,7 +23,6 @@ const settings = [
         statusElement: null,
         optionsSelector: null,
     },
-    // Thêm các cấu hình khác:
     {
         option: '.settings__option--deactivate-profile',
         overlay: '.settings-overlay--deactivate-profile',
@@ -46,65 +44,38 @@ const settings = [
         statusElement: null,
         optionsSelector: null,
     },
-    {
-        option: '.settings__option--privacy-security-help',
-        overlay: '.settings-overlay--privacy-security-help',
-        menu: '.settings-overlay__popup',
-        statusElement: null,
-        optionsSelector: null,
-    },
-    {
-        option: '.settings__option--support-requests',
-        overlay: '.settings-overlay--support-requests',
-        menu: '.settings-overlay__popup',
-        statusElement: null,
-        optionsSelector: null,
-    },
-    {
-        option: '.settings__option--help-centre',
-        overlay: '.settings-overlay--help-centre',
-        menu: '.settings-overlay__popup',
-        statusElement: null,
-        optionsSelector: null,
-    },
-    {
-        option: '.settings__option--privacy-policy',
-        overlay: '.settings-overlay--privacy-policy',
-        menu: '.settings-overlay__popup',
-        statusElement: null,
-        optionsSelector: null,
-    },
-    {
-        option: '.settings__option--terms-of-use',
-        overlay: '.settings-overlay--terms-of-use',
-        menu: '.settings-overlay__popup',
-        statusElement: null,
-        optionsSelector: null,
-    },
 ];
 
 function toggleOverlay(overlay) {
     overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
 }
 
-// Hàm xử lý sự kiện click cho từng tùy chọn
 function handleOptionClick({ option, overlay, menu, statusElement, optionsSelector }) {
     const optionElement = $(option);
     const overlayElement = $(overlay);
+
+    if (!overlayElement) return;
+
     const menuElement = overlayElement.querySelector(menu);
-    const statusElementNode = statusElement ? optionElement.querySelector(statusElement) : null;
+    if (!menuElement) return;
+
+    const statusElementNode = statusElement && optionElement ? optionElement.querySelector(statusElement) : null;
     const options = optionsSelector ? overlayElement.querySelectorAll(optionsSelector) : null;
     const backButton = overlayElement.querySelector('.settings-overlay__header-back');
 
-    optionElement.addEventListener('click', function (event) {
-        event.stopPropagation();
-        toggleOverlay(overlayElement);
-    });
+    if (optionElement) {
+        optionElement.addEventListener('click', function (event) {
+            event.stopPropagation();
+            toggleOverlay(overlayElement);
+        });
+    }
 
     // Đóng overlay khi nhấn nút "Back"
-    backButton?.addEventListener('click', function () {
-        overlayElement.style.display = 'none';
-    });
+    if (backButton) {
+        backButton.addEventListener('click', function () {
+            overlayElement.style.display = 'none';
+        });
+    }
 
     // Đóng overlay khi click ngoài
     document.addEventListener('click', function (event) {
