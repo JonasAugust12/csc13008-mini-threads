@@ -30,6 +30,8 @@ function hideModal() {
     createModal.classList.add('hidden');
     overlay.classList.add('hidden');
     document.body.classList.remove('overflow-hidden');
+    edit_form.classList.add('hidden');
+    follower_popup.classList.add('hidden');
 }
 createBtn.addEventListener('click', showModal);
 navUtilityCreate.addEventListener('click', showModal);
