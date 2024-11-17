@@ -392,20 +392,7 @@
                     class="heading__section hidden h-[60px] fixed z-[1] top-0 bg-main-bg box-border tbl:grid tbl:grid-cols-[1fr_50%_1fr] tbl:grid-rows-[1fr] tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px]"
                 >
                     <div class="heading__section__left flex items-center justify-start pl-4">
-                        <div
-                            class="back-btn inline-flex justify-center items-center w-6 h-6 border-[1px] border-[#363737] bg-[#181818] rounded-full cursor-pointer"
-                        >
-                            <svg aria-label="Back" role="img" viewBox="0 0 12 12" class="w-3 h-3">
-                                <title>Back</title>
-                                <path
-                                    d="M1 6h10M1 6l4-4M1 6l4 4"
-                                    stroke="white"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                ></path>
-                            </svg>
-                        </div>
+                        
                     </div>
                     <div class="heading__section__middle flex justify-center items-center">
                         <a href="#" class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center select-none"
@@ -477,7 +464,7 @@
                             </div>
                         </div>
                         <div
-                            class="follow-btn block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
+                            class="follow-btn1 block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
                             style="border: 2px solid rgba(147, 140, 140, 0.4)"
                         >
                             <p class="mt-1">Follow</p>
@@ -526,9 +513,9 @@
                                                     </div>
                                                     <div class="hover-bottom mt-1">
                                                         <div class="hover-followers text-[#777777]">700 followers</div>
-                                                        <button class="follow-btn mt-4 px-[120px] py-1 bg-white text-black font-semibold rounded-md">
+                                                        <div class="follow-btn mt-4 px-[120px] py-1 bg-white text-black font-semibold rounded-md">
                                                             Follow
-                                                        </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1156,6 +1143,17 @@
         </div>
          <script src="../Js/layout.js"></script>
          <script src="../Js/index.js"></script>
+        <script>
+            let followBtn = document.querySelector('.follow-btn1');
+            let followText = followBtn.querySelector('p');
+    
+             followBtn.addEventListener('click', () => {
+        followBtn.classList.toggle('following');
+        
+        
+        followText.textContent = followBtn.classList.contains('following') ? 'Following' : 'Follow';
+    });
+        </script>
     </body>
    
 </html>
