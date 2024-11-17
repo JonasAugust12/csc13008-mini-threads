@@ -3,6 +3,7 @@ const $$ = document.querySelectorAll.bind(document);
 
 const searchInput = $('.search-box__input');
 const userProfiles = $$('.user-profile');
+const clearButton = $('.search-box__clear-btn');
 
 document.addEventListener('DOMContentLoaded', () => {
     const followers = $$('.user-profile__followers-count');
@@ -40,3 +41,19 @@ followBtns.forEach(function (followBtn) {
         }
     });
 });
+
+searchInput.addEventListener('input', function () {
+    if (searchInput.value === '') {
+        clearButton.style.display = 'none';
+    } else {
+        clearButton.style.display = 'flex';
+    }
+});
+
+clearButton.onclick = function () {
+    searchInput.value = '';
+    _;
+    userProfiles.forEach((profile) => {
+        profile.style.display = 'flex';
+    });
+};
