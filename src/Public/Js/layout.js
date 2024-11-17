@@ -85,5 +85,11 @@ document.addEventListener('click', function (event) {
 const logoutBtn = document.querySelector('.menu__btn--logout');
 
 logoutBtn.addEventListener('click', function () {
-    window.location.href = '../Pages/login.html';
+    const currentPage = window.location.pathname.split('/').pop();
+
+    if (currentPage === 'index.html' || currentPage === '') {
+        window.location.href = './src/Public/Pages/login.html';
+    } else {
+        window.location.href = '../Pages/login.html';
+    }
 });

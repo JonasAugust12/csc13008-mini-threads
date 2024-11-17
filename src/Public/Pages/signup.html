@@ -8,9 +8,9 @@
         <link href="../Css/output.css" rel="stylesheet" />
     </head>
 
-    <body class="bg-[#0a0a0a] leading-relaxed p-0 w-full h-screen">
-        <div class="signup-container flex w-full h-screen flex-col items-center justify-center">
-            <div class="signup max-w-[350px] flex flex-col items-center justify-center box-border mb-[100px] shrink-0">
+    <body class="bg-[#0a0a0a] leading-relaxed p-0 w-full h-screen overflow-hidden">
+        <div class="signup-container flex w-full h-full flex-col items-center justify-center">
+            <div class="signup max-w-[350px] mt-4 flex flex-col items-center justify-center box-border shrink-0">
                 <div class="signup__logo h-[50px] mt-4 mb-4 cursor-pointer overflow-visible">
                     <svg
                         aria-label="Threads"
@@ -97,14 +97,14 @@
                             <button
                                 class="signup-form__button bg-[#0095f6] h-[40px] rounded-lg text-sm font-semibold text-white w-full py-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
                                 type="button"
-                                onclick="window.location.href='index.html'"
+                                onclick="window.location.href='../../../index.html'"
                             >
                                 Sign Up
                             </button>
                         </div>
                     </form>
                 </div>
-                <div class="signup__login-redirect flex flex-row gap-1">
+                <div class="signup__login-redirect flex flex-row gap-1 mb-6">
                     <div class="singup__login-redirect-text text-white">Have an account?</div>
                     <a href="login.html" class="signup__login-redirect-link text-[#0095f6] font-semibold">Log in</a>
                 </div>
