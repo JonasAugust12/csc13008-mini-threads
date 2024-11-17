@@ -116,3 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+const startThreadBtn = document.querySelector('.start-thread');
+function showModal() {
+    createModal.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+}
+startThreadBtn.addEventListener('click', showModal);

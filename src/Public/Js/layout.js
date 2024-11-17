@@ -19,7 +19,6 @@ function adjustHeadingWidth() {
 const createModal = document.querySelector('.create-post-modal');
 const overlay = document.querySelector('.overlay');
 const createBtn = document.querySelector('.create-btn');
-const startThreadBtn = document.querySelector('.start-thread');
 const navUtilityCreate = document.querySelector('.nav-utility-create');
 const cancelBtn = document.querySelector('.create-post__header__cancel-btn');
 function showModal() {
@@ -36,7 +35,6 @@ createBtn.addEventListener('click', showModal);
 navUtilityCreate.addEventListener('click', showModal);
 overlay.addEventListener('click', hideModal);
 cancelBtn.addEventListener('click', hideModal);
-startThreadBtn.addEventListener('click', showModal);
 
 const privacyButton = document.querySelector('.create-post__footer__privacy');
 const privacyList = document.querySelector('.create-post__privacy-list');
