@@ -492,3 +492,29 @@
 .settings-overlay__input:focus {
     border-color: #f3f5f7;
 }
+
+.settings-overlay__actions {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-overlay__button {
+    padding: 0 16px 0 16px;
+    height: 52px;
+    border: 1px solid white;
+    transition: transform ease-in-out;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.settings-overlay__button--deactivate {
+    color: black;
+    background-color: white;
+    margin-bottom: 8px;
+}
+
+.settings-overlay__button--delete {
+    background-color: transparent;
+    color: #ff3040;
+}

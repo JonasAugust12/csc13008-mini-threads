@@ -52,8 +52,4 @@ searchInput.addEventListener('input', function () {
 
 clearButton.onclick = function () {
     searchInput.value = '';
-    _;
-    userProfiles.forEach((profile) => {
-        profile.style.display = 'flex';
-    });
 };
