@@ -31,13 +31,6 @@ const settings = [
         optionsSelector: null,
     },
     {
-        option: '.settings__option--personal-info',
-        overlay: '.settings-overlay--personal-info',
-        menu: '.settings-overlay__popup',
-        statusElement: null,
-        optionsSelector: null,
-    },
-    {
         option: '.settings__option--change-password',
         overlay: '.settings-overlay--change-password',
         menu: '.settings-overlay__popup',
