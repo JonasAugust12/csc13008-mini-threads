@@ -1,0 +1,61 @@
+<div class="edit-profile tbl:bg-black bg-main-bg w-full text-white p-4 mt-20 rounded-3xl hidden fixed inset-0 m-auto tbl:bottom-auto bottom-auto tbl:border tbl:border-[rgba(147,140,140,0.4)] pc:w-[580px] z-[10] tbl:w-[calc(80%)]">
+  <div
+    class="edit-profile__avatar h-12 w-12 bg-cover absolute rounded-full right-8"
+    style="background-image: url('<%= user.avatar %>'); z-index: 2;"
+  ></div>
+  <div
+    class="avatar-mask tbl:bg-black bg-main-bg h-20 w-20 bg-cover absolute right-8"
+    style="z-index: 1"
+  ></div>
+  <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+    <div class="field__title font-bold mb-2">Name</div>
+    <div class="field__content field__content__name font-normal">
+      <p><%= user.name %> (@<%= user.nickname %>)</p>
+    </div>
+    <div
+      class="line mt-4"
+      style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"
+    ></div>
+  </div>
+  <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+    <div class="field__title font-bold mt-4">Bio</div>
+    <div class="field__content field__content__bio">
+      <p><%= user.bio %></p>
+    </div>
+    <div
+      class="line mt-4"
+      style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"
+    ></div>
+  </div>
+  <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+    <div class="field__title font-bold mt-4">Link</div>
+    <div class="field__content field__content__link">
+      <p>+ Add link</p>
+    </div>
+    <div
+      class="line mt-4"
+      style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"
+    ></div>
+  </div>
+  <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+    <div class="field__title font-bold mt-4">Show Instagram badge</div>
+    <div class="field__content field__content__ig text-xs">
+      <p>When turned off, the Threads badge on your Instagram profile will also disappear.</p>
+    </div>
+    <div
+      class="line mt-4"
+      style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"
+    ></div>
+  </div>
+  <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
+    <div class="field__title font-bold mt-4">Private profile</div>
+    <div class="field__content field__content__private text-xs">
+      <p>If you switch to private, you won't be able to reply to others unless they follow you.</p>
+    </div>
+  </div>
+  <div
+    class="edit-profile__button hidden tbl:flex pc:flex h-12 mt-8 bg-white text-black text-base font-semibold flex justify-center items-center cursor-pointer rounded-lg"
+  >
+    <p class="">Done</p>
+  </div>
+</div>

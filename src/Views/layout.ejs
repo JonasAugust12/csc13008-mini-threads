@@ -33,6 +33,9 @@
                 </a>
             </div>
             <div class="top-nav__right">
+                  <div class="top_button_done_mobile font-semibold text-base text-white hidden mr-6 flex h-full items-center justify-end cursor-pointer">
+                        Done
+                    </div>
                 <div class="top-nav__right-setting flex h-full items-center justify-end cursor-pointer">
                     <svg aria-label="More" role="img" viewBox="0 0 24 24" class="mr-7 w-6 h-6 scale-x-[-1]">
                         <title>More</title>
@@ -431,12 +434,16 @@
 
             <div
                 class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] box-border pb-[68px] tbl:pb-0 tbl:pt-6 tbl:bg-content-bg">
-                <%- body %>
+                       <%- include(body) %> 
+
             </div>
         </div>
     </div>
     <script src="Js/layout.js"></script>
     <script src="Js/index.js"></script>
+    
+    <script src="Js/profile.js"></script>
+    
 </body>
 
 </html>

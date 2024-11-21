@@ -10,6 +10,8 @@ const searchRoutes = require('./Routes/searchRoutes');
 const homeRoutes = require('./Routes/homeRoutes');
 const activityRoutes = require('./Routes/activityRoutes');
 const authRoutes = require('./Routes/authRoutes');
+const profileRoutes = require('./Routes/profileRoutes');
+
 
 // Cài đặt view engine
 app.set('view engine', 'ejs');
@@ -33,7 +35,7 @@ app.use('/search', searchRoutes);
 app.use('/', homeRoutes); // Đường dẫn '/' cho trang home
 app.use('/activity', activityRoutes);
 app.use('/auth', authRoutes);
-
+app.use("/profile", profileRoutes);
 // // Route chính để hiển thị layout
 // app.get('/', (req, res) => {
 //     const username = req.session.username || 'Guest';
