@@ -87,4 +87,21 @@
             </div>
         </div>
     </div>
+
+    <% if (header === 'Activity') { %>
+        <div
+            class="activity-filter bg-main-bg fixed top-[60px] left-0 w-full h-[42px] overflow-x-auto overflow-y-hidden custom-scrollbar py-1 px-3 flex z-[1] box-border gap-x-[6px] self-center flex-nowrap tbl:hidden">
+            <% if (header === 'Activity' && refreshItems && refreshItems.length > 0) { %>
+                <% refreshItems.forEach(item => { %>
+                    <a href="<%= item.link %>"
+                        class="activity-option min-w-[100px] h-[34px] inline-flex justify-center items-center border-border-color border-[1px]
+                        rounded-[10px] px-4 <%= selectedItem===item.name ? 'bg-white' : 'bg-main-bg' %>">
+                            <div class="font-semibold select-none <%= selectedItem === item.name ? 'text-black' : 'text-white' %>">
+                                <%= item.name %>
+                            </div>
+                    </a>
+                <% }) %>
+            <% } %>
+        </div>
+    <% } %>
 </nav>

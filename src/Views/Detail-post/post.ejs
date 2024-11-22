@@ -1,0 +1,11 @@
+<div class="detail-post-wrapper w-full h-full relative">
+    <%- include('post-activity') %>
+
+    <%- include('main-post', {mainPost}) %>
+
+    <% if (replies.length > 0) { %>
+        <% replies.forEach(function(reply) { %>
+            <%- include('reply-post', {reply}) %>
+        <% }) %>
+    <% } %>
+</div>

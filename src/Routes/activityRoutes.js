@@ -4,5 +4,6 @@ const activityController = require('../Controllers/activityController');
 
 // Route cho trang Activity
 router.get('/', activityController);
+router.get('/:type', activityController);
 
 module.exports = router;
