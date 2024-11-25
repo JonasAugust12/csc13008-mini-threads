@@ -4,6 +4,36 @@ const $$ = document.querySelectorAll.bind(document);
 const searchInput = $('.search-box__input');
 const userProfiles = $$('.user-profile');
 const clearButton = $('.search-box__clear-btn');
+const suggestionHeading = $('.suggestion-box__heading');
+const followBtns = $$('.user-profile__follow-btn');
+
+searchInput.addEventListener('input', function () {
+    const query = this.value.trim().toLowerCase();
+    if (query.length > 0) {
+        suggestionHeading.style.display = 'none';
+    } else {
+        suggestionHeading.style.display = 'flex';
+    }
+
+    userProfiles.forEach((profile) => {
+        const username = profile.querySelector('.user-profile__username-link').textContent.toLowerCase();
+        const name = profile.querySelector('.user-profile__name-text').textContent.toLowerCase();
+
+        if (username.includes(query) || name.includes(query)) {
+            profile.style.display = 'flex';
+        } else {
+            profile.style.display = 'none';
+        }
+    });
+});
+
+clearButton.onclick = function () {
+    searchInput.value = '';
+
+    userProfiles.forEach((profile) => {
+        profile.style.display = 'flex';
+    });
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     const followers = $$('.user-profile__followers-count');
@@ -28,8 +58,6 @@ function formatFollowers(followers) {
     }
 }
 
-const followBtns = $$('.user-profile__follow-btn');
-
 followBtns.forEach(function (followBtn) {
     followBtn.addEventListener('click', function () {
         if (followBtn.innerText === 'Follow') {
@@ -42,14 +70,21 @@ followBtns.forEach(function (followBtn) {
     });
 });
 
-searchInput.addEventListener('input', function () {
-    if (searchInput.value === '') {
-        clearButton.style.display = 'none';
-    } else {
-        clearButton.style.display = 'flex';
+searchInput.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        localStorage.setItem('searchValue', searchInput.value);
+        window.location.href = 'search_result.html';
     }
 });
 
-clearButton.onclick = function () {
-    searchInput.value = '';
-};
+// searchInput.addEventListener('input', function () {
+//     if (searchInput.value === '') {
+//         clearButton.style.display = 'none';
+//     } else {
+//         clearButton.style.display = 'flex';
+//     }
+// });
+
+// clearButton.onclick = function () {
+//     searchInput.value = '';
+// };

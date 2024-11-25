@@ -24,7 +24,7 @@ connectToMongo();
 
 connectToMongo();
 const app = express();
-// Import các routes đã tách
+// Import các routes
 const searchRoutes = require('./Routes/searchRoutes');
 const homeRoutes = require('./Routes/homeRoutes');
 const activityRoutes = require('./Routes/activityRoutes');
