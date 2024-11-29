@@ -45,15 +45,20 @@ app.use(
 );
 
 app.use(ejsLayouts);
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "./Public")));
-
+app.use(cookieParser());
 // Cài đặt các routes
 app.use("/search", searchRoutes);
 app.use("/", homeRoutes); // Đường dẫn '/' cho trang home
 app.use("/activity", activityRoutes);
-app.use("/auth", authRoutes);
+app.use("/auth", authRoutes); // AUTHENTICATION - ĐĂNG NHẬP, ĐĂNG KÝ
 app.use("/profile", profileRoutes);
+
+app.get("/go-to-signup", (req, res) => {
+  res.redirect("/auth/signup");
+});
 // // Route chính để hiển thị layout
 // app.get('/', (req, res) => {
 //     const username = req.session.username || 'Guest';

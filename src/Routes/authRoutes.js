@@ -1,11 +1,28 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { loginController, signupController } = require('../Controllers/authController');
+const {
+  loginController,
+  signupController,
+  requestRefreshToken,
+  logoutController,
+} = require("../Controllers/authController");
 
+//const middlewareController = require("../Controllers/middlewareController");
 // Route đăng nhập
-router.get('/login', loginController);
+router.post("/login", loginController);
 
 // Route đăng ký
-router.get('/signup', signupController);
+router.post("/signup", signupController);
 
+// REFRESH
+router.post("/refresh", requestRefreshToken);
+
+// ROUTE LOGOUT
+router.post("/logout", logoutController);
+router.get("/login", (req, res) => {
+  res.render("login", { layout: false });
+});
+router.get("/signup", (req, res) => {
+  res.render("signup", { layout: false });
+});
 module.exports = router;
