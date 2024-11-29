@@ -7,48 +7,49 @@
     <title>
         <%= title %>
     </title>
-    <link rel="icon" type="image/svg+xml" href="/Img/threads-app-icon.svg" />
-    <link href="/Css/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/Css/bundle.css" />
-    <link rel="stylesheet" href="/Css/scroll.css" />
+    <link rel="icon" type="image/svg+xml" href="Img/threads-app-icon.svg" />
+    <link href="Css/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="Css/bundle.css" />
+    <link rel="stylesheet" href="Css/scroll.css" />
 </head>
 
 <body class="bg-main-bg">
     <div class="app-container font-main-font">
         <%- include('Partials/top-navbar') %>
 
-        <%- include('Partials/bottom-navbar') %>
+            <%- include('Partials/bottom-navbar') %>
 
-        <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden select-none tbl:block">
-            <button type="button"
-                class="login-btn__inner h-[34px] leading-[34px] w-[82px] bg-[#ffffff] rounded-[10px] font-medium text-[16px] p-0 border-none cursor-pointer"
-                data-bs-toggle="modal" data-bs-target="#loginModal" onclick="window.location.href='/login';">
-                Log in
-            </button>
-        </div>
+                <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[2] hidden select-none tbl:block">
+                    <button type="button"
+                        class="login-btn__inner h-[34px] leading-[34px] w-[82px] bg-[#ffffff] rounded-[10px] font-medium text-[16px] p-0 border-none cursor-pointer"
+                        data-bs-toggle="modal" data-bs-target="#loginModal" onclick="window.location.href='/login';">
+                        Log in
+                    </button>
+                </div>
 
-        <div
-            class="create-btn fixed bottom-6 right-7 hidden tbl:flex justify-center items-center h-[68px] w-[82px] bg-content-bg border-[1px] border-[#353636] rounded-xl p-0 z-[2] cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-105">
-            <svg aria-label="Create" role="img" viewBox="0 0 12 12" class="w-6 h-6">
-                <title>Create</title>
-                <path d="M6 2v8m4-4H2" stroke="#f3f5f7" stroke-linecap="round" stroke-width="1.5"></path>
-            </svg>
-        </div>
+                <div
+                    class="create-btn fixed bottom-6 right-7 hidden tbl:flex justify-center items-center h-[68px] w-[82px] bg-content-bg border-[1px] border-[#353636] rounded-xl p-0 z-[2] cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-105">
+                    <svg aria-label="Create" role="img" viewBox="0 0 12 12" class="w-6 h-6">
+                        <title>Create</title>
+                        <path d="M6 2v8m4-4H2" stroke="#f3f5f7" stroke-linecap="round" stroke-width="1.5"></path>
+                    </svg>
+                </div>
 
-        <div class="overlay fixed top-0 left-0 bottom-0 right-0 bg-black opacity-65 z-[3] hidden"></div>
-        <%- include('Partials/create-post-modal', {username, avatarSrc}) %>
+                <div class="overlay fixed top-0 left-0 bottom-0 right-0 bg-black opacity-65 z-[3] hidden"></div>
+                <%- include('Partials/create-post-modal', {username, avatarSrc}) %>
 
-        <div
-            class="content-wrapper w-screen tbl:shadow-[0_0_10px_5px_rgba(10,10,10,0.7)] tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:mx-[76px] tbl:h-[calc(100vh-60px)] pc:w-[640px] pc:ml-auto pc:mr-auto pc:mx-0">
-            <div
-                class="content-border border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]">
-            </div>
-            <%- include('Partials/heading-section', {header, refreshItems, selectedItem}) %>
-            <div
-                class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] box-border pb-[68px] tbl:pb-0 tbl:pt-6 tbl:bg-content-bg">
-                    <%- body %>
-            </div>
-        </div>
+                    <div
+                        class="content-wrapper w-screen tbl:shadow-[0_0_10px_5px_rgba(10,10,10,0.7)] tbl:w-auto tbl:min-w-[546px] tbl:max-w-[640px] tbl:mx-[76px] tbl:h-[calc(100vh-60px)] pc:w-[640px] pc:ml-auto pc:mr-auto pc:mx-0">
+                        <div
+                            class="content-border border-[1px] border-border-color rounded-t-3xl hidden tbl:block tbl:h-[calc(100vh-60px)] tbl:mt-[60px] tbl:top-0 tbl:fixed tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px] pc:top-0 pc:left-1/2 pc:transform pc:-translate-x-1/2 pc:mx-0 shadow-[0_0_12px_0_rgba(0,0,0,0.04),_0_0_0_48px_rgb(10,10,10)]">
+                        </div>
+                        <%- include('Partials/heading-section', {header, refreshItems, selectedItem}) %>
+                            <div
+                                class="content-section w-full min-h-full pc:min-h-[calc(100vh-60px) overflow-y-auto custom-scrollbar text-primary-text mt-[60px] box-border pb-[68px] tbl:pb-0 tbl:pt-6 tbl:bg-content-bg">
+                                <%- body %>
+                            </div>
+                    </div>
+                    <%- include('Partials/partial_popup') %>
     </div>
     <script src="/Js/layout.js"></script>
     <script src="/Js/index.js"></script>
