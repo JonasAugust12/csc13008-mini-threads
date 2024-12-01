@@ -110,7 +110,7 @@ logoutBtn.addEventListener("click", async function () {
     if (data) {
       // xóa access token và chuyển hướng về trang login
       localStorage.removeItem("accessToken");
-      window.location.href = "/";
+      window.location.href = "/auth/login";
     }
   } catch (error) {
     console.error(error);
@@ -178,9 +178,10 @@ const login_button = document.querySelector(".login-btn");
 login_button.addEventListener("click", () => {
   window.location.href = "/auth/login";
 });
-// kiểm tra trang hiện tại đã đăng nhập hay chưa (tức là đã có access token hay chưa), nếu có -> ẩn nút login
+// kiểm tra trang hiện tại đã đăng nhập hay chưa (tức là đã có access token còn hạn hay chưa), nếu có -> ẩn nút login
 const accessToken = localStorage.getItem("accessToken");
-console.log(accessToken);
+
+
 if (accessToken) {
   login_button.style.display = "none";
 }

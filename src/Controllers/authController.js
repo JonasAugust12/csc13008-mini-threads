@@ -40,13 +40,14 @@ const loginController = async (req, res) => {
     console.log(user);
     // nếu không tìm thấy
     if (!user) {
-      return res.status(404).json("Wrong username");
+      return res.status(404).json({ message: "Incorrect username or email." });
     }
+    const email = user.email;
     // Kiểm tra trạng thái xác minh
     if (!user.is_verified) {
       // gửi email xác minh
       const token = jwt.sign(
-        { id: user._id, email: user.email },
+        { id: user._id, email: email },
         process.env.JWT_VERIFY_KEY,
         { expiresIn: "1h" }
       );
@@ -61,7 +62,7 @@ const loginController = async (req, res) => {
       const verificationLink = `${process.env.API_URL}/auth/verify?token=${token}`;
       const mailOptions = {
         from: process.env.MAIL_FROM_ADDRESS,
-        to: req.body.username,
+        to: email,
         subject: "Verify your email",
         html: `
     <h2>Welcome to Our Service</h2>
@@ -84,7 +85,7 @@ const loginController = async (req, res) => {
             " Verification email sent. Please verify your email to login",
         });
       });
-      return res.status(400).json("Account not verified");
+      return res.status(400).json({ message: "Account is not verified" });
     }
     // so sánh password
     const validPassword = await bcrypt.compare(
@@ -112,9 +113,8 @@ const loginController = async (req, res) => {
       });
 
       const { password, ...other } = user._doc;
-                      
 
-      res.status(200).json({ ...other, accessToken });
+      res.status(200).json({ ...other, accessToken, message: "Login success" });
     }
   } catch (err) {
     console.error("Error during login:", err);
@@ -127,10 +127,18 @@ const signupController = async (req, res) => {
   try {
     const { username, email, password, fullname } = req.body;
 
-    // Kiểm tra xem các trường bắt buộc đã được nhập chưa
-    if (!username || !email || !password || !fullname) {
-      return res.status(400).json({ message: "Missing required fields" });
+    // kiểm tra email tồn tại
+    const emailExist = await User.findOne({ email: email });
+    if (emailExist) {
+      return res.status(400).json({ message: "Email already exists." });
     }
+
+    // kiểm tra username tồn tại
+    const usernameExist = await User.findOne({ username: username });
+    if (usernameExist) {
+      return res.status(400).json({ message: "Username already exists." });
+    }
+
     // hash password
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(req.body.password, salt);
@@ -200,6 +208,7 @@ requestRefreshToken = async (req, res) => {
   // Nếu không có refreshToken (chưa đăng nhập,...)
   if (!refreshToken) return res.status(401).json("You are not authenticated");
 
+  // Verify refreshToken
   jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, (err, user) => {
     if (err) return res.status(403).json("Token is not valid");
 
@@ -227,7 +236,7 @@ const logoutController = async (req, res) => {
   res.clearCookie("refreshToken");
 
   // trả về kết quả
-  res.status(200).json("Logged out successfully");
+  res.status(200).json({ message: "Logged out successfully" });
 };
 
 // RESET PASSWORD
@@ -236,7 +245,7 @@ const resetPassword = async (req, res) => {
     // Tìm người dùng theo email
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(404).json("Email not found");
+      return res.status(404).json({ message: "Email not found" });
     }
 
     // Tạo token để reset mật khẩu
