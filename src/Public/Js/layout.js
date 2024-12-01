@@ -94,7 +94,8 @@ document.addEventListener("click", function (event) {
   }
 });
 
-const logoutBtn = document.querySelector(".menu__btn--logout");
+// query theo id
+const logoutBtn = document.getElementById("menu-logout");
 
 logoutBtn.addEventListener("click", async function () {
   // fetch api logout
