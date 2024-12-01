@@ -5,6 +5,10 @@ const {
   signupController,
   requestRefreshToken,
   logoutController,
+  resetPassword,
+  changePassword,
+  updatePassword,
+  verifyController,
 } = require("../Controllers/authController");
 
 //const middlewareController = require("../Controllers/middlewareController");
@@ -25,4 +29,20 @@ router.get("/login", (req, res) => {
 router.get("/signup", (req, res) => {
   res.render("signup", { layout: false });
 });
+
+// Resest password
+router.get("/forgotPassword", (req, res) => {
+  res.render("forgotPassword", { layout: false });
+});
+
+router.post("/forgotPassword", resetPassword);
+
+router.get("/changePassword", (req, res) => {
+  res.render("changePassword", { layout: false });
+});
+
+router.post("/changePassword", updatePassword);
+
+router.get("/verify", verifyController);
+
 module.exports = router;

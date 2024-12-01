@@ -59,6 +59,10 @@ const userScheme = new mongoose.Schema(
       type: Number,
       default: 0, // Ban đầu số người mà tài khoản này theo dõi là 0
     },
+    is_verified: {
+      type: Boolean,
+      default: false, // Ban đầu chưa xác thực
+    },
   },
   // cho biết tạo acc lúc nào
   { timestamps: true }

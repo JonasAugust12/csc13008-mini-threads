@@ -96,13 +96,23 @@ document.addEventListener("click", function (event) {
 
 const logoutBtn = document.querySelector(".menu__btn--logout");
 
-logoutBtn.addEventListener("click", function () {
-  const currentPage = window.location.pathname.split("/").pop();
-
-  if (currentPage === "index.html" || currentPage === "") {
-    window.location.href = "./src/Public/Pages/login.html";
-  } else {
-    window.location.href = "../Pages/login.html";
+logoutBtn.addEventListener("click", async function () {
+  // fetch api logout
+  try {
+    const response = await fetch("/auth/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    if (data) {
+      // xóa access token và chuyển hướng về trang login
+      localStorage.removeItem("accessToken");
+      window.location.href = "/";
+    }
+  } catch (error) {
+    console.error(error);
   }
 });
 

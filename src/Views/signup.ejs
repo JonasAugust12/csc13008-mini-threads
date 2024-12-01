@@ -165,6 +165,10 @@
                     showModal('Username cannot contain spaces');
                     return;
                 }
+                if (username.length < 6) {
+                    showModal('Username must be at least 6 characters long');
+                    return;
+                }
                 // Submit data
                 try {
                     const response = await fetch('/auth/signup', {
