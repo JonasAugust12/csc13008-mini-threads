@@ -61,9 +61,9 @@
             <div class="profile__info mt-8">
                 <div class="content__heading flex justify-between">
                     <div class="information flex flex-col ml-6 font-bold">
-                        <div class="information__name text-2xl mb-1">Minh Toàn</div>
-                        <div class="information__nickname text-sm font-normal mb-6">cas.nothingtosay</div>
-                        <div class="information__bio text-sm font-normal mb-4">Vietnamese gang</div>
+                        <div class="information__name text-2xl mb-1"><%=user.profile.display_name%></div>
+                        <div class="information__nickname text-sm font-normal mb-6"><%=user.profile.nick_name%></div>
+                        <div class="information__bio text-sm font-normal mb-4"><%=user.profile.bio%></div>
                         <div class="information__follower flex flex-row justify-around mb-8 text-gray-500">
                             <ul class="follower__img flex flex-row cursor-pointer">
                                 <li class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full" style="
@@ -79,7 +79,7 @@
                                                         left: -20px;
                                                     "></li>
                             </ul>
-                            <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer">100</div>
+                            <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer"><%=user.followers_count%></div>
                             <div class="follower__text text-sm font-normal relative cursor-pointer">followers</div>
                         </div>
                     </div>
@@ -92,10 +92,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="edit-btn block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
-                    style="border: 2px solid rgba(147, 140, 140, 0.4)">
-                    <p class="mt-1">Edit profile</p>
-                </div>
+                <% if (type === "guest") { %>
+                    <div
+                        class="follow-btn1 block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
+                        style="border: 2px solid rgba(147, 140, 140, 0.4)"
+                        data-user-id="<%= user._id %>"
+                        onClick="handleFollowClick('<%= user._id %>')"
+                    >
+                        <p class="mt-1"><%= isFollowing ? "Following" : "Follow" %></p>
+                    </div>
+                  <% } else if (type === "owner") { %>
+                    <div
+                      class="edit-btn block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
+                      style="border: 2px solid rgba(147, 140, 140, 0.4)"
+                    >
+                      <p class="mt-1">Edit profile</p>
+                    </div>
+                  <% } %>
                 <!-- navigation -->
                 <ul class="navigation flex flex-row justify-around font-medium text-[15px] mt-[30px] ;list-style: none">
                     <li
@@ -333,5 +346,29 @@
                 </div>
             </div>
         </div>
-
 </div>
+
+<script>
+    function handleFollowClick(userId) {
+        console.log("click follow");
+        fetch(`/profile/follow/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include' // Include cookies in the request
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Followed successfully');
+                document.querySelector('.follow-btn1 p').textContent = 'Following';
+            } else {
+                alert('Failed to follow');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred');
+        });
+    }
+</script>
