@@ -2,22 +2,17 @@ const path = require('path');
 const User = require('../Models/User'); // model user
 const Follow = require('../Models/Follow'); // model follow
 const jwt = require('jsonwebtoken'); // token
+const { default: mongoose } = require('mongoose');
 const env = require('dotenv').config(); // biến môi trường
 
-const followerUsers = [
-    {
-        avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
-        username: 'user1',
-        name: 'User 1',
-        followers: Math.floor(Math.random() * 10000),
-    },
-    {
-        avatar: 'https://randomuser.me/api/portraits/women/2.jpg',
-        username: 'user2',
-        name: 'User 2',
-        followers: Math.floor(Math.random() * 10000),
-    },
-];
+// Initialize GridFS
+let gfs;
+const conn = mongoose.connection;
+conn.once('open', () => {
+    gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+        bucketName: 'uploads',
+    });
+});
 
 const followController = async (req, res) => {
     try {
@@ -62,6 +57,9 @@ const followController = async (req, res) => {
 const getOtherUserProfile = async (req, res) => {
     try {
         const userId = req.params.id;
+        if (userId === req.userId) {
+            return res.redirect('/profile');
+        }
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).send('User not found');
@@ -69,9 +67,24 @@ const getOtherUserProfile = async (req, res) => {
         let isFollowing = false;
         if (req.userId) {
             // Check if the current user is already following this user
-            const follow = await Follow.findOne({ userId: userId, followerId: req.userId });
+            const follow = await Follow.findOne({
+                userId: userId,
+                followerId: req.userId,
+            });
             isFollowing = !!follow;
         }
+
+        // Find all followers for the user
+        const followers = await Follow.find({ userId: userId }).populate('followerId');
+
+        // Get follower user details
+        const followerUsers = await Promise.all(
+            followers.map(async (follower) => {
+                const followerUser = await User.findById(follower.followerId);
+                return followerUser; // Return the entire user object
+            }),
+        );
+
         console.log('ready to render');
         res.render('profile', {
             title: user.profile.display_name,
@@ -80,7 +93,7 @@ const getOtherUserProfile = async (req, res) => {
             selectedItem: null,
             user: user,
             username: user.username,
-            avatarSrc: user.avatar || 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
+            avatarSrc: user.profile.avt ? `/profile/avatar/${user._id}` : '/Img/UserIcon.jpg',
             followerUsers: followerUsers,
             type: 'guest',
             isFollowing: isFollowing, // Pass a boolean indicating if the current user is following this user
@@ -122,11 +135,23 @@ const profileController = async (req, res) => {
         if (!req.userId) {
             return res.status(401).send('Unauthorized');
         }
-        const user = await User.findById(req.userId);
+        const userId = req.userId;
+        const user = await User.findById(userId);
         if (!user) {
             return res.status(404).send('User not found');
         }
 
+        // Find all followers for the user
+        // Find all followers for the user
+        const followers = await Follow.find({ userId: userId }).populate('followerId');
+
+        // Get follower user details
+        const followerUsers = await Promise.all(
+            followers.map(async (follower) => {
+                const followerUser = await User.findById(follower.followerId);
+                return followerUser; // Return the entire user object
+            }),
+        );
         // Example data for followers, replace with actual data from the database
 
         res.render('profile', {
@@ -136,7 +161,7 @@ const profileController = async (req, res) => {
             selectedItem: null,
             user: user,
             username: user.username,
-            avatarSrc: user.avatar || 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
+            avatarSrc: user.profile.avt ? `/profile/avatar/${user._id}` : '/Img/UserIcon.jpg',
             followerUsers: followerUsers,
             type: 'owner',
         });
@@ -146,9 +171,71 @@ const profileController = async (req, res) => {
     }
 };
 
+const uploadAvatar = async (req, res) => {
+    try {
+        const user = await User.findById(req.userId);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+        console.log(req.file);
+        // Ensure the file object is defined
+        if (!req.file || !req.file.id) {
+            return res.status(400).send('File  upload failed');
+        }
+        // Find the old avatar file ID
+        const oldAvatarId = user.profile.avt;
+
+        // Update user's avatar with the file ID
+        console.log('ready to update avatar');
+        user.profile.avt = req.file.id;
+        await user.save();
+        console.log('Avatar updated successfully');
+
+        // if (oldAvatarId) {
+        //   gfs.delete(new mongoose.Types.ObjectId(oldAvatarId), (err) => {
+        //     if (err) {
+        //       console.error("Failed to delete old avatar:", err);
+        //     } else {
+        //       console.log("Old avatar deleted successfully");
+        //     }
+        //   });
+        // }
+
+        res.redirect('/profile');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+const getAvatar = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        if (!user.profile.avt) {
+            return res.status(404).send('No avatar found');
+        }
+
+        const file = await gfs.find({ _id: new mongoose.Types.ObjectId(user.profile.avt) }).toArray();
+        if (!file || file.length === 0) {
+            return res.status(404).send('No file found');
+        }
+
+        gfs.openDownloadStream(new mongoose.Types.ObjectId(user.profile.avt)).pipe(res);
+    } catch (error) {
+        console.error('Some thing wrong with avatar', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 module.exports = {
     profileController,
     updateProfileController,
     getOtherUserProfile,
     followController,
+    uploadAvatar,
+    getAvatar,
 };

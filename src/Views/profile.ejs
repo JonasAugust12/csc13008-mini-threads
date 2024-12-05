@@ -23,7 +23,7 @@
                 <li
                     class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__news navigation__item--on text-[white]">
                     <div class="item-follower__text">Followers</div>
-                    <div class="item-follower__number text-sm">5</div>
+                    <div class="item-follower__number text-sm"><%= user.followers_count %></div>
                     <div
                         class="item-follower__line w-full mt-4 border-b-[rgba(243,245,247,0.15)] border-b border-solid border-b-[white]">
                     </div>
@@ -31,7 +31,7 @@
                 <li
                     class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__replies navigation__item--off text-[rgb(153,153,153)]">
                     <div class="item-follower__text">Following</div>
-                    <div class="item-follower__number text-sm">10</div>
+                    <div class="item-follower__number text-sm"><%= user.following_count %></div>
                     <div
                         class="item-follower__line w-full mt-4 border-b-[rgba(243,245,247,0.15)] border-b border-solid">
                     </div>
@@ -64,7 +64,7 @@
                         <div class="information__name text-2xl mb-1"><%=user.profile.display_name%></div>
                         <div class="information__nickname text-sm font-normal mb-6"><%=user.profile.nick_name%></div>
                         <div class="information__bio text-sm font-normal mb-4"><%=user.profile.bio%></div>
-                        <div class="information__follower flex flex-row justify-around mb-8 text-gray-500">
+                        <div class="information__follower flex flex-row gap-1 mb-8 text-gray-500">
                             <ul class="follower__img flex flex-row cursor-pointer">
                                 <li class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full" style="
                                                         background-image: url('https://th.bing.com/th/id/OIP.P6RqRgE_lh77mF6mktc_LgHaLH?rs=1&pid=ImgDetMain');
@@ -85,12 +85,17 @@
                     </div>
                     <div class="utility flex flex-col items-end h-48 mr-6">
                         <div class="utility__avatar h-20 w-20 bg-cover mb-8 rounded-full cursor-pointer" style="
-                                                background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
-                                            "></div>
+                                                background-image: url('/profile/avatar/<%= user._id %>');
+                                            " onClick="handleAvatarClick()"></div>
                         <div class="utility__insta cursor-pointer mr-2">
                             <i class="fa-brands fa-instagram text-2xl cursor-pointer"></i>
                         </div>
                     </div>
+
+                    <form id="uploadForm" action="/profile/upload-avatar" method="POST" enctype="multipart/form-data" style="display: none;">
+                        <input type="file" name="avatar" id="avatarInput" accept="image/*" onChange="handleFileChange()">
+                    </form>
+
                 </div>
                 <% if (type === "guest") { %>
                     <div
@@ -370,5 +375,15 @@
             console.error('Error:', error);
             alert('An error occurred');
         });
+    }
+
+    function handleAvatarClick() {
+        const type = '<%= type %>';
+        console.log(type);
+            if (type == "owner") document.getElementById('avatarInput').click();
+        }
+
+    function handleFileChange() {
+        document.getElementById('uploadForm').submit();
     }
 </script>
