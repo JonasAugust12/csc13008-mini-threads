@@ -63,6 +63,10 @@ const userScheme = new mongoose.Schema(
       type: Boolean,
       default: false, // Ban đầu chưa xác thực
     },
+    verification_sent_at:{
+      type: Date,
+      default: null,
+    }
   },
   // cho biết tạo acc lúc nào
   { timestamps: true }
