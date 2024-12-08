@@ -5,6 +5,7 @@ const ejsLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 
@@ -24,6 +25,18 @@ const connectToMongo = async () => {
 connectToMongo();
 
 const app = express();
+
+// Cors config
+const corsOptions = {
+    origin: process.env.API_URL || 'http://localhost:3000',
+    credentials: true,
+    optionSuccessStatus: 200,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+};
+app.use(cors(corsOptions));
+
 // Import các routes
 const searchRoutes = require('./Routes/searchRoutes');
 const homeRoutes = require('./Routes/homeRoutes');
@@ -31,6 +44,7 @@ const activityRoutes = require('./Routes/activityRoutes');
 const authRoutes = require('./Routes/authRoutes');
 const profileRoutes = require('./Routes/profileRoutes');
 const postRoutes = require('./Routes/postRoutes');
+const uploadRoutes = require('./Routes/uploadRoutes');
 
 // Cài đặt view engine
 app.set('view engine', 'ejs');
@@ -73,6 +87,19 @@ app.use('/activity', activityRoutes);
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
 app.use('/post', postRoutes);
+app.use('/upload', uploadRoutes);
+// // Route chính để hiển thị layout
+// app.get('/', (req, res) => {
+//     const username = req.session.username || 'Guest';
+//     res.render('layout', {
+//         title: 'Mini Threads',
+//         body: '',
+//         header: '',
+//         username: username,
+//         avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
+//         refreshItems: null,
+//     });
+// });
 
 // Khởi động server
 const PORT = process.env.PORT || 3001;
