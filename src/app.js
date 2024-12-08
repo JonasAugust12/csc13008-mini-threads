@@ -6,6 +6,7 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
 
 // Kết nối database -> thành công -> print success
 dotenv.config();
@@ -22,7 +23,6 @@ const connectToMongo = async () => {
 
 connectToMongo();
 
-connectToMongo();
 const app = express();
 // Import các routes
 const searchRoutes = require('./Routes/searchRoutes');
@@ -49,6 +49,23 @@ app.use(ejsLayouts);
 
 app.use(express.static(path.join(__dirname, './Public')));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Cấu hình multer để lưu ảnh
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'src/uploads/'); // Lưu vào thư mục uploads
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Đặt tên file là timestamp + phần mở rộng
+    },
+});
+const upload = multer({ storage: storage });
+
+// Đảm bảo bạn có thể xử lý ảnh và nội dung văn bản từ FormData
+app.use(upload.single('post_image')); // Chỉ cần dùng `upload.single` nếu gửi một ảnh duy nhất, đổi tên 'post_image' nếu cần
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Cài đặt các routes
 app.use('/search', searchRoutes);
 app.use('/', homeRoutes); // Đường dẫn '/' cho trang home
@@ -56,18 +73,6 @@ app.use('/activity', activityRoutes);
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
 app.use('/post', postRoutes);
-// // Route chính để hiển thị layout
-// app.get('/', (req, res) => {
-//     const username = req.session.username || 'Guest';
-//     res.render('layout', {
-//         title: 'Mini Threads',
-//         body: '',
-//         header: '',
-//         username: username,
-//         avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-//         refreshItems: null,
-//     });
-// });
 
 // Khởi động server
 const PORT = process.env.PORT || 3001;

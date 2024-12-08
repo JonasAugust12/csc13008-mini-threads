@@ -1,13 +1,15 @@
-const path = require('path');
+const posts = require('../data/posts');
 
 const profileController = (req, res) => {
-    // data giả, thay đoạn này bằng dữ liệu từ database
+    // Dữ liệu người dùng giả lập
     const user = {
         avatar: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
         name: 'Minh Toàn',
         nickname: 'cas.nothingtosay',
         bio: 'Vietnamese gang',
     };
+
+    // Danh sách người theo dõi giả lập
     const followerUsers = [
         {
             avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
@@ -35,15 +37,17 @@ const profileController = (req, res) => {
         },
     ];
 
+    // Trả về trang profile với các bài đăng đã lưu trong mảng
     res.render('profile', {
         title: 'Profile',
         header: 'Profile',
         refreshItems: [],
         selectedItem: null,
-        username: req.session.username,
+        username: req.session.username || 'Guest',
         avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
         followerUsers: followerUsers,
         user: user,
+        posts: posts, // Trả về các bài đăng từ mảng tạm thời
     });
 };
 

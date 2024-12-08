@@ -45,3 +45,17 @@
     height: 341px;
     width: 240px;
 }
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.create-post__info-post__img {
+    animation: 0.2s appear;
+}

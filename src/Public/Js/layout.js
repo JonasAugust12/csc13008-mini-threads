@@ -95,3 +95,106 @@ logoutBtn.addEventListener('click', function () {
         window.location.href = '../Pages/login.html';
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const textarea = document.querySelector('.create-post__info-post__status');
+    const addToThread = document.querySelector('.create-post__next-post-info');
+    const postButton = document.querySelector('.create-post__footer__post-btn');
+    const postsContainer = document.querySelector('.my-posts');
+
+    // Lắng nghe sự kiện nhập liệu trong textarea để kích hoạt các thay đổi giao diện
+    textarea.addEventListener('input', () => {
+        if (textarea.value.trim().length > 0) {
+            addToThread.classList.remove('text-[#353535]');
+            addToThread.classList.add('text-secondary-text');
+            addToThread.classList.remove('cursor-not-allowed');
+            addToThread.classList.add('cursor-pointer');
+
+            postButton.classList.remove('tbl:cursor-not-allowed');
+            postButton.classList.add('tbl:cursor-pointer');
+            postButton.classList.remove('tbl:text-[#5a5b5b]');
+            postButton.classList.add('tbl:text-white');
+            postButton.classList.remove('opacity-30');
+            postButton.classList.remove('cursor-not-allowed');
+            postButton.classList.add('cursor-pointer');
+        } else {
+            addToThread.classList.remove('cursor-pointer');
+            addToThread.classList.add('cursor-not-allowed');
+            addToThread.classList.remove('text-secondary-text');
+            addToThread.classList.add('text-[#353535]');
+
+            postButton.classList.remove('tbl:cursor-pointer');
+            postButton.classList.add('tbl:cursor-not-allowed');
+            postButton.classList.add('opacity-30');
+            postButton.classList.add('tbl:text-[#5a5b5b]');
+            postButton.classList.remove('tbl:text-white');
+        }
+    });
+
+    postButton.addEventListener('click', () => {
+        const postContent = textarea.value.trim();
+        const postImage = imageInput.files[0]; // Lấy ảnh đầu tiên người dùng chọn (nếu có)
+
+        console.log('Post content:', postContent); // Debug: kiểm tra nội dung nhập vào
+        console.log('Post image:', postImage); // Debug: kiểm tra ảnh người dùng đã chọn (nếu có)
+
+        if (postContent.length > 0 || postImage) {
+            // Kiểm tra nếu có nội dung hoặc ảnh
+            console.log('Valid post content or image, preparing to send request.'); // Debug: kiểm tra khi có nội dung hoặc ảnh hợp lệ
+
+            const formData = new FormData();
+            formData.append('post_quote', postContent); // Thêm nội dung bài viết vào FormData
+            if (postImage) {
+                formData.append('post_image', postImage); // Thêm ảnh vào FormData nếu có
+            }
+
+            // Gửi yêu cầu POST đến backend để thêm bài post
+            fetch('/post', {
+                method: 'POST',
+                body: formData, // Gửi FormData thay vì JSON
+            })
+                .then((response) => {
+                    console.log('Response status:', response.status); // Debug: kiểm tra trạng thái phản hồi từ backend
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log('Response data:', data); // Debug: kiểm tra dữ liệu trả về từ backend
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error('Error occurred:', error); // Debug: kiểm tra lỗi xảy ra
+                });
+        } else {
+            console.warn('Post content and image are both empty. Nothing to post.'); // Debug: cảnh báo khi cả nội dung và ảnh đều trống
+        }
+    });
+});
+
+// Lấy phần tử input và phần tử img
+const imageInput = document.getElementById('imageInput');
+const selectedImage = document.getElementById('selectedImage');
+const imageContainer = document.querySelector('.create-post__info-post__img');
+
+// Lắng nghe sự kiện click của phần tử chứa biểu tượng SVG để mở cửa sổ chọn ảnh
+document.querySelector('.create-post__utilities-icon').addEventListener('click', () => {
+    imageInput.click(); // Mở cửa sổ chọn ảnh
+});
+
+// Lắng nghe sự kiện thay đổi của input file để hiển thị ảnh đã chọn
+imageInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            selectedImage.src = e.target.result; // Đặt đường dẫn ảnh vào src của img
+            imageContainer.classList.remove('hidden'); // Hiển thị phần tử chứa ảnh
+        };
+
+        reader.readAsDataURL(file); // Đọc ảnh và tạo URL để hiển thị
+    }
+});

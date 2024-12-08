@@ -332,6 +332,20 @@
                     </div>
                 </div>
             </div>
+
+            <div class="my-posts">
+                <% 
+                    console.log('Posts-profile.ejs:', posts);  // Debug: In toàn bộ danh sách bài đăng
+                    posts.forEach(post => { 
+                %>
+                    <!-- Debug: In chi tiết từng bài đăng -->
+                    <%- console.log('Post:', post); %>
+                    <%- include('home/home-post', { post: post }) %>
+                <% }) %>
+            </div>
+            
+
+
         </div>
 
 </div>
