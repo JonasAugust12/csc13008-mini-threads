@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const upload = require('../Middleware/multer');
-const { uploadAvatar, uploadPostImage, uploadCommentImage } = require('../config/cloudinary');
+const { uploadAvatar, uploadPostImage, uploadCommentImage } = require('../Config/cloudinary');
 
 router.post('/test-upload', upload.single('image'), async (req, res) => {
     try {

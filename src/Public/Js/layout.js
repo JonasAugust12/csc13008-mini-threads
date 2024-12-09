@@ -102,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const postButton = document.querySelector('.create-post__footer__post-btn');
     const postsContainer = document.querySelector('.my-posts');
 
-    // Lắng nghe sự kiện nhập liệu trong textarea để kích hoạt các thay đổi giao diện
     textarea.addEventListener('input', () => {
         if (textarea.value.trim().length > 0) {
             addToThread.classList.remove('text-[#353535]');
@@ -134,18 +133,14 @@ document.addEventListener('DOMContentLoaded', () => {
     postButton.addEventListener('click', () => {
         const postContent = textarea.value.trim();
         const postImage = imageInput.files[0]; // Lấy ảnh đầu tiên người dùng chọn (nếu có)
-
         console.log('Post content:', postContent); // Debug: kiểm tra nội dung nhập vào
         console.log('Post image:', postImage); // Debug: kiểm tra ảnh người dùng đã chọn (nếu có)
 
         if (postContent.length > 0 || postImage) {
-            // Kiểm tra nếu có nội dung hoặc ảnh
-            console.log('Valid post content or image, preparing to send request.'); // Debug: kiểm tra khi có nội dung hoặc ảnh hợp lệ
-
             const formData = new FormData();
-            formData.append('post_quote', postContent); // Thêm nội dung bài viết vào FormData
+            formData.append('post_quote', postContent);
             if (postImage) {
-                formData.append('post_image', postImage); // Thêm ảnh vào FormData nếu có
+                formData.append('post_image', postImage);
             }
 
             // Gửi yêu cầu POST đến backend để thêm bài post
@@ -197,4 +192,31 @@ imageInput.addEventListener('change', (event) => {
 
         reader.readAsDataURL(file); // Đọc ảnh và tạo URL để hiển thị
     }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const timeElements = document.querySelectorAll('.post-time-stamp');
+
+    timeElements.forEach((element) => {
+        const createdAt = new Date(element.getAttribute('data-created-at'));
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - createdAt) / 1000);
+
+        let timeAgo = '';
+
+        if (diffInSeconds < 60) {
+            timeAgo = `${diffInSeconds}s`;
+        } else if (diffInSeconds < 3600) {
+            const minutes = Math.floor(diffInSeconds / 60);
+            timeAgo = `${minutes}m`;
+        } else if (diffInSeconds < 86400) {
+            const hours = Math.floor(diffInSeconds / 3600);
+            timeAgo = `${hours}h`;
+        } else {
+            const days = Math.floor(diffInSeconds / 86400);
+            timeAgo = `${days}d`;
+        }
+
+        element.innerText = timeAgo;
+    });
 });

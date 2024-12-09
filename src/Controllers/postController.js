@@ -1,74 +1,66 @@
-const posts = require('../data/posts');
+const Post = require('../Models/Post');
+const { uploadPostImage } = require('../Config/cloudinary');
 
-// Danh sách người theo dõi giả lập
-const followerUsers = [
-    {
-        avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
-        username: 'user1',
-        name: 'User 1',
-        followers: Math.floor(Math.random() * 10000),
-    },
-    {
-        avatar: 'https://randomuser.me/api/portraits/women/2.jpg',
-        username: 'user2',
-        name: 'User 2',
-        followers: Math.floor(Math.random() * 10000),
-    },
-    {
-        avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-        username: 'user3',
-        name: 'User 3',
-        followers: Math.floor(Math.random() * 10000),
-    },
-    {
-        avatar: 'https://randomuser.me/api/portraits/women/4.jpg',
-        username: 'user4',
-        name: 'User 4',
-        followers: Math.floor(Math.random() * 10000),
-    },
-];
+const postController = async (req, res) => {
+    const username = req.session?.username || 'Guest';
+    console.log('Received request for post creation. Username:', username);
 
-// Dữ liệu người dùng giả lập (sử dụng dữ liệu từ cơ sở dữ liệu trong thực tế)
-const user = {
-    avatar: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-    name: 'Minh Toàn',
-    nickname: 'cas.nothingtosay',
-    bio: 'Vietnamese gang',
-};
+    if (req.method !== 'POST') {
+        console.log('Invalid request method:', req.method);
+        return res.status(400).json({ error: 'Invalid request method' });
+    }
 
-const postController = (req, res) => {
-    const username = req.session.username || 'Guest';
+    try {
+        let imageUrl = null;
 
-    if (req.method === 'POST') {
+        if (req.file) {
+            try {
+                // Upload image and get its URL
+                const uploadResult = await uploadPostImage(req);
+                imageUrl = uploadResult.url; // Extract URL from the upload result
+            } catch (uploadError) {
+                console.error('Image upload failed:', uploadError.message);
+                return res.status(500).json({ error: 'Image upload failed', details: uploadError.message });
+            }
+        }
+
         const { post_quote } = req.body;
 
-        // Lấy đường dẫn ảnh từ req.file
-        const uploadedImage = req.file ? `/uploads/${req.file.filename}` : null;
-
-        const newPost = {
+        // Create a new post
+        const newPost = new Post({
             user: {
-                username: 'justinbieber',
-                user_display_name: 'Justin Bieber',
+                username: username,
+                user_display_name: 'Justin Bieber', // Replace with actual data
                 user_nick_name: 'Pdiddy',
-                user_bio: 'i love fried chicken',
+                user_bio: 'I love fried chicken',
                 avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-                user_profile_link: '/profile/justinbieber',
-                user_followers_count: 1000000,
+                user_profile_link: `/profile/${username}`,
+                user_followers_count: 1000000, // Example data
             },
-            createdAt: 'just now',
             post_quote: post_quote || 'No content',
-            post_images: uploadedImage ? [uploadedImage] : [], // Lưu đường dẫn ảnh vào mảng nếu có
+            post_images: imageUrl ? [imageUrl] : [],
             post_likes: [],
             post_comments: [],
             post_repost: [],
-        };
+        });
 
-        posts.unshift(newPost); // Thêm bài đăng mới vào mảng
-        console.log('New post added:', newPost); // Debug
-        return res.json(newPost); // Gửi lại bài đăng vừa thêm cho client
+        console.log('Attempting to save new post:', newPost);
+
+        // Save the post to the database
+        const savedPost = await newPost.save();
+        console.log('New post saved successfully:', savedPost);
+
+        return res.status(201).json({
+            message: 'Post created successfully',
+            post: savedPost,
+        });
+    } catch (error) {
+        console.error('Error creating post:', error.message);
+        return res.status(500).json({
+            error: 'Failed to create post',
+            details: error.message,
+        });
     }
-
-    res.status(400).json({ error: 'Invalid request method' });
 };
 
 module.exports = postController;

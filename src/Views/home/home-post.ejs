@@ -8,7 +8,7 @@
         <div class="post-top flex w-full justify-between">
             <div class="post-user-info flex gap-2">
                 <%- include('../Partials/hover-user', {user: post.user}) %>
-                <div class="post-time-stamp text-[15px] text-secondary-text"><%= post.createdAt %></div>
+                <div class="post-time-stamp text-[15px] text-secondary-text" data-created-at="<%= post.createdAt %>"></div>
             </div>
             <div class="main-post-more-btn p-1 hover:bg-[#222222] rounded-[20px] relative">
                 <svg
