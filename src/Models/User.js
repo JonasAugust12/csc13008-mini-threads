@@ -37,8 +37,8 @@ const userScheme = new mongoose.Schema(
                 },
             },
             avt: {
-                type: mongoose.Schema.Types.ObjectId, // Store the file ID
-                default: '6751a48d118fde5bafe106a9', // Avatar mặc định là null
+                type: String, // Store the file ID
+                default: null, // Avatar mặc định là null
             },
             bio: {
                 type: String,
