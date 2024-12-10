@@ -3,7 +3,7 @@
         <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
             <img
                 class="user-profile__avatar-img rounded-full"
-                src="<%= user.profile.avt ? `/profile/avatar/${user._id}` : '/Img/UserIcon.jpg' %>"
+                src="<%= user.profile.avt ? user.profile.avt : '/Img/UserIcon.jpg' %>"
                 alt="Profile picture"
             />
         </div>
