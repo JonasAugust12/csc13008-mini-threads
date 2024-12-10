@@ -21,7 +21,9 @@
             <ul
                 class="navigation-follower pt-2 flex flex-row justify-around font-medium text-[15px] list-style: none border-b border-solid border-b-[rgba(243,245,247,0.15)]">
                 <li
-                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__news navigation__item--on text-[white]">
+                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__news navigation__item--on text-[white]"
+                    id="tab-followers"
+                    >
                     <div class="item-follower__text">Followers</div>
                     <div class="item-follower__number text-sm"><%= user.followers_count %></div>
                     <div
@@ -29,17 +31,11 @@
                     </div>
                 </li>
                 <li
-                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__replies navigation__item--off text-[rgb(153,153,153)]">
+                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__replies navigation__item--off text-[rgb(153,153,153)]"
+                    id="tab-following"
+                    >
                     <div class="item-follower__text">Following</div>
                     <div class="item-follower__number text-sm"><%= user.following_count %></div>
-                    <div
-                        class="item-follower__line w-full mt-4 border-b-[rgba(243,245,247,0.15)] border-b border-solid">
-                    </div>
-                </li>
-                <li
-                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__reposts navigation__item--off text-[rgb(153,153,153)]">
-                    <div class="item-follower__text">Pending</div>
-                    <div class="item-follower__number text-sm">20</div>
                     <div
                         class="item-follower__line w-full mt-4 border-b-[rgba(243,245,247,0.15)] border-b border-solid">
                     </div>
@@ -47,10 +43,19 @@
             </ul>
             <!-- list follower -->
 
-            <div class="list-follower w-full h-full tbl:bg-[#181818] border-b border-gray-700 rounded-b-3xl">
-                <% followerUsers.forEach(user=> { %>
+            <div id="followers-list" class="list-follower w-full h-full tbl:bg-[#181818] border-b border-gray-700 rounded-b-3xl">
+                <%= console.log(followerUsers) %>
+                <% followerUsers.forEach(followUser=> { %>
                     <!-- lấy module từ Views/Partials/user_follow_module -->
-                    <%- include('profile/user_follow_module', { user: user }) %>
+                    <%- include('profile/user_follow_module', { user: followUser, curUserId: curUserId }) %>
+                        <% }) %>
+            </div>
+
+            <div id="following-list" class="list-follower w-full h-full tbl:bg-[#181818] border-b border-gray-700 rounded-b-3xl hidden">
+                <%= console.log(followingUsers) %>
+                <% followingUsers.forEach(followingUser=> { %>
+                    <!-- lấy module từ Views/Partials/user_follow_module -->
+                    <%- include('profile/user_follow_module', { user: followingUser, curUserId: curUserId }) %>
                         <% }) %>
             </div>
         </div>
@@ -392,7 +397,7 @@
         })
         .then(response => {
             if (response.ok) {
-                alert('Followed successfully');
+                window.location.reload();
                 document.querySelector('.follow-btn1 p').textContent = 'Following';
             } else {
                 alert('Failed to follow');
@@ -448,5 +453,45 @@
             // Ẩn spinner sau khi hoàn tất
             spinner.classList.add('hidden');
         }
-    }
+    };
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const tabFollowers = document.getElementById('tab-followers');
+        const tabFollowing = document.getElementById('tab-following');
+        const followersList = document.getElementById('followers-list');
+        const followingList = document.getElementById('following-list');
+
+        // Sự kiện click cho tab "Followers"
+        tabFollowers.addEventListener("click", function() {
+            setFollowList('followers');
+        });
+
+        // Sự kiện click cho tab "Following"
+        tabFollowing.addEventListener("click", function() {
+            setFollowList('following');
+        });
+
+        function setFollowList(followType) {
+            if (followType === 'followers') {
+                followersList.classList.remove('hidden');
+                followingList.classList.add('hidden');
+                tabFollowers.classList.add('text-[white]');
+                tabFollowers.classList.remove('text-[rgb(153,153,153)]');
+                tabFollowing.classList.add('text-[rgb(153,153,153)]');
+                tabFollowing.classList.remove('text-[white]');
+                tabFollowing.querySelector('.item-follower__line').classList.remove('border-b-[white]'); 
+                tabFollowers.querySelector('.item-follower__line').classList.add('border-b-[white]');
+            } else if (followType === 'following') {
+                followersList.classList.add('hidden');
+                followingList.classList.remove('hidden');
+                tabFollowers.classList.add('text-[rgb(153,153,153)]');
+                tabFollowers.classList.remove('text-[white]');
+                tabFollowing.classList.add('text-[white]');
+                tabFollowing.classList.remove('text-[rgb(153,153,153)]');
+                tabFollowing.querySelector('.item-follower__line').classList.add('border-b-[white]'); 
+                tabFollowers.querySelector('.item-follower__line').classList.remove('border-b-[white]');
+                tabFollowers.querySelector('.item-follower__line').classList.add('border-b-[rgba(243,245,247,0.15)]');
+            }
+        }
+    });
 </script>

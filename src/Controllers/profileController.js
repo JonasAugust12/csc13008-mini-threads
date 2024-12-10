@@ -22,6 +22,8 @@ const followController = async (req, res) => {
         const followerId = req.userId; // Get the current user ID from the authenticated request
         const userId = req.params.id; // Get the ID of the user to follow from the request parameters
 
+        // Check if the current user exists
+        curUser = await User.findById(followerId);
         // Check if the user to follow exists
         const followUser = await User.findById(userId);
         if (!followUser) {
@@ -37,12 +39,17 @@ const followController = async (req, res) => {
             await Follow.deleteOne({ _id: existingFollow._id });
             followUser.followers_count -= 1;
             await followUser.save();
+            curUser.following_count -= 1;
+            await curUser.save();
             return res.status(200).send('Unfollowed successfully');
         }
 
         // Create the follow relationship
         const follow = new Follow({ userId: userId, followerId: followerId });
         await follow.save();
+
+        curUser.following_count += 1;
+        await curUser.save();
 
         followUser.followers_count += 1;
         await followUser.save();
@@ -65,6 +72,9 @@ const getOtherUserProfile = async (req, res) => {
             return res.status(404).send('User not found');
         }
         let isFollowing = false;
+
+        const curUser = await User.findById(req.userId);
+
         if (req.userId) {
             // Check if the current user is already following this user
             const follow = await Follow.findOne({
@@ -85,7 +95,16 @@ const getOtherUserProfile = async (req, res) => {
             }),
         );
 
+        const following = await Follow.find({ followerId: userId }).populate('userId');
+        const followingUsers = await Promise.all(
+            following.map(async (follow) => {
+                const followingUser = await User.findById(follow.userId);
+                return followingUser;
+            }),
+        );
+
         console.log('ready to render');
+        console.log(req.userId);
         res.render('profile', {
             title: user.profile.display_name,
             header: user.profile.nick_name,
@@ -93,11 +112,13 @@ const getOtherUserProfile = async (req, res) => {
             selectedItem: null,
             user: user,
             username: user.username,
-            avatarSrc: user.profile.avt ? `/profile/avatar/${user._id}` : '/Img/UserIcon.jpg',
+            avatarSrc: user.profile.avt ? user.profile.avt : '/Img/UserIcon.jpg',
             followerUsers: followerUsers,
+            followingUsers: followingUsers,
             type: 'guest',
             isFollowing: isFollowing, // Pass a boolean indicating if the current user is following this user
-            isAuthenticated: !!req.userId, // Pass a boolean indicating if the user is authenticated
+            isAuthenticated: !!req.userId,
+            curUserId: curUser._id ? curUser._id : null, // Pass a boolean indicating if the user is authenticated
         });
     } catch (error) {
         console.error(error);
@@ -152,6 +173,15 @@ const profileController = async (req, res) => {
                 return followerUser; // Return the entire user object
             }),
         );
+
+        // Find following users
+        const following = await Follow.find({ followerId: userId }).populate('userId');
+        const followingUsers = await Promise.all(
+            following.map(async (follow) => {
+                const followingUser = await User.findById(follow.userId);
+                return followingUser;
+            }),
+        );
         // Example data for followers, replace with actual data from the database
 
         res.render('profile', {
@@ -163,7 +193,9 @@ const profileController = async (req, res) => {
             username: user.username,
             avatarSrc: user.profile.avt ? `/profile/avatar/${user._id}` : '/Img/UserIcon.jpg',
             followerUsers: followerUsers,
+            followingUsers: followingUsers,
             type: 'owner',
+            curUserId: user._id || null,
         });
     } catch (error) {
         console.error(error);
@@ -171,6 +203,7 @@ const profileController = async (req, res) => {
     }
 };
 
+//hàm cũ setup cho gfs
 const uploadAvatar = async (req, res) => {
     try {
         const user = await User.findById(req.userId);
@@ -208,6 +241,7 @@ const uploadAvatar = async (req, res) => {
     }
 };
 
+//hàm cũ setup cho gfs
 const getAvatar = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);

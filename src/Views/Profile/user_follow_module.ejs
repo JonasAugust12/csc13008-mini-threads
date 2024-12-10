@@ -3,7 +3,7 @@
         <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
             <img
                 class="user-profile__avatar-img rounded-full"
-                src="<%= user.profile.avt ? user.profile.avt : '/Img/UserIcon.jpg' %>"
+                src="<%= user.profile.avt %>"
                 alt="Profile picture"
             />
         </div>
@@ -23,12 +23,16 @@
                     ><%= user.profile.nick_name %></span>
                 </div>
             </div>
-            <button
-                type="button"
-                class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
-            >
-                Follow back
-            </button>
+            
+            <!-- Chuyển về tostring để so sánh vì khoogn thể so sánh trực tiếp từ object id -->
+            <% if (curUserId.toString() !== user._id.toString()) { %>
+                <button
+                    type="button"
+                    class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
+                >
+                    Follow back
+                </button>
+            <% } %>
         </div>
         <div class="user-profile__followers pb-3">
             <div class="user-profile__followers-wrapper flex items-center">

@@ -38,7 +38,7 @@ const userScheme = new mongoose.Schema(
             },
             avt: {
                 type: String, // Store the file ID
-                default: null, // Avatar mặc định là null
+                default: '/Img/UserIcon.jpg', // Avatar mặc định là null
             },
             bio: {
                 type: String,
