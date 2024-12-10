@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedImage = document.getElementById('selectedImage');
     const imageContainer = document.querySelector('.create-post__info-post__img');
     const removeImageButton = document.querySelector('.create-post__info-post__remove-img');
+    const loadingToast = document.querySelector('.loading-post-toast');
 
     const checkButtonState = () => {
         const hasContent = textarea.value.trim().length > 0 || !imageContainer.classList.contains('hidden');
@@ -149,6 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
     textarea.addEventListener('input', checkButtonState);
 
     postButton.addEventListener('click', () => {
+        createModal.classList.add('hidden');
+        overlay.classList.add('hidden');
+        loadingToast.classList.remove('hidden');
         const postContent = textarea.value.trim();
         const postImage = imageInput.files[0];
 
@@ -162,7 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     return response.json();
                 })
-                .then(() => window.location.reload())
+                .then(() => {
+                    loadingToast.classList.add('hidden');
+                    window.location.reload();
+                })
                 .catch((error) => console.error('Error occurred:', error));
         } else {
             console.warn('Post content and image are both empty. Nothing to post.');
