@@ -100,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const textarea = document.querySelector('.create-post__info-post__status');
     const addToThread = document.querySelector('.create-post__next-post-info');
     const postButton = document.querySelector('.create-post__footer__post-btn');
-    const postsContainer = document.querySelector('.my-posts');
 
     textarea.addEventListener('input', () => {
         if (textarea.value.trim().length > 0) {
@@ -111,8 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             postButton.classList.remove('tbl:cursor-not-allowed');
             postButton.classList.add('tbl:cursor-pointer');
-            postButton.classList.remove('tbl:text-[#5a5b5b]');
-            postButton.classList.add('tbl:text-white');
             postButton.classList.remove('opacity-30');
             postButton.classList.remove('cursor-not-allowed');
             postButton.classList.add('cursor-pointer');
@@ -125,16 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
             postButton.classList.remove('tbl:cursor-pointer');
             postButton.classList.add('tbl:cursor-not-allowed');
             postButton.classList.add('opacity-30');
-            postButton.classList.add('tbl:text-[#5a5b5b]');
-            postButton.classList.remove('tbl:text-white');
         }
     });
 
     postButton.addEventListener('click', () => {
         const postContent = textarea.value.trim();
         const postImage = imageInput.files[0]; // Lấy ảnh đầu tiên người dùng chọn (nếu có)
-        console.log('Post content:', postContent); // Debug: kiểm tra nội dung nhập vào
-        console.log('Post image:', postImage); // Debug: kiểm tra ảnh người dùng đã chọn (nếu có)
 
         if (postContent.length > 0 || postImage) {
             const formData = new FormData();
@@ -168,17 +161,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Lấy phần tử input và phần tử img
 const imageInput = document.getElementById('imageInput');
 const selectedImage = document.getElementById('selectedImage');
 const imageContainer = document.querySelector('.create-post__info-post__img');
 
-// Lắng nghe sự kiện click của phần tử chứa biểu tượng SVG để mở cửa sổ chọn ảnh
 document.querySelector('.create-post__utilities-icon').addEventListener('click', () => {
-    imageInput.click(); // Mở cửa sổ chọn ảnh
+    imageInput.click();
 });
 
-// Lắng nghe sự kiện thay đổi của input file để hiển thị ảnh đã chọn
 imageInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
 
@@ -186,11 +176,11 @@ imageInput.addEventListener('change', (event) => {
         const reader = new FileReader();
 
         reader.onload = function (e) {
-            selectedImage.src = e.target.result; // Đặt đường dẫn ảnh vào src của img
-            imageContainer.classList.remove('hidden'); // Hiển thị phần tử chứa ảnh
+            selectedImage.src = e.target.result;
+            imageContainer.classList.remove('hidden');
         };
 
-        reader.readAsDataURL(file); // Đọc ảnh và tạo URL để hiển thị
+        reader.readAsDataURL(file);
     }
 });
 

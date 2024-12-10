@@ -15,9 +15,8 @@ const postController = async (req, res) => {
 
         if (req.file) {
             try {
-                // Upload image and get its URL
                 const uploadResult = await uploadPostImage(req);
-                imageUrl = uploadResult.url; // Extract URL from the upload result
+                imageUrl = uploadResult.url;
             } catch (uploadError) {
                 console.error('Image upload failed:', uploadError.message);
                 return res.status(500).json({ error: 'Image upload failed', details: uploadError.message });
@@ -26,7 +25,6 @@ const postController = async (req, res) => {
 
         const { post_quote } = req.body;
 
-        // Create a new post
         const newPost = new Post({
             user: {
                 username: username,
@@ -44,11 +42,8 @@ const postController = async (req, res) => {
             post_repost: [],
         });
 
-        console.log('Attempting to save new post:', newPost);
-
         // Save the post to the database
         const savedPost = await newPost.save();
-        console.log('New post saved successfully:', savedPost);
 
         return res.status(201).json({
             message: 'Post created successfully',

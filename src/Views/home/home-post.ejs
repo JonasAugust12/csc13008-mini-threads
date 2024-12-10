@@ -198,16 +198,16 @@
                 </div>
             </div>
         </div>
-        <div class="post-content-container">
-            <div class="post-text"><%= post.post_quote%></div>
+        <div class="post-content-container flex flex-col">
+            <div class="post-text w-full"><%= post.post_quote%></div>
             <div
-                class="replies-img max-w-[calc(100%+48px)] m-h-[430px] mt-2 flex space-x-[6px] overflow-x-auto custom-scrollbar ml-[-48px]"
+                class="replies-img max-w-full m-h-[430px] mt-2 overflow-x-auto custom-scrollbar object-cover "
             >
                 <% post.post_images.forEach((image, index) => { %>
                     <img
                         src="<%= image %>"
                         alt=""
-                        class="replies-user-img rounded-lg max-w-full max-h-full object-cover outline-1 outline-[#f3f5f726] border-none select-none <%= index === 0 ? 'ml-[48px]' : '' %>"
+                        class="replies-user-img rounded-lg max-w-full max-h-full object-cover outline-1 outline-[#f3f5f726] border-none select-none <%= index === 0 %>"
                     />
                 <% }) %>
             </div>

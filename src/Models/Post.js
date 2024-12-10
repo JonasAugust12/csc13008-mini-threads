@@ -13,9 +13,9 @@ const postSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
     post_quote: { type: String, required: true },
     post_images: { type: [String], default: [] },
-    post_likes: { type: [String], default: [] }, // User IDs who liked the post
-    post_comments: { type: [String], default: [] }, // Comment IDs
-    post_repost: { type: [String], default: [] }, // Repost IDs
+    post_likes: { type: [String], default: [] },
+    post_comments: { type: [String], default: [] },
+    post_repost: { type: [String], default: [] },
 });
 
 const Post = mongoose.model('Post', postSchema);

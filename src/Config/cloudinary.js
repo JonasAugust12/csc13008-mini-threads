@@ -7,12 +7,6 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-/**
- * Reusable function to upload images to Cloudinary
- * @param {Buffer} fileBuffer - The file buffer from the request
- * @param {string} folder - The folder to upload the image in Cloudinary
- * @returns {Promise<object>} - The result from Cloudinary
- */
 const uploadImageToCloudinary = (fileBuffer, folder) => {
     return new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
@@ -27,7 +21,7 @@ const uploadImageToCloudinary = (fileBuffer, folder) => {
             },
         );
 
-        stream.end(fileBuffer); // Write file buffer to the upload stream
+        stream.end(fileBuffer);
     });
 };
 
@@ -65,7 +59,7 @@ const uploadPostImage = async (req) => {
                 else resolve(result);
             },
         );
-        stream.end(file.buffer); // Send file buffer to the stream
+        stream.end(file.buffer);
     });
 };
 

@@ -71,32 +71,16 @@ const profileRoutes = require('./Routes/profileRoutes');
 const postRoutes = require('./Routes/postRoutes');
 const uploadRoutes = require('./Routes/uploadRoutes');
 
-// Sử dụng JSON và URL-encoded body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Các route cho trang chủ, tìm kiếm, hoạt động, đăng nhập, hồ sơ và bài viết
 app.use('/search', searchRoutes);
 app.use('/', homeRoutes);
 app.use('/activity', activityRoutes);
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
-app.use('/post', postRoutes); // Đảm bảo routes này có thể xử lý yêu cầu gửi bài viết
+app.use('/post', postRoutes);
 app.use('/upload', uploadRoutes);
-// const upload = require('./Middleware/multer');
-// app.use('/upload', upload.single('post_image')); // Middleware xử lý ảnh
-
-// Route chính để hiển thị layout
-app.get('/', (req, res) => {
-    const username = req.session.username || 'Guest';
-    res.render('layout', {
-        title: 'Mini Threads',
-        body: '',
-        header: '',
-        username: username,
-        avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-    });
-});
 
 // Khởi động server
 const PORT = process.env.PORT || 3001;

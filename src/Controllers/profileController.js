@@ -1,7 +1,6 @@
 const Post = require('../Models/Post'); // Import the Post model
 
 const profileController = async (req, res) => {
-    // Fetch user data (this could be fetched from a database or session in the future)
     const user = {
         avatar: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
         name: 'Minh Toàn',
@@ -36,11 +35,9 @@ const profileController = async (req, res) => {
         },
     ];
 
-    // Fetch posts for the current user from MongoDB
     try {
-        const posts = await Post.find().sort({ createdAt: -1 }); // Fetch posts and sort by most recent
+        const posts = await Post.find().sort({ createdAt: -1 });
 
-        // Send the posts and other data to the profile view
         res.render('profile', {
             title: 'Profile',
             header: 'Profile',
