@@ -59,3 +59,7 @@
 .create-post__info-post__img {
     animation: 0.2s appear;
 }
+
+.create-post__info-post__remove-img {
+    backdrop-filter: blur(21.5px);
+}

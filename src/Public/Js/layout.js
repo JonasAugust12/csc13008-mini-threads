@@ -100,111 +100,92 @@ document.addEventListener('DOMContentLoaded', () => {
     const textarea = document.querySelector('.create-post__info-post__status');
     const addToThread = document.querySelector('.create-post__next-post-info');
     const postButton = document.querySelector('.create-post__footer__post-btn');
+    const imageInput = document.getElementById('imageInput');
+    const selectedImage = document.getElementById('selectedImage');
+    const imageContainer = document.querySelector('.create-post__info-post__img');
+    const removeImageButton = document.querySelector('.create-post__info-post__remove-img');
 
-    textarea.addEventListener('input', () => {
-        if (textarea.value.trim().length > 0) {
-            addToThread.classList.remove('text-[#353535]');
-            addToThread.classList.add('text-secondary-text');
-            addToThread.classList.remove('cursor-not-allowed');
-            addToThread.classList.add('cursor-pointer');
-
-            postButton.classList.remove('tbl:cursor-not-allowed');
-            postButton.classList.add('tbl:cursor-pointer');
+    const checkButtonState = () => {
+        const hasContent = textarea.value.trim().length > 0 || !imageContainer.classList.contains('hidden');
+        if (hasContent) {
+            addToThread.classList.replace('text-[#353535]', 'text-secondary-text');
+            addToThread.classList.replace('cursor-not-allowed', 'cursor-pointer');
+            postButton.classList.replace('cursor-not-allowed', 'cursor-pointer');
+            postButton.classList.replace('tbl:cursor-not-allowed', 'tbl:cursor-pointer');
             postButton.classList.remove('opacity-30');
-            postButton.classList.remove('cursor-not-allowed');
-            postButton.classList.add('cursor-pointer');
         } else {
-            addToThread.classList.remove('cursor-pointer');
-            addToThread.classList.add('cursor-not-allowed');
-            addToThread.classList.remove('text-secondary-text');
-            addToThread.classList.add('text-[#353535]');
-
-            postButton.classList.remove('tbl:cursor-pointer');
-            postButton.classList.add('tbl:cursor-not-allowed');
+            addToThread.classList.replace('cursor-pointer', 'cursor-not-allowed');
+            addToThread.classList.replace('text-secondary-text', 'text-[#353535]');
+            postButton.classList.replace('tbl:cursor-pointer', 'tbl:cursor-not-allowed');
+            postButton.classList.replace('cursor-pointer', 'cursor-not-allowed');
             postButton.classList.add('opacity-30');
+        }
+    };
+
+    document.querySelector('.create-post__utilities-icon').addEventListener('click', () => {
+        imageInput.click();
+    });
+
+    imageInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                selectedImage.src = e.target.result;
+                imageContainer.classList.remove('hidden');
+                checkButtonState();
+            };
+            reader.readAsDataURL(file);
         }
     });
 
+    removeImageButton.addEventListener('click', () => {
+        selectedImage.src = '';
+        imageContainer.classList.add('hidden');
+        imageInput.value = '';
+        checkButtonState();
+    });
+
+    textarea.addEventListener('input', checkButtonState);
+
     postButton.addEventListener('click', () => {
         const postContent = textarea.value.trim();
-        const postImage = imageInput.files[0]; // Lấy ảnh đầu tiên người dùng chọn (nếu có)
+        const postImage = imageInput.files[0];
 
         if (postContent.length > 0 || postImage) {
             const formData = new FormData();
             formData.append('post_quote', postContent);
-            if (postImage) {
-                formData.append('post_image', postImage);
-            }
+            if (postImage) formData.append('post_image', postImage);
 
-            // Gửi yêu cầu POST đến backend để thêm bài post
-            fetch('/post', {
-                method: 'POST',
-                body: formData, // Gửi FormData thay vì JSON
-            })
+            fetch('/post', { method: 'POST', body: formData })
                 .then((response) => {
-                    console.log('Response status:', response.status); // Debug: kiểm tra trạng thái phản hồi từ backend
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     return response.json();
                 })
-                .then((data) => {
-                    console.log('Response data:', data); // Debug: kiểm tra dữ liệu trả về từ backend
-                    window.location.reload();
-                })
-                .catch((error) => {
-                    console.error('Error occurred:', error); // Debug: kiểm tra lỗi xảy ra
-                });
+                .then(() => window.location.reload())
+                .catch((error) => console.error('Error occurred:', error));
         } else {
-            console.warn('Post content and image are both empty. Nothing to post.'); // Debug: cảnh báo khi cả nội dung và ảnh đều trống
+            console.warn('Post content and image are both empty. Nothing to post.');
         }
     });
 });
 
-const imageInput = document.getElementById('imageInput');
-const selectedImage = document.getElementById('selectedImage');
-const imageContainer = document.querySelector('.create-post__info-post__img');
-
-document.querySelector('.create-post__utilities-icon').addEventListener('click', () => {
-    imageInput.click();
-});
-
-imageInput.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-
-    if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-            selectedImage.src = e.target.result;
-            imageContainer.classList.remove('hidden');
-        };
-
-        reader.readAsDataURL(file);
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     const timeElements = document.querySelectorAll('.post-time-stamp');
-
     timeElements.forEach((element) => {
         const createdAt = new Date(element.getAttribute('data-created-at'));
         const now = new Date();
         const diffInSeconds = Math.floor((now - createdAt) / 1000);
-
         let timeAgo = '';
 
         if (diffInSeconds < 60) {
             timeAgo = `${diffInSeconds}s`;
         } else if (diffInSeconds < 3600) {
-            const minutes = Math.floor(diffInSeconds / 60);
-            timeAgo = `${minutes}m`;
+            timeAgo = `${Math.floor(diffInSeconds / 60)}m`;
         } else if (diffInSeconds < 86400) {
-            const hours = Math.floor(diffInSeconds / 3600);
-            timeAgo = `${hours}h`;
+            timeAgo = `${Math.floor(diffInSeconds / 3600)}h`;
         } else {
-            const days = Math.floor(diffInSeconds / 86400);
-            timeAgo = `${days}d`;
+            timeAgo = `${Math.floor(diffInSeconds / 86400)}d`;
         }
 
         element.innerText = timeAgo;

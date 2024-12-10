@@ -35,7 +35,7 @@ const postController = async (req, res) => {
                 user_profile_link: `/profile/${username}`,
                 user_followers_count: 1000000, // Example data
             },
-            post_quote: post_quote || 'No content',
+            post_quote: post_quote || ' ',
             post_images: imageUrl ? [imageUrl] : [],
             post_likes: [],
             post_comments: [],
