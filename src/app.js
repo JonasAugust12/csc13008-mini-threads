@@ -4,13 +4,12 @@ const ejsLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const multer = require('multer');
 
 // Kết nối với cơ sở dữ liệu MongoDB
 dotenv.config();
-
 const connectToMongo = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URL, {
@@ -22,7 +21,6 @@ const connectToMongo = async () => {
         console.error('FAILED TO CONNECT TO MONGO DB', error);
     }
 };
-
 connectToMongo();
 
 const app = express();
@@ -38,8 +36,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Cài đặt các middleware
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'Public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Cài đặt EJS view engine và layouts
 app.set('view engine', 'ejs');
@@ -71,17 +71,17 @@ const profileRoutes = require('./Routes/profileRoutes');
 const postRoutes = require('./Routes/postRoutes');
 const uploadRoutes = require('./Routes/uploadRoutes');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
+// Cài đặt các routes
 app.use('/search', searchRoutes);
 app.use('/', homeRoutes);
 app.use('/activity', activityRoutes);
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
 app.use('/post', postRoutes);
+app.get('/go-to-signup', (req, res) => {
+    res.redirect('/auth/signup');
+});
 app.use('/upload', uploadRoutes);
-
 // Khởi động server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

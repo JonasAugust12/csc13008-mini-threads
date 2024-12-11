@@ -50,8 +50,8 @@
                     class="group-hover:stroke-white"></path>
             </svg>
         </label>
-        <a href="/activity"
-            class="nav-utility-noti w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]">
+        <div
+            class="nav-utility-noti cursor-pointer w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]">
             <svg aria-label="Notifications" role="img" viewBox="0 0 32 32" style="transform: scale(1.25)"
                 class="w-[26px] h-[26px] tbl:w-6 tbl:h-6">
                 <title>Notifications</title>
@@ -59,9 +59,9 @@
                     d="M5.5 12.8568C5.5 17.224 9.22178 21.5299 15.0332 25.2032C15.3554 25.397 15.7401 25.5909 16 25.5909C16.2703 25.5909 16.655 25.397 16.9668 25.2032C22.7782 21.5299 26.5 17.224 26.5 12.8568C26.5 9.11212 23.8698 6.5 20.4599 6.5C18.4847 6.5 16.9356 7.39792 16 8.74479C15.0851 7.40812 13.5257 6.5 11.5401 6.5C8.14059 6.5 5.5 9.11212 5.5 12.8568Z"
                     stroke="#4d4d4d" fill="transparent" stroke-width="2.5"></path>
             </svg>
-        </a>
-        <a href="/profile"
-            class="nav-utility-profile w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]">
+        </div>
+        <div
+            class="nav-utility-profile cursor-pointer w-1/5 h-full inline-flex justify-center items-center tbl:w-[24px] tbl:h-[24px] tbl:py-3 tbl:px-[18px] tbl:my-[6px] tbl:box-content tbl:rounded-xl hover:bg-[#171717]">
             <svg aria-label="Profile" role="img" viewBox="0 0 26 26" class="w-[26px] h-[26px] tbl:w-6 tbl:h-6">
                 <title>Profile</title>
                 <circle cx="13" cy="7.25" r="4" stroke="#4d4d4d" stroke-width="2.5" fill="transparent"></circle>
@@ -69,12 +69,12 @@
                     d="M6.26678 23.75H19.744C21.603 23.75 22.5 23.2186 22.5 22.0673C22.5 19.3712 18.8038 15.75 13 15.75C7.19625 15.75 3.5 19.3712 3.5 22.0673C3.5 23.2186 4.39704 23.75 6.26678 23.75Z"
                     stroke="#4d4d4d" fill="transparent" stroke-width="2.5"></path>
             </svg>
-        </a>
+        </div>
     </div>
 
-    <div class="navbar__setting mb-[22px] h-fit hidden tbl:block">
+    <div class="navbar__setting mb-[22px] h-fit hidden tbl:block ">
         <div
-            class="navbar__setting-btn navbar__setting-btn--more w-[54px] h-[54px] flex items-center justify-center group cursor-pointer">
+            class="navbar__setting-btn  navbar__setting-btn--more w-[54px] h-[54px] flex items-center justify-center group ">
             <svg aria-label="More" role="img" viewBox="0 0 24 24" class="w-6 h-6">
                 <title>More</title>
                 <rect width="24" height="2.5" rx="1.25" x="3" y="7" fill="#4d4d4d" class="group-hover:fill-white">
@@ -119,14 +119,19 @@
                     </span>
                 </div>
                 <div
+                    id="menu-logout"
                     class="menu__btn menu__btn--logout flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]">
                     <span
-                        class="menu__btn-text menu__btn-text--logout max-w-full text-[#ff3040] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative"
-                        onclick="window.location.href='/login'">
+                        class="menu__btn-text menu__btn-text--logout max-w-full text-[#ff3040] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative">
                         Log out
                     </span>
                 </div>
             </div>
         </div>
     </div>
+
 </nav>
+
+<script>
+    
+</script>

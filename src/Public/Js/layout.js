@@ -84,17 +84,94 @@ document.addEventListener('click', function (event) {
     }
 });
 
-const logoutBtn = document.querySelector('.menu__btn--logout');
+// query theo id
+const logoutBtn = document.getElementById('menu-logout');
 
-logoutBtn.addEventListener('click', function () {
-    const currentPage = window.location.pathname.split('/').pop();
-
-    if (currentPage === 'index.html' || currentPage === '') {
-        window.location.href = './src/Public/Pages/login.html';
-    } else {
-        window.location.href = '../Pages/login.html';
+logoutBtn.addEventListener('click', async function () {
+    // fetch api logout
+    try {
+        const response = await fetch('/auth/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await response.json();
+        if (data) {
+            // xóa access token và chuyển hướng về trang login
+            localStorage.removeItem('accessToken');
+            window.location.href = '/auth/login';
+        }
+    } catch (error) {
+        console.error(error);
     }
 });
+
+// show popup
+const showPopup = (id) => {
+    const popup = document.getElementById(id);
+    popup.classList.remove('hidden');
+    // close popup when click outside
+    window.onclick = (event) => {
+        if (event.target == popup) {
+            popup.classList.add('hidden');
+        }
+    };
+};
+
+// KHI CHƯA ĐĂNG NHẬP MÀ BẤM VÀO PROFILE VÀ ACTIVITY -> HIỆN POPUP
+// hide popup
+const hidePopup = (id) => {
+    const popup = document.getElementById(id);
+    popup.classList.add('hidden');
+};
+var continue_with_thread_button = document.querySelector('.continue_with_thread');
+continue_with_thread_button.addEventListener('click', () => {
+    window.location.href = '/auth/login';
+});
+// lấy ra element nav-utility-profile
+const navUtilityProfile = document.querySelector('.nav-utility-profile');
+// nếu bấm vào nút này thì chuyển hướng đến trang profile
+navUtilityProfile.addEventListener('click', () => {
+    // lấy ra access token từ localStorage
+    const accessToken = localStorage.getItem('accessToken');
+    // nếu không có access token thì hiện popup
+    if (!accessToken) {
+        showPopup('popup');
+        return;
+    } else {
+        // nếu có access token thì chuyển hướng đến trang profile
+        window.location.href = '/profile';
+    }
+});
+// lấy ra element nav-utility-noti
+const navUtilityActivity = document.querySelector('.nav-utility-noti');
+// nếu bấm vào nút này thì chuyển hướng đến trang activity
+navUtilityActivity.addEventListener('click', () => {
+    // lấy ra access token từ localStorage
+    const accessToken = localStorage.getItem('accessToken');
+    // nếu không có access token thì hiện popup
+    if (!accessToken) {
+        showPopup('popup');
+        return;
+    } else {
+        // nếu có access token thì chuyển hướng đến trang activity
+        window.location.href = '/activity';
+    }
+});
+
+// lấy ra element login_button
+const login_button = document.querySelector('.login-btn');
+// nếu bấm vào nút này thì chuyển hướng đến trang login
+login_button.addEventListener('click', () => {
+    window.location.href = '/auth/login';
+});
+// kiểm tra trang hiện tại đã đăng nhập hay chưa (tức là đã có access token còn hạn hay chưa), nếu có -> ẩn nút login
+const accessToken = localStorage.getItem('accessToken');
+
+if (accessToken) {
+    login_button.style.display = 'none';
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const textarea = document.querySelector('.create-post__info-post__status');

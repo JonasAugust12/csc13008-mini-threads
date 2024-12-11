@@ -21,25 +21,21 @@
             <ul
                 class="navigation-follower pt-2 flex flex-row justify-around font-medium text-[15px] list-style: none border-b border-solid border-b-[rgba(243,245,247,0.15)]">
                 <li
-                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__news navigation__item--on text-[white]">
+                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__news navigation__item--on text-[white]"
+                    id="tab-followers"
+                    >
                     <div class="item-follower__text">Followers</div>
-                    <div class="item-follower__number text-sm">5</div>
+                    <div class="item-follower__number text-sm"><%= user.followers_count %></div>
                     <div
                         class="item-follower__line w-full mt-4 border-b-[rgba(243,245,247,0.15)] border-b border-solid border-b-[white]">
                     </div>
                 </li>
                 <li
-                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__replies navigation__item--off text-[rgb(153,153,153)]">
+                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__replies navigation__item--off text-[rgb(153,153,153)]"
+                    id="tab-following"
+                    >
                     <div class="item-follower__text">Following</div>
-                    <div class="item-follower__number text-sm">10</div>
-                    <div
-                        class="item-follower__line w-full mt-4 border-b-[rgba(243,245,247,0.15)] border-b border-solid">
-                    </div>
-                </li>
-                <li
-                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__reposts navigation__item--off text-[rgb(153,153,153)]">
-                    <div class="item-follower__text">Pending</div>
-                    <div class="item-follower__number text-sm">20</div>
+                    <div class="item-follower__number text-sm"><%= user.following_count %></div>
                     <div
                         class="item-follower__line w-full mt-4 border-b-[rgba(243,245,247,0.15)] border-b border-solid">
                     </div>
@@ -47,10 +43,19 @@
             </ul>
             <!-- list follower -->
 
-            <div class="list-follower w-full h-full tbl:bg-[#181818] border-b border-gray-700 rounded-b-3xl">
-                <% followerUsers.forEach(user=> { %>
+            <div id="followers-list" class="list-follower w-full h-full tbl:bg-[#181818] border-b border-gray-700 rounded-b-3xl">
+                <%= console.log(followerUsers) %>
+                <% followerUsers.forEach(followUser=> { %>
                     <!-- lấy module từ Views/Partials/user_follow_module -->
-                    <%- include('profile/user_follow_module', { user: user }) %>
+                    <%- include('profile/user_follow_module', { user: followUser, curUserId: curUserId }) %>
+                        <% }) %>
+            </div>
+
+            <div id="following-list" class="list-follower w-full h-full tbl:bg-[#181818] border-b border-gray-700 rounded-b-3xl hidden">
+                <%= console.log(followingUsers) %>
+                <% followingUsers.forEach(followingUser=> { %>
+                    <!-- lấy module từ Views/Partials/user_follow_module -->
+                    <%- include('profile/user_follow_module', { user: followingUser, curUserId: curUserId }) %>
                         <% }) %>
             </div>
         </div>
@@ -61,10 +66,10 @@
             <div class="profile__info mt-8">
                 <div class="content__heading flex justify-between">
                     <div class="information flex flex-col ml-6 font-bold">
-                        <div class="information__name text-2xl mb-1">Minh Toàn</div>
-                        <div class="information__nickname text-sm font-normal mb-6">cas.nothingtosay</div>
-                        <div class="information__bio text-sm font-normal mb-4">Vietnamese gang</div>
-                        <div class="information__follower flex flex-row justify-around mb-8 text-gray-500">
+                        <div class="information__name text-2xl mb-1"><%=user.profile.display_name%></div>
+                        <div class="information__nickname text-sm font-normal mb-6"><%=user.profile.nick_name%></div>
+                        <div class="information__bio text-sm font-normal mb-4"><%=user.profile.bio%></div>
+                        <div class="information__follower flex flex-row gap-1 mb-8 text-gray-500">
                             <ul class="follower__img flex flex-row cursor-pointer">
                                 <li class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full" style="
                                                         background-image: url('https://th.bing.com/th/id/OIP.P6RqRgE_lh77mF6mktc_LgHaLH?rs=1&pid=ImgDetMain');
@@ -79,23 +84,68 @@
                                                         left: -20px;
                                                     "></li>
                             </ul>
-                            <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer">100</div>
+                            <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer"><%=user.followers_count%></div>
                             <div class="follower__text text-sm font-normal relative cursor-pointer">followers</div>
                         </div>
                     </div>
                     <div class="utility flex flex-col items-end h-48 mr-6">
                         <div class="utility__avatar h-20 w-20 bg-cover mb-8 rounded-full cursor-pointer" style="
-                                                background-image: url(https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png);
-                                            "></div>
+                                                background-image: url('<%= user.profile.avt %>');
+                                            " onClick="handleAvatarClick()">
+                                                    <!-- Overlay loading (ẩn ban đầu) -->
+                                                    <div id="loadingSpinner" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+                                                        <div class="spinner"></div>
+                                                    </div>
+
+                                                    <!-- Thêm CSS spinner tại đây -->
+                                                    <style>
+                                                        .spinner {
+                                                            border: 4px solid rgba(255, 255, 255, 0.3); /* Viền mờ */
+                                                            border-top: 4px solid white; /* Viền sáng */
+                                                            border-radius: 50%;
+                                                            width: 30px;
+                                                            height: 30px;
+                                                            animation: spin 1s linear infinite;
+                                                        }
+
+                                                        /* Animation quay */
+                                                        @keyframes spin {
+                                                            from {
+                                                                transform: rotate(0deg);
+                                                            }
+                                                            to {
+                                                                transform: rotate(360deg);
+                                                            }
+                                                        }
+                                                    </style>             
+                        </div>
                         <div class="utility__insta cursor-pointer mr-2">
                             <i class="fa-brands fa-instagram text-2xl cursor-pointer"></i>
                         </div>
                     </div>
+
+                    <form id="uploadForm" action="/upload/test-upload" method="POST" enctype="multipart/form-data" style="display: none;">
+                        <input type="file" name="image" id="avatarInput" accept="image/*" onChange="handleFileChange()">
+                    </form>
+
                 </div>
-                <div class="edit-btn block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
-                    style="border: 2px solid rgba(147, 140, 140, 0.4)">
-                    <p class="mt-1">Edit profile</p>
-                </div>
+                <% if (type === "guest") { %>
+                    <div
+                        class="follow-btn1 block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
+                        style="border: 2px solid rgba(147, 140, 140, 0.4)"
+                        data-user-id="<%= user._id %>"
+                        onClick="handleFollowClick('<%= user._id %>')"
+                    >
+                        <p class="mt-1"><%= isFollowing ? "Following" : "Follow" %></p>
+                    </div>
+                  <% } else if (type === "owner") { %>
+                    <div
+                      class="edit-btn block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
+                      style="border: 2px solid rgba(147, 140, 140, 0.4)"
+                    >
+                      <p class="mt-1">Edit profile</p>
+                    </div>
+                  <% } %>
                 <!-- navigation -->
                 <ul class="navigation flex flex-row justify-around font-medium text-[15px] mt-[30px] ;list-style: none">
                     <li
@@ -134,5 +184,115 @@
 
 
         </div>
-
 </div>
+
+<script>
+    function handleFollowClick(userId) {
+        console.log("click follow");
+        fetch(`/profile/follow/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include' // Include cookies in the request
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.reload();
+                document.querySelector('.follow-btn1 p').textContent = 'Following';
+            } else {
+                alert('Failed to follow');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred');
+        });
+    }
+
+    function handleAvatarClick() {
+        const type = '<%= type %>';
+        console.log(type);
+            if (type == "owner") document.getElementById('avatarInput').click();
+        }
+
+    async function handleFileChange() {
+        const input = document.getElementById('avatarInput');
+        const form = document.getElementById('uploadForm');
+        const spinner = document.getElementById('loadingSpinner');
+        const formData = new FormData(form);
+
+        if (input.files.length === 0) {
+            alert('Vui lòng chọn một tệp!');
+            return;
+        }
+
+        try {
+            // Hiển thị loading spinner
+            spinner.classList.remove('hidden');
+
+            // Gửi form qua fetch
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log(result.message);
+
+                // Cập nhật ảnh avatar trên giao diện
+                const avatar = document.querySelector('.utility__avatar');
+                avatar.style.backgroundImage = `url('${result.url}')`;
+            } else {
+                const error = await response.json();
+                alert(`Lỗi: ${error.message}`);
+            }
+        } catch (err) {
+            alert(`Lỗi khi tải tệp: ${err.message}`);
+        } finally {
+            // Ẩn spinner sau khi hoàn tất
+            spinner.classList.add('hidden');
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const tabFollowers = document.getElementById('tab-followers');
+        const tabFollowing = document.getElementById('tab-following');
+        const followersList = document.getElementById('followers-list');
+        const followingList = document.getElementById('following-list');
+
+        // Sự kiện click cho tab "Followers"
+        tabFollowers.addEventListener("click", function() {
+            setFollowList('followers');
+        });
+
+        // Sự kiện click cho tab "Following"
+        tabFollowing.addEventListener("click", function() {
+            setFollowList('following');
+        });
+
+        function setFollowList(followType) {
+            if (followType === 'followers') {
+                followersList.classList.remove('hidden');
+                followingList.classList.add('hidden');
+                tabFollowers.classList.add('text-[white]');
+                tabFollowers.classList.remove('text-[rgb(153,153,153)]');
+                tabFollowing.classList.add('text-[rgb(153,153,153)]');
+                tabFollowing.classList.remove('text-[white]');
+                tabFollowing.querySelector('.item-follower__line').classList.remove('border-b-[white]'); 
+                tabFollowers.querySelector('.item-follower__line').classList.add('border-b-[white]');
+            } else if (followType === 'following') {
+                followersList.classList.add('hidden');
+                followingList.classList.remove('hidden');
+                tabFollowers.classList.add('text-[rgb(153,153,153)]');
+                tabFollowers.classList.remove('text-[white]');
+                tabFollowing.classList.add('text-[white]');
+                tabFollowing.classList.remove('text-[rgb(153,153,153)]');
+                tabFollowing.querySelector('.item-follower__line').classList.add('border-b-[white]'); 
+                tabFollowers.querySelector('.item-follower__line').classList.remove('border-b-[white]');
+                tabFollowers.querySelector('.item-follower__line').classList.add('border-b-[rgba(243,245,247,0.15)]');
+            }
+        }
+    });
+</script>
