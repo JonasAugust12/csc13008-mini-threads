@@ -1,13 +1,13 @@
-const path = require('path');
+const Post = require('../Models/Post'); // Import the Post model
 
-const profileController = (req, res) => {
-    // data giả, thay đoạn này bằng dữ liệu từ database
+const profileController = async (req, res) => {
     const user = {
         avatar: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
         name: 'Minh Toàn',
         nickname: 'cas.nothingtosay',
         bio: 'Vietnamese gang',
     };
+
     const followerUsers = [
         {
             avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
@@ -35,16 +35,24 @@ const profileController = (req, res) => {
         },
     ];
 
-    res.render('profile', {
-        title: 'Profile',
-        header: 'Profile',
-        refreshItems: [],
-        selectedItem: null,
-        username: req.session.username,
-        avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-        followerUsers: followerUsers,
-        user: user,
-    });
+    try {
+        const posts = await Post.find().sort({ createdAt: -1 });
+
+        res.render('profile', {
+            title: 'Profile',
+            header: 'Profile',
+            refreshItems: [],
+            selectedItem: null,
+            username: req.session.username || 'Guest',
+            avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
+            user: user,
+            posts: posts,
+            followerUsers: followerUsers,
+        });
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+        res.status(500).json({ error: 'Failed to fetch posts' });
+    }
 };
 
 module.exports = profileController;

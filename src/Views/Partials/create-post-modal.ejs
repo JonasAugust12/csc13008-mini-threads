@@ -20,11 +20,28 @@
                     <%= username %>
                 </div>
                 <textarea rows="4"
-                    class="create-post__info-post__status w-full h-6 bg-transparent border-none outline-none text-secondary-text"
+                    class="create-post__info-post__status w-full h-6 bg-transparent border-none outline-none text-white"
                     placeholder="What's new?"></textarea>
+                <div
+                    class="create-post__info-post__img pt-3 grid grid-rows-[minmax(0,1fr)] grid-cols-[minmax(0,1fr)] max-h-[430px] aspect-[1.5] relative w-full h-full overflow-hidden rounded-[8px] hidden">
+                    <picture class="create-post__img-container">
+                        <img id="selectedImage" src="" alt=""
+                            class="create-post__img h-full w-full object-cover rounded-[8px] absolute bottom-0 top-0 right-0 left-0 outline-[#f3f5f726]"
+                            draggable="false">
+                    </picture>
+                    <button class="create-post__info-post__remove-img top-[10px] right-[10px] absolute w-[26px] h-[26px] rounded-full cursor-pointer bg-[#0006] flex items-center justify-center">
+                        <svg aria-label="Gỡ" role="img" viewBox="0 0 24 24"
+                        class="h-[12px] w-[12px] stroke-[3] stroke-white"
+                            style="--fill: currentColor; --height: 12px; --width: 12px;">
+                            <title>Gỡ</title>
+                            <polyline points="20.643 3.357 12 12 3.353 20.647"></polyline>
+                            <line x1="20.649" x2="3.354" y1="20.649" y2="3.354"></line>
+                        </svg>
+                    </button>
+                </div>
                 <div class="create-post__utilities cursor-default select-none -ml-2">
                     <div
-                        class="create-post__utilities-icon inline-flex items-center box-border w-9 h-9 px-2 cursor-pointer">
+                        class="create-post__utilities-icon create-post__utilities-icon--media inline-flex items-center box-border w-9 h-9 px-2 cursor-pointer">
                         <svg aria-label="Attach media" role="img" viewBox="0 0 24 24" class="w-5 h-5">
                             <title>Attach media</title>
                             <g>
@@ -49,9 +66,10 @@
                                 </clipPath>
                             </defs>
                         </svg>
+                        <input type="file" id="imageInput" class="hidden" accept="image/*">
                     </div>
                     <div
-                        class="create-post__utilities-icon inline-flex items-center box-border w-9 h-9 px-2 cursor-pointer">
+                        class="create-post__utilities-icon create-post__utilities-icon--gif inline-flex items-center box-border w-9 h-9 px-2 cursor-pointer">
                         <svg aria-label="Add a GIF" role="img" viewBox="0 0 24 24" class="w-5 h-5">
                             <title>Add a GIF</title>
                             <g clip-path="url(#clipPathID)">
@@ -80,7 +98,7 @@
                         </svg>
                     </div>
                     <div
-                        class="create-post__utilities-icon inline-flex items-center box-border w-9 h-9 px-2 cursor-pointer">
+                        class="create-post__utilities-icon create-post__utilities-icon--tag inline-flex items-center box-border w-9 h-9 px-2 cursor-pointer">
                         <svg aria-label="Add a tag" role="img" viewBox="1 1 22 22" class="w-5 h-5" stroke="#777777"
                             fill="transparent" stroke-width="1.5">
                             <title>Add a tag</title>
@@ -91,7 +109,7 @@
                         </svg>
                     </div>
                     <div
-                        class="create-post__utilities-icon inline-flex items-center box-border w-9 h-9 px-2 cursor-pointer">
+                        class="create-post__utilities-icon create-post__utilities-icon--poll inline-flex items-center box-border w-9 h-9 px-2 cursor-pointer">
                         <svg aria-label="Add a poll" role="img" viewBox="0 0 24 24" class="w-5 h-5">
                             <title>Add a poll</title>
                             <rect fill="#777777" height="1.5" rx="0.75" width="8" x="4" y="5.5"></rect>
@@ -100,7 +118,7 @@
                         </svg>
                     </div>
                     <div
-                        class="create-post__utilities-icon inline-flex items-center box-border w-9 h-9 px-2 cursor-pointer">
+                        class="create-post__utilities-icon create-post__utilities-icon--location inline-flex items-center box-border w-9 h-9 px-2 cursor-pointer">
                         <svg aria-label="Add a location" role="img" viewBox="0 0 18 20" class="w-[18px] h-[18px]">
                             <title>Add a location</title>
                             <path clip-rule="evenodd"
@@ -142,7 +160,8 @@
             </div>
         </button>
         <button
-            class="create-post__footer__post-btn h-9 text-black font-semibold px-4 border-[1px] border-[#0006] rounded-[243px] bg-white tbl:absolute tbl:py-2 tbl:px-4 tbl:right-[26px] tbl:top-1/2 tbl:transform tbl:-translate-y-1/2 tbl:rounded-[10px] tbl:text-[14px] tbl:text-[#5a5b5b] tbl:bg-[#181818] tbl:cursor-not-all0.5wed tbl:border-[#f3f5f726] tbl:overflow-hidden">
+            class="create-post__footer__post-btn h-9 cursor-not-allowed text-black font-semibold px-4 border-[1px] border-[#0006] rounded-[243px] bg-white opacity-30 tbl:absolute tbl:py-2 tbl:px-4 tbl:right-[26px] tbl:top-1/2 tbl:transform tbl:-translate-y-1/2 tbl:rounded-[10px] tbl:text-[14px] tbl:text-white tbl:bg-[#181818] tbl:cursor-not-allowed tbl:border-[#f3f5f726] tbl:overflow-hidden"
+            type="submit">
             Post
         </button>
     </div>

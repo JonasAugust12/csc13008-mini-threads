@@ -45,3 +45,44 @@
     height: 341px;
     width: 240px;
 }
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.create-post__info-post__img {
+    animation: 0.2s appear;
+}
+
+.create-post__info-post__remove-img {
+    backdrop-filter: blur(21.5px);
+}
+
+.toast__loading {
+    transform: transform 280ms;
+    transition-timing-function: cubic-bezier(0.14, 1, 0.34, 1);
+    transform: scale(1);
+    opacity: 1;
+    box-shadow:
+        0 8px 20px 0 rgba(0, 0, 0, 0.2),
+        0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+@keyframes rotate-loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.toast__loading-icon svg {
+    animation: rotate-loading 0.8s steps(8, end) infinite;
+}

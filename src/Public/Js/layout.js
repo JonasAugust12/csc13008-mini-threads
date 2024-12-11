@@ -95,3 +95,106 @@ logoutBtn.addEventListener('click', function () {
         window.location.href = '../Pages/login.html';
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const textarea = document.querySelector('.create-post__info-post__status');
+    const addToThread = document.querySelector('.create-post__next-post-info');
+    const postButton = document.querySelector('.create-post__footer__post-btn');
+    const imageInput = document.getElementById('imageInput');
+    const selectedImage = document.getElementById('selectedImage');
+    const imageContainer = document.querySelector('.create-post__info-post__img');
+    const removeImageButton = document.querySelector('.create-post__info-post__remove-img');
+    const loadingToast = document.querySelector('.loading-post-toast');
+
+    const checkButtonState = () => {
+        const hasContent = textarea.value.trim().length > 0 || !imageContainer.classList.contains('hidden');
+        if (hasContent) {
+            addToThread.classList.replace('text-[#353535]', 'text-secondary-text');
+            addToThread.classList.replace('cursor-not-allowed', 'cursor-pointer');
+            postButton.classList.replace('cursor-not-allowed', 'cursor-pointer');
+            postButton.classList.replace('tbl:cursor-not-allowed', 'tbl:cursor-pointer');
+            postButton.classList.remove('opacity-30');
+        } else {
+            addToThread.classList.replace('cursor-pointer', 'cursor-not-allowed');
+            addToThread.classList.replace('text-secondary-text', 'text-[#353535]');
+            postButton.classList.replace('tbl:cursor-pointer', 'tbl:cursor-not-allowed');
+            postButton.classList.replace('cursor-pointer', 'cursor-not-allowed');
+            postButton.classList.add('opacity-30');
+        }
+    };
+
+    document.querySelector('.create-post__utilities-icon').addEventListener('click', () => {
+        imageInput.click();
+    });
+
+    imageInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                selectedImage.src = e.target.result;
+                imageContainer.classList.remove('hidden');
+                checkButtonState();
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    removeImageButton.addEventListener('click', () => {
+        selectedImage.src = '';
+        imageContainer.classList.add('hidden');
+        imageInput.value = '';
+        checkButtonState();
+    });
+
+    textarea.addEventListener('input', checkButtonState);
+
+    postButton.addEventListener('click', () => {
+        createModal.classList.add('hidden');
+        overlay.classList.add('hidden');
+        loadingToast.classList.remove('hidden');
+        const postContent = textarea.value.trim();
+        const postImage = imageInput.files[0];
+
+        if (postContent.length > 0 || postImage) {
+            const formData = new FormData();
+            formData.append('post_quote', postContent);
+            if (postImage) formData.append('post_image', postImage);
+
+            fetch('/post', { method: 'POST', body: formData })
+                .then((response) => {
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return response.json();
+                })
+                .then(() => {
+                    loadingToast.classList.add('hidden');
+                    window.location.reload();
+                })
+                .catch((error) => console.error('Error occurred:', error));
+        } else {
+            console.warn('Post content and image are both empty. Nothing to post.');
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const timeElements = document.querySelectorAll('.post-time-stamp');
+    timeElements.forEach((element) => {
+        const createdAt = new Date(element.getAttribute('data-created-at'));
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - createdAt) / 1000);
+        let timeAgo = '';
+
+        if (diffInSeconds < 60) {
+            timeAgo = `${diffInSeconds}s`;
+        } else if (diffInSeconds < 3600) {
+            timeAgo = `${Math.floor(diffInSeconds / 60)}m`;
+        } else if (diffInSeconds < 86400) {
+            timeAgo = `${Math.floor(diffInSeconds / 3600)}h`;
+        } else {
+            timeAgo = `${Math.floor(diffInSeconds / 86400)}d`;
+        }
+
+        element.innerText = timeAgo;
+    });
+});
