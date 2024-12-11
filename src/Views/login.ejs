@@ -116,140 +116,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="footer-wrapper absolute w-full bottom-0">
-                    <footer
-                        class="footer h-[70px] w-full bottom-0 flex items-center text-center box-border px-4 absolute">
-                        <ul class="footer__list mx-auto list-none block">
-                            <li class="footer__item inline-block">
-                                <span
-                                    class="footer__text block overflow-visible min-w-0 max-w-full font-normal text-left relative break-words text-[12px] leading-[1.4em] text-[#777]">
-                                    © 2024
-                                </span>
-                            </li>
-
-                            <li class="footer__item inline-block ml-3">
-                                <span
-                                    class="footer__text block overflow-visible min-w-0 max-w-full font-normal text-left relative break-words text-[12px] leading-[1.4em] text-[#777]">
-                                    <a href="#"
-                                        class="footer__link inline text-[#777] cursor-pointer no-underline hover:underline"
-                                        target="_blank">Threads Terms</a>
-                                </span>
-                            </li>
-
-                            <li class="footer__item inline-block ml-3">
-                                <span
-                                    class="footer__text block overflow-visible min-w-0 max-w-full font-normal text-left relative break-words text-[12px] leading-[1.4em] text-[#777]">
-                                    <a href="#"
-                                        class="footer__link inline text-[#777] cursor-pointer no-underline hover:underline"
-                                        target="_blank">Privacy Policy</a>
-                                </span>
-                            </li>
-
-                            <li class="footer__item inline-block ml-3">
-                                <span
-                                    class="footer__text block overflow-visible min-w-0 max-w-full font-normal text-left relative break-words text-[12px] leading-[1.4em] text-[#777]">
-                                    <a href="#"
-                                        class="footer__link inline text-[#777] cursor-pointer no-underline hover:underline"
-                                        target="_blank">Cookies Policy</a>
-                                </span>
-                            </li>
-
-                            <li class="footer__item inline-block ml-3">
-                                <div class="footer__button cursor-pointer select-none hover:underline" role="button"
-                                    tabindex="0">
-                                    <span
-                                        class="footer__text block overflow-visible min-w-0 max-w-full font-normal text-left relative break-words text-[12px] leading-[1.4em] text-[#777]">Report
-                                        a problem</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </footer>
-                </div>
+                <%- include('Auth/footer.ejs') %>
             </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/Js/login.js"></script>
 <script>
-    // Điều hướng đến trang đăng ký
-    document.querySelector('.sign-up__text-wrapper').addEventListener('click', () => {
-        window.location.href = "/go-to-signup";
-    });
-
-    // Lấy các phần tử input và nút login
-    const usernameInput = document.querySelector('[name="username"]');
-    const passwordInput = document.querySelector('[name="password"]');
-    const loginButton = document.querySelector('button[type="submit"]');
-
-    // Hàm kiểm tra trạng thái nhập
-    function toggleLoginButtonState() {
-        const isFormValid = usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "";
-        loginButton.disabled = !isFormValid; // Bật/tắt nút login dựa trên trạng thái form
-    }
-
-    // Gán sự kiện cho các trường input
-    usernameInput.addEventListener('input', toggleLoginButtonState);
-    passwordInput.addEventListener('input', toggleLoginButtonState);
-
-    // Kiểm tra trạng thái nút khi trang tải
-    toggleLoginButtonState();
-
-    // Xử lý sự kiện submit form
-    document.getElementById('login_form').addEventListener('submit', async function (event) {
-        event.preventDefault(); // Ngăn trang reload khi submit
-
-        // Lấy dữ liệu từ form
-        const formFields = {
-            username: usernameInput.value.trim(),
-            password: passwordInput.value.trim(),
-        };
-
-        try {
-            // Gửi yêu cầu đăng nhập
-            const response = await axios.post('/auth/login', formFields, {
-                headers: { 'Content-Type': 'application/json' },
-            });
-
-            if (response.status === 200) {
-                // Đăng nhập thành công
-                localStorage.setItem('accessToken', response.data.accessToken); // Lưu token
-                showModal(response.data.message);
-
-                // Chuyển hướng về trang chính
-                setTimeout(() => window.location.href = "/", 1000);
-            } else {
-                showModal(response.data.message); // Hiển thị thông báo từ server
-            }
-        } catch (error) {
-            console.error('Error during login:', error);
-
-            const errorMessage = error.response?.data?.message || 'Login failed! Something went wrong.';
-            showModal(errorMessage);
-        }
-    });
-
-    // Hàm hiển thị modal thông báo
-    function showModal(message) {
-        const modal = document.getElementById('modal-popup');
-        const modalMessage = document.getElementById('modal-message');
-
-        modalMessage.textContent = message;
-        modal.classList.remove('hidden');
-        modal.style.opacity = '1';
-        modal.style.transform = 'translateY(0)';
-
-        // Tự động ẩn sau 4 giây
-        setTimeout(hideModal, 4000);
-    }
-
-    // Hàm ẩn modal
-    function hideModal() {
-        const modal = document.getElementById('modal-popup');
-        modal.style.opacity = '0';
-        modal.style.transform = 'translateY(100%)';
-
-        // Đợi hoàn thành hiệu ứng trước khi ẩn
-        setTimeout(() => modal.classList.add('hidden'), 500);
-    }
+   
 </script>
 
 

@@ -37,8 +37,8 @@ const userScheme = new mongoose.Schema(
                 },
             },
             avt: {
-                type: String, // Store the file ID
-                default: '/Img/UserIcon.jpg', // Avatar mặc định là null
+                type: String,
+                default: null, // Avatar mặc định là null
             },
             bio: {
                 type: String,
@@ -62,6 +62,10 @@ const userScheme = new mongoose.Schema(
         is_verified: {
             type: Boolean,
             default: false, // Ban đầu chưa xác thực
+        },
+        verification_sent_at: {
+            type: Date,
+            default: null,
         },
     },
     // cho biết tạo acc lúc nào

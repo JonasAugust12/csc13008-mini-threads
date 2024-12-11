@@ -43,8 +43,22 @@ const loginController = async (req, res) => {
             return res.status(404).json({ message: 'Incorrect username or email.' });
         }
         const email = user.email;
+        // so sánh password
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+
+        // nếu sai password
+        if (!validPassword) {
+            return res.status(400).json({ message: 'Incorrect password.' });
+        }
         // Kiểm tra trạng thái xác minh
         if (!user.is_verified) {
+            // kiểm tra thời gian gửi email xác minh, token email trước đã hết hạn chưa
+            if (user.verification_sent_at && new Date() - new Date(user.verification_sent_at) < 60 * 60 * 1000) {
+                return res.status(400).json({
+                    message: 'Account is not verified. Please check your mail! Verification email sent.',
+                });
+            }
+
             // gửi email xác minh
             const token = jwt.sign({ id: user._id, email: email }, process.env.JWT_VERIFY_KEY, { expiresIn: '1h' });
             const transporter = nodemailer.createTransport({
@@ -73,21 +87,16 @@ const loginController = async (req, res) => {
                     console.error('Error sending verification email:', error);
                     return res.status(500).json({ message: 'Failed to send verification email' });
                 }
+                user.verification_sent_at = Date.now();
                 res.status(200).json({
                     message:
                         // Account chưa được xác minh, đã gửi email xác minh, hãy xác minh để đăng nhập
                         ' Verification email sent. Please verify your email to login',
                 });
             });
-            return res.status(400).json({ message: 'Account is not verified' });
+            return res.status(400).json({ message: 'Account is not verified. Please check your mail!' });
         }
-        // so sánh password
-        const validPassword = await bcrypt.compare(req.body.password, user.password);
 
-        // nếu sai password
-        if (!validPassword) {
-            return res.status(400).json({ message: 'Incorrect password.' });
-        }
         // nếu đúng cả username và password
         if (user && validPassword) {
             // tạo token
@@ -161,7 +170,7 @@ const signupController = async (req, res) => {
             to: email,
             subject: 'Verify your email',
             html: `
-    <h2>Welcome to Our Service</h2>
+    <h2>Welcome to Mini Threads</h2>
     <p>To complete your registration, please verify your email by clicking the link below:</p>
     <a href="${verificationLink}">Verify Email</a>
     <p>If you didn't register for this service, please ignore this email.</p>
@@ -173,15 +182,21 @@ const signupController = async (req, res) => {
                 console.error('Error sending verification email:', error);
                 return res.status(500).json({ message: 'Failed to send verification email' });
             }
+
             res.status(200).json({
                 message: 'Signup successful! Please verify your email to activate your account.',
             });
         });
+        // cập nhật thời gian xác minh
+        newUser.verification_sent_at = Date.now();
         // lưu vào db
         const user = await newUser.save();
 
         // trả về kết quả
-        res.status(200).json(user);
+        res.status(200).json({
+            user,
+            message: 'Signup successful! Please verify your email to activate your account.',
+        });
     } catch (err) {
         console.error('Error during signup:', err);
         res.status(500).json(err);
@@ -294,7 +309,7 @@ const updatePassword = async (req, res) => {
         // Verify token
         jwt.verify(token, process.env.JWT_RESET_KEY, async (err, decoded) => {
             if (err) {
-                return res.status(400).json({ message: 'Invalid or expired token' });
+                return res.status(400).json({ message: 'The password change period has expired' });
             }
 
             // Tìm người dùng theo ID
