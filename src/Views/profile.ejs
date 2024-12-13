@@ -173,10 +173,8 @@
             <!-- post : lấy module từ trang home thay vào-->
             <div class="my-posts">
                 <% 
-                    console.log('Posts-profile.ejs:', posts);  // Debug: In toàn bộ danh sách bài đăng
                     posts.forEach(post => { 
                 %>
-                    <%- console.log('Post:', post); %>
                     <%- include('home/home-post', { post: post }) %>
                 <% }) %>
             </div>

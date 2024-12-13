@@ -1,16 +1,21 @@
 const Post = require('../Models/Post');
+const User = require('../Models/User'); // Import User model
 const { uploadPostImage } = require('../Config/cloudinary');
 
 const postController = async (req, res) => {
-    const username = req.session?.username || 'Guest';
-    console.log('Received request for post creation. Username:', username);
-
-    if (req.method !== 'POST') {
-        console.log('Invalid request method:', req.method);
-        return res.status(400).json({ error: 'Invalid request method' });
-    }
-
     try {
+        console.log('User ID:', req.userId); // Debugging line
+        if (!req.userId) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+
+        console.log('Received request for post creation by user ID:', req.userId);
+
+        if (req.method !== 'POST') {
+            console.log('Invalid request method:', req.method);
+            return res.status(400).json({ error: 'Invalid request method' });
+        }
+
         let imageUrl = null;
 
         if (req.file) {
@@ -25,17 +30,24 @@ const postController = async (req, res) => {
 
         const { post_quote } = req.body;
 
+        // Fetch the user details from the database
+        const user = await User.findById(req.userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Create the new post with real user data
         const newPost = new Post({
             user: {
-                username: username,
-                user_display_name: 'Justin Bieber', // Replace with actual data
-                user_nick_name: 'Pdiddy',
-                user_bio: 'I love fried chicken',
-                avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-                user_profile_link: `/profile/${username}`,
-                user_followers_count: 1000000, // Example data
+                username: user.username,
+                user_display_name: user.profile.display_name,
+                user_nick_name: user.profile.nick_name,
+                user_bio: user.profile.bio,
+                avatarSrc: user.profile.avt || '/Img/UserIcon.jpg',
+                user_profile_link: `/profile/${user._id}`,
+                user_followers_count: user.followers_count || 0,
             },
-            post_quote: post_quote || ' ',
+            post_quote: post_quote || '',
             post_images: imageUrl ? [imageUrl] : [],
             post_likes: [],
             post_comments: [],

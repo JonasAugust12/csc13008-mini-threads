@@ -164,7 +164,6 @@ const profileController = async (req, res) => {
         }
 
         // Find all followers for the user
-        // Find all followers for the user
         const followers = await Follow.find({ userId: userId }).populate('followerId');
 
         // Get follower user details
@@ -184,7 +183,7 @@ const profileController = async (req, res) => {
             }),
         );
 
-        const posts = await Post.find().sort({ createdAt: -1 });
+        const posts = await Post.find({ 'user.user_profile_link': `/profile/${userId}` }).sort({ createdAt: -1 });
 
         res.render('profile', {
             title: user.profile.display_name,
