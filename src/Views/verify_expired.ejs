@@ -42,7 +42,7 @@
 </head>
 
 <body class="bg-[#0a0a0a] leading-relaxed p-0 w-full h-screen overflow-hidden flex">
-    <div class="verify-container flex w-full h-full flex-col items-center justify-center">
+    <div class="verify-ex-container flex w-full h-full flex-col items-center justify-center">
         <div
             class="decoration absolute top-0 overflow-hidden portrait-mobile:hidden flexible-decoration:mt-[calc(100vh-860px)]">
             <picture>
@@ -52,19 +52,19 @@
             </picture>
         </div>
 
-        <div id="success-message"
+        <div id="fail-message"
             class="animate-fade-in w-full h-full flex flex-col items-center justify-center text-white">
             <!-- thêm thẻ svg -->
-            <img src="https://cdn-icons-png.flaticon.com/512/10629/10629607.png" width="100px" height="100px"
+            <img src="https://cdn-icons-png.flaticon.com/512/753/753345.png" width="100px" height="100px"
                 class="min-w-[100px]" alt="Checklist free icon" title="Checklist free icon">
-            <h2 class="text-2xl font-bold mb-4 mt-4">Welcome to Mini Threads</h2>
+            <h2 class="text-2xl font-bold mb-4 mt-4">Link expired!</h2>
             <p class="text-center text-sm max-w-[300px]">
-                Your account has been successfully verified. You can now log in to your account.
+                Your verification link has expired. Please signup again.
             </p>
             <button
                 class="back_login-form__button mt-8 max-w-[370px] w-full h-[56px] bg-[#ffffff] rounded-[12px] text-[15px] font-semibold leading-[140%] text-[#101010] disabled:cursor-not-allowed disabled:text-[#10101066] relative">
-                <div class="back_login-form__button-text" onclick="window.location.href='/auth/login'">Back to log
-                    in</div>
+                <div class="back_login-form__button-text" onclick="window.location.href='/auth/signup'">Back to sign up
+                </div>
             </button>
         </div>
 
