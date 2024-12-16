@@ -353,6 +353,7 @@ const updatePassword = async (req, res) => {
 
 // verify email
 const verifyController = async (req, res) => {
+  
   try {
     const { token } = req.query;
 
@@ -365,12 +366,14 @@ const verifyController = async (req, res) => {
 
     // Tìm user và cập nhật trạng thái
     const user = await User.findById(decoded.id);
+    userid = user._id;
+    email = user.email;
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
     if (user.is_verified) {
-      return res.status(200).render("verify", {
+      return res.status(200).render("verify/verify", {
         message: "Account already verified",
         layout: false,
       });
@@ -380,13 +383,15 @@ const verifyController = async (req, res) => {
 
     await user.save();
 
-    return res.status(200).render("verify", {
+    return res.status(200).render("verify/verify", {
       message: "Your account has been successfully verified!",
       layout: false,
     });
   } catch (err) {
     console.error("Error verifying account:", err);
-    return res.status(200).render("verify_expired", {
+    
+
+    return res.status(200).render("verify/verify_expired", {
       message: "Your account has been successfully verified!",
       layout: false,
     });

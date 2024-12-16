@@ -2583,10 +2583,6 @@ video {
   }
 }
 
-.animate-fadeOut {
-  animation: fadeOut 1s ease forwards;
-}
-
 @keyframes zoomOutFade {
   0% {
     transform: scale(1);
@@ -2600,7 +2596,7 @@ video {
 }
 
 .animate-zoomOutFade {
-  animation: zoomOutFade 2s ease forwards;
+  animation: zoomOutFade 1s ease forwards;
 }
 
 @keyframes fadeInDrop {
