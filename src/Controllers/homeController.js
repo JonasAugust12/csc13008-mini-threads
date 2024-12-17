@@ -3,16 +3,21 @@ const Post = require('../Models/Post');
 
 const homeController = async (req, res) => {
     try {
-        if (!req.userId) {
-            return res.status(401).send('Unauthorized');
-        }
-        const userId = req.userId;
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).send('User not found');
+        let user = null;
+        let userId = null;
+        let username = '';
+        let avatarSrc = '/Img/UserIcon.jpg';
+
+        if (req.userId) {
+            userId = req.userId;
+            user = await User.findById(userId);
+            if (user) {
+                username = user.username;
+                avatarSrc = user.profile.avt ? user.profile.avt : avatarSrc;
+            }
         }
 
-        const posts = await Post.find().populate('user', 'username user_display_name avatarSrc user_followers_count').sort({ createdAt: -1 }); // Sắp xếp bài đăng mới nhất lên đầu
+        const posts = await Post.find().populate('user', 'username user_display_name avatarSrc user_followers_count').sort({ createdAt: -1 });
 
         const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
 
@@ -26,8 +31,8 @@ const homeController = async (req, res) => {
                 { name: 'Saved', link: '/home/saved' },
             ],
             selectedItem: 'For you',
-            username: user.username,
-            avatarSrc: user.profile.avt ? user.profile.avt : '/Img/UserIcon.jpg',
+            username: username,
+            avatarSrc: avatarSrc,
             posts: posts,
             users: users,
             curUserId: userId,
