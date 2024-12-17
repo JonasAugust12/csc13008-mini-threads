@@ -44,7 +44,7 @@
 
         <% if (users.length > 0) { %>
             <% users.forEach(user => { %>
-                <%- include('search-user-profile', user) %>
+                <%- include('search-user-profile', { user: user }) %>
             <% }); %>
         <% } else { %>
             <div class="text-center text-[#777777] p-4">No results found.</div>

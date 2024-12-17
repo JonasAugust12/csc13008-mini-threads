@@ -1,144 +1,41 @@
-const path = require('path');
+const User = require('../Models/User');
+const Post = require('../Models/Post');
 
-// Data dùng cho suggestion user
-const dummyUsers = [
-    {
-        username: 'justinbieber',
-        user_display_name: 'Justin Bieber',
-        user_nick_name: 'Pdiddy',
-        user_bio: 'i love fried chicken',
-        avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-        user_profile_link: 'src/Public/Pages/another_user.html',
-        user_followers_count: 1000000,
-    },
-    {
-        username: 'Katy Pery',
-        user_display_name: 'Katy Pery',
-        user_nick_name: 'ROARRR',
-        user_bio: 'Orlando Bloom is my husband',
-        avatarSrc: 'https://randomuser.me/api/portraits/men/1.jpg',
-        user_profile_link: 'src/Public/Pages/another_user.html',
-        user_followers_count: 1000000,
-    },
-    {
-        username: 'justinbieber',
-        user_display_name: 'Justin Bieber',
-        user_nick_name: 'Pdiddy',
-        user_bio: 'i love fried chicken',
-        avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-        user_profile_link: 'src/Public/Pages/another_user.html',
-        user_followers_count: 1000000,
-    },
-    {
-        username: 'Katy Pery',
-        user_display_name: 'Katy Pery',
-        user_nick_name: 'ROARRR',
-        user_bio: 'Orlando Bloom is my husband',
-        avatarSrc: 'https://randomuser.me/api/portraits/men/1.jpg',
-        user_profile_link: 'src/Public/Pages/another_user.html',
-        user_followers_count: 1000000,
-    },
-];
+const homeController = async (req, res) => {
+    try {
+        if (!req.userId) {
+            return res.status(401).send('Unauthorized');
+        }
+        const userId = req.userId;
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
 
-// Dùng cho các post ở home khi kết nối database có thể tách ra nếu cần ( nhớ sửa các biến trong template hiện tại đang gắn với post hết)
-const dummyPosts = [
-    {
-        user: {
-            username: 'justinbieber',
-            user_display_name: 'Justin Bieber',
-            user_nick_name: 'Pdiddy',
-            user_bio: 'i love fried chicken',
-            avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            user_profile_link: 'src/Public/Pages/another_user.html',
-            user_followers_count: 1000000,
-        },
-        createdAt: '34m',
-        post_quote: 'Followed you',
-        post_images: [
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-        ],
-        post_likes: [3, 2, 9, 6, 7, 3, 2, 9, 6, 7, 3, 2, 9, 6, 7],
-        post_comments: [1],
-        post_repost: [1],
-    },
-    {
-        user: {
-            username: 'justinbieber',
-            user_display_name: 'Justin Bieber',
-            user_nick_name: 'Pdiddy',
-            user_bio: 'i love fried chicken',
-            avatarSrc: 'https://randomuser.me/api/portraits/men/1.jpg',
-            user_profile_link: 'src/Public/Pages/another_user.html',
-            user_followers_count: 1000000,
-        },
-        createdAt: '12m',
-        post_quote: 'CSC13008-Mini-Threads',
-        post_images: [
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-        ],
-        post_likes: [3, 2],
-        post_comments: [1],
-        post_repost: [1],
-    },
-    {
-        user: {
-            username: 'justinbieber',
-            user_display_name: 'Justin Bieber',
-            user_nick_name: 'Pdiddy',
-            user_bio: 'i love fried chicken',
-            avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            user_profile_link: 'src/Public/Pages/another_user.html',
-            user_followers_count: 1000000,
-        },
-        createdAt: '2h',
-        post_quote: 'CSC13008-Mini-Threads',
-        post_images: ['https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png'],
-        post_likes: [3, 2],
-        post_comments: [1],
-        post_repost: [1],
-    },
-    {
-        user: {
-            username: 'justinbieber',
-            user_display_name: 'Justin Bieber',
-            user_nick_name: 'Pdiddy',
-            user_bio: 'i love fried chicken',
-            avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            user_profile_link: 'src/Public/Pages/another_user.html',
-            user_followers_count: 1000000,
-        },
-        createdAt: '2h',
-        post_quote: 'CSC13008-Mini-Threads',
-        post_images: ['https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png'],
-        post_likes: [3, 2],
-        post_comments: [1],
-        post_repost: [1],
-    },
-];
-const homeController = (req, res) => {
-    const username = req.session.username || 'Binh';
-    const avatarSrc = req.session.avatarSrc || 'https://randomuser.me/api/portraits/men/1.jpg';
+        const posts = await Post.find().populate('user', 'username user_display_name avatarSrc user_followers_count').sort({ createdAt: -1 }); // Sắp xếp bài đăng mới nhất lên đầu
 
-    res.render('home/home', {
-        title: 'Mini Threads',
-        header: 'Home',
-        refreshItems: [
-            { name: 'For you', link: '/home/for-you' },
-            { name: 'Following', link: '/home/following' },
-            { name: 'Liked', link: '/home/liked' },
-            { name: 'Saved', link: '/home/saved' },
-        ],
-        selectedItem: 'For you',
-        username: username,
-        avatarSrc: avatarSrc,
-        posts: dummyPosts,
-        users: dummyUsers,
-    });
+        const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
+
+        res.render('home/home', {
+            title: 'Mini Threads',
+            header: 'Home',
+            refreshItems: [
+                { name: 'For you', link: '/home/for-you' },
+                { name: 'Following', link: '/home/following' },
+                { name: 'Liked', link: '/home/liked' },
+                { name: 'Saved', link: '/home/saved' },
+            ],
+            selectedItem: 'For you',
+            username: user.username,
+            avatarSrc: user.profile.avt ? user.profile.avt : '/Img/UserIcon.jpg',
+            posts: posts,
+            users: users,
+            curUserId: userId,
+        });
+    } catch (error) {
+        console.error('Error fetching posts or users:', error);
+        res.status(500).send('An error occurred while fetching posts or users.');
+    }
 };
 
 module.exports = homeController;

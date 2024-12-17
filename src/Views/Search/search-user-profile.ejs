@@ -3,8 +3,8 @@
         <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
             <img
                 class="user-profile__avatar-img rounded-full"
-                src="<%= avatar %>"
-                alt="<%= username %>'s profile picture" />
+                src="<%= user.profile.avt %>"
+                alt="<%= user.username %>'s profile picture" />
         </div>
     </div>
     <div class="user-profile__info flex flex-col flex-grow border-b-[0.5px] border-[#f3f5f726] pr-6">
@@ -14,13 +14,13 @@
                     <a
                         href="#"
                         class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline">
-                        <%= username %>
+                        <%= user.username %>
                     </a>
                 </div>
                 <div class="user-profile__name flex items-center">
                     <span
                         class="user-profile__name-text block max-w-full font-normal text-[15px] text-[#777777] leading-[1.4em]">
-                        <%= name %>
+                        <%= user.fullname %>
                     </span>
                 </div>
             </div>
@@ -34,7 +34,7 @@
             <div class="user-profile__followers-wrapper flex items-center">
                 <span
                     class="user-profile__followers-count max-w-full text-[#f3f5f7] font-normal text-[15px] leading-[1.4em]">
-                    <%= followers %> followers
+                    <%= user.followers_count %> followers
                 </span>
             </div>
         </div>

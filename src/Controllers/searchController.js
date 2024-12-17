@@ -1,38 +1,33 @@
-const dummyUsers = [
-    {
-        username: '_budu.official',
-        name: 'FAMILY_DUBUDUBU',
-        followers: 4500004,
-        avatar: 'https://i.pinimg.com/736x/4a/99/fc/4a99fc60caf04e2ec45c75c99f2f7615.jpg',
-    },
-    {
-        username: 'john_doe',
-        name: 'John Doe',
-        followers: 7653,
-        avatar: 'https://img.freepik.com/premium-photo/graphic-designer-digital-avatar-generative-ai_934475-9292.jpg',
-    },
-    {
-        username: 'jane_smith',
-        name: 'Jane Smith',
-        followers: 345789,
-        avatar: 'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg',
-    },
-];
+const User = require('../Models/User');
 
-const searchController = (req, res) => {
-    const query = req.query.q ? req.query.q.toLowerCase() : '';
-    const filteredUsers = dummyUsers.filter((user) => user.username.toLowerCase().includes(query) || user.name.toLowerCase().includes(query));
-    const username = req.session.username || 'Guest';
-    res.render('Search/search', {
-        title: 'Activity',
-        header: 'Search',
-        refreshItems: null,
-        selectedItem: null,
-        username: username,
-        avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-        users: filteredUsers,
-        query,
-    });
+const searchController = async (req, res) => {
+    try {
+        const query = req.query.q ? req.query.q.toLowerCase() : '';
+
+        let filteredUsers = [];
+
+        if (query) {
+            filteredUsers = await User.find({
+                $or: [{ username: { $regex: query, $options: 'i' } }, { fullname: { $regex: query, $options: 'i' } }],
+            }).select('username fullname profile.avt followers_count');
+        } else {
+            filteredUsers = await User.find().select('username fullname profile.avt followers_count');
+        }
+
+        res.render('Search/search', {
+            title: 'Search',
+            header: 'Search',
+            refreshItems: null,
+            selectedItem: null,
+            username: null,
+            avatarSrc: null,
+            users: filteredUsers,
+            query,
+        });
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).send('An error occurred while fetching users.');
+    }
 };
 
 module.exports = searchController;
