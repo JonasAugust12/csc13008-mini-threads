@@ -1,12 +1,11 @@
-<div
-    class="heading__section hidden h-[60px] fixed z-[1] top-0 bg-main-bg box-border tbl:grid tbl:grid-cols-[1fr_50%_1fr] tbl:grid-rows-[1fr] tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px]">
+<div class="heading__section hidden h-[60px] fixed z-[1] top-0 bg-main-bg box-border tbl:grid tbl:grid-cols-[1fr_50%_1fr] tbl:grid-rows-[1fr] tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px]">
     <div class="heading__section__left flex items-center justify-start pl-4"></div>
     <div class="heading__section__middle flex justify-center items-center">
         <a href="#"
             class="refresh-btn inline-block p-4 font-semibold text-[15px] text-primary-text text-center select-none">
             <%= header %>
         </a>
-        <% if (refreshItems && refreshItems.length> 0) { %>
+        <% if (refreshItems && refreshItems.length > 0) { %>
             <div id="refresh-option"
                 class="refresh-option inline-flex justify-center items-center w-6 h-6 border-[1px] border-[#363737] bg-[#181818] rounded-full cursor-pointer relative">
                 <svg aria-label="All" role="img" viewBox="0 0 13 12" class="w-3 h-3">
@@ -21,7 +20,7 @@
                         <a href="<%= item.link %>"
                             class="refresh-list__item flex items-center p-3 min-h-6 h-[52px] w-full rounded-xl cursor-pointer hover:bg-[#212121]">
                             <span class="refresh-list__item-name font-semibold text-[15px] flex-grow select-none">
-                                <%= item.name %> <!-- đảm bảo rằng item có thuộc tính name -->
+                                <%= item.name %> 
                             </span>
                             <% if (item.name.toLowerCase() === selectedItem.toLowerCase()) { %>
                                 <div class="refresh-list__item-selected flex items-center ml-2">
