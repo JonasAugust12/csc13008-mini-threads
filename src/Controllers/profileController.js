@@ -20,42 +20,51 @@ const followController = async (req, res) => {
         if (!req.userId) {
             return res.status(401).send('Unauthorized');
         }
-        const followerId = req.userId; // Get the current user ID from the authenticated request
-        const userId = req.params.id; // Get the ID of the user to follow from the request parameters
 
-        // Check if the current user exists
-        curUser = await User.findById(followerId);
-        // Check if the user to follow exists
+        const followerId = req.userId;
+        const userId = req.params.id;
+        const { action } = req.body; // Lấy action từ request body (follow hoặc unfollow)
+
         const followUser = await User.findById(userId);
         if (!followUser) {
             return res.status(404).send('User not found');
         }
 
-        // Check if the follow relationship already exists
         const existingFollow = await Follow.findOne({
             userId: userId,
             followerId: followerId,
         });
-        if (existingFollow) {
+
+        if (action === 'follow') {
+            // Nếu chưa follow thì thực hiện follow
+            if (existingFollow) {
+                return res.status(400).send('Already following');
+            }
+
+            const follow = new Follow({ userId: userId, followerId: followerId });
+            await follow.save();
+
+            // Cập nhật số lượng followers và following
+            await User.findByIdAndUpdate(followerId, { $inc: { following_count: 1 } });
+            await User.findByIdAndUpdate(userId, { $inc: { followers_count: 1 } });
+
+            return res.status(201).send('Followed successfully');
+        } else if (action === 'unfollow') {
+            // Nếu đã follow thì thực hiện unfollow
+            if (!existingFollow) {
+                return res.status(400).send('Not following');
+            }
+
             await Follow.deleteOne({ _id: existingFollow._id });
-            followUser.followers_count -= 1;
-            await followUser.save();
-            curUser.following_count -= 1;
-            await curUser.save();
+
+            // Cập nhật số lượng followers và following
+            await User.findByIdAndUpdate(followerId, { $inc: { following_count: -1 } });
+            await User.findByIdAndUpdate(userId, { $inc: { followers_count: -1 } });
+
             return res.status(200).send('Unfollowed successfully');
+        } else {
+            return res.status(400).send('Invalid action');
         }
-
-        // Create the follow relationship
-        const follow = new Follow({ userId: userId, followerId: followerId });
-        await follow.save();
-
-        curUser.following_count += 1;
-        await curUser.save();
-
-        followUser.followers_count += 1;
-        await followUser.save();
-
-        res.status(201).send('Followed successfully');
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');

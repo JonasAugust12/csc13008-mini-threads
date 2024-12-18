@@ -4,7 +4,6 @@ const homeController = require('../Controllers/homeController');
 const authenticateToken = require('../Middleware/auth');
 
 router.get('/', authenticateToken, homeController);
-// router.get('/following', authenticateToken, homeController);
-router.get('/:selectedItem', authenticateToken, homeController);
+router.get('/home/:type', authenticateToken, homeController);
 
 module.exports = router;

@@ -292,12 +292,3 @@ document.addEventListener('DOMContentLoaded', () => {
         element.innerText = timeAgo;
     });
 });
-
-document.querySelectorAll('.refresh-list__item').forEach((item) => {
-    item.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        // Điều hướng đến URL mới mà không cần query string
-        window.location.href = this.getAttribute('href');
-    });
-});

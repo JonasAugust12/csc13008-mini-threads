@@ -59,13 +59,41 @@ function formatFollowers(followers) {
 }
 
 followBtns.forEach(function (followBtn) {
-    followBtn.addEventListener('click', function () {
-        if (followBtn.innerText === 'Follow') {
+    followBtn.addEventListener('click', async function () {
+        const userId = followBtn.getAttribute('data-user-id');
+        const action = followBtn.innerText === 'Follow' ? 'follow' : 'unfollow';
+
+        if (action === 'follow') {
             followBtn.innerText = 'Following';
             followBtn.style.color = '#777777';
         } else {
             followBtn.innerText = 'Follow';
             followBtn.style.color = '#f3f5f7';
+        }
+
+        try {
+            const response = await fetch(`/search/follow/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ action }), // Gửi action (follow/unfollow) vào body
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (action === 'follow') {
+                    followBtn.innerText = 'Following';
+                    followBtn.style.color = '#777777';
+                } else {
+                    followBtn.innerText = 'Follow';
+                    followBtn.style.color = '#f3f5f7';
+                }
+            } else {
+                console.error('Error:', await response.text());
+            }
+        } catch (error) {
+            console.error('Error:', error);
         }
     });
 });

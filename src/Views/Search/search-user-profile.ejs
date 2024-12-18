@@ -1,9 +1,7 @@
 <div class="user-profile flex w-full cursor-pointer pt-4 pl-6">
     <div class="user-profile__avatar px-3 py-1">
         <div class="user-profile__avatar-wrapper flex h-9 w-9 rounded-full user-select-none">
-            <img
-                class="user-profile__avatar-img rounded-full"
-                src="<%= user.profile.avt %>"
+            <img class="user-profile__avatar-img rounded-full" src="<%= user.profile.avt %>"
                 alt="<%= user.username %>'s profile picture" />
         </div>
     </div>
@@ -11,8 +9,7 @@
         <div class="user-profile__info-wrapper flex items-center justify-between flex-grow pb-2">
             <div class="user-profile__details flex h-[42px] justify-center flex-col pr-2">
                 <div class="user-profile__username flex items-center">
-                    <a
-                        href="#"
+                    <a href="#"
                         class="user-profile__username-link text-[#f3f5f7] font-semibold text-[15px] leading-[1.4em] hover:underline">
                         <%= user.username %>
                     </a>
@@ -24,11 +21,12 @@
                     </span>
                 </div>
             </div>
-            <button
-                type="button"
-                class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]">
-                Follow
+            <button type="button" class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[15px] leading-[1.4em] 
+                <%= user.isFollowing ? 'text-[#777777] cursor-pointer' : 'text-[#f3f5f7]' %>"
+                data-user-id="<%= user._id %>" <%=user.isFollowing %> >
+                <%= user.isFollowing ? 'Following' : 'Follow' %>
             </button>
+
         </div>
         <div class="user-profile__followers pb-3">
             <div class="user-profile__followers-wrapper flex items-center">
