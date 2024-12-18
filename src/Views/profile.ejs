@@ -25,7 +25,7 @@
                     id="tab-followers"
                     >
                     <div class="item-follower__text">Followers</div>
-                    <div class="item-follower__number text-sm"><%= user.followers_count %></div>
+                    <div class="item-follower__number text-sm"><%= user.followers.length %></div>
                     <div
                         class="item-follower__line w-full mt-4 border-b-[rgba(243,245,247,0.15)] border-b border-solid border-b-[white]">
                     </div>
@@ -35,7 +35,7 @@
                     id="tab-following"
                     >
                     <div class="item-follower__text">Following</div>
-                    <div class="item-follower__number text-sm"><%= user.following_count %></div>
+                    <div class="item-follower__number text-sm"><%= user.following.length %></div>
                     <div
                         class="item-follower__line w-full mt-4 border-b-[rgba(243,245,247,0.15)] border-b border-solid">
                     </div>
@@ -84,7 +84,7 @@
                                                         left: -20px;
                                                     "></li>
                             </ul>
-                            <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer"><%=user.followers_count%></div>
+                            <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer"><%=user.followers.length%></div>
                             <div class="follower__text text-sm font-normal relative cursor-pointer">followers</div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                     </div>
 
                     <form id="uploadForm" action="/upload/test-upload" method="POST" enctype="multipart/form-data" style="display: none;">
-                        <input type="file" name="image" id="avatarInput" accept="image/*" onChange="handleFileChange()">
+                        <input type="file" name="image" id="avatarInput" accept="image/*" onChange="handleFileChange(event)">
                     </form>
 
                 </div>
@@ -171,13 +171,13 @@
             </div>
 
             <!-- post : lấy module từ trang home thay vào-->
-            <div class="my-posts">
-                <% 
-                    posts.forEach(post => { 
+            <!-- <div class="my-posts"> -->
+                <% //
+                    //posts.forEach(post => { 
                 %>
-                    <%- include('home/home-post', { post: post }) %>
-                <% }) %>
-            </div>
+                    <%- //include('home/home-post', { post: post }) %>
+                <% //}) %>
+            <!-- </div> -->
             
 
 
@@ -214,11 +214,19 @@
             if (type == "owner") document.getElementById('avatarInput').click();
         }
 
-    async function handleFileChange() {
-        const input = document.getElementById('avatarInput');
-        const form = document.getElementById('uploadForm');
+    async function handleFileChange(event) {
+        const input = event.target;
         const spinner = document.getElementById('loadingSpinner');
-        const formData = new FormData(form);
+        const file = input.files[0];
+        const formData = new FormData();
+        formData.append("image", file);
+
+        console.log("form", formData);
+
+        console.log("key value");
+        formData.forEach((value, key) => {
+            console.log(`${key}:`, value);
+        });
 
         if (input.files.length === 0) {
             alert('Vui lòng chọn một tệp!');
@@ -229,13 +237,18 @@
             // Hiển thị loading spinner
             spinner.classList.remove('hidden');
 
+            console.log(formData);
+
             // Gửi form qua fetch
-            const response = await fetch(form.action, {
+            const response = await fetch("http://localhost:3001/upload/test-upload", {
                 method: 'POST',
                 body: formData,
             });
 
+            console.log(response);
+
             if (response.ok) {
+                console.log("Post success");
                 const result = await response.json();
                 console.log(result.message);
 
@@ -243,7 +256,8 @@
                 const avatar = document.querySelector('.utility__avatar');
                 avatar.style.backgroundImage = `url('${result.url}')`;
             } else {
-                const error = await response.json();
+                console.log("Post failed");
+                const error = await response;
                 alert(`Lỗi: ${error.message}`);
             }
         } catch (err) {

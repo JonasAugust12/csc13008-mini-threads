@@ -38,7 +38,7 @@ const userScheme = new mongoose.Schema(
             },
             avt: {
                 type: String,
-                default: null, // Avatar mặc định là null
+                default: '/Img/UserIcon.jpg', // Avatar mặc định là null
             },
             bio: {
                 type: String,
@@ -51,14 +51,20 @@ const userScheme = new mongoose.Schema(
                 },
             },
         },
-        followers_count: {
-            type: Number,
-            default: 0, // Ban đầu số người theo dõi là 0
-        },
-        following_count: {
-            type: Number,
-            default: 0, // Ban đầu số người mà tài khoản này theo dõi là 0
-        },
+        followers: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User', // Reference to the 'User' model
+                default: [],
+            },
+        ],
+        following: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User', // Reference to the 'User' model
+                default: [],
+            },
+        ],
         is_verified: {
             type: Boolean,
             default: false, // Ban đầu chưa xác thực

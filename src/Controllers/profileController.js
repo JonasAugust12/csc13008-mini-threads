@@ -7,114 +7,82 @@ const env = require('dotenv').config(); // biến môi trường
 const Post = require('../Models/Post');
 
 // Initialize GridFS
-let gfs;
-const conn = mongoose.connection;
-conn.once('open', () => {
-    gfs = new mongoose.mongo.GridFSBucket(conn.db, {
-        bucketName: 'uploads',
-    });
-});
+// let gfs;
+// const conn = mongoose.connection;
+// conn.once('open', () => {
+//     gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+//         bucketName: 'uploads',
+//     });
+// });
 
 const followController = async (req, res) => {
     try {
         if (!req.userId) {
-            return res.status(401).send('Unauthorized');
+            return res.status(401).json({ message: 'Unauthorized' }); // Return JSON response for consistency
         }
 
-        const followerId = req.userId;
-        const userId = req.params.id;
-        const { action } = req.body; // Lấy action từ request body (follow hoặc unfollow)
+        const curUserId = req.userId;
+        const targetUserId = req.params.id;
 
-        const followUser = await User.findById(userId);
-        if (!followUser) {
-            return res.status(404).send('User not found');
+        const targetUser = await User.findById(targetUserId);
+        if (!targetUser) {
+            return res.status(404).json({ message: 'Target user not found' });
         }
 
-        const existingFollow = await Follow.findOne({
-            userId: userId,
-            followerId: followerId,
-        });
+        const currentUser = await User.findById(curUserId);
+        if (!currentUser) {
+            return res.status(404).json({ message: 'Current user not found' });
+        }
 
-        if (action === 'follow') {
-            // Nếu chưa follow thì thực hiện follow
-            if (existingFollow) {
-                return res.status(400).send('Already following');
-            }
+        const isFollowing = targetUser.followers.some((follower) => follower.equals(curUserId));
 
-            const follow = new Follow({ userId: userId, followerId: followerId });
-            await follow.save();
-
-            // Cập nhật số lượng followers và following
-            await User.findByIdAndUpdate(followerId, { $inc: { following_count: 1 } });
-            await User.findByIdAndUpdate(userId, { $inc: { followers_count: 1 } });
-
-            return res.status(201).send('Followed successfully');
-        } else if (action === 'unfollow') {
-            // Nếu đã follow thì thực hiện unfollow
-            if (!existingFollow) {
-                return res.status(400).send('Not following');
-            }
-
-            await Follow.deleteOne({ _id: existingFollow._id });
-
-            // Cập nhật số lượng followers và following
-            await User.findByIdAndUpdate(followerId, { $inc: { following_count: -1 } });
-            await User.findByIdAndUpdate(userId, { $inc: { followers_count: -1 } });
-
-            return res.status(200).send('Unfollowed successfully');
+        if (isFollowing) {
+            // Unfollow
+            await User.findByIdAndUpdate(curUserId, { $pull: { following: targetUserId } });
+            await User.findByIdAndUpdate(targetUserId, { $pull: { followers: curUserId } });
+            return res.status(200).json({ message: 'Unfollowed successfully', action: 'unfollow' });
         } else {
-            return res.status(400).send('Invalid action');
+            // Follow
+            await User.findByIdAndUpdate(curUserId, { $push: { following: targetUserId } });
+            await User.findByIdAndUpdate(targetUserId, { $push: { followers: curUserId } });
+            return res.status(200).json({ message: 'Followed successfully', action: 'follow' });
         }
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+        console.error('Error in followController:', error);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
 };
 
 const getOtherUserProfile = async (req, res) => {
     try {
         const userId = req.params.id;
+
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(404).render('404', { layout: false }); // Render 404 page for invalid ID format
+        }
         if (userId === req.userId) {
             return res.redirect('/profile');
         }
         const user = await User.findById(userId);
         if (!user) {
-            return res.status(404).send('User not found');
+            return res.status(404).render('404', { layout: false }); // Render 404 page for non-existent user
         }
+
+        // Check if the current user is following this user
         let isFollowing = false;
-
         const curUser = await User.findById(req.userId);
-
-        if (req.userId) {
-            // Check if the current user is already following this user
-            const follow = await Follow.findOne({
-                userId: userId,
-                followerId: req.userId,
-            });
-            isFollowing = !!follow;
+        if (curUser) {
+            isFollowing = user.followers.some((follower) => follower.equals(curUser._id));
         }
 
-        // Find all followers for the user
-        const followers = await Follow.find({ userId: userId }).populate('followerId');
+        // Populate followers and following user details
 
-        // Get follower user details
-        const followerUsers = await Promise.all(
-            followers.map(async (follower) => {
-                const followerUser = await User.findById(follower.followerId);
-                return followerUser; // Return the entire user object
-            }),
-        );
-
-        const following = await Follow.find({ followerId: userId }).populate('userId');
-        const followingUsers = await Promise.all(
-            following.map(async (follow) => {
-                const followingUser = await User.findById(follow.userId);
-                return followingUser;
-            }),
-        );
-
+        const populatedUser = await User.findById(userId).populate('followers').populate('following');
+        const followerUsers = populatedUser.followers;
+        const followingUsers = populatedUser.following;
         console.log('ready to render');
         console.log(req.userId);
+
         res.render('profile', {
             title: user.profile.display_name,
             header: user.profile.nick_name,
@@ -173,24 +141,9 @@ const profileController = async (req, res) => {
         }
 
         // Find all followers for the user
-        const followers = await Follow.find({ userId: userId }).populate('followerId');
-
-        // Get follower user details
-        const followerUsers = await Promise.all(
-            followers.map(async (follower) => {
-                const followerUser = await User.findById(follower.followerId);
-                return followerUser; // Return the entire user object
-            }),
-        );
-
-        // Find following users
-        const following = await Follow.find({ followerId: userId }).populate('userId');
-        const followingUsers = await Promise.all(
-            following.map(async (follow) => {
-                const followingUser = await User.findById(follow.userId);
-                return followingUser;
-            }),
-        );
+        const populatedUser = await User.findById(userId).populate('followers').populate('following');
+        const followerUsers = populatedUser.followers;
+        const followingUsers = populatedUser.following;
 
         const posts = await Post.find({ 'user.user_profile_link': `/profile/${userId}` }).sort({ createdAt: -1 });
 
@@ -214,73 +167,71 @@ const profileController = async (req, res) => {
     }
 };
 
-//hàm cũ setup cho gfs
-const uploadAvatar = async (req, res) => {
-    try {
-        const user = await User.findById(req.userId);
-        if (!user) {
-            return res.status(404).send('User not found');
-        }
-        console.log(req.file);
-        // Ensure the file object is defined
-        if (!req.file || !req.file.id) {
-            return res.status(400).send('File  upload failed');
-        }
-        // Find the old avatar file ID
-        const oldAvatarId = user.profile.avt;
+// //hàm cũ setup cho gfs
+// const uploadAvatar = async (req, res) => {
+//     try {
+//         const user = await User.findById(req.userId);
+//         if (!user) {
+//             return res.status(404).send('User not found');
+//         }
+//         console.log(req.file);
+//         // Ensure the file object is defined
+//         if (!req.file || !req.file.id) {
+//             return res.status(400).send('File  upload failed');
+//         }
+//         // Find the old avatar file ID
+//         const oldAvatarId = user.profile.avt;
 
-        // Update user's avatar with the file ID
-        console.log('ready to update avatar');
-        user.profile.avt = req.file.id;
-        await user.save();
-        console.log('Avatar updated successfully');
+//         // Update user's avatar with the file ID
+//         console.log('ready to update avatar');
+//         user.profile.avt = req.file.id;
+//         await user.save();
+//         console.log('Avatar updated successfully');
 
-        // if (oldAvatarId) {
-        //   gfs.delete(new mongoose.Types.ObjectId(oldAvatarId), (err) => {
-        //     if (err) {
-        //       console.error("Failed to delete old avatar:", err);
-        //     } else {
-        //       console.log("Old avatar deleted successfully");
-        //     }
-        //   });
-        // }
+//         // if (oldAvatarId) {
+//         //   gfs.delete(new mongoose.Types.ObjectId(oldAvatarId), (err) => {
+//         //     if (err) {
+//         //       console.error("Failed to delete old avatar:", err);
+//         //     } else {
+//         //       console.log("Old avatar deleted successfully");
+//         //     }
+//         //   });
+//         // }
 
-        res.redirect('/profile');
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-    }
-};
+//         res.redirect('/profile');
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send('Internal Server Error');
+//     }
+// };
 
-//hàm cũ setup cho gfs
-const getAvatar = async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id);
-        if (!user) {
-            return res.status(404).send('User not found');
-        }
+// //hàm cũ setup cho gfs
+// const getAvatar = async (req, res) => {
+//     try {
+//         const user = await User.findById(req.params.id);
+//         if (!user) {
+//             return res.status(404).send('User not found');
+//         }
 
-        if (!user.profile.avt) {
-            return res.status(404).send('No avatar found');
-        }
+//         if (!user.profile.avt) {
+//             return res.status(404).send('No avatar found');
+//         }
 
-        const file = await gfs.find({ _id: new mongoose.Types.ObjectId(user.profile.avt) }).toArray();
-        if (!file || file.length === 0) {
-            return res.status(404).send('No file found');
-        }
+//         const file = await gfs.find({ _id: new mongoose.Types.ObjectId(user.profile.avt) }).toArray();
+//         if (!file || file.length === 0) {
+//             return res.status(404).send('No file found');
+//         }
 
-        gfs.openDownloadStream(new mongoose.Types.ObjectId(user.profile.avt)).pipe(res);
-    } catch (error) {
-        console.error('Some thing wrong with avatar', error);
-        res.status(500).send('Internal Server Error');
-    }
-};
+//         gfs.openDownloadStream(new mongoose.Types.ObjectId(user.profile.avt)).pipe(res);
+//     } catch (error) {
+//         console.error('Some thing wrong with avatar', error);
+//         res.status(500).send('Internal Server Error');
+//     }
+// };
 
 module.exports = {
     profileController,
     updateProfileController,
     getOtherUserProfile,
     followController,
-    uploadAvatar,
-    getAvatar,
 };
