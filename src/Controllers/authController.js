@@ -43,6 +43,7 @@ const loginController = async (req, res) => {
       return res.status(404).json({ message: "Incorrect username or email." });
     }
     const email = user.email;
+
     // so sánh password
     const validPassword = await bcrypt.compare(
       req.body.password,
@@ -127,9 +128,11 @@ const loginController = async (req, res) => {
         sameSite: "strict",
       });
 
-      const { password, ...other } = user._doc;
-
-      res.status(200).json({ ...other, accessToken, message: "Login success" });
+      const { password: _, createdAt, updatedAt, ...userInfo } = user._doc;
+     
+      res
+        .status(200)
+        .json({ user: userInfo, accessToken, message: "Login success" });
     }
   } catch (err) {
     console.error("Error during login:", err);
@@ -353,7 +356,6 @@ const updatePassword = async (req, res) => {
 
 // verify email
 const verifyController = async (req, res) => {
-  
   try {
     const { token } = req.query;
 
@@ -389,7 +391,6 @@ const verifyController = async (req, res) => {
     });
   } catch (err) {
     console.error("Error verifying account:", err);
-    
 
     return res.status(200).render("verify/verify_expired", {
       message: "Your account has been successfully verified!",
