@@ -1,3 +1,5 @@
+const User = require('../Models/User');
+const Post1 = require('../Models/Post1');
 const path = require('path');
 
 // Data dùng cho suggestion user
@@ -40,89 +42,8 @@ const dummyUsers = [
     },
 ];
 
-// Dùng cho các post ở home khi kết nối database có thể tách ra nếu cần ( nhớ sửa các biến trong template hiện tại đang gắn với post hết)
-const dummyPosts = [
-    {
-        user: {
-            username: 'justinbieber',
-            user_display_name: 'Justin Bieber',
-            user_nick_name: 'Pdiddy',
-            user_bio: 'i love fried chicken',
-            avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            user_profile_link: 'src/Public/Pages/another_user.html',
-            user_followers_count: 1000000,
-        },
-        createdAt: '34m',
-        post_quote: 'Followed you',
-        post_images: [
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-        ],
-        post_likes: [3, 2, 9, 6, 7, 3, 2, 9, 6, 7, 3, 2, 9, 6, 7],
-        post_comments: [1],
-        post_repost: [1],
-    },
-    {
-        user: {
-            username: 'justinbieber',
-            user_display_name: 'Justin Bieber',
-            user_nick_name: 'Pdiddy',
-            user_bio: 'i love fried chicken',
-            avatarSrc: 'https://randomuser.me/api/portraits/men/1.jpg',
-            user_profile_link: 'src/Public/Pages/another_user.html',
-            user_followers_count: 1000000,
-        },
-        createdAt: '12m',
-        post_quote: 'CSC13008-Mini-Threads',
-        post_images: [
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-        ],
-        post_likes: [3, 2],
-        post_comments: [1],
-        post_repost: [1],
-    },
-    {
-        user: {
-            username: 'justinbieber',
-            user_display_name: 'Justin Bieber',
-            user_nick_name: 'Pdiddy',
-            user_bio: 'i love fried chicken',
-            avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            user_profile_link: 'src/Public/Pages/another_user.html',
-            user_followers_count: 1000000,
-        },
-        createdAt: '2h',
-        post_quote: 'CSC13008-Mini-Threads',
-        post_images: ['https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png'],
-        post_likes: [3, 2],
-        post_comments: [1],
-        post_repost: [1],
-    },
-    {
-        user: {
-            username: 'justinbieber',
-            user_display_name: 'Justin Bieber',
-            user_nick_name: 'Pdiddy',
-            user_bio: 'i love fried chicken',
-            avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-            user_profile_link: 'src/Public/Pages/another_user.html',
-            user_followers_count: 1000000,
-        },
-        createdAt: '2h',
-        post_quote: 'CSC13008-Mini-Threads',
-        post_images: ['https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png'],
-        post_likes: [3, 2],
-        post_comments: [1],
-        post_repost: [1],
-    },
-];
-const homeController = (req, res) => {
-    const username = req.session.username || 'Binh';
-    const avatarSrc = req.session.avatarSrc || 'https://randomuser.me/api/portraits/men/1.jpg';
+const homeController = async (req, res) => {
+    const posts = await Post1.find().populate('user_id', 'profile').exec();
 
     res.render('home/home', {
         title: 'Mini Threads',
@@ -134,9 +55,10 @@ const homeController = (req, res) => {
             { name: 'Saved', link: '/home/saved' },
         ],
         selectedItem: 'For you',
-        username: username,
-        avatarSrc: avatarSrc,
-        posts: dummyPosts,
+        userid: req.user._id,
+        username: req.user.profile.display_name,
+        avatarSrc: req.user.profile.avt,
+        posts: posts,
         users: dummyUsers,
     });
 };

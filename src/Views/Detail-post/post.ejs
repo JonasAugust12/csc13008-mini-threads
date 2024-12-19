@@ -1,11 +1,13 @@
 <div class="detail-post-wrapper w-full h-full relative">
-    <%- include('post-activity') %>
+    <%- include('post-activity', { post }) %>
 
-    <%- include('main-post', {mainPost}) %>
-
-    <% if (replies.length > 0) { %>
-        <% replies.forEach(function(reply) { %>
-            <%- include('reply-post', {reply}) %>
-        <% }) %>
-    <% } %>
+    <%- include('main-post', {post}) %>
+    <%- include('comment-form', { postId: post._id.toString(), avatarSrc }) %>
+    <div class="comment-wrapper">
+        <% if(comments.length> 0) { %>
+            <% comments.forEach(comment=> { %>
+                <%- include('reply-post', { comment }) %>
+            <% }) %>
+        <% } %>
+    </div>
 </div>

@@ -92,26 +92,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//Like post
 document.addEventListener('DOMContentLoaded', () => {
     const postLikes = document.querySelectorAll('.post-like');
 
     postLikes.forEach((postLike) => {
         postLike.addEventListener('click', () => {
+            const postId = postLike.id.replace('like-button-', ''); // Sửa biến `button` thành `postLike`
             const svg = postLike.querySelector('svg path');
             const likeNum = postLike.querySelector('.like-num');
             const currentLikes = parseInt(likeNum.textContent.trim(), 10);
 
             // Kiểm tra trạng thái hiện tại của nút
             if (svg.getAttribute('fill') === 'red') {
-                // Nếu đang thích -> Bỏ thích
+                // Nếu đã like thì gửi yêu cầu API để "unlike"
+                fetch(`/post/like/${postId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        postId: postId, // Gửi postId trong request body
+                        action: 'unlike', // Đưa thêm action để biết đây là yêu cầu unlike
+                    }),
+                });
+
+                // Bỏ thích trên UI
                 svg.setAttribute('fill', 'none');
                 svg.setAttribute('stroke', 'currentColor');
-                likeNum.textContent = currentLikes - 1;
+                likeNum.textContent = currentLikes - 1; // Giảm số lượt thích
+                likeNum.style.color = '#ccc';
             } else {
-                // Nếu chưa thích -> Thích
+                // Nếu chưa thích thì gửi yêu cầu API để "like"
+                fetch(`/post/like/${postId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        postId: postId, // Gửi postId trong request body
+                        action: 'like', // Đưa thêm action để biết đây là yêu cầu like
+                    }),
+                });
+
+                // Thích trên UI
                 svg.setAttribute('fill', 'red');
                 svg.setAttribute('stroke', 'red');
-                likeNum.textContent = currentLikes + 1;
+                likeNum.textContent = currentLikes + 1; // Tăng số lượt thích
+                likeNum.style.color = 'red';
             }
         });
     });

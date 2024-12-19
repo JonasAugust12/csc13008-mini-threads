@@ -16,29 +16,17 @@
         <div class="mini-post-wrapper pb-2 px-6">
             <div class="mini-post p-4 rounded-lg border-[1px] border-[#f3f5f726]">
                 <div class="mini-post-info flex flex-nowrap items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png" alt=""
+                    <img src="<%= post.user_id.profile.avt %>" alt="avatar"
                         class="main-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover select-none" />
                     <div class="inline-block pl-3 flex-grow">
                         <a href="#"
-                            class="mini-post-username inline-block text-[15px] font-user-weight hover:underline">justinbieber</a>
+                            class="mini-post-username inline-block text-[15px] font-user-weight hover:underline"><%= post.user_id.profile.display_name %></a>
                         <p class="mini-post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
                     </div>
                 </div>
                 <div class="mini-post-content pt-[10px] w-full">
-                    <div class="text-primary-text font-normal break-words text-[15px]">CSC13008-Mini-Threads</div>
+                    <div class="text-primary-text font-normal break-words text-[15px]"><%= post.post_quote || 'Photo' %></div>
                 </div>
-            </div>
-        </div>
-        <div class="post-view w-full flex items-center">
-            <svg aria-label="Views" role="img" viewBox="0 0 24 24" class="w-6 h-6 box-content pl-[30px] mr-[18px]">
-                <title>Views</title>
-                <path fill="white" stroke="white"
-                    d="M23.44141,11.81885C23.41309,11.74072,20.542,4,12,4S.58691,11.74072.55859,11.81885a1,1,0,0,0,1.88184.67724,10.28206,10.28206,0,0,1,19.11914-.00048.99992.99992,0,0,0,1.88184-.67676Zm-7.124,2.36853a3.35859,3.35859,0,0,1-1.541-.101,3.55981,3.55981,0,0,1-2.364-2.361,3.35086,3.35086,0,0,1-.103-1.542.99093.99093,0,0,0-1.134-1.107,5.42733,5.42733,0,0,0-3.733,2.339,5.50019,5.50019,0,0,0,8.44605,6.971,5.402,5.402,0,0,0,1.53595-3.091A.98311.98311,0,0,0,16.31738,14.18738Z">
-                </path>
-            </svg>
-            <div class="flex w-full justify-between py-3 pr-6 text-15px font-semibold">
-                <span>Views</span>
-                <span>61</span>
             </div>
         </div>
         <div class="post-like w-full flex items-center">
@@ -49,88 +37,52 @@
                     stroke-width="1.25"></path>
             </svg>
             <div
-                class="flex w-full justify-between py-3 pr-6 text-15px font-semibold border-t-[1px] border-[#f3f5f726]">
+                class="flex w-full justify-between py-3 pr-6 text-15px font-semibold border-[#f3f5f726]">
                 <span>Like</span>
-                <span>2</span>
+                <span> <%= post.post_likes.length %></span>
             </div>
         </div>
-        <div class="post-user-liked w-full flex mt-4px relative cursor-pointer">
-            <div class="user-liked-avatar py-3 pl-6 pr-0 tbl:pl-6 select-none">
-                <a href="" class="block w-[41px] pt-1">
-                    <div class="w-9 h-9 relative">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
-                            alt="avatar" class="w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover" />
-                        <div class="absolute top-5 right-[-4px]">
+        <% if (post.post_likes.length > 0) { %>
+            <% post.post_likes.forEach((user, index) => { %>
+                <div class="post-user-liked w-full flex mt-4px relative cursor-pointer">
+                    <div class="user-liked-avatar py-3 pl-6 pr-0 tbl:pl-6 select-none">
+                        <a href="" class="block w-[41px] pt-1">
+                            <div class="w-9 h-9 relative">
+                                <img src="<%= user.profile.avt %>"
+                                    alt="avatar" class="w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover" />
+                                <div class="absolute top-5 right-[-4px]">
+                                    <div class="bg-[#FF007A] w-[18px] h-[18px] border-[1px] border-[#101010] rounded-full box-content">
+                                        <svg aria-label="" role="img" viewBox="0 0 18 18">
+                                            <title></title>
+                                            <path fill="white"
+                                                d="M5 8.33956C5 6.84296 6.07645 5.75 7.48174 5.75C8.08884 5.75 8.61175 5.95938 9.00094 6.30299C9.3914 5.95863 9.91188 5.75 10.5183 5.75C11.9276 5.75 13 6.84345 13 8.33956C13 9.20812 12.6297 10.037 12.0266 10.7947C11.4237 11.5521 10.5712 12.2609 9.5565 12.9023L9.55379 12.904C9.48997 12.9437 9.41108 12.9882 9.32747 13.0242C9.25284 13.0563 9.1332 13.1001 9 13.1001C8.86687 13.1001 8.74693 13.0551 8.67518 13.0242C8.59318 12.9889 8.51482 12.9453 8.45151 12.9072L8.44748 12.9048L8.4435 12.9023C7.42882 12.2609 6.57626 11.5521 5.97338 10.7947C5.37032 10.037 5 9.20812 5 8.33956Z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="user-liked-content-container-1 w-full border-t-[1px] border-border-color pr-6">
+                        <div class="user-liked-content-container-2 py-3 pl-1 flex justify-between items-center">
+                            <div class="flex-grow">
+                                <a href="#"
+                                    class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"><%= user.profile.display_name %></a>
+                                <p
+                                    class="user-liked-timestamp overflow-hidden leading-[22.5px] inline-block text-[15px] text-secondary-text">
+                                    34m
+                                </p>
+                                <p class="user-liked-pickedtag text-[15px] font-normal text-secondary-text"> <%= user.profile.nick_name %></p>
+                            </div>
                             <div
-                                class="bg-[#FF007A] w-[18px] h-[18px] border-[1px] border-[#101010] rounded-full box-content">
-                                <svg aria-label="" role="img" viewBox="0 0 18 18">
-                                    <title></title>
-                                    <path fill="white"
-                                        d="M5 8.33956C5 6.84296 6.07645 5.75 7.48174 5.75C8.08884 5.75 8.61175 5.95938 9.00094 6.30299C9.3914 5.95863 9.91188 5.75 10.5183 5.75C11.9276 5.75 13 6.84345 13 8.33956C13 9.20812 12.6297 10.037 12.0266 10.7947C11.4237 11.5521 10.5712 12.2609 9.5565 12.9023L9.55379 12.904C9.48997 12.9437 9.41108 12.9882 9.32747 13.0242C9.25284 13.0563 9.1332 13.1001 9 13.1001C8.86687 13.1001 8.74693 13.0551 8.67518 13.0242C8.59318 12.9889 8.51482 12.9453 8.45151 12.9072L8.44748 12.9048L8.4435 12.9023C7.42882 12.2609 6.57626 11.5521 5.97338 10.7947C5.37032 10.037 5 9.20812 5 8.33956Z">
-                                    </path>
-                                </svg>
+                                class="user-liked-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight text-primary-text select-none">
+                                Follow
                             </div>
                         </div>
                     </div>
-                </a>
-            </div>
-            <div class="user-liked-content-container-1 w-full border-t-[1px] border-border-color pr-6">
-                <div class="user-liked-content-container-2 py-3 pl-1 flex justify-between items-center">
-                    <div class="flex-grow">
-                        <a href="#"
-                            class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline">justinbieber</a>
-                        <p
-                            class="user-liked-timestamp overflow-hidden leading-[22.5px] inline-block text-[15px] text-secondary-text">
-                            34m
-                        </p>
-                        <p class="user-liked-pickedtag text-[15px] font-normal text-secondary-text">Justin Bieber
-                        </p>
-                    </div>
-                    <div
-                        class="user-liked-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight text-primary-text select-none">
-                        Follow
-                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="post-user-liked w-full flex mt-4px relative cursor-pointer">
-            <div class="user-liked-avatar py-3 pl-6 pr-0 tbl:pl-6 select-none">
-                <a href="" class="block w-[41px] pt-1">
-                    <div class="w-9 h-9 relative">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png"
-                            alt="avatar" class="w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover" />
-                        <div class="absolute top-5 right-[-4px]">
-                            <div
-                                class="bg-[#FF007A] w-[18px] h-[18px] border-[1px] border-[#101010] rounded-full box-content">
-                                <svg aria-label="" role="img" viewBox="0 0 18 18">
-                                    <title></title>
-                                    <path fill="white"
-                                        d="M5 8.33956C5 6.84296 6.07645 5.75 7.48174 5.75C8.08884 5.75 8.61175 5.95938 9.00094 6.30299C9.3914 5.95863 9.91188 5.75 10.5183 5.75C11.9276 5.75 13 6.84345 13 8.33956C13 9.20812 12.6297 10.037 12.0266 10.7947C11.4237 11.5521 10.5712 12.2609 9.5565 12.9023L9.55379 12.904C9.48997 12.9437 9.41108 12.9882 9.32747 13.0242C9.25284 13.0563 9.1332 13.1001 9 13.1001C8.86687 13.1001 8.74693 13.0551 8.67518 13.0242C8.59318 12.9889 8.51482 12.9453 8.45151 12.9072L8.44748 12.9048L8.4435 12.9023C7.42882 12.2609 6.57626 11.5521 5.97338 10.7947C5.37032 10.037 5 9.20812 5 8.33956Z">
-                                    </path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="user-liked-content-container-1 w-full border-t-[1px] border-border-color pr-6">
-                <div class="user-liked-content-container-2 py-3 pl-1 flex justify-between items-center">
-                    <div class="flex-grow">
-                        <a href="#"
-                            class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline">justinbieber</a>
-                        <p
-                            class="user-liked-timestamp overflow-hidden leading-[22.5px] inline-block text-[15px] text-secondary-text">
-                            34m
-                        </p>
-                        <p class="user-liked-pickedtag text-[15px] font-normal text-secondary-text">Justin Bieber
-                        </p>
-                    </div>
-                    <div
-                        class="user-liked-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight text-secondary-text select-none">
-                        Following
-                    </div>
-                </div>
-            </div>
-        </div>
+            <% }) %>
+        <% } %>
+       
     </div>
 </div>

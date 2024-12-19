@@ -25,6 +25,28 @@ const uploadImageToCloudinary = (fileBuffer, folder) => {
     });
 };
 
+const uploadImage = async (file) => {
+    if (!file) {
+        throw new Error('File not found');
+    }
+    const uploadedImage = await new Promise((resolve, reject) => {
+        cloudinary.uploader
+            .upload_stream(
+                {
+                    resource_type: 'image',
+                    folder: 'phy000007',
+                    overwrite: true,
+                },
+                (error, result) => {
+                    if (error) return reject(error);
+                    resolve(result);
+                },
+            )
+            .end(file.buffer);
+    });
+    return uploadedImage;
+};
+
 const uploadAvatar = async (req, res) => {
     const file = req.file;
     if (!file) {
@@ -63,26 +85,8 @@ const uploadPostImage = async (req) => {
     });
 };
 
-const uploadCommentImage = async (req, res) => {
-    const file = req.file;
-    if (!file) {
-        return res.status(400).json({ message: 'File not found' });
-    }
-
-    try {
-        const uploadedImage = await uploadImageToCloudinary(file.buffer, 'csc13008/comment');
-        return res.status(200).json({
-            message: 'Comment image uploaded successfully',
-            url: uploadedImage.secure_url,
-        });
-    } catch (error) {
-        console.error('Comment image upload error:', error);
-        return res.status(500).json({ message: error.message });
-    }
-};
-
 module.exports = {
     uploadAvatar,
     uploadPostImage,
-    uploadCommentImage,
+    uploadImage,
 };

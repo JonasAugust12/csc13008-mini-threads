@@ -33,10 +33,13 @@ const moreList = document.querySelector('.main-post-more-list');
 
 // Hàm để hiển thị và ẩn danh sách
 function toggleMoreList(event) {
-    if (moreList.style.display === 'flex') {
-        moreList.style.display = 'none';
+    console.log(moreList);
+    if (moreList.classList.contains('flex')) {
+        moreList.classList.remove('flex');
+        moreList.classList.add('hidden');
     } else {
-        moreList.style.display = 'flex';
+        moreList.classList.remove('hidden');
+        moreList.classList.add('flex');
     }
 }
 
@@ -49,6 +52,7 @@ document.addEventListener('click', (event) => {
 
 // Thêm sự kiện click vào nút More để hiển thị danh sách
 moreButton.addEventListener('click', (event) => {
+    console.log('click');
     event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
     toggleMoreList();
 });
