@@ -80,6 +80,8 @@ const getOtherUserProfile = async (req, res) => {
         const populatedUser = await User.findById(userId).populate('followers').populate('following');
         const followerUsers = populatedUser.followers;
         const followingUsers = populatedUser.following;
+
+        const posts = await Post.find({ 'user.user_profile_link': `/profile/${userId}` }).sort({ createdAt: -1 });
         console.log('ready to render');
         console.log(req.userId);
 
@@ -94,8 +96,8 @@ const getOtherUserProfile = async (req, res) => {
             followerUsers: followerUsers,
             followingUsers: followingUsers,
             type: 'guest',
+            posts: posts,
             isFollowing: isFollowing, // Pass a boolean indicating if the current user is following this user
-            isAuthenticated: !!req.userId,
             curUserId: curUser._id ? curUser._id : null, // Pass a boolean indicating if the user is authenticated
         });
     } catch (error) {
@@ -154,7 +156,7 @@ const profileController = async (req, res) => {
             selectedItem: null,
             user: user,
             username: user.username,
-            avatarSrc: user.profile.avt ? `/profile/avatar/${user._id}` : '/Img/UserIcon.jpg',
+            avatarSrc: user.profile.avt,
             followerUsers: followerUsers,
             followingUsers: followingUsers,
             type: 'owner',

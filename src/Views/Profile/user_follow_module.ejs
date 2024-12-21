@@ -29,8 +29,13 @@
                 <button
                     type="button"
                     class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
+                    onClick="handleFollowClick('<%= user._id %>', event);"
                 >
-                    Follow back
+                    <% if (user.followers.some(follower => follower.equals(curUserId))) { %>
+                        Following
+                    <% } else { %>
+                        Follow back
+                    <% } %>
                 </button>
             <% } %>
         </div>
@@ -42,3 +47,5 @@
         </div>
     </div>
 </div>
+
+<script src="/Js/profile.js"></script>

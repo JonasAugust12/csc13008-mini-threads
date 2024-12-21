@@ -44,19 +44,27 @@
             <!-- list follower -->
 
             <div id="followers-list" class="list-follower w-full h-full tbl:bg-[#181818] border-b border-gray-700 rounded-b-3xl">
-                <%= console.log(followerUsers) %>
-                <% followerUsers.forEach(followUser=> { %>
-                    <!-- lấy module từ Views/Partials/user_follow_module -->
-                    <%- include('profile/user_follow_module', { user: followUser, curUserId: curUserId }) %>
-                        <% }) %>
+                <% if (followerUsers.length > 0) { %>
+                    <% followerUsers.forEach(followUser=> { %>
+                        <%- include('profile/user_follow_module', { user: followUser, curUserId: curUserId }) %>
+                    <% }) %>
+                <% } else { %>
+                    <div class="p-4 text-center text-[#777777] ">
+                        <p>There are currently no followers.</p>
+                    </div>
+                <% } %>
             </div>
 
             <div id="following-list" class="list-follower w-full h-full tbl:bg-[#181818] border-b border-gray-700 rounded-b-3xl hidden">
-                <%= console.log(followingUsers) %>
-                <% followingUsers.forEach(followingUser=> { %>
-                    <!-- lấy module từ Views/Partials/user_follow_module -->
-                    <%- include('profile/user_follow_module', { user: followingUser, curUserId: curUserId }) %>
-                        <% }) %>
+                <% if (followingUsers.length > 0) { %>
+                    <% followingUsers.forEach(followingUser=> { %>
+                        <%- include('profile/user_follow_module', { user: followingUser, curUserId: curUserId }) %>
+                    <% }) %>
+                <% } else { %>
+                    <div class="p-4 text-center text-[#777777] ">
+                        <p><%= user.profile.display_name %> currently not following anyone.</p>
+                    </div>
+                <% } %>
             </div>
         </div>
         <div class="profile-wrapper relative w-full h-full">
@@ -71,18 +79,26 @@
                         <div class="information__bio text-sm font-normal mb-4"><%=user.profile.bio%></div>
                         <div class="information__follower flex flex-row gap-1 mb-8 text-gray-500">
                             <ul class="follower__img flex flex-row cursor-pointer">
-                                <li class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full" style="
-                                                        background-image: url('https://th.bing.com/th/id/OIP.P6RqRgE_lh77mF6mktc_LgHaLH?rs=1&pid=ImgDetMain');
-                                                        left: 2px;
-                                                    "></li>
-                                <li class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full" style="
-                                                        background-image: url('https://th.bing.com/th/id/R.b28868904888f28f32264a83f29d5b4a?rik=MeIviuEyQSaLbw&pid=ImgRaw&r=0');
-                                                        left: -10px;
-                                                    "></li>
-                                <li class="follower__img__item h-4 w-4 bg-cover relative rounded-full" style="
-                                                        background-image: url('https://dailytrust.com/wp-content/uploads/2022/12/Neymar.jpg');
-                                                        left: -20px;
-                                                    "></li>
+                                <!-- không tạo loop vì truyền biến theo loop vô style khá khó không tối ưu nếu để nó lồng if vô thì sẽ tối ưu hơn một xíu nhưng không đáng kể kiểu này dễ đọc code hơn -->
+                                <% if (followerUsers[0]?.profile?.avt) { %>
+                                    <li 
+                                        class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
+                                        style="background-image: url('<%= followerUsers[0].profile.avt %>'); left: 2px;"
+                                    ></li>
+                                <% } %>
+                                <% if (followerUsers[1]?.profile?.avt) { %>
+                                    <li 
+                                        class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
+                                        style="background-image: url('<%= followerUsers[1].profile.avt %>'); left: -10px;"
+                                    ></li>
+                                <% } %>
+                                <% if (followerUsers[2]?.profile?.avt) { %>
+                                    <li 
+                                        class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
+                                        style="background-image: url('<%= followerUsers[2].profile.avt %>'); left: -20px;"
+                                    ></li>
+                                <% } %>
+
                             </ul>
                             <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer"><%=user.followers.length%></div>
                             <div class="follower__text text-sm font-normal relative cursor-pointer">followers</div>
@@ -134,7 +150,7 @@
                         class="follow-btn1 block h-8 text-sm ml-6 mr-6 text-center cursor-pointer border rounded-lg"
                         style="border: 2px solid rgba(147, 140, 140, 0.4)"
                         data-user-id="<%= user._id %>"
-                        onClick="handleFollowClick('<%= user._id %>')"
+                        onClick="handleFollowClick('<%= user._id %>', event)"
                     >
                         <p class="mt-1"><%= isFollowing ? "Following" : "Follow" %></p>
                     </div>
@@ -171,13 +187,13 @@
             </div>
 
             <!-- post : lấy module từ trang home thay vào-->
-            <!-- <div class="my-posts"> -->
-                <% //
-                    //posts.forEach(post => { 
+            <div class="my-posts">
+                <% 
+                    posts.forEach(post => { 
                 %>
-                    <%- //include('home/home-post', { post: post }) %>
-                <% //}) %>
-            <!-- </div> -->
+                    <%- include('home/home-post', { post: post }) %>
+                <% }) %>
+            </div>
             
 
 
@@ -185,28 +201,28 @@
 </div>
 
 <script>
-    function handleFollowClick(userId) {
-        console.log("click follow");
-        fetch(`/profile/follow/${userId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include' // Include cookies in the request
-        })
-        .then(response => {
-            if (response.ok) {
-                window.location.reload();
-                document.querySelector('.follow-btn1 p').textContent = 'Following';
-            } else {
-                alert('Failed to follow');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred');
-        });
-    }
+    // function handleFollowClick(userId) {
+    //     console.log("click follow");
+    //     fetch(`/profile/follow/${userId}`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         credentials: 'include' // Include cookies in the request
+    //     })
+    //     .then(response => {
+    //         if (response.ok) {
+    //             window.location.reload();
+    //             document.querySelector('.follow-btn1 p').textContent = 'Following';
+    //         } else {
+    //             alert('Failed to follow');
+    //         }
+    //     })
+    //     .catch(error => {
+    //         console.error('Error:', error);
+    //         alert('An error occurred');
+    //     });
+    // }
 
     function handleAvatarClick() {
         const type = '<%= type %>';
@@ -308,3 +324,5 @@
         }
     });
 </script>
+
+<script src="/Js/profile.js"></script>
