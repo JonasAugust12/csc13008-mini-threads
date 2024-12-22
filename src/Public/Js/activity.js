@@ -40,3 +40,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Like và unlike comment (tương tự với cái bên detail-post.js)
+document.addEventListener('DOMContentLoaded', () => {
+    const commentLikes = document.querySelectorAll('.like-comment');
+
+    commentLikes.forEach((likeButton) => {
+        likeButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const commentId = likeButton.id.replace('like-comment-', '');
+            const svg = likeButton.querySelector('svg path');
+            const likeNum = likeButton.querySelector('.like-comment-num');
+            const currentLikes = parseInt(likeNum.textContent.trim(), 10) || 0;
+
+            if (svg.getAttribute('fill') === 'red') {
+                // Unlike comment
+                fetch(`/post/like-comment/${commentId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'unlike' }),
+                }).then(() => {
+                    svg.setAttribute('fill', 'none');
+                    svg.setAttribute('stroke', 'currentColor');
+                    likeNum.textContent = currentLikes - 1;
+                    if (currentLikes - 1 === 0) likeNum.classList.add('hidden');
+                });
+            } else {
+                // Like comment
+                fetch(`/post/like-comment/${commentId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'like' }),
+                }).then(() => {
+                    svg.setAttribute('fill', 'red');
+                    svg.setAttribute('stroke', 'red');
+                    likeNum.textContent = currentLikes + 1;
+                    likeNum.classList.remove('hidden');
+                });
+            }
+        });
+    });
+});

@@ -1,4 +1,4 @@
-<div class="post-container flex px-6 py-4 border-t border-border-color cursor-pointer">
+<div class="post-container flex px-6 py-4 border-t border-border-color cursor-pointer" post-id="post-id-<%= post._id.toString() %>">
     <img
         src="<%= post.user_id.profile.avt %>"
         class="w-9 h-9 rounded-full mt-1 select-none"
@@ -8,10 +8,9 @@
         <div class="post-top flex w-full justify-between">
             <div class="post-user-info flex gap-2">
                 <%# include('../Partials/hover-user', {user: post.user}) %>
-                <span class="hover:underline text-[15px] font-user-weight"
-                    onclick="window.location.href='/profile/<%= post.user_id._id.toString() %>'">
+                <a href="/profile/<%= post.user_id._id.toString() %>" class="hover:underline text-[15px] font-user-weight">
                     <%= post.user_id.profile.display_name %>
-                </span>
+                </a>
                 <div class="post-time-stamp text-[15px] text-secondary-text" data-created-at="<%= post.createdAt %>"></div>
             </div>
             <div class="main-post-more-btn p-1 hover:bg-[#222222] rounded-[20   px] relative">
@@ -37,136 +36,29 @@
                         <div class="w-full py-3 flex justify-center tbl:hidden">
                             <div class="w-10 h-1 bg-secondary-text rounded-full"></div>
                         </div>
+                        <% if (post.user_id._id.toString() === userid.toString()) { %>
+                            <div
+                                class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent"
+                            >
+                                <div
+                                    post-id="delete-post-<%= post._id.toString() %>"
+                                    class="delete-post min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] text-red-600 tbl:p-3"
+                                >
+                                    <span>Delete</span>
+                                    <svg aria-label="" role="img" viewBox="0 0 20 20" class="w-5 h-5">
+                                        <title></title>
+                                        <path d="M6.75 3.5V2.5C6.75 1.67157 7.42157 1 8.25 1H11.75C12.5784 1 13.25 1.67157 13.25 2.5V3.5" fill="none"
+                                            stroke="red" stroke-linecap="round" stroke-width="1.5"></path>
+                                        <path
+                                            d="M3.75 4L4.54449 15.5202C4.61689 16.57 4.6531 17.0949 4.88062 17.4928C5.08095 17.8431 5.38256 18.1246 5.74584 18.3004C6.15846 18.5 6.68461 18.5 7.73691 18.5H12.2631C13.3154 18.5 13.8415 18.5 14.2542 18.3004C14.6174 18.1246 14.9191 17.8431 15.1194 17.4928C15.3469 17.0949 15.3831 16.57 15.4555 15.5202L16.25 4M3.75 4H16.25M3.75 4H1.75M16.25 4H18.25"
+                                            fill="none" stroke="red" stroke-linecap="round" stroke-width="1.5"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        <% } %>
                         <div
-                            class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent"
-                        >
-                            <div
-                                class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer border-b-[1px] border-[#f3f5f726] hover:bg-[#212121] tbl:p-3 tbl:border-b-0"
-                            >
-                                <span>Save</span>
-                                <svg aria-label="" role="img" viewBox="0 0 20 20" class="w-5 h-5">
-                                    <title></title>
-                                    <path
-                                        stroke="white"
-                                        fill="none"
-                                        d="M3.40039 17.7891V3.94995C3.40039 2.43117 4.6316 1.19995 6.15039 1.19995H13.8448C15.3636 1.19995 16.5948 2.43117 16.5948 3.94995V17.6516C16.5948 18.592 15.4579 19.063 14.7929 18.398L10.6201 14.2252C10.4198 14.0249 10.097 14.0184 9.88889 14.2106L5.17191 18.5647C4.49575 19.1888 3.40039 18.7093 3.40039 17.7891Z"
-                                    ></path>
-                                </svg>
-                            </div>
-                            <div
-                                class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] tbl:p-3"
-                            >
-                                <span>Not interested</span>
-                                <svg
-                                    aria-label=""
-                                    role="img"
-                                    viewBox="0 0 20 20"
-                                    class="x1lliihq x135i0dr x2lah0s x1f5funs x1n2onr6 x1bl4301 x1yxark7 w-5 h-5"
-                                    style="--fill: currentColor; --height: 20px; --width: 20px"
-                                >
-                                    <title></title>
-                                    <path
-                                        d="M1.5 1.75L18.5 18.25"
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-width="1.5"
-                                    ></path>
-                                    <path
-                                        d="M3.47414 6.27892C3.20456 6.01727 2.78029 5.99602 2.50117 6.24747C1.41059 7.22999 0.587673 8.33683 0.139959 9.36712C-0.0338603 9.76712 -0.0300002 10.2108 0.129836 10.601C1.24049 13.3126 4.48326 16.75 10.0001 16.75C10.8741 16.75 11.68 16.6639 12.4235 16.5086C13.0002 16.3882 13.1633 15.6831 12.7405 15.2728V15.2728C12.5453 15.0833 12.2667 15.0101 11.9998 15.0626C11.3839 15.1836 10.7188 15.25 10.0001 15.25C5.18515 15.25 2.43521 12.272 1.51791 10.0325C1.50596 10.0033 1.50888 9.98059 1.51568 9.96494C1.85715 9.17913 2.51757 8.26748 3.43478 7.42578C3.76747 7.12048 3.79816 6.59341 3.47414 6.27892V6.27892ZM16.5428 13.7373C16.2272 13.431 16.2465 12.9204 16.5569 12.6088C17.3554 11.8075 17.9704 10.9194 18.4571 10.0897C18.4939 10.0269 18.489 9.95912 18.4597 9.91192C17.0155 7.58585 14.0306 4.75 10.0001 4.75C9.33037 4.75 8.67997 4.82776 8.05567 4.96835C7.78456 5.02941 7.49807 4.95861 7.29866 4.76506V4.76506C6.8837 4.36231 7.03604 3.66842 7.59858 3.53444C8.36334 3.35229 9.16684 3.25 10.0001 3.25C14.7628 3.25 18.1518 6.57225 19.734 9.12072C20.066 9.65543 20.0607 10.3204 19.7509 10.8485C19.206 11.7776 18.4889 12.8103 17.5356 13.7488C17.26 14.0201 16.8203 14.0067 16.5428 13.7373V13.7373Z"
-                                        fill="currentColor"
-                                    ></path>
-                                    <path
-                                        d="M6.36296 9.08288C6.28918 9.37637 6.25 9.68361 6.25 10C6.25 12.0711 7.92893 13.75 10 13.75C10.3555 13.75 10.6994 13.7005 11.0253 13.6081L6.36296 9.08288ZM13.637 10.9171C13.7108 10.6236 13.75 10.3164 13.75 10C13.75 7.92893 12.0711 6.25 10 6.25C9.6445 6.25 9.30056 6.29947 8.97468 6.39189L13.637 10.9171Z"
-                                        fill="currentColor"
-                                    ></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div
-                            class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-t-[1px] tbl:border-border-color"
-                        >
-                            <div
-                                class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] border-b-[1px] border-[#f3f5f726] tbl:p-3 tbl:border-b-0"
-                            >
-                                <span>Mute</span>
-                                <svg
-                                    aria-label=""
-                                    role="img"
-                                    viewBox="0 0 20 20"
-                                    class="x1lliihq x135i0dr x2lah0s x1f5funs x1n2onr6 x1bl4301 x1yxark7 w-5 h-5"
-                                    style="--fill: currentColor; --height: 20px; --width: 20px"
-                                >
-                                    <title></title>
-                                    <circle
-                                        cx="10"
-                                        cy="4.5"
-                                        fill="none"
-                                        r="3.75"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                    ></circle>
-                                    <path
-                                        d="M10 12C10 12.4142 10.3358 12.75 10.75 12.75H12.75C13.4705 12.75 13.7581 12.7516 13.9895 12.7821C15.6722 13.0036 16.9964 14.3278 17.2179 16.0105C17.2484 16.2419 17.25 16.5295 17.25 17.25C17.25 17.5061 17.2484 17.5614 17.2436 17.5979C17.1993 17.9345 16.9344 18.1993 16.5979 18.2436C16.5614 18.2484 16.506 18.25 16.25 18.25H12.75C12.3358 18.25 12 18.5858 12 19V19C12 19.4142 12.3358 19.75 12.75 19.75H16.25L16.2919 19.75C16.4823 19.7501 16.6459 19.7502 16.7937 19.7308C17.8033 19.5978 18.5978 18.8033 18.7308 17.7937C18.7502 17.646 18.7501 17.4823 18.75 17.292V17.292L18.75 17.25L18.75 17.1844C18.7501 16.5504 18.7501 16.1566 18.7051 15.8147C18.3949 13.4589 16.5411 11.6051 14.1853 11.2949C13.8435 11.2499 13.4497 11.25 12.8156 11.25L12.75 11.25H10.75C10.3358 11.25 10 11.5858 10 12V12Z"
-                                        fill="currentColor"
-                                    ></path>
-                                    <path
-                                        d="M9.67859 15.4265L9.67859 15.4265C9.80959 15.0264 9.60635 14.6807 9.3748 14.5182C9.14085 14.3541 8.73272 14.2784 8.39838 14.5588C8.00033 14.8927 7.3258 15.1492 6.67146 15.1232C6.12745 15.1016 5.60071 14.7228 5.27564 14.094C4.95018 13.4643 4.91366 12.7417 5.18479 12.2126C5.2292 12.126 5.28288 12.0404 5.36407 11.9124L5.36741 11.9072C5.44401 11.7864 5.53932 11.6362 5.63571 11.4569C5.96639 10.8416 5.39228 10.0925 4.68842 10.3197L4.91883 11.0334L4.68842 10.3197C3.07583 10.8403 1.45517 12.3652 1.26765 14.3326C1.09773 16.1155 2.1977 17.925 3.85499 18.5991C4.76781 18.9704 5.92954 19.1116 7.04056 18.6508C8.17268 18.1813 9.11634 17.1436 9.67859 15.4265Z"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                    ></path>
-                                </svg>
-                            </div>
-
-                            <div
-                                class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] text-red-600 tbl:p-3 border-b-[1px] border-[#f3f5f726] tbl:border-b-0"
-                            >
-                                <span>Block</span>
-                                <svg
-                                    aria-label=""
-                                    role="img"
-                                    viewBox="0 0 20 20"
-                                    class="x1lliihq x135i0dr x2lah0s x1f5funs x1n2onr6 x1bl4301 xhci195 w-5 h-5"
-                                    style="--fill: currentColor; --height: 20px; --width: 20px"
-                                >
-                                    <title></title>
-                                    <path
-                                        d="M3 3L18.5 18"
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-width="1.5"
-                                    ></path>
-                                    <path
-                                        d="M15 19C15 18.5858 14.6642 18.25 14.25 18.25H3.75003C3.49398 18.25 3.43859 18.2484 3.40213 18.2436C3.06558 18.1993 2.80075 17.9345 2.75645 17.5979C2.75165 17.5614 2.75003 17.5061 2.75003 17.25C2.75003 16.5295 2.75165 16.2419 2.78211 16.0105C3.00365 14.3278 4.32781 13.0036 6.01056 12.7821C6.24196 12.7516 6.52956 12.75 7.25003 12.75H8.12394C8.79958 12.75 9.13073 11.9267 8.64327 11.4589V11.4589C8.5036 11.3249 8.31752 11.25 8.12394 11.25H7.25003L7.18445 11.25C6.55037 11.25 6.15658 11.2499 5.81477 11.2949C3.45892 11.6051 1.6051 13.4589 1.29494 15.8147C1.24994 16.1566 1.24997 16.5504 1.25003 17.1844L1.25003 17.25L1.25001 17.2919C1.24991 17.4823 1.24983 17.6459 1.26928 17.7937C1.4022 18.8033 2.19669 19.5978 3.20635 19.7308C3.3541 19.7502 3.51777 19.7501 3.70809 19.75L3.75003 19.75H14.25C14.6642 19.75 15 19.4142 15 19V19ZM12 11.25V11.25C12.0623 11.25 12.0923 11.3249 12.0481 11.3688L11.6151 11.7984C11.4915 11.921 11.2927 11.9226 11.1671 11.8021V11.8021C10.9587 11.602 11.1003 11.25 11.3892 11.25H12Z"
-                                        fill="currentColor"
-                                    ></path>
-                                    <path
-                                        d="M5.56721 4.47188C5.54196 4.44749 5.5 4.4649 5.5 4.5V4.5C5.5 6.98528 7.51472 9 10 9V9C10.0943 9 10.1373 8.88672 10.0694 8.8212L5.56721 4.47188ZM11.6174 8.23094C11.8191 8.4258 12.1236 8.47833 12.3621 8.33092C13.6451 7.53815 14.5 6.11891 14.5 4.5C14.5 2.01472 12.4853 0 10 0C8.32548 0 6.86458 0.914631 6.08962 2.27157C5.95057 2.51505 6.0136 2.81751 6.21527 3.01232V3.01232C6.59103 3.37532 7.25278 3.18476 7.55625 2.75946C8.10022 1.99708 8.99206 1.5 10 1.5C11.6569 1.5 13 2.84315 13 4.5C13 5.47083 12.5389 6.33395 11.8237 6.88227C11.4091 7.20012 11.2416 7.86798 11.6174 8.23094V8.23094Z"
-                                        fill="currentColor"
-                                    ></path>
-                                </svg>
-                            </div>
-                            <div
-                                class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] text-red-600 tbl:p-3"
-                            >
-                                <span>Report</span>
-                                <svg
-                                    aria-label=""
-                                    role="img"
-                                    viewBox="0 0 24 24"
-                                    class="x1lliihq x135i0dr x2lah0s x1f5funs x1n2onr6 x1bl4301 xhci195 w-5 h-5"
-                                    style="--fill: currentColor; --height: 20px; --width: 20px"
-                                >
-                                    <title></title>
-                                    <path
-                                        d="M18.001 1h-12a5.006 5.006 0 0 0-5 5v9.005a5.006 5.006 0 0 0 5 5h2.514l2.789 2.712a1 1 0 0 0 1.394 0l2.787-2.712h2.516a5.006 5.006 0 0 0 5-5V6a5.006 5.006 0 0 0-5-5Zm3 14.005a3.003 3.003 0 0 1-3 3h-2.936a1 1 0 0 0-.79.387l-2.274 2.212-2.276-2.212a1 1 0 0 0-.79-.387H6a3.003 3.003 0 0 1-3-3V6a3.003 3.003 0 0 1 3-3h12a3.003 3.003 0 0 1 3 3Zm-9-1.66a1.229 1.229 0 1 0 1.228 1.228A1.23 1.23 0 0 0 12 13.344Zm0-8.117a1.274 1.274 0 0 0-.933.396 1.108 1.108 0 0 0-.3.838l.347 4.861a.892.892 0 0 0 1.77 0l.348-4.86a1.106 1.106 0 0 0-.3-.838A1.272 1.272 0 0 0 12 5.228Z"
-                                        fill="currentColor"
-                                    ></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div
-                            class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-t-[1px] tbl:border-border-color"
+                            onclick="copyLinkToClipboard('/post/<%= post._id %>')"
+                            class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-border-color <%= post.user_id._id.toString()===userid.toString() ? 'border-t-[1px]' : '' %>"
                         >
                             <div
                                 class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] tbl:p-3"
@@ -205,7 +97,7 @@
         <div class="post-content-container flex flex-col">
             <div class="post-text w-full"><%= post.post_quote%></div>
             <div
-                class="replies-img max-w-full m-h-[430px] mt-2 overflow-x-auto custom-scrollbar object-cover "
+                class="replies-img max-w-full mt-2 overflow-x-auto custom-scrollbar object-cover "
             >
                 <img
                     src="<%= post.post_image %>"
@@ -233,7 +125,7 @@
                             stroke-width="1.25"
                         ></path>
                     </svg>
-                    <div class="like-num text-[#<%= post.post_likes.includes(userid) ? 'ff0000' : 'ccc' %>]" text-[13px] font-normal pl-1"><%= post.post_likes.length%></div>
+                    <div class="like-num text-[#<%= post.post_likes.includes(userid) ? 'ff0000' : 'ccc' %>] text-[13px] font-normal pl-1 <%= post.post_likes.length===0 ? 'hidden' : '' %>"><%= post.post_likes.length%></div>
                 </div>
             <div
                 onclick="window.location.href='/post/<%= post._id.toString() %>'"
@@ -255,7 +147,9 @@
                         stroke-width="1.25"
                     ></path>
                 </svg>
-                <div class="comment-num text-[#ccc] text-[13px] font-normal pl-1"><%= post.post_comments.length%></div>
+                <% if(post.post_comments.length > 0) { %>
+                    <div class="comment-num text-[#ccc] text-[13px] font-normal pl-1"><%= post.post_comments.length%></div>
+                <% } %>
             </div>
         </div>
     </div>

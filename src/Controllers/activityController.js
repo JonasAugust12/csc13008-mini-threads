@@ -5,9 +5,8 @@ const activityController = async (req, res) => {
         const noti = await Notification.find({ user_id: req.userId })
             .populate('action_user_id', 'profile.display_name profile.avt')
             .populate('post_id', 'post_image post_quote')
-            .populate('comment_id', 'comment_content comment_likes');
-
-        const sortedNoti = noti.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            .populate('comment_id', 'comment_content comment_likes comment_image')
+            .sort({ createdAt: -1 });
 
         const typeMapping = {
             all: 'all',

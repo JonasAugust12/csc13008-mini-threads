@@ -21,7 +21,7 @@
                     <div class="inline-block pl-3 flex-grow">
                         <a href="#"
                             class="mini-post-username inline-block text-[15px] font-user-weight hover:underline"><%= post.user_id.profile.display_name %></a>
-                        <p class="mini-post-timestamp inline-block text-[15px] text-secondary-text">34m</p>
+                        <p data-created-at="<%= post.createdAt %>" class="post-time-stamp inline-block text-[15px] text-secondary-text"></p>
                     </div>
                 </div>
                 <div class="mini-post-content pt-[10px] w-full">

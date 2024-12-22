@@ -13,7 +13,7 @@ post1Controller.createPost = async (req, res) => {
 
         // Nếu có file ảnh, tiến hành upload
         if (req.file) {
-            const uploadResult = await uploadImage(req.file); // Gọi hàm upload ảnh
+            const uploadResult = await uploadImage(req.file, 'csc13008/post'); // Upload ảnh lên Cloudinary
             imageUrl = uploadResult.secure_url; // URL của ảnh sau khi upload lên Cloudinary
         }
         // Tạo bài post mới
@@ -100,7 +100,6 @@ post1Controller.likePost = async (req, res) => {
     }
 };
 
-// Create comment
 post1Controller.createComment = async (req, res) => {
     try {
         const { post_id, comment_content } = req.body; // Get the post ID and comment content
@@ -109,7 +108,7 @@ post1Controller.createComment = async (req, res) => {
         // Optional: Handle image upload for comment if any
         let comment_image = '';
         if (req.file) {
-            const uploadResult = await uploadImage(req.file); // Upload image to Cloudinary
+            const uploadResult = await uploadImage(req.file, 'csc13008/comment');
             comment_image = uploadResult.secure_url;
         }
 
@@ -146,6 +145,125 @@ post1Controller.createComment = async (req, res) => {
     }
 };
 
+post1Controller.deletePost = async (req, res) => {
+    try {
+        const postId = req.params.id; // Lấy ID bài viết từ params
+        const userId = req.userId; // Lấy ID người dùng từ token
+
+        const post = await Post1.findById(postId);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+        if (post.user_id.toString() !== userId.toString()) {
+            return res.status(403).json({ message: 'You are not authorized to delete this post' });
+        }
+        await Comment.deleteMany({ post_id: postId });
+        await Notification.deleteMany({ post_id: postId });
+        await Post1.findByIdAndDelete(postId);
+
+        return res.status(200).json({ message: 'Post and related data deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        return res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
+post1Controller.likeComment = async (req, res) => {
+    try {
+        const commentId = req.params.id; // Lấy ID comment từ params
+        const userId = req.userId; // Lấy ID người dùng từ token
+        const action = req.body.action; // Lấy action từ request body, để xác định 'like' hoặc 'unlike'
+
+        // Tìm comment theo ID
+        const comment = await Comment.findById(commentId);
+        if (!comment) {
+            return res.status(404).json({ message: 'Comment not found' });
+        }
+
+        // Kiểm tra hành động "like"
+        if (action === 'like') {
+            // Kiểm tra nếu người dùng đã thích comment
+            if (comment.comment_likes.includes(userId)) {
+                return res.status(400).json({ message: 'You already liked this comment' });
+            }
+            // Thêm user vào danh sách like
+            comment.comment_likes.push(userId);
+            await comment.save();
+            // Nếu người dùng là chủ comment thì không cần tạo thông báo
+            if (comment.user_id.toString() !== userId.toString()) {
+                // Tạo thông báo cho người nhận (người chủ comment)
+                const notification = new Notification({
+                    action_user_id: userId,
+                    user_id: comment.user_id, // Người nhận thông báo là chủ comment
+                    type: 'like',
+                    post_id: comment.post_id, // Gắn với bài viết
+                    comment_id: commentId, // Gắn với comment
+                });
+                await notification.save();
+            }
+
+            return res.status(200).json({ message: 'Comment liked successfully' });
+        } else if (action === 'unlike') {
+            // Kiểm tra nếu người dùng chưa thích comment
+            if (!comment.comment_likes.includes(userId)) {
+                return res.status(400).json({ message: 'You have not liked this comment' });
+            }
+            comment.comment_likes = comment.comment_likes.filter((id) => id.toString() !== userId.toString());
+            await comment.save();
+            await Notification.deleteOne({
+                action_user_id: userId,
+                type: 'like',
+                comment_id: commentId,
+            });
+
+            return res.status(200).json({ message: 'Comment unliked successfully' });
+        } else {
+            return res.status(400).json({ message: 'Invalid action' });
+        }
+    } catch (error) {
+        console.error('Error processing like/unlike for comment:', error);
+        return res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
+post1Controller.deleteComment = async (req, res) => {
+    try {
+        const commentId = req.params.id; // Lấy ID của comment từ params
+        const userId = req.userId; // Lấy ID người dùng từ token
+
+        // Tìm comment
+        const comment = await Comment.findById(commentId);
+        if (!comment) {
+            return res.status(404).json({ message: 'Comment not found' });
+        }
+
+        // Kiểm tra quyền xóa: chủ comment hoặc chủ bài viết
+        const post = await Post1.findById(comment.post_id);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+        if (comment.user_id.toString() !== userId.toString() && post.user_id.toString() !== userId.toString()) {
+            return res.status(403).json({ message: 'You are not authorized to delete this comment' });
+        }
+
+        // Xoá comment khỏi mảng `post_comments` trong bài viết
+        await Post1.findByIdAndUpdate(comment.post_id, {
+            $pull: { post_comments: comment._id },
+        });
+
+        // Xoá tất cả thông báo liên quan đến comment
+        await Notification.deleteMany({ comment_id: comment._id });
+
+        // Xoá comment
+        await Comment.findByIdAndDelete(comment._id);
+
+        return res.status(200).json({ message: 'Comment deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting comment:', error);
+        return res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
 post1Controller.renderpost = async (req, res) => {
     try {
         const postId = req.params.id; // Lấy ID bài viết từ params
@@ -161,7 +279,8 @@ post1Controller.renderpost = async (req, res) => {
 
         const comment = await Comment.find({ post_id: postId })
             .populate('user_id', 'profile.nick_name profile.display_name profile.avt')
-            .sort({ createdAt: 'asc' });
+            .populate('post_id', 'user_id')
+            .sort({ createdAt: -1 });
 
         // Render dữ liệu bài viết với các tham số cần thiết
         res.render('Detail-post/post', {

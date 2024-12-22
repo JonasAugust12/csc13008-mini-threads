@@ -4,7 +4,7 @@ const Follow = require('../Models/Follow'); // model follow
 const jwt = require('jsonwebtoken'); // token
 const { default: mongoose } = require('mongoose');
 const env = require('dotenv').config(); // biến môi trường
-const Post = require('../Models/Post');
+const Post1 = require('../Models/Post1');
 
 // Initialize GridFS
 let gfs;
@@ -104,8 +104,10 @@ const getOtherUserProfile = async (req, res) => {
             }),
         );
 
-        console.log('ready to render');
-        console.log(req.userId);
+        const post = await Post1.find({ user_id: userId })
+            .populate('user_id', 'profile.nick_name profile.display_name profile.avt')
+            .sort({ createdAt: -1 });
+
         res.render('profile', {
             title: user.profile.display_name,
             header: user.profile.nick_name,
@@ -113,6 +115,7 @@ const getOtherUserProfile = async (req, res) => {
             selectedItem: null,
             user: user,
             username: user.username,
+            userid: req.user._id,
             avatarSrc: user.profile.avt ? user.profile.avt : '/Img/UserIcon.jpg',
             followerUsers: followerUsers,
             followingUsers: followingUsers,
@@ -120,6 +123,7 @@ const getOtherUserProfile = async (req, res) => {
             isFollowing: isFollowing, // Pass a boolean indicating if the current user is following this user
             isAuthenticated: !!req.userId,
             curUserId: curUser._id ? curUser._id : null, // Pass a boolean indicating if the user is authenticated
+            posts: post,
         });
     } catch (error) {
         console.error(error);
@@ -183,7 +187,9 @@ const profileController = async (req, res) => {
             }),
         );
 
-        const posts = await Post.find({ 'user.user_profile_link': `/profile/${userId}` }).sort({ createdAt: -1 });
+        const posts = await Post1.find({ user_id: userId })
+            .populate('user_id', 'profile.nick_name profile.display_name profile.avt')
+            .sort({ createdAt: -1 });
 
         res.render('profile', {
             title: user.profile.display_name,
@@ -192,7 +198,8 @@ const profileController = async (req, res) => {
             selectedItem: null,
             user: user,
             username: user.username,
-            avatarSrc: user.profile.avt ? `/profile/avatar/${user._id}` : '/Img/UserIcon.jpg',
+            userid: req.user._id,
+            avatarSrc: user.profile.avt,
             followerUsers: followerUsers,
             followingUsers: followingUsers,
             type: 'owner',

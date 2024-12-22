@@ -172,11 +172,11 @@
 
             <!-- post : lấy module từ trang home thay vào-->
             <div class="my-posts">
-                <% 
-                    posts.forEach(post => { 
-                %>
-                    <%- include('home/home-post', { post: post }) %>
-                <% }) %>
+                <% if (posts.length > 0) { %>
+                    <% posts.forEach(post => { %>
+                        <%- include('home/home-post', { post: post }) %>
+                    <% }) %>
+                <% } %>
             </div>
             
 

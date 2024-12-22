@@ -55,13 +55,6 @@ app.use(
     }),
 );
 
-// Cấu hình multer để xử lý ảnh
-const storage = multer.memoryStorage(); // Lưu ảnh vào bộ nhớ RAM
-const upload = multer({ storage });
-
-// Middleware để xử lý ảnh và dữ liệuz văn bản từ FormData
-app.use(upload.single('post_image')); // Sử dụng 'post_image' làm tên trường ảnh trong FormData
-
 // Cấu hình các route
 const searchRoutes = require('./Routes/searchRoutes');
 const homeRoutes = require('./Routes/homeRoutes');

@@ -12,9 +12,8 @@
         path: 'M5 8.33956C5 6.84296 6.07645 5.75 7.48174 5.75C8.08884 5.75 8.61175 5.95938 9.00094 6.30299C9.3914 5.95863 9.91188 5.75 10.5183 5.75C11.9276 5.75 13 6.84345 13 8.33956C13 9.20812 12.6297 10.037 12.0266 10.7947C11.4237 11.5521 10.5712 12.2609 9.5565 12.9023L9.55379 12.904C9.48997 12.9437 9.41108 12.9882 9.32747 13.0242C9.25284 13.0563 9.1332 13.1001 9 13.1001C8.86687 13.1001 8.74693 13.0551 8.67518 13.0242C8.59318 12.9889 8.51482 12.9453 8.45151 12.9072L8.44748 12.9048L8.4435 12.9023C7.42882 12.2609 6.57626 11.5521 5.97338 10.7947C5.37032 10.037 5 9.20812 5 8.33956Z',
     },    
 } %>
-<div class="activity-post w-full flex mt-4px relative cursor-pointer" onclick="
-        window.location.href = 
-        '/post/<%= noti.post_id._id.toString() %><% if (noti.type === 'comment') { %>#comment-<%= noti.comment_id._id.toString() %><% } %>'">
+<div class="activity-post w-full flex mt-4px relative cursor-pointer <%= noti.is_read ? 'bg-[#1e1e1e]' : 'bg-[#222222]' %> tbl:bg-transparent transition duration-300 ease-in-out"
+        onclick="window.location.href='/post/<%= noti.post_id._id.toString() %><% if (noti.type === 'comment' || (noti.type === 'like' && (noti.comment_id?.comment_content || noti.comment_id?.comment_image))) { %>#comment-<%= noti.comment_id._id.toString() %><% } %>'">
     <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2 tbl:hidden">
         <svg aria-label="More" role="img" viewBox="0 0 12 12">
             <title>More</title>
@@ -47,21 +46,24 @@
                     <a href="/profile/<%= noti.action_user_id._id %>"
                         class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"><%= noti.action_user_id.profile.display_name %></a>
                     <p
-                        class="activity__post-timestamp leading-[22.5px] overflow-hidden inline-block text-[15px] text-secondary-text">
-                        <%# post.timestamp %>
-                        34m
+                        data-created-at="<%= noti.createdAt %>"
+                        class="post-time-stamp leading-[22.5px] overflow-hidden inline-block text-[15px] text-secondary-text">
                     </p>
-                    <p class="activity__post-pickedtag text-[15px] font-normal text-secondary-text">
+                    <p class="activity__post-pickedtag text-[15px] font-normal text-secondary-text break-all">
                         <% if (noti.type === 'follow') {%>
                             Followed you
                         <% } else if ((noti.type === 'comment' || noti.type === 'like') && noti.post_id.post_quote) {%>
                             <%= noti.post_id.post_quote %>
-                        <% } else {%>
+                        <% } else if (noti.type === 'like') {%>
+                            Liked your thread
+                        <% } else if (noti.type === 'comment') {%>
                             Replied to your photo
                         <% } %>
                     </p>
-                    <% if (noti.type === 'comment') {%>
-                        <span class="activity__post-content block text-[15px] font-normal text-primary-text"> <%= noti.comment_id.comment_content || 'Replied with a photo' %> </span>
+                    <% if ((noti.type === 'comment') || (noti.type === 'like' && (noti.comment_id?.comment_content || noti.comment_id?.comment_image))) {%>
+                        <p class="activity__post-content block text-[15px] font-normal text-primary-text break-all">
+                            <%= noti.comment_id.comment_content || 'Replied with a photo' %>
+                        </p>
                     <% } %>
                 </div>
                 <% if (noti.type === 'follow') {%>
@@ -74,16 +76,19 @@
             <% if (noti.type==='comment' ) {%>
                 <div class="activity__post-action ml-[-12px] mt-[3px] select-none">
                     <button
-                        class="activity__post-action-like h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]">
+                        id="like-comment-<%= noti.comment_id._id.toString() %>"
+                        class="like-comment h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]">
                         <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                             <title>Like</title>
-                            <path stroke="#ccc" fill="none"
+                            <path 
+                                <%= noti.comment_id.comment_likes.includes(userid) ? 'fill=red stroke=red' : 'fill=none stroke=currentColor' %>
                                 d="M1.34375 7.53125L1.34375 7.54043C1.34374 8.04211 1.34372 8.76295 1.6611 9.65585C1.9795 10.5516 2.60026 11.5779 3.77681 12.7544C5.59273 14.5704 7.58105 16.0215 8.33387 16.5497C8.73525 16.8313 9.26573 16.8313 9.66705 16.5496C10.4197 16.0213 12.4074 14.5703 14.2232 12.7544C15.3997 11.5779 16.0205 10.5516 16.3389 9.65585C16.6563 8.76296 16.6563 8.04211 16.6562 7.54043V7.53125C16.6562 5.23466 15.0849 3.25 12.6562 3.25C11.5214 3.25 10.6433 3.78244 9.99228 4.45476C9.59009 4.87012 9.26356 5.3491 9 5.81533C8.73645 5.3491 8.40991 4.87012 8.00772 4.45476C7.35672 3.78244 6.47861 3.25 5.34375 3.25C2.9151 3.25 1.34375 5.23466 1.34375 7.53125Z"
                                 stroke-width="1.25"></path>
                         </svg>
-                        <% if(noti.comment_id.comment_likes.length > 0) { %>
-                            <span class="like-num text-[#ccc] text-[13px] font-normal pl-1"> <%= noti.comment_id.comment_likes.length %></span>
-                        <% } %>
+                        <span
+                            class="like-comment-num text-[#ff0000] text-[#<%= noti.comment_id.comment_likes.includes(userid) ? '' : 'ccc' %>] text-[13px] font-normal pl-1 <%= noti.comment_id.comment_likes.length === 0 ? 'hidden' : '' %>">
+                            <%= noti.comment_id.comment_likes.length %>
+                        </span>
                     </button>
                 </div>
             <% } %>

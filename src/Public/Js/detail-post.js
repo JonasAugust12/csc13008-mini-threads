@@ -33,7 +33,6 @@ const moreList = document.querySelector('.main-post-more-list');
 
 // Hàm để hiển thị và ẩn danh sách
 function toggleMoreList(event) {
-    console.log(moreList);
     if (moreList.classList.contains('flex')) {
         moreList.classList.remove('flex');
         moreList.classList.add('hidden');
@@ -52,7 +51,6 @@ document.addEventListener('click', (event) => {
 
 // Thêm sự kiện click vào nút More để hiển thị danh sách
 moreButton.addEventListener('click', (event) => {
-    console.log('click');
     event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
     toggleMoreList();
 });
@@ -108,27 +106,107 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Like và unlike comment
 document.addEventListener('DOMContentLoaded', () => {
-    const postLikes = document.querySelectorAll('.post-action-like');
+    const commentLikes = document.querySelectorAll('.like-comment');
 
-    postLikes.forEach((postLike) => {
-        postLike.addEventListener('click', () => {
-            const svg = postLike.querySelector('svg path');
-            const likeNum = postLike.querySelector('.like-num');
-            const currentLikes = parseInt(likeNum.textContent.trim(), 10);
+    commentLikes.forEach((likeButton) => {
+        likeButton.addEventListener('click', () => {
+            const commentId = likeButton.id.replace('like-comment-', '');
+            const svg = likeButton.querySelector('svg path');
+            const likeNum = likeButton.querySelector('.like-comment-num');
+            const currentLikes = parseInt(likeNum.textContent.trim(), 10) || 0;
 
-            // Kiểm tra trạng thái hiện tại của nút
             if (svg.getAttribute('fill') === 'red') {
-                // Nếu đang thích -> Bỏ thích
-                svg.setAttribute('fill', 'none');
-                svg.setAttribute('stroke', 'currentColor');
-                likeNum.textContent = currentLikes - 1;
+                // Unlike comment
+                fetch(`/post/like-comment/${commentId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'unlike' }),
+                }).then(() => {
+                    svg.setAttribute('fill', 'none');
+                    svg.setAttribute('stroke', 'currentColor');
+                    likeNum.textContent = currentLikes - 1;
+                    if (currentLikes - 1 === 0) likeNum.classList.add('hidden');
+                });
             } else {
-                // Nếu chưa thích -> Thích
-                svg.setAttribute('fill', 'red');
-                svg.setAttribute('stroke', 'red');
-                likeNum.textContent = currentLikes + 1;
+                // Like comment
+                fetch(`/post/like-comment/${commentId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'like' }),
+                }).then(() => {
+                    svg.setAttribute('fill', 'red');
+                    svg.setAttribute('stroke', 'red');
+                    likeNum.textContent = currentLikes + 1;
+                    likeNum.classList.remove('hidden');
+                });
             }
         });
+    });
+});
+
+// Xoá comment
+document.querySelectorAll('.delete-comment').forEach((deleteCommentButton) => {
+    deleteCommentButton.addEventListener('click', (e) => {
+        const commentNum = document.querySelector('.comment-num');
+
+        // Lấy các phần tử liên quan đến confirm delete và overlay
+        const confirmDeleteBox = document.querySelector('.confirm-delete');
+        const overlay = document.querySelector('.overlay');
+        const confirmTitle = document.querySelector('.delete-title');
+        confirmTitle.textContent = 'Delete comment';
+        const confirmContent = document.querySelector('.delete-content');
+        confirmContent.textContent = "If you delete this comment, you won't be able to restore it.";
+        const confirmCancelBtn = document.querySelector('.confirm-cancel-btn');
+        const confirmDeleteBtn = document.querySelector('.confirm-delete-btn');
+        const loadingToast = document.querySelector('.loading-post-toast');
+        const toastContent = document.querySelector('.toast__loading-content');
+
+        // Hiển thị hộp xác nhận
+        confirmDeleteBox.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+
+        const commentId = e.target.closest('.delete-comment').getAttribute('comment-id').split('-')[2];
+
+        // Sự kiện hủy bỏ
+        confirmCancelBtn.addEventListener('click', () => {
+            confirmDeleteBox.classList.add('hidden');
+            overlay.classList.add('hidden');
+        });
+
+        // Thêm sự kiện chỉ một lần cho button delete
+        const handleDelete = async () => {
+            loadingToast.classList.remove('hidden');
+            toastContent.textContent = 'Deleting comment...';
+
+            try {
+                // Gửi yêu cầu DELETE đến server
+                await fetch(`/post/delete-comment/${commentId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }).then(() => {
+                    loadingToast.classList.add('hidden');
+                    const commentContainer = document.querySelector(`#comment-${commentId}`);
+                    if (commentContainer) {
+                        commentContainer.remove();
+                    }
+                    confirmDeleteBox.classList.add('hidden');
+                    overlay.classList.add('hidden');
+                    commentNum.textContent = parseInt(commentNum.textContent, 10) - 1;
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while deleting the comment.');
+            }
+        };
+
+        confirmDeleteBtn.addEventListener('click', handleDelete, { once: true });
     });
 });

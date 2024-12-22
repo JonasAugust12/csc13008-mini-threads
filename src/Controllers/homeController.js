@@ -43,7 +43,7 @@ const dummyUsers = [
 ];
 
 const homeController = async (req, res) => {
-    const posts = await Post1.find().populate('user_id', 'profile').exec();
+    const posts = await Post1.find().populate('user_id', 'profile').sort({ createdAt: -1 });
 
     res.render('home/home', {
         title: 'Mini Threads',
