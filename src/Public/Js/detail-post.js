@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     svg.setAttribute('fill', 'none');
                     svg.setAttribute('stroke', 'currentColor');
                     likeNum.textContent = currentLikes - 1;
+                    likeNum.style.color = '#ccc';
                     if (currentLikes - 1 === 0) likeNum.classList.add('hidden');
                 });
             } else {
@@ -143,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     svg.setAttribute('fill', 'red');
                     svg.setAttribute('stroke', 'red');
                     likeNum.textContent = currentLikes + 1;
+                    likeNum.style.color = 'red';
                     likeNum.classList.remove('hidden');
                 });
             }
@@ -187,7 +189,7 @@ document.querySelectorAll('.delete-comment').forEach((deleteCommentButton) => {
             try {
                 // Gửi yêu cầu DELETE đến server
                 await fetch(`/post/delete-comment/${commentId}`, {
-                    method: 'POST',
+                    method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
                     },

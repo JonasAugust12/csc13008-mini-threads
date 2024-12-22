@@ -1,3 +1,5 @@
+const Notification = require('../Models/Notification');
+
 const dummyUsers = [
     {
         username: '_budu.official',
@@ -19,12 +21,16 @@ const dummyUsers = [
     },
 ];
 
-const searchController = (req, res) => {
+const searchController = async (req, res) => {
     const query = req.query.q ? req.query.q.toLowerCase() : '';
     const filteredUsers = dummyUsers.filter((user) => user.username.toLowerCase().includes(query) || user.name.toLowerCase().includes(query));
     const username = req.session.username || 'Guest';
+    const unreadCount = await Notification.countDocuments({
+        user_id: req.userId,
+        is_read: false,
+    });
     res.render('Search/search', {
-        title: 'Activity',
+        title: 'Search',
         header: 'Search',
         refreshItems: null,
         selectedItem: null,
@@ -32,6 +38,7 @@ const searchController = (req, res) => {
         avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
         users: filteredUsers,
         query,
+        unreadCount,
     });
 };
 

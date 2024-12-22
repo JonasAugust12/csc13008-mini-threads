@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken'); // token
 const { default: mongoose } = require('mongoose');
 const env = require('dotenv').config(); // biến môi trường
 const Post1 = require('../Models/Post1');
+const Notification = require('../Models/Notification');
 
 // Initialize GridFS
 let gfs;
@@ -108,6 +109,11 @@ const getOtherUserProfile = async (req, res) => {
             .populate('user_id', 'profile.nick_name profile.display_name profile.avt')
             .sort({ createdAt: -1 });
 
+        const unreadCount = await Notification.countDocuments({
+            user_id: req.userId,
+            is_read: false,
+        });
+
         res.render('profile', {
             title: user.profile.display_name,
             header: user.profile.nick_name,
@@ -124,6 +130,7 @@ const getOtherUserProfile = async (req, res) => {
             isAuthenticated: !!req.userId,
             curUserId: curUser._id ? curUser._id : null, // Pass a boolean indicating if the user is authenticated
             posts: post,
+            unreadCount: unreadCount,
         });
     } catch (error) {
         console.error(error);
@@ -191,6 +198,11 @@ const profileController = async (req, res) => {
             .populate('user_id', 'profile.nick_name profile.display_name profile.avt')
             .sort({ createdAt: -1 });
 
+        const unreadCount = await Notification.countDocuments({
+            user_id: req.userId,
+            is_read: false,
+        });
+
         res.render('profile', {
             title: user.profile.display_name,
             header: 'Personal profile',
@@ -205,6 +217,7 @@ const profileController = async (req, res) => {
             type: 'owner',
             posts: posts,
             curUserId: user._id || null,
+            unreadCount: unreadCount,
         });
     } catch (error) {
         console.error(error);

@@ -30,7 +30,7 @@ const corsOptions = {
     origin: process.env.API_URL || 'http://localhost:3000',
     credentials: true,
     optionSuccessStatus: 200,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
 app.use(cors(corsOptions));

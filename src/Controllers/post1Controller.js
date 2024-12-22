@@ -100,6 +100,29 @@ post1Controller.likePost = async (req, res) => {
     }
 };
 
+post1Controller.deletePost = async (req, res) => {
+    try {
+        const postId = req.params.id; // Lấy ID bài viết từ params
+        const userId = req.userId; // Lấy ID người dùng từ token
+
+        const post = await Post1.findById(postId);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+        if (post.user_id.toString() !== userId.toString()) {
+            return res.status(403).json({ message: 'You are not authorized to delete this post' });
+        }
+        await Comment.deleteMany({ post_id: postId });
+        await Notification.deleteMany({ post_id: postId });
+        await Post1.findByIdAndDelete(postId);
+
+        return res.status(200).json({ message: 'Post and related data deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        return res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
 post1Controller.createComment = async (req, res) => {
     try {
         const { post_id, comment_content } = req.body; // Get the post ID and comment content
@@ -142,29 +165,6 @@ post1Controller.createComment = async (req, res) => {
     } catch (error) {
         console.error('Error creating comment:', error);
         return res.status(500).json({ error: error.message });
-    }
-};
-
-post1Controller.deletePost = async (req, res) => {
-    try {
-        const postId = req.params.id; // Lấy ID bài viết từ params
-        const userId = req.userId; // Lấy ID người dùng từ token
-
-        const post = await Post1.findById(postId);
-        if (!post) {
-            return res.status(404).json({ message: 'Post not found' });
-        }
-        if (post.user_id.toString() !== userId.toString()) {
-            return res.status(403).json({ message: 'You are not authorized to delete this post' });
-        }
-        await Comment.deleteMany({ post_id: postId });
-        await Notification.deleteMany({ post_id: postId });
-        await Post1.findByIdAndDelete(postId);
-
-        return res.status(200).json({ message: 'Post and related data deleted successfully' });
-    } catch (error) {
-        console.error('Error deleting post:', error);
-        return res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
 
@@ -282,6 +282,11 @@ post1Controller.renderpost = async (req, res) => {
             .populate('post_id', 'user_id')
             .sort({ createdAt: -1 });
 
+        const unreadCount = await Notification.countDocuments({
+            user_id: req.user._id,
+            is_read: false,
+        });
+
         // Render dữ liệu bài viết với các tham số cần thiết
         res.render('Detail-post/post', {
             title: post.post_quote || 'Photo posted by ' + post.user_id.profile.display_name,
@@ -293,6 +298,7 @@ post1Controller.renderpost = async (req, res) => {
             avatarSrc: req.user.profile.avt,
             post: post,
             comments: comment,
+            unreadCount,
         });
     } catch (error) {
         console.error('Error retrieving post:', error);

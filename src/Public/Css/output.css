@@ -3101,6 +3101,11 @@ video {
         border-bottom-left-radius: 1.5rem;
     }
 
+    .tbl\:rounded-t-2xl {
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+
     .tbl\:border {
         border-width: 1px;
     }
@@ -3111,6 +3116,10 @@ video {
 
     .tbl\:border-\[0\.5px\] {
         border-width: 0.5px;
+    }
+
+    .tbl\:border-\[1px\] {
+        border-width: 1px;
     }
 
     .tbl\:border-b-0 {

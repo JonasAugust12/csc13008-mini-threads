@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Kiểm tra trạng thái hiện tại của nút
             if (svg.getAttribute('fill') === 'red') {
                 // Nếu đã like thì gửi yêu cầu API để "unlike"
-                fetch(`/post/like/${postId}`, {
+                fetch(`/post/like-post/${postId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 likeNum.style.color = '#ccc';
             } else {
                 // Nếu chưa thích thì gửi yêu cầu API để "like"
-                fetch(`/post/like/${postId}`, {
+                fetch(`/post/like-post/${postId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -179,8 +179,8 @@ deletePostButtons.forEach((deletePostButton) => {
             loadingToast.classList.remove('hidden');
             toastContent.textContent = 'Deleting post...';
             try {
-                await fetch(`/post/delete/${postId}`, {
-                    method: 'POST',
+                await fetch(`/post/delete-post/${postId}`, {
+                    method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -189,6 +189,8 @@ deletePostButtons.forEach((deletePostButton) => {
                     const postContainer = e.target.closest('.post-container');
                     if (postContainer) {
                         postContainer.remove();
+                    } else {
+                        window.location.href = '/';
                     }
                     confirmDeleteBox.classList.add('hidden');
                     overlay.classList.add('hidden');

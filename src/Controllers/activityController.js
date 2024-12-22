@@ -1,12 +1,15 @@
 const Notification = require('../Models/Notification');
+let activityController = {};
 
-const activityController = async (req, res) => {
+activityController.renderActivity = async (req, res) => {
     try {
         const noti = await Notification.find({ user_id: req.userId })
             .populate('action_user_id', 'profile.display_name profile.avt')
             .populate('post_id', 'post_image post_quote')
             .populate('comment_id', 'comment_content comment_likes comment_image')
             .sort({ createdAt: -1 });
+
+        const unreadCount = noti.filter((notification) => !notification.is_read).length;
 
         const typeMapping = {
             all: 'all',
@@ -17,8 +20,7 @@ const activityController = async (req, res) => {
 
         const selectedItem = typeMapping[(req.params.type || 'all').toLowerCase()] || 'all';
 
-        const filteredNoti =
-            selectedItem === 'all' ? sortedNoti : sortedNoti.filter((notification) => notification.type.toLowerCase() === selectedItem);
+        const filteredNoti = selectedItem === 'all' ? noti : noti.filter((notification) => notification.type.toLowerCase() === selectedItem);
 
         const headerMapping = {
             all: 'Activity',
@@ -28,9 +30,10 @@ const activityController = async (req, res) => {
         };
 
         const header = headerMapping[selectedItem] || 'Activity';
+        const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Activity`;
 
         res.render('Activity/activity', {
-            title: 'Activity',
+            title: title,
             header,
             refreshItems: [
                 { name: 'All', link: '/activity', type: 'all' },
@@ -43,10 +46,47 @@ const activityController = async (req, res) => {
             username: req.user.profile.display_name,
             avatarSrc: req.user.profile.avt,
             notifications: filteredNoti,
+            unreadCount,
         });
     } catch (error) {
         console.error('Error in activityController:', error.message, error.stack);
         res.status(500).send('Internal Server Error');
+    }
+};
+
+activityController.markNotificationAsRead = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Cập nhật trạng thái is_read thành true
+        const updatedNotification = await Notification.findByIdAndUpdate(id, { is_read: true }, { new: true });
+
+        if (!updatedNotification) {
+            return res.status(404).json({ message: 'Notification not found' });
+        }
+
+        res.status(200).json({ message: 'Notification marked as read' });
+    } catch (error) {
+        console.error('Error in markNotificationAsRead:', error.message);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+
+activityController.deleteNotification = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Xóa thông báo dựa trên ID
+        const deletedNotification = await Notification.findByIdAndDelete(id);
+
+        if (!deletedNotification) {
+            return res.status(404).json({ message: 'Notification not found' });
+        }
+
+        res.status(200).json({ message: 'Notification deleted successfully' });
+    } catch (error) {
+        console.error('Error in deleteNotification:', error.message);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 };
 

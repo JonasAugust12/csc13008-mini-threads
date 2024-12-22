@@ -1,5 +1,6 @@
 const User = require('../Models/User');
 const Post1 = require('../Models/Post1');
+const Notification = require('../Models/Notification');
 const path = require('path');
 
 // Data dùng cho suggestion user
@@ -44,7 +45,10 @@ const dummyUsers = [
 
 const homeController = async (req, res) => {
     const posts = await Post1.find().populate('user_id', 'profile').sort({ createdAt: -1 });
-
+    const unreadCount = await Notification.countDocuments({
+        user_id: req.userId,
+        is_read: false,
+    });
     res.render('home/home', {
         title: 'Mini Threads',
         header: 'Home',
@@ -60,6 +64,7 @@ const homeController = async (req, res) => {
         avatarSrc: req.user.profile.avt,
         posts: posts,
         users: dummyUsers,
+        unreadCount,
     });
 };
 

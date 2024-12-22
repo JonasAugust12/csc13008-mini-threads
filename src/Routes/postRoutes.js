@@ -9,11 +9,10 @@ const upload = require('../Middleware/multer');
 router.get('/:id', authenticateToken, post1Controller.renderpost);
 
 // Route to create a new post
-router.post('/', authenticateToken, postController);
 router.post('/newpost', upload.single('post_image'), authenticateToken, post1Controller.createPost);
-router.post('/like/:id', authenticateToken, post1Controller.likePost);
-router.post('/comment', authenticateToken, upload.single('post_image'), post1Controller.createComment);
+router.post('/newcomment', authenticateToken, upload.single('post_image'), post1Controller.createComment);
+router.post('/like-post/:id', authenticateToken, post1Controller.likePost);
 router.post('/like-comment/:id', authenticateToken, post1Controller.likeComment);
-router.post('/delete/:id', authenticateToken, post1Controller.deletePost);
-router.post('/delete-comment/:id', authenticateToken, post1Controller.deleteComment);
+router.delete('/delete-post/:id', authenticateToken, post1Controller.deletePost);
+router.delete('/delete-comment/:id', authenticateToken, post1Controller.deleteComment);
 module.exports = router;

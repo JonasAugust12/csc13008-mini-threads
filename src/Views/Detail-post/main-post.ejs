@@ -18,7 +18,7 @@
                     <circle cx="18" cy="12" r="1.5"></circle>
                 </svg>
                 <div
-                    class="main-post-more-list hidden select-none overflow-hidden fixed z-[4] top-0 bottom-0 right-0 left-0 bg-[#00000080] items-end text-primary-text text-[15px] font-semibold border-[1px] border-border-color rounded-t-2xl shadow-[0_10.5px_21px_rgba(0,_0,_0,_0.078)] tbl:absolute tbl:top-full tbl:z-[1] tbl:w-[224px] tbl:right-0 tbl:my-2 tbl:mr-[-19px] tbl:bg-content-bg tbl:left-auto tbl:bottom-auto tbl:rounded-b-2xl">
+                    class="main-post-more-list hidden select-none overflow-hidden fixed z-[4] top-0 bottom-0 right-0 left-0 bg-[#00000080] items-end text-primary-text text-[15px] font-semibold tbl:border-[1px] tbl:border-border-color tbl:rounded-t-2xl shadow-[0_10.5px_21px_rgba(0,_0,_0,_0.078)] tbl:absolute tbl:top-full tbl:z-[1] tbl:w-[224px] tbl:right-0 tbl:my-2 tbl:mr-[-19px] tbl:bg-content-bg tbl:left-auto tbl:bottom-auto tbl:rounded-b-2xl">
                     <div
                         class="w-screen box-border p-4 pt-0 bg-content-bg rounded-t-3xl border-[1px] border-[#f3f5f726] border-b-0 tbl:p-0 tbl:rounded-none tbl:border-0 tbl:w-full">
                         <div class="w-full py-3 flex justify-center tbl:hidden">
@@ -43,7 +43,7 @@
                         <% } %>
                         <div
                             onclick="copyLinkToClipboard('/post/<%= post._id %>')"
-                            class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-border-color <%= post.user_id._id.toString() === userid.toString() ? 'border-t-[1px]' : '' %>">
+                            class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-border-color <%= post.user_id._id.toString() === userid.toString() ? 'tbl:border-t-[1px]' : '' %>">
                             <div
                                 class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] tbl:p-3">
                                 <span>Copy link</span>
@@ -108,27 +108,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    const deletePostButton = document.querySelector('.delete-post');
-
-    if (deletePostButton) {
-        deletePostButton.addEventListener('click', async (e) => {
-            const postId = e.target.closest('.delete-post').getAttribute('post-id').split('-')[2];
-
-            try {
-                const response = await fetch(`/post/delete/${postId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        // 'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-                window.location.href = '/';
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred while deleting the post.');
-            }
-        });
-    }
-</script>
