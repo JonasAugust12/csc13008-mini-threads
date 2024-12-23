@@ -1,46 +1,7 @@
 const Follow = require('../Models/Follow'); // Import model Follow
 const Post1 = require('../Models/Post1'); // Import model Post1
 const Notification = require('../Models/Notification'); // Import model Notification
-
-// Data dùng cho suggestion user
-const dummyUsers = [
-    {
-        username: 'justinbieber',
-        user_display_name: 'Justin Bieber',
-        user_nick_name: 'Pdiddy',
-        user_bio: 'i love fried chicken',
-        avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-        user_profile_link: 'src/Public/Pages/another_user.html',
-        user_followers_count: 1000000,
-    },
-    {
-        username: 'Katy Pery',
-        user_display_name: 'Katy Pery',
-        user_nick_name: 'ROARRR',
-        user_bio: 'Orlando Bloom is my husband',
-        avatarSrc: 'https://randomuser.me/api/portraits/men/1.jpg',
-        user_profile_link: 'src/Public/Pages/another_user.html',
-        user_followers_count: 1000000,
-    },
-    {
-        username: 'justinbieber',
-        user_display_name: 'Justin Bieber',
-        user_nick_name: 'Pdiddy',
-        user_bio: 'i love fried chicken',
-        avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
-        user_profile_link: 'src/Public/Pages/another_user.html',
-        user_followers_count: 1000000,
-    },
-    {
-        username: 'Katy Pery',
-        user_display_name: 'Katy Pery',
-        user_nick_name: 'ROARRR',
-        user_bio: 'Orlando Bloom is my husband',
-        avatarSrc: 'https://randomuser.me/api/portraits/men/1.jpg',
-        user_profile_link: 'src/Public/Pages/another_user.html',
-        user_followers_count: 1000000,
-    },
-];
+const User = require('../Models/User'); // Import model User
 let homeController = {};
 
 homeController.renderHome = async (req, res) => {
@@ -49,6 +10,7 @@ homeController.renderHome = async (req, res) => {
         user_id: req.userId,
         is_read: false,
     });
+    const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
     res.render('home/home', {
         title: 'Mini Threads',
         header: 'Home',
@@ -62,7 +24,7 @@ homeController.renderHome = async (req, res) => {
         username: req.user.profile.display_name,
         avatarSrc: req.user.profile.avt,
         posts: posts,
-        users: dummyUsers,
+        users,
         unreadCount,
     });
 };
@@ -81,6 +43,7 @@ homeController.filterFollowing = async (req, res) => {
             user_id: req.userId,
             is_read: false,
         });
+        const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
 
         res.render('home/home', {
             title: 'Mini Threads - Following',
@@ -95,7 +58,7 @@ homeController.filterFollowing = async (req, res) => {
             username: req.user.profile.display_name,
             avatarSrc: req.user.profile.avt,
             posts: posts,
-            users: dummyUsers,
+            users: users,
             unreadCount,
         });
     } catch (error) {
@@ -114,6 +77,7 @@ homeController.filterLiked = async (req, res) => {
             user_id: req.userId,
             is_read: false,
         });
+        const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
 
         res.render('home/home', {
             title: 'Mini Threads - Liked',
@@ -128,7 +92,7 @@ homeController.filterLiked = async (req, res) => {
             username: req.user.profile.display_name,
             avatarSrc: req.user.profile.avt,
             posts: posts,
-            users: dummyUsers,
+            users,
             unreadCount,
         });
     } catch (error) {
