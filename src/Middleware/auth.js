@@ -1,35 +1,30 @@
+const User = require('../Models/User');
 const jwt = require('jsonwebtoken');
 
-const authenticateToken = (req, res, next) => {
-    const token = req.cookies.refreshToken;
-
-    // Nếu đường dẫn là '/', bỏ qua việc xác thực token, nhưng vẫn kiểm tra token nếu có
-    if (req.path === '/') {
-        if (token) {
-            jwt.verify(token, process.env.JWT_REFRESH_KEY, (err, user) => {
-                if (err) {
-                    console.log('Something wrong with token');
-                    return res.sendStatus(403);
-                }
-                req.userId = user.id;
-                next();
-            });
-        } else {
-            next();
-        }
-    } else {
+const authenticateToken = async (req, res, next) => {
+    try {
+        const token = req.cookies.refreshToken;
         if (!token) {
-            next();
+            return res.redirect('/auth/login'); // Điều hướng đến trang đăng nhập nếu không có token
         }
 
-        jwt.verify(token, process.env.JWT_REFRESH_KEY, (err, user) => {
-            if (err) {
-                console.log('Something wrong with token');
-                return res.sendStatus(403);
-            }
-            req.userId = user.id;
-            next();
-        });
+        // Xác minh token
+        const decoded = await jwt.verify(token, process.env.JWT_REFRESH_KEY);
+        req.userId = decoded.id;
+
+        // Tìm người dùng từ cơ sở dữ liệu
+        const user = await User.findById(req.userId).select('-password -is_verified -verification_sent_at -createdAt -updatedAt');
+        if (!user) {
+            return res.sendStatus(404); // Not Found nếu người dùng không tồn tại
+        }
+
+        // Gắn thông tin người dùng (nếu cần)
+        req.user = user;
+        // Tiếp tục
+        next();
+    } catch (err) {
+        console.error('Error in authenticateToken middleware:', err);
+        return res.sendStatus(403); // Forbidden nếu có lỗi trong xử lý token
     }
 };
 

@@ -134,7 +134,6 @@ document.getElementById('login_form').addEventListener('submit', async function 
             // Đăng nhập thành công
             localStorage.setItem('accessToken', response.data.accessToken); // Lưu token
             showModal(response.data.message);
-
             // Chuyển hướng về trang chính
             setTimeout(() => (window.location.href = '/'), 1000);
         } else {

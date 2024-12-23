@@ -3,7 +3,9 @@ const router = express.Router();
 const homeController = require('../Controllers/homeController');
 const authenticateToken = require('../Middleware/auth');
 
-router.get('/', authenticateToken, homeController);
-router.get('/home/:type', authenticateToken, homeController);
+// Route cho trang Home
+router.get('/', authenticateToken, homeController.renderHome);
+router.get('/home/following', authenticateToken, homeController.filterFollowing);
+router.get('/home/liked', authenticateToken, homeController.filterLiked);
 
 module.exports = router;

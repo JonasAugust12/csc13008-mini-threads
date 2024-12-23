@@ -32,11 +32,13 @@
             </div>
         </div>
     </div>
-    <div class="activity-post-container w-full mt-[42px] tbl:mt-0">
-        <% if (posts && posts.length > 0) {%>
-            <% posts.forEach(post=> { %>
-                <%- include('activity-post', { post: post }) %>
+    <div class="activity-post-container w-full mt-[102px] tbl:mt-0">
+        <% if (notifications && notifications.length > 0) {%>
+            <% notifications.forEach(noti=> { %>
+                <%- include('activity-post', { noti }) %>
             <% }) %>
         <% } %>
     </div>
 </div>
+
+<script src="/Js/activity.js"></script>

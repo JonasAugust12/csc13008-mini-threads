@@ -21,6 +21,7 @@ const overlay = document.querySelector('.overlay');
 const createBtn = document.querySelector('.create-btn');
 const navUtilityCreate = document.querySelector('.nav-utility-create');
 const cancelBtn = document.querySelector('.create-post__header__cancel-btn');
+const confirmDeleteModal = document.querySelector('.confirm-delete');
 function showModal() {
     if (!accessToken) {
         showPopup('popup');
@@ -34,6 +35,7 @@ function hideModal() {
     createModal.classList.add('hidden');
     overlay.classList.add('hidden');
     document.body.classList.remove('overflow-hidden');
+    confirmDeleteModal.classList.add('hidden');
     edit_form.classList.add('hidden');
     follower_popup.classList.add('hidden');
 }
@@ -41,31 +43,6 @@ createBtn.addEventListener('click', showModal);
 navUtilityCreate.addEventListener('click', showModal);
 overlay.addEventListener('click', hideModal);
 cancelBtn.addEventListener('click', hideModal);
-
-const privacyButton = document.querySelector('.create-post__footer__privacy');
-const privacyList = document.querySelector('.create-post__privacy-list');
-const privacyItems = document.querySelectorAll('.create-post__privacy-list__item');
-const privacyTitle = privacyButton.querySelector('.create-post__footer__privacy-title');
-privacyButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    privacyList.classList.toggle('hidden');
-});
-document.addEventListener('click', (event) => {
-    if (!privacyButton.contains(event.target) && !privacyList.contains(event.target)) {
-        privacyList.classList.add('hidden');
-    }
-});
-privacyItems.forEach((item) => {
-    item.addEventListener('click', (event) => {
-        if (item.textContent === 'Anyone') {
-            privacyTitle.textContent = 'Anyone can reply & quote';
-        } else if (item.textContent === 'Profiles you follow') {
-            privacyTitle.textContent = 'Profiles you follow can reply & quote';
-        }
-        privacyList.classList.add('hidden');
-        event.stopPropagation();
-    });
-});
 
 const moreBtn = document.querySelector('.navbar__setting-btn--more');
 const moreMenu = document.querySelector('.navbar__setting-more-menu');
@@ -199,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const imageContainer = document.querySelector('.create-post__info-post__img');
     const removeImageButton = document.querySelector('.create-post__info-post__remove-img');
     const loadingToast = document.querySelector('.loading-post-toast');
+    const toastContent = document.querySelector('.toast__loading-content');
 
     const checkButtonState = () => {
         const hasContent = textarea.value.trim().length > 0 || !imageContainer.classList.contains('hidden');
@@ -245,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     postButton.addEventListener('click', () => {
         createModal.classList.add('hidden');
+        toastContent.innerText = 'Posting...';
         overlay.classList.add('hidden');
         loadingToast.classList.remove('hidden');
         const postContent = textarea.value.trim();
@@ -255,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('post_quote', postContent);
             if (postImage) formData.append('post_image', postImage);
 
-            fetch('/post', { method: 'POST', body: formData })
+            fetch('/post/newpost', { method: 'POST', body: formData })
                 .then((response) => {
                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     return response.json();
@@ -292,3 +271,20 @@ document.addEventListener('DOMContentLoaded', () => {
         element.innerText = timeAgo;
     });
 });
+
+//clip link to clipboard
+function copyLinkToClipboard(path) {
+    const link = `${window.location.origin}${path}`;
+    const loadingToast = document.querySelector('.loading-post-toast');
+    const toastIcon = document.querySelector('.toast__loading-icon');
+    const toastContent = document.querySelector('.toast__loading-content');
+    toastIcon.classList.add('hidden');
+    loadingToast.classList.remove('hidden');
+    toastContent.innerText = 'Link copied to clipboard';
+    navigator.clipboard.writeText(link).then(() => {
+        setTimeout(() => {
+            loadingToast.classList.add('hidden');
+            toastIcon.classList.remove('hidden');
+        }, 1000);
+    });
+}

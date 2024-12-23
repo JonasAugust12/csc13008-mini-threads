@@ -30,7 +30,7 @@ const corsOptions = {
     origin: process.env.API_URL || 'http://localhost:3000',
     credentials: true,
     optionSuccessStatus: 200,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
 app.use(cors(corsOptions));
@@ -54,13 +54,6 @@ app.use(
         saveUninitialized: true,
     }),
 );
-
-// Cấu hình multer để xử lý ảnh
-const storage = multer.memoryStorage(); // Lưu ảnh vào bộ nhớ RAM
-const upload = multer({ storage });
-
-// Middleware để xử lý ảnh và dữ liệuz văn bản từ FormData
-app.use(upload.single('post_image')); // Sử dụng 'post_image' làm tên trường ảnh trong FormData
 
 // Cấu hình các route
 const searchRoutes = require('./Routes/searchRoutes');

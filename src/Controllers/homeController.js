@@ -1,82 +1,139 @@
-const User = require('../Models/User');
-const Post = require('../Models/Post');
-const Follow = require('../Models/Follow');
+const Follow = require('../Models/Follow'); // Import model Follow
+const Post1 = require('../Models/Post1'); // Import model Post1
+const Notification = require('../Models/Notification'); // Import model Notification
 
-const homeController = async (req, res) => {
+// Data dùng cho suggestion user
+const dummyUsers = [
+    {
+        username: 'justinbieber',
+        user_display_name: 'Justin Bieber',
+        user_nick_name: 'Pdiddy',
+        user_bio: 'i love fried chicken',
+        avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
+        user_profile_link: 'src/Public/Pages/another_user.html',
+        user_followers_count: 1000000,
+    },
+    {
+        username: 'Katy Pery',
+        user_display_name: 'Katy Pery',
+        user_nick_name: 'ROARRR',
+        user_bio: 'Orlando Bloom is my husband',
+        avatarSrc: 'https://randomuser.me/api/portraits/men/1.jpg',
+        user_profile_link: 'src/Public/Pages/another_user.html',
+        user_followers_count: 1000000,
+    },
+    {
+        username: 'justinbieber',
+        user_display_name: 'Justin Bieber',
+        user_nick_name: 'Pdiddy',
+        user_bio: 'i love fried chicken',
+        avatarSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png',
+        user_profile_link: 'src/Public/Pages/another_user.html',
+        user_followers_count: 1000000,
+    },
+    {
+        username: 'Katy Pery',
+        user_display_name: 'Katy Pery',
+        user_nick_name: 'ROARRR',
+        user_bio: 'Orlando Bloom is my husband',
+        avatarSrc: 'https://randomuser.me/api/portraits/men/1.jpg',
+        user_profile_link: 'src/Public/Pages/another_user.html',
+        user_followers_count: 1000000,
+    },
+];
+let homeController = {};
+
+homeController.renderHome = async (req, res) => {
+    const posts = await Post1.find().populate('user_id', 'profile').sort({ createdAt: -1 });
+    const unreadCount = await Notification.countDocuments({
+        user_id: req.userId,
+        is_read: false,
+    });
+    res.render('home/home', {
+        title: 'Mini Threads',
+        header: 'Home',
+        refreshItems: [
+            { name: 'For you', link: '/' },
+            { name: 'Following', link: '/home/following' },
+            { name: 'Liked', link: '/home/liked' },
+        ],
+        selectedItem: 'For you',
+        userid: req.user._id,
+        username: req.user.profile.display_name,
+        avatarSrc: req.user.profile.avt,
+        posts: posts,
+        users: dummyUsers,
+        unreadCount,
+    });
+};
+
+homeController.filterFollowing = async (req, res) => {
     try {
-        let user = null;
-        let userId = null;
-        let username = '';
-        let avatarSrc = '/Img/UserIcon.jpg';
+        // Lấy danh sách user mà user hiện tại đang follow
+        const followingUsers = await Follow.find({ followerId: req.user._id }).select('userId');
+        const followingUserIds = followingUsers.map((follow) => follow.userId);
 
-        if (req.userId) {
-            userId = req.userId;
-            user = await User.findById(userId);
-            if (user) {
-                username = user.username;
-                avatarSrc = user.profile && user.profile.avt ? user.profile.avt : avatarSrc;
-            }
-        }
-
-        const selectedItem = req.params.type || 'for you';
-        const headerText = selectedItem
-            .split('-')
-            .map((word) => {
-                return word.charAt(0).toUpperCase() + word.slice(1);
-            })
-            .join(' ');
-
-        let posts;
-
-        if (selectedItem === 'following') {
-            console.log(userId);
-
-            // Lấy danh sách người dùng mà người dùng hiện tại đang theo dõi
-            const following = await Follow.find({ followerId: userId }).populate('userId');
-            const followingIds = following.map((follow) => follow.userId._id);
-            console.log('User is following the following userIds: ', followingIds);
-
-            // Kiểm tra nếu không có người nào được theo dõi
-            if (followingIds.length === 0) {
-                posts = [];
-            } else {
-                // Lấy các user tương ứng với các followingIds
-                const followingUsers = await User.find({ _id: { $in: followingIds } }).select('username');
-                const followingUsernames = followingUsers.map((user) => user.username);
-                console.log("Following users' usernames: ", followingUsernames);
-
-                // Lấy các bài đăng từ những người mà người dùng đang theo dõi
-                posts = await Post.find({ 'user.username': { $in: followingUsernames } })
-                    .populate('user', 'username user_display_name avatarSrc user_followers_count')
-                    .sort({ createdAt: -1 });
-            }
-            console.log('Posts of followed users: ', posts);
-        } else {
-            // Nếu không phải 'following', lấy tất cả bài đăng
-            posts = await Post.find().populate('user', 'username user_display_name avatarSrc user_followers_count').sort({ createdAt: -1 });
-        }
-
-        const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
+        // Lấy bài viết từ những người được follow
+        const posts = await Post1.find({ user_id: { $in: followingUserIds } })
+            .populate('user_id', 'profile')
+            .sort({ createdAt: -1 });
+        const unreadCount = await Notification.countDocuments({
+            user_id: req.userId,
+            is_read: false,
+        });
 
         res.render('home/home', {
-            title: 'Mini Threads',
-            header: headerText,
+            title: 'Mini Threads - Following',
+            header: 'Following',
             refreshItems: [
-                { name: 'For you', link: '/home/for-you' },
+                { name: 'For you', link: '/' },
                 { name: 'Following', link: '/home/following' },
                 { name: 'Liked', link: '/home/liked' },
-                { name: 'Saved', link: '/home/saved' },
             ],
-            selectedItem: selectedItem,
-            username: username,
-            avatarSrc: avatarSrc,
+            selectedItem: 'Following',
+            userid: req.user._id,
+            username: req.user.profile.display_name,
+            avatarSrc: req.user.profile.avt,
             posts: posts,
-            users: users,
-            curUserId: userId,
+            users: dummyUsers,
+            unreadCount,
         });
     } catch (error) {
-        console.error('Error fetching posts or users:', error);
-        res.status(500).send('An error occurred while fetching posts or users.');
+        console.error('Error fetching following posts:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+homeController.filterLiked = async (req, res) => {
+    try {
+        // Lấy bài viết đã được user hiện tại like
+        const posts = await Post1.find({ post_likes: req.user._id }) // Assume 'liked' là mảng chứa userId
+            .populate('user_id', 'profile')
+            .sort({ createdAt: -1 });
+        const unreadCount = await Notification.countDocuments({
+            user_id: req.userId,
+            is_read: false,
+        });
+
+        res.render('home/home', {
+            title: 'Mini Threads - Liked',
+            header: 'Liked',
+            refreshItems: [
+                { name: 'For you', link: '/' },
+                { name: 'Following', link: '/home/following' },
+                { name: 'Liked', link: '/home/liked' },
+            ],
+            selectedItem: 'Liked',
+            userid: req.user._id,
+            username: req.user.profile.display_name,
+            avatarSrc: req.user.profile.avt,
+            posts: posts,
+            users: dummyUsers,
+            unreadCount,
+        });
+    } catch (error) {
+        console.error('Error fetching liked posts:', error);
+        res.status(500).send('Internal Server Error');
     }
 };
 

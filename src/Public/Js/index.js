@@ -92,28 +92,116 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//Like post
 document.addEventListener('DOMContentLoaded', () => {
     const postLikes = document.querySelectorAll('.post-like');
 
     postLikes.forEach((postLike) => {
         postLike.addEventListener('click', () => {
+            const postId = postLike.id.replace('like-button-', ''); // Sửa biến `button` thành `postLike`
             const svg = postLike.querySelector('svg path');
             const likeNum = postLike.querySelector('.like-num');
             const currentLikes = parseInt(likeNum.textContent.trim(), 10);
 
             // Kiểm tra trạng thái hiện tại của nút
             if (svg.getAttribute('fill') === 'red') {
-                // Nếu đang thích -> Bỏ thích
+                // Nếu đã like thì gửi yêu cầu API để "unlike"
+                fetch(`/post/like-post/${postId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        postId: postId, // Gửi postId trong request body
+                        action: 'unlike', // Đưa thêm action để biết đây là yêu cầu unlike
+                    }),
+                });
+
+                // Bỏ thích trên UI
                 svg.setAttribute('fill', 'none');
                 svg.setAttribute('stroke', 'currentColor');
-                likeNum.textContent = currentLikes - 1;
+                likeNum.textContent = currentLikes - 1; // Giảm số lượt thích
+                if (likeNum.textContent === '0') likeNum.classList.add('hidden');
+                likeNum.style.color = '#ccc';
             } else {
-                // Nếu chưa thích -> Thích
+                // Nếu chưa thích thì gửi yêu cầu API để "like"
+                fetch(`/post/like-post/${postId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        postId: postId, // Gửi postId trong request body
+                        action: 'like', // Đưa thêm action để biết đây là yêu cầu like
+                    }),
+                });
+
+                // Thích trên UI
                 svg.setAttribute('fill', 'red');
                 svg.setAttribute('stroke', 'red');
-                likeNum.textContent = currentLikes + 1;
+                likeNum.textContent = currentLikes + 1; // Tăng số lượt thích
+                if (likeNum.textContent !== '0') likeNum.classList.remove('hidden');
+                likeNum.style.color = 'red';
             }
         });
+    });
+});
+
+// xoá bài viết
+const deletePostButtons = document.querySelectorAll('.delete-post');
+deletePostButtons.forEach((deletePostButton) => {
+    deletePostButton.addEventListener('click', (e) => {
+        // Lấy các phần tử liên quan đến confirm delete và overlay
+        const confirmDeleteBox = document.querySelector('.confirm-delete');
+        const overlay = document.querySelector('.overlay');
+        const confirmTitle = document.querySelector('.delete-title');
+        confirmTitle.textContent = 'Delete post';
+        const confirmContent = document.querySelector('.delete-content');
+        confirmContent.textContent = "If you delete this post, you won't be able to restore it.";
+        const confirmCancelBtn = document.querySelector('.confirm-cancel-btn');
+        const confirmDeleteBtn = document.querySelector('.confirm-delete-btn');
+        const loadingToast = document.querySelector('.loading-post-toast');
+        const toastContent = document.querySelector('.toast__loading-content');
+
+        // Hiển thị hộp xác nhận
+        confirmDeleteBox.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+
+        const postId = e.target.closest('.delete-post').getAttribute('post-id').split('-')[2];
+
+        confirmCancelBtn.addEventListener('click', () => {
+            confirmDeleteBox.classList.add('hidden');
+            overlay.classList.add('hidden');
+        });
+
+        // Thêm sự kiện chỉ một lần cho button delete
+        const handleDelete = async () => {
+            loadingToast.classList.remove('hidden');
+            toastContent.textContent = 'Deleting post...';
+            try {
+                await fetch(`/post/delete-post/${postId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }).then(() => {
+                    loadingToast.classList.add('hidden');
+                    const postContainer = e.target.closest('.post-container');
+                    if (postContainer) {
+                        postContainer.remove();
+                    } else {
+                        window.location.href = '/';
+                    }
+                    confirmDeleteBox.classList.add('hidden');
+                    overlay.classList.add('hidden');
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while deleting the post.');
+            }
+        };
+
+        confirmDeleteBtn.addEventListener('click', handleDelete, { once: true });
     });
 });
 

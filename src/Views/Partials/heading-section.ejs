@@ -1,4 +1,5 @@
-<div class="heading__section hidden h-[60px] fixed z-[1] top-0 bg-main-bg box-border tbl:grid tbl:grid-cols-[1fr_50%_1fr] tbl:grid-rows-[1fr] tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px]">
+<div
+    class="heading__section hidden h-[60px] fixed z-[2] top-0 bg-main-bg box-border tbl:grid tbl:grid-cols-[1fr_50%_1fr] tbl:grid-rows-[1fr] tbl:min-w-[546px] tbl:max-w-[640px] pc:w-[640px]">
     <div class="heading__section__left flex items-center justify-start pl-4"></div>
     <div class="heading__section__middle flex justify-center items-center">
         <a href="#"
@@ -22,7 +23,7 @@
                             <span class="refresh-list__item-name font-semibold text-[15px] flex-grow select-none">
                                 <%= item.name %> 
                             </span>
-                            <% if (item.name.toLowerCase() === selectedItem.toLowerCase()) { %>
+                            <% if (item.name.toLowerCase().includes(selectedItem.toLowerCase())) { %>
                                 <div class="refresh-list__item-selected flex items-center ml-2">
                                     <svg aria-label="Checkmark: selected" role="img" viewBox="0 0 24 24" class="w-4 h-4">
                                         <title>Checkmark: selected</title>

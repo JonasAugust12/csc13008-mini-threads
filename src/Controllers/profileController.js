@@ -4,7 +4,8 @@ const Follow = require('../Models/Follow'); // model follow
 const jwt = require('jsonwebtoken'); // token
 const { default: mongoose } = require('mongoose');
 const env = require('dotenv').config(); // biến môi trường
-const Post = require('../Models/Post');
+const Post1 = require('../Models/Post1');
+const Notification = require('../Models/Notification');
 
 // Initialize GridFS
 // let gfs;
@@ -81,9 +82,14 @@ const getOtherUserProfile = async (req, res) => {
         const followerUsers = populatedUser.followers;
         const followingUsers = populatedUser.following;
 
-        const posts = await Post.find({ 'user.user_profile_link': `/profile/${userId}` }).sort({ createdAt: -1 });
-        console.log('ready to render');
-        console.log(req.userId);
+        const post = await Post1.find({ user_id: userId })
+            .populate('user_id', 'profile.nick_name profile.display_name profile.avt')
+            .sort({ createdAt: -1 });
+
+        const unreadCount = await Notification.countDocuments({
+            user_id: req.userId,
+            is_read: false,
+        });
 
         res.render('profile', {
             title: user.profile.display_name,
@@ -92,6 +98,7 @@ const getOtherUserProfile = async (req, res) => {
             selectedItem: null,
             user: user,
             username: user.username,
+            userid: req.user._id,
             avatarSrc: user.profile.avt ? user.profile.avt : '/Img/UserIcon.jpg',
             followerUsers: followerUsers,
             followingUsers: followingUsers,
@@ -99,6 +106,8 @@ const getOtherUserProfile = async (req, res) => {
             posts: posts,
             isFollowing: isFollowing, // Pass a boolean indicating if the current user is following this user
             curUserId: curUser._id ? curUser._id : null, // Pass a boolean indicating if the user is authenticated
+            posts: post,
+            unreadCount: unreadCount,
         });
     } catch (error) {
         console.error(error);
@@ -147,7 +156,14 @@ const profileController = async (req, res) => {
         const followerUsers = populatedUser.followers;
         const followingUsers = populatedUser.following;
 
-        const posts = await Post.find({ 'user.user_profile_link': `/profile/${userId}` }).sort({ createdAt: -1 });
+        const posts = await Post1.find({ user_id: userId })
+            .populate('user_id', 'profile.nick_name profile.display_name profile.avt')
+            .sort({ createdAt: -1 });
+
+        const unreadCount = await Notification.countDocuments({
+            user_id: req.userId,
+            is_read: false,
+        });
 
         res.render('profile', {
             title: user.profile.display_name,
@@ -156,12 +172,14 @@ const profileController = async (req, res) => {
             selectedItem: null,
             user: user,
             username: user.username,
+            userid: req.user._id,
             avatarSrc: user.profile.avt,
             followerUsers: followerUsers,
             followingUsers: followingUsers,
             type: 'owner',
             posts: posts,
             curUserId: user._id || null,
+            unreadCount: unreadCount,
         });
     } catch (error) {
         console.error(error);

@@ -38,7 +38,7 @@ const userScheme = new mongoose.Schema(
             },
             avt: {
                 type: String,
-                default: '/Img/UserIcon.jpg', // Avatar mặc định là null
+                default: 'https://res.cloudinary.com/djyugezvf/image/upload/v1733484686/phy000007/q57ps7ajaeqeuqztwkhf.png', // Ảnh đại diện mặc định
             },
             bio: {
                 type: String,
