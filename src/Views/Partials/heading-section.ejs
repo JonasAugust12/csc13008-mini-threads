@@ -23,7 +23,7 @@
                             <span class="refresh-list__item-name font-semibold text-[15px] flex-grow select-none">
                                 <%= item.name %> <!-- đảm bảo rằng item có thuộc tính name -->
                             </span>
-                            <% if (item.name.toLowerCase() === selectedItem.toLowerCase()) { %>
+                            <% if (item.name.toLowerCase().includes(selectedItem.toLowerCase())) { %>
                                 <div class="refresh-list__item-selected flex items-center ml-2">
                                     <svg aria-label="Checkmark: selected" role="img" viewBox="0 0 24 24" class="w-4 h-4">
                                         <title>Checkmark: selected</title>

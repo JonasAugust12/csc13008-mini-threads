@@ -1779,6 +1779,10 @@ video {
     border-top-width: 1px;
 }
 
+.border-b-2 {
+    border-bottom-width: 2px;
+}
+
 .border-solid {
     border-style: solid;
 }
@@ -1842,6 +1846,11 @@ video {
 
 .border-transparent {
     border-color: transparent;
+}
+
+.border-white {
+    --tw-border-opacity: 1;
+    border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
 .border-b-\[rgba\(243\2c 245\2c 247\2c 0\.15\)\] {

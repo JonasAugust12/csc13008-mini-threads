@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-    <% if (title === 'Activity') { %>
+    <% if (title.includes('Activity')) { %>
         <div
             class="activity-filter bg-main-bg fixed top-[60px] left-0 w-full h-[42px] overflow-x-auto overflow-y-hidden custom-scrollbar py-1 px-3 flex justify-center z-[1] box-border gap-x-[6px] self-center flex-nowrap tbl:hidden">
             <% if (refreshItems && refreshItems.length > 0) { %>
