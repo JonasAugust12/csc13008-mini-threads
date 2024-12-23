@@ -11,8 +11,9 @@ homeController.renderHome = async (req, res) => {
         is_read: false,
     });
     const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
+    const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Mini Threads`;
     res.render('home/home', {
-        title: 'Mini Threads',
+        title,
         header: 'Home',
         refreshItems: [
             { name: 'For you', link: '/' },
@@ -44,9 +45,10 @@ homeController.filterFollowing = async (req, res) => {
             is_read: false,
         });
         const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
+        const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Mini Threads - Following`;
 
         res.render('home/home', {
-            title: 'Mini Threads - Following',
+            title,
             header: 'Following',
             refreshItems: [
                 { name: 'For you', link: '/' },
@@ -78,9 +80,10 @@ homeController.filterLiked = async (req, res) => {
             is_read: false,
         });
         const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
+        const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Mini Threads - Liked`;
 
         res.render('home/home', {
-            title: 'Mini Threads - Liked',
+            title,
             header: 'Liked',
             refreshItems: [
                 { name: 'For you', link: '/' },

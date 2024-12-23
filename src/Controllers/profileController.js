@@ -90,9 +90,10 @@ const getOtherUserProfile = async (req, res) => {
             user_id: req.userId,
             is_read: false,
         });
+        const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}${user.profile.display_name}`;
 
         res.render('profile', {
-            title: user.profile.display_name,
+            title: title,
             header: user.profile.nick_name,
             refreshItems: [],
             selectedItem: null,
@@ -164,9 +165,10 @@ const profileController = async (req, res) => {
             user_id: req.userId,
             is_read: false,
         });
+        const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}${user.profile.display_name}`;
 
         res.render('profile', {
-            title: user.profile.display_name,
+            title: title,
             header: 'Personal profile',
             refreshItems: [],
             selectedItem: null,

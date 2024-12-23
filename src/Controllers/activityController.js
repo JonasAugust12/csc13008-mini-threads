@@ -33,7 +33,7 @@ activityController.renderActivity = async (req, res) => {
         const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Activity`;
 
         res.render('Activity/activity', {
-            title: title,
+            title,
             header,
             refreshItems: [
                 { name: 'All', link: '/activity', type: 'all' },

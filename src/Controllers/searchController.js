@@ -1,5 +1,6 @@
 const User = require('../Models/User');
 const Follow = require('../Models/Follow');
+const Notification = require('../Models/Notification');
 
 const searchController = async (req, res) => {
     try {
@@ -28,9 +29,15 @@ const searchController = async (req, res) => {
                 };
             });
         }
+        const unreadCount = await Notification.countDocuments({
+            user_id: req.userId,
+            is_read: false,
+        });
+
+        const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Search`;
 
         res.render('Search/search', {
-            title: 'Search',
+            title,
             header: 'Search',
             refreshItems: null,
             selectedItem: null,
@@ -38,6 +45,7 @@ const searchController = async (req, res) => {
             avatarSrc: null,
             users: filteredUsers,
             query,
+            unreadCount,
         });
     } catch (error) {
         console.error('Error fetching users:', error);

@@ -1759,6 +1759,10 @@ video {
     border-bottom-width: 0px;
 }
 
+.border-b-2 {
+    border-bottom-width: 2px;
+}
+
 .border-b-\[0\.5px\] {
     border-bottom-width: 0.5px;
 }
@@ -1777,10 +1781,6 @@ video {
 
 .border-t-\[1px\] {
     border-top-width: 1px;
-}
-
-.border-b-2 {
-    border-bottom-width: 2px;
 }
 
 .border-solid {
@@ -2562,11 +2562,6 @@ video {
 .text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-\[\#000\] {
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .no-underline {
