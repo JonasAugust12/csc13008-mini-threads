@@ -5,34 +5,30 @@ const Notification = require('../Models/Notification');
 const searchController = async (req, res) => {
     try {
         const query = req.query.q ? req.query.q.toLowerCase() : '';
-        const userId = req.userId;
+        const userId = req.userId || null;
 
         let filteredUsers = [];
 
         if (query) {
             filteredUsers = await User.find({
                 $or: [{ username: { $regex: query, $options: 'i' } }, { fullname: { $regex: query, $options: 'i' } }],
-            }).select('username fullname profile.avt followers_count');
+            }).select('username fullname profile.avt followers');
         } else {
-            filteredUsers = await User.find().select('username fullname profile.avt followers_count');
+            filteredUsers = await User.find().select('username fullname profile.avt followers');
         }
 
         if (userId) {
             const follows = await Follow.find({ followerId: userId }).populate('userId');
-            const followingIds = follows.map((follow) => follow.userId._id.toString());
+            const followingIds = follows.map((follow) => follow.userId?._id?.toString());
 
-            // Cập nhật thông tin follow cho từng người dùng trong kết quả tìm kiếm
-            filteredUsers = filteredUsers.map((user) => {
-                return {
-                    ...user.toObject(),
-                    isFollowing: followingIds.includes(user._id.toString()),
-                };
-            });
+            filteredUsers = filteredUsers.map((user) => ({
+                ...user.toObject(),
+                isFollowing: followingIds.includes(user._id.toString()),
+                followers_count: user.followers.length,
+            }));
         }
-        const unreadCount = await Notification.countDocuments({
-            user_id: req.userId,
-            is_read: false,
-        });
+
+        const unreadCount = userId ? await Notification.countDocuments({ user_id: userId, is_read: false }) : 0;
 
         const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Search`;
 
@@ -41,11 +37,12 @@ const searchController = async (req, res) => {
             header: 'Search',
             refreshItems: null,
             selectedItem: null,
-            username: null,
-            avatarSrc: null,
+            username: req.username || null,
+            avatarSrc: req.avatarSrc || null,
             users: filteredUsers,
             query,
             unreadCount,
+            curUserId: userId,
         });
     } catch (error) {
         console.error('Error fetching users:', error);

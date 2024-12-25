@@ -5,7 +5,7 @@ const searchInput = $('.search-box__input');
 const userProfiles = $$('.user-profile');
 const clearButton = $('.search-box__clear-btn');
 const suggestionHeading = $('.suggestion-box__heading');
-const followBtns = $$('.user-profile__follow-btn');
+const followBtns = $$('.user-profile__follow-button');
 
 searchInput.addEventListener('input', function () {
     const query = this.value.trim().toLowerCase();
@@ -66,9 +66,11 @@ followBtns.forEach(function (followBtn) {
         if (action === 'follow') {
             followBtn.innerText = 'Following';
             followBtn.style.color = '#777777';
+            console.log('Button text updated to: Following');
         } else {
             followBtn.innerText = 'Follow';
             followBtn.style.color = '#f3f5f7';
+            console.log('Button text updated to: Follow');
         }
 
         try {
@@ -77,17 +79,21 @@ followBtns.forEach(function (followBtn) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ action }), // Gửi action (follow/unfollow) vào body
+                body: JSON.stringify({ action }),
+                credentials: 'include',
             });
 
             if (response.ok) {
                 const data = await response.json();
-                if (action === 'follow') {
-                    followBtn.innerText = 'Following';
-                    followBtn.style.color = '#777777';
+                console.log('Response received:', data);
+
+                const followerCountElement = followBtn.closest('.user-profile').querySelector('.user-profile__followers-count');
+                const newFollowerCount = parseInt(followerCountElement.textContent.trim(), 10);
+
+                if (action === 'unfollow') {
+                    followerCountElement.textContent = formatFollowers(newFollowerCount - 1) + ' followers';
                 } else {
-                    followBtn.innerText = 'Follow';
-                    followBtn.style.color = '#f3f5f7';
+                    followerCountElement.textContent = formatFollowers(newFollowerCount + 1) + ' followers';
                 }
             } else {
                 console.error('Error:', await response.text());
@@ -98,21 +104,15 @@ followBtns.forEach(function (followBtn) {
     });
 });
 
-searchInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        localStorage.setItem('searchValue', searchInput.value);
-        window.location.href = 'search_result.html';
-    }
+document.addEventListener('DOMContentLoaded', function () {
+    const userProfiles = $$('.user-profile');
+
+    userProfiles.forEach(function (profile) {
+        profile.addEventListener('click', function (event) {
+            if (!event.target.closest('.user-profile__follow-button')) {
+                const userId = profile.querySelector('.user-profile__follow-button').getAttribute('data-user-id');
+                window.location.href = `/profile/${userId}`;
+            }
+        });
+    });
 });
-
-// searchInput.addEventListener('input', function () {
-//     if (searchInput.value === '') {
-//         clearButton.style.display = 'none';
-//     } else {
-//         clearButton.style.display = 'flex';
-//     }
-// });
-
-// clearButton.onclick = function () {
-//     searchInput.value = '';
-// };
