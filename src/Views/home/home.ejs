@@ -5,7 +5,7 @@
     </div>
     <div class="start-thread top-0 flex justify-center border-b border-border-color gap-2 w-full items-stretch tbl:pt-0 py-4 px-6">
         <div class="icon-container flex cursor-pointer">
-            <img src="<%= avatarSrc %>" class="w-9 h-9 rounded-full mt-1" alt="" />
+            <img src="<%= avatarSrc %>" class="w-9 h-9 rounded-full mt-1 object-cover select-none" alt="" />
         </div>
         <div class="start-thread w-11/12 flex flex-col gap-1">
             <div class="start-thread-username text-[15px] font-user-weight tbl:hidden">
@@ -54,7 +54,7 @@
                     <!-- sau 3 post đầu tiên thì sẽ xuất hiện suggestion -->
                 <% if (index===2) { %>
                     </div>
-                    <div class="suggest-container px-6 py-4 border-t border-border-color">
+                    <div class="suggest-container px-6 py-4 border-b border-border-color">
                         <%- include('home-suggestion', { users: users }) %>
                     </div>
                     <div class="post-contents flex flex-col">

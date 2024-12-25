@@ -1,15 +1,13 @@
-<div class="post-container flex px-6 py-4 border-b border-border-color cursor-pointer" post-id="post-id-<%= post._id.toString() %>">
-    <img
-        src="<%= post.user_id.profile.avt %>"
-        class="w-9 h-9 rounded-full mt-1 select-none"
-        alt=""
-    />
+<div class="post-container flex px-6 py-4 border-b border-border-color cursor-pointer" post-id="post-id-<%= post._id.toString() %>"
+    onclick="window.location.href='/post/<%= post._id.toString() %>'"    
+>
+    <img src="<%= post.user_id.profile.avt %>" class="w-9 h-9 rounded-full mt-1 select-none object-cover" alt="" />
     <div class="post-content flex flex-col ml-2 w-full">
         <div class="post-top flex w-full justify-between">
             <div class="post-user-info flex gap-2">
                 <%# include('../Partials/hover-user', {user: post.user}) %>
-                <a href="/profile/<%= post.user_id._id.toString() %>" class="hover:underline text-[15px] font-user-weight">
-                    <%= post.user_id.profile.display_name %>
+                <a href="/profile/<%= post.user_id._id.toString() %>" class="hover:underline text-[15px] font-user-weight" onclick="event.stopPropagation()">
+                    <%= post.user_id.profile.nick_name %>
                 </a>
                 <div class="post-time-stamp text-[15px] text-secondary-text" data-created-at="<%= post.createdAt %>"></div>
             </div>
@@ -128,7 +126,6 @@
                     <div class="like-num text-[#<%= post.post_likes.includes(userid) ? 'ff0000' : 'ccc' %>] text-[13px] font-normal pl-1 <%= post.post_likes.length===0 ? 'hidden' : '' %>"><%= post.post_likes.length%></div>
                 </div>
             <div
-                onclick="window.location.href='/post/<%= post._id.toString() %>'"
                 class="post-comment flex gap-1 justify-center items-center cursor-pointer hover:bg-[#222222] px-3 py-2 rounded-[20px]"
             >
                 <svg

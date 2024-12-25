@@ -1,5 +1,5 @@
 <div class="detail-post-wrapper w-full h-full relative">
-    <%- include('post-activity', { post }) %>
+    <%- include('post-activity', { post, following }) %>
 
     <%- include('main-post', {post}) %>
     <%- include('comment-form', { postId: post._id.toString(), avatarSrc }) %>

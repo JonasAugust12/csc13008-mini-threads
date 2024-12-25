@@ -23,6 +23,8 @@ const navUtilityCreate = document.querySelector('.nav-utility-create');
 const cancelBtn = document.querySelector('.create-post__header__cancel-btn');
 const confirmDeleteModal = document.querySelector('.confirm-delete');
 const startThreadBtn = document.querySelector('.start-thread');
+const edit_form = document.querySelector('.edit-profile');
+const follower_popup = document.querySelector('.follower-popup');
 function showModal() {
     if (!accessToken) {
         showPopup('popup');
@@ -235,11 +237,12 @@ document.addEventListener('DOMContentLoaded', () => {
         toastContent.innerText = 'Posting...';
         overlay.classList.add('hidden');
         loadingToast.classList.remove('hidden');
-        const postContent = textarea.value.trim();
+        let postContent = textarea.value.trim();
         const postImage = imageInput.files[0];
 
         if (postContent.length > 0 || postImage) {
             const formData = new FormData();
+            postContent = postContent.replace(/<\/?script[^>]*>/gim, '');
             formData.append('post_quote', postContent);
             if (postImage) formData.append('post_image', postImage);
 
@@ -364,7 +367,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const postLikes = document.querySelectorAll('.post-like');
 
     postLikes.forEach((postLike) => {
-        postLike.addEventListener('click', () => {
+        postLike.addEventListener('click', (e) => {
+            e.stopPropagation();
             const postId = postLike.id.replace('like-button-', ''); // Sửa biến `button` thành `postLike`
             const svg = postLike.querySelector('svg path');
             const likeNum = postLike.querySelector('.like-num');

@@ -70,7 +70,7 @@
         </div>
     </div>
     <div class="activity__post-avatar py-3 pl-3 pr-0 tbl:pl-6 select-none">
-        <a href="/profile/<%= noti.action_user_id._id.toString() %>" class="block w-[41px] relative">
+        <a href="/profile/<%= noti.action_user_id._id.toString() %>" class="block w-[41px] relative" onclick="event.stopPropagation()">
             <div class="w-9 h-9 relative">
                 <img src="<%= noti.action_user_id.profile.avt %>"
                     alt="User Avatar" class="w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover" />
@@ -98,7 +98,8 @@
             <div class="flex justify-between items-center">
                 <div class="flex-grow">
                     <a href="/profile/<%= noti.action_user_id._id %>"
-                        class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"><%= noti.action_user_id.profile.display_name %></a>
+                        onclick="event.stopPropagation()"
+                        class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"><%= noti.action_user_id.profile.nick_name %></a>
                     <p
                         data-created-at="<%= noti.createdAt %>"
                         class="post-time-stamp leading-[22.5px] overflow-hidden inline-block text-[15px] text-secondary-text">
@@ -122,8 +123,9 @@
                 </div>
                 <% if (noti.type === 'follow') {%>
                     <div
+                        follow-id="follow-<%= noti.action_user_id._id %>"
                         class="activity__post-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight px-4 mr-5 select-none whitespace-nowrap">
-                        Follow
+                        <% if (following.includes(noti.action_user_id._id)) { %>Following<% } else { %>Follow<% } %>
                     </div>
                 <% } %>
             </div>

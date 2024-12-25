@@ -115,7 +115,7 @@ const getOtherUserProfile = async (req, res) => {
             refreshItems: [],
             selectedItem: null,
             user: user,
-            username: user.username,
+            username: user.nick_name,
             userid: req.user._id,
             avatarSrc: user.profile.avt ? user.profile.avt : '/Img/UserIcon.jpg',
             followerUsers: followerUsers,
@@ -142,6 +142,17 @@ const updateProfileController = async (req, res) => {
         const user = await User.findById(req.userId);
         if (!user) {
             return res.status(404).send('User not found');
+        }
+
+        if (req.body.nickname) {
+            const existingUser = await User.findOne({
+                'profile.nick_name': req.body.nickname,
+                _id: { $ne: req.userId },
+            });
+
+            if (existingUser) {
+                return res.status(409).json({ message: 'Nickname already exists' });
+            }
         }
 
         if (req.file) {
@@ -195,7 +206,7 @@ const profileController = async (req, res) => {
             refreshItems: [],
             selectedItem: null,
             user: user,
-            username: user.username,
+            username: user.nick_name,
             userid: req.user._id,
             avatarSrc: user.profile.avt,
             followerUsers: followerUsers,

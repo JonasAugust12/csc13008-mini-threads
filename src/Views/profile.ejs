@@ -4,11 +4,11 @@
     <%- include('profile/edit_form_module', { user: user, }) %>
         <!-- follower -->
         <div
-            class="follower-popup bg-[#121212] text-white rounded-3xl hidden fixed inset-0 m-auto pc:w-[520px] z-[10] tbl:w-[500px] tbl:fixed tbl:bottom-auto tbl:border tbl:border-[rgba(147,140,140,0.4)] tbl:top-1/2 tbl:left-1/2 tbl:right-1/2 tbl:transform tbl:-translate-x-1/2 tbl:-translate-y-1/2">
+            class="follower-popup bg-[#121212] text-white tbl:rounded-3xl hidden fixed inset-0 m-auto pc:w-[520px] z-[10] tbl:w-[500px] tbl:fixed tbl:bottom-auto tbl:border tbl:border-[rgba(147,140,140,0.4)] tbl:top-1/2 tbl:left-1/2 tbl:right-1/2 tbl:transform tbl:-translate-x-1/2 tbl:-translate-y-1/2">
             <!-- đóng -->
             <div class="follower-popup__header flex justify-end items-center tbl:hidden">
                 <div class="follower-popup__header__close-btn cursor-pointer">
-                    <svg aria-label="Close" role="img" viewBox="0 0 24 24" class="w-6 h-6" stroke="#f3f5f7"
+                    <svg aria-label="Close" role="img" viewBox="0 0 24 24" class="w-7 h-7 pr-5 pt-3 box-content" stroke="#f3f5f7"
                         fill="transparent" stroke-width="1.5">
                         <title>Close</title>
                         <path d="M18 6L6 18"></path>
@@ -21,7 +21,7 @@
             <ul
                 class="navigation-follower pt-2 flex flex-row justify-around font-medium text-[15px] list-style: none border-b border-solid border-b-[rgba(243,245,247,0.15)]">
                 <li
-                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__news navigation__item--on text-[white]"
+                    class="navigation-follower__item cursor-pointer w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__news navigation__item--on text-[white]"
                     id="tab-followers"
                     >
                     <div class="item-follower__text">Followers</div>
@@ -31,11 +31,11 @@
                     </div>
                 </li>
                 <li
-                    class="navigation-follower__item w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__replies navigation__item--off text-[rgb(153,153,153)]"
+                    class="navigation-follower__item cursor-pointer w-[calc(100%_/_3)] flex items-center flex-col hover:cursor-pointer; navigation__replies navigation__item--off text-[rgb(153,153,153)]"
                     id="tab-following"
                     >
                     <div class="item-follower__text">Following</div>
-                    <div class="item-follower__number text-sm"><%= user.following.length %></div>
+                    <div class="item-following__number text-sm"><%= user.following.length %></div>
                     <div
                         class="item-follower__line w-full mt-4 border-b-[rgba(243,245,247,0.15)] border-b border-solid">
                     </div>

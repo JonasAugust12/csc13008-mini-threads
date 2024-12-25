@@ -91,24 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const followButtons = document.querySelectorAll('.user-liked-follow-btn');
-
-    followButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            if (button.textContent.trim() === 'Following') {
-                button.textContent = 'Follow';
-                button.classList.remove('text-secondary-text');
-                button.classList.add('text-primary-text');
-            } else {
-                button.textContent = 'Following';
-                button.classList.remove('text-primary-text');
-                button.classList.add('text-secondary-text');
-            }
-        });
-    });
-});
-
 // Like và unlike comment
 document.addEventListener('DOMContentLoaded', () => {
     const commentLikes = document.querySelectorAll('.like-comment');
@@ -213,5 +195,36 @@ document.querySelectorAll('.delete-comment').forEach((deleteCommentButton) => {
         };
 
         confirmDeleteBtn.addEventListener('click', handleDelete, { once: true });
+    });
+});
+
+// Xử lý sự kiện click vào nút follow/unfollow
+document.addEventListener('DOMContentLoaded', () => {
+    const followBtn = document.querySelectorAll('.user-liked-follow-btn');
+    followBtn.forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const userId = btn.getAttribute('follow-id').replace('follow-', '');
+            const followText = btn.innerText;
+            fetch(`/profile/follow/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        if (followText === 'Follow') {
+                            btn.innerText = 'Following';
+                        } else {
+                            btn.innerText = 'Follow';
+                        }
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
     });
 });

@@ -1,11 +1,9 @@
 var button_done = document.querySelector('.edit-profile__button');
 var mobile_cancel_btn = document.querySelector('.edit-info__cancel');
-var edit_form = document.querySelector('.edit-profile');
 var edit = document.querySelector('.edit-btn');
 var profile_info = document.querySelector('.profile__info');
 var top_nav_right_setting = document.querySelector('.top-nav__right-setting');
 var profile_follower = document.querySelector('.information__follower');
-var follower_popup = document.querySelector('.follower-popup');
 var close_follower = document.querySelector('.follower-popup__header__close-btn');
 
 if (close_follower) {
@@ -57,9 +55,55 @@ window.addEventListener('resize', function () {
     }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    // Lấy tất cả các nút follow có id bắt đầu bằng 'follow-'
+    const followButtons = document.querySelectorAll('[id^="follow-"]');
+
+    followButtons.forEach((followButton) => {
+        followButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Ngừng sự kiện lan truyền
+
+            const userId = followButton.id.replace('follow-', '');
+
+            fetch(`/profile/follow/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        // Cập nhật tất cả các nút có cùng userId sau khi gọi API thành công
+                        const allFollowButtons = document.querySelectorAll(`[id^="follow-${userId}"]`);
+
+                        allFollowButtons.forEach((button) => {
+                            const buttonText = button.querySelector('span') || button; // Nếu có span thì lấy text từ span, nếu không lấy trực tiếp button text
+                            const followersCountText = button.closest('.user-profile__info').querySelector('.user-profile__followers-count');
+                            const currentFollowersCount = parseInt(followersCountText.textContent.trim(), 10);
+
+                            if (buttonText.textContent === 'Following') {
+                                buttonText.textContent = 'Follow';
+                                followersCountText.textContent = `${currentFollowersCount - 1} followers`;
+                            } else {
+                                buttonText.textContent = 'Following';
+                                followersCountText.textContent = `${currentFollowersCount + 1} followers`;
+                            }
+                        });
+                    } else {
+                        alert('Failed to follow');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('An error occurred');
+                });
+        });
+    });
+});
+
 function handleFollowClick(userId, event) {
     event.stopPropagation();
-    console.log('click follow');
     fetch(`/profile/follow/${userId}`, {
         method: 'POST',
         headers: {
@@ -68,7 +112,6 @@ function handleFollowClick(userId, event) {
         credentials: 'include', // Include cookies in the request
     })
         .then((response) => {
-            console.log('response ', response);
             if (response.ok) {
                 window.location.reload();
                 //document.querySelector('.follow-btn1 p').textContent = 'Following';

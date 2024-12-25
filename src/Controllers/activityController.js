@@ -17,7 +17,7 @@ activityController.renderActivity = async (req, res) => {
         }
 
         const noti = await Notification.find({ user_id: req.userId })
-            .populate('action_user_id', 'profile.display_name profile.avt')
+            .populate('action_user_id', 'profile.nick_name profile.avt')
             .populate('post_id', 'post_image post_quote')
             .populate('comment_id', 'comment_content comment_likes comment_image')
             .sort({ createdAt: -1 });
@@ -47,8 +47,9 @@ activityController.renderActivity = async (req, res) => {
             ],
             selectedItem,
             userid: req.user._id,
-            username: req.user.profile.display_name,
+            username: req.user.profile.nick_name,
             avatarSrc: req.user.profile.avt,
+            following: req.user.following,
             notifications: filteredNoti,
             unreadCount,
         });

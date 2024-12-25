@@ -96,7 +96,7 @@
         if (event.key === 'Enter') {
             event.preventDefault();  // Prevents form submission or any default behavior when pressing Enter
 
-            const replyContent = event.target.value;  // Get the content of the input field
+            let replyContent = event.target.value;  // Get the content of the input field
             const postId = event.target.getAttribute('post-id');  // Get the post ID from the input field
             const commentImg = document.getElementById('upload-comment-img');
         
@@ -107,7 +107,9 @@
             if (replyContent.trim() === '' && !commentImg.files[0]) {
                 return;
             }
-            
+
+            replyContent = replyContent.replace(/<\/?script[^>]*>/gim, "");
+
             loadingToast.classList.remove('hidden');
             toastContent.textContent = 'Posting comment...';
 

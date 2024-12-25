@@ -300,6 +300,7 @@ postController.renderpost = async (req, res) => {
             userid: req.user._id,
             username: req.user.profile.display_name,
             avatarSrc: req.user.profile.avt,
+            following: req.user.following,
             post: post,
             comments: comment,
             unreadCount,

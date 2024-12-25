@@ -9,7 +9,9 @@ homeController.renderHome = async (req, res) => {
         user_id: req.userId,
         is_read: false,
     });
-    const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
+    const users = await User.find({
+        _id: { $nin: [...req.user.following, req.user._id] },
+    }).limit(10);
     const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Mini Threads`;
     res.render('home/home', {
         title,
@@ -21,7 +23,7 @@ homeController.renderHome = async (req, res) => {
         ],
         selectedItem: 'For you',
         userid: req.user._id,
-        username: req.user.profile.display_name,
+        username: req.user.profile.nick_name,
         avatarSrc: req.user.profile.avt,
         posts: posts,
         users,
@@ -39,7 +41,7 @@ homeController.filterFollowing = async (req, res) => {
         const followingUserIds = user.following.map((followedUser) => followedUser._id);
 
         const posts = await Post.find({ user_id: { $in: followingUserIds } })
-            .populate('user_id', 'profile.display_name profile.avt')
+            .populate('user_id', 'profile.nick_name profile.avt')
             .sort({ createdAt: -1 });
 
         const unreadCount = await Notification.countDocuments({
@@ -47,8 +49,9 @@ homeController.filterFollowing = async (req, res) => {
             is_read: false,
         });
 
-        const users = await User.find().select('username profile.display_name profile.avt followers').limit(5);
-
+        const users = await User.find({
+            _id: { $nin: [...req.user.following, req.user._id] },
+        }).limit(10);
         const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Mini Threads - Following`;
 
         res.render('home/home', {
@@ -61,7 +64,7 @@ homeController.filterFollowing = async (req, res) => {
             ],
             selectedItem: 'Following',
             userid: req.user._id,
-            username: req.user.profile.display_name,
+            username: req.user.profile.nick_name,
             avatarSrc: req.user.profile.avt,
             posts: posts,
             users: users,
@@ -83,7 +86,9 @@ homeController.filterLiked = async (req, res) => {
             user_id: req.userId,
             is_read: false,
         });
-        const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
+        const users = await User.find({
+            _id: { $nin: [...req.user.following, req.user._id] },
+        }).limit(10);
         const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Mini Threads - Liked`;
 
         res.render('home/home', {
@@ -96,7 +101,7 @@ homeController.filterLiked = async (req, res) => {
             ],
             selectedItem: 'Liked',
             userid: req.user._id,
-            username: req.user.profile.display_name,
+            username: req.user.profile.nick_name,
             avatarSrc: req.user.profile.avt,
             posts: posts,
             users,

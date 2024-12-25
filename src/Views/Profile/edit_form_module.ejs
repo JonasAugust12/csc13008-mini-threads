@@ -15,9 +15,9 @@
                 <div class="flex flex-nowrap ml-6">
                     <div
                         class="edit-profile__field text-base flex flex-col justify-center flex-grow pb-3 border-b border-border-color">
-                        <div class="field__title font-bold mb-1">Name</div>
+                        <label for="name" class="field__title font-bold mb-1">Name</label>
                         <div class="field__content field__content__name font-normal">
-                            <input type="text" name="name" value="<%= user.profile.display_name %>"
+                            <input type="text" id="name" name="name" value="<%= user.profile.display_name %>"
                                 class="bg-transparent border-none outline-none w-full" />
                         </div>
                     </div>
@@ -30,17 +30,17 @@
                 </div>
                 <div
                     class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6 mt-4 pb-3 border-b border-border-color">
-                    <div class="field__title font-bold mb-1">Nick Name</div>
+                    <label for="nickname" class="field__title font-bold mb-1">Nick Name</label>
                     <div class="field__content field__content__name font-normal">
-                        <input type="text" name="nickname" value="<%= user.profile.nick_name %>"
+                        <input type="text" id="nickname" name="nickname" value="<%= user.profile.nick_name %>"
                             class="bg-transparent border-none outline-none w-full" />
                     </div>
                 </div>
                 <div
                     class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6 pb-3 border-b border-border-color">
-                    <div class="field__title font-bold mt-4">Bio</div>
+                    <label for="bio" class="field__title font-bold mt-4">Bio</label>
                     <div class="field__content field__content__bio mt-2">
-                        <textarea name="bio"
+                        <textarea id="bio" name="bio"
                             class="bg-transparent border-none outline-none w-full"><%= user.profile.bio %></textarea>
                     </div>
                 </div>
@@ -74,10 +74,58 @@
         doneButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault(); // Prevent default form submission
-                const formData = new FormData(editProfileForm);
-                
                 const loadingToast = document.querySelector('.loading-post-toast');
                 const toastContent = document.querySelector('.toast__loading-content');
+                const toastIcon = document.querySelector('.toast__loading-icon');
+                const nickname = document.getElementById('nickname').value.trim();
+                const name = document.getElementById('name').value.trim();
+                const bio = document.getElementById('bio').value.trim();
+
+                if (/\s/.test(nickname)) {
+                    toastContent.textContent = 'Nickname cannot contain spaces';
+                    toastIcon.classList.add('hidden');
+                    loadingToast.classList.remove('hidden');
+                    setInterval(() => {
+                        loadingToast.classList.add('hidden');
+                        toastIcon.classList.remove('hidden');
+                    }, 3000);
+                    return;
+                }
+
+                if (nickname.length > 20 || nickname.length === 0) {
+                    toastContent.textContent = 'Nickname must be between 1 and 20 characters';
+                    toastIcon.classList.add('hidden');
+                    loadingToast.classList.remove('hidden');
+                    setInterval(() => {
+                        loadingToast.classList.add('hidden');
+                        toastIcon.classList.remove('hidden');
+                    }, 3000);
+                    return;
+                }
+
+                if (name.length > 25 || name.length === 0) {
+                    toastContent.textContent = 'Name must be between 1 and 25 characters';
+                    toastIcon.classList.add('hidden');
+                    loadingToast.classList.remove('hidden');
+                    setInterval(() => {
+                        loadingToast.classList.add('hidden');
+                        toastIcon.classList.remove('hidden');
+                    }, 3000);
+                    return;
+                }
+
+                if (bio.length > 150) {
+                    toastContent.textContent = 'Bio must be less than 150 characters';
+                    toastIcon.classList.add('hidden');
+                    loadingToast.classList.remove('hidden');
+                    setInterval(() => {
+                        loadingToast.classList.add('hidden');
+                        toastIcon.classList.remove('hidden');
+                    }, 3000);
+                    return;
+                }
+
+                const formData = new FormData(editProfileForm);
                 loadingToast.classList.remove('hidden');
                 toastContent.textContent = 'Updating profile...';
 
@@ -90,6 +138,20 @@
                         if (response.ok) {
                             loadingToast.classList.add('hidden');
                             location.reload(); // Reload page if needed
+                        } else {
+                            return response.json(); // Parse JSON response to get the error message
+                        }
+                    })
+                    .then(data => {
+                        // Check if the server returned an error message (e.g., nickname already exists)
+                        if (data && data.message) {
+                            toastContent.textContent = data.message; // Display the error message in toast
+                            toastIcon.classList.add('hidden');
+                            loadingToast.classList.remove('hidden');
+                            setInterval(() => {
+                                loadingToast.classList.add('hidden');
+                                toastIcon.classList.remove('hidden');
+                            }, 3000);
                         }
                     })
                     .catch(error => {

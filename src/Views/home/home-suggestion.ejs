@@ -9,7 +9,7 @@
                     aria-label="Close"
                     role="img"
                     viewBox="0 0 24 24"
-                    class="absolute top-1 right-1 m-2 w-2 h-2 text-[#939393]"
+                    class="close-user absolute top-1 right-1 m-2 w-4 h-4 text-[#939393] "
                     style="--fill: currentColor"
                 >
                     <title>Đóng</title>
@@ -30,26 +30,24 @@
                     ></line>
                 </svg>
                 <img
-                    src="<%= user.avatarSrc %>"
-                    class="w-20 h-20 rounded-full"
-                    onclick="window.location.href='<%= user.user_profile_link %>'"
+                    src="<%= user.profile.avt %>"
+                    class="w-20 h-20 rounded-full object-cover select-none"
+                    onclick="window.location.href='/profile/<%= user._id %>'"
                     alt=""
                 />
-                <div
-                    class="post-user-info text-ellipsis whitespace-nowrap w-full text-center text-[15px] font-user-weight"
-                    onclick="window.location.href='<%= user.user_profile_link %>'"
-                >
-                    <%= user.user_display_name%>
-                </div>
+                <a href="/profile/<%= user._id %>"
+                    class="post-user-info text-ellipsis whitespace-nowrap w-full text-center text-[15px] font-user-weight hover:underline">
+                    <%= user.profile.nick_name %>
+                </a>
                 <div
                     class="second-title text-ellipsis overflow-hidden whitespace-nowrap w-full text-center text-secondary-text"
-                    onclick="window.location.href='<%= user.user_profile_link %>'"
+                    onclick="window.location.href='/profile/<%= user._id %>'"
                 >
-                    <%= user.user_nick_name %>
+                    <%= user.profile.display_name %>
                 </div>
                 <button
-                    id="monitorBtn"
-                    class="monitor-btn px-8 py-1 border border-border-color bg-white text-black font-semibold rounded-md mt-2"
+                    follow-id="follow-<%= user._id %>"
+                    class="suggest-follow-btn px-8 py-1 border border-border-color bg-white text-black font-semibold rounded-md mt-2"
                 >
                     Follow
                 </button>
