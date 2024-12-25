@@ -1,10 +1,10 @@
-const path = require('path');
-const User = require('../Models/User'); // model user
-const Follow = require('../Models/Follow'); // model follow
-const jwt = require('jsonwebtoken'); // token
-const { default: mongoose } = require('mongoose');
-const env = require('dotenv').config(); // biến môi trường
-const Post = require('../Models/Post');
+const path = require("path");
+const User = require("../Models/User"); // model user
+const Follow = require("../Models/Follow"); // model follow
+const jwt = require("jsonwebtoken"); // token
+const { default: mongoose } = require("mongoose");
+const env = require("dotenv").config(); // biến môi trường
+const Post = require("../Models/Post");
 
 // Initialize GridFS
 // let gfs;
@@ -16,155 +16,179 @@ const Post = require('../Models/Post');
 // });
 
 const followController = async (req, res) => {
-    try {
-        if (!req.userId) {
-            return res.status(401).json({ message: 'Unauthorized' }); // Return JSON response for consistency
-        }
-
-        const curUserId = req.userId;
-        const targetUserId = req.params.id;
-
-        const targetUser = await User.findById(targetUserId);
-        if (!targetUser) {
-            return res.status(404).json({ message: 'Target user not found' });
-        }
-
-        const currentUser = await User.findById(curUserId);
-        if (!currentUser) {
-            return res.status(404).json({ message: 'Current user not found' });
-        }
-
-        const isFollowing = targetUser.followers.some((follower) => follower.equals(curUserId));
-
-        if (isFollowing) {
-            // Unfollow
-            await User.findByIdAndUpdate(curUserId, { $pull: { following: targetUserId } });
-            await User.findByIdAndUpdate(targetUserId, { $pull: { followers: curUserId } });
-            return res.status(200).json({ message: 'Unfollowed successfully', action: 'unfollow' });
-        } else {
-            // Follow
-            await User.findByIdAndUpdate(curUserId, { $push: { following: targetUserId } });
-            await User.findByIdAndUpdate(targetUserId, { $push: { followers: curUserId } });
-            return res.status(200).json({ message: 'Followed successfully', action: 'follow' });
-        }
-    } catch (error) {
-        console.error('Error in followController:', error);
-        return res.status(500).json({ message: 'Internal Server Error' });
+  try {
+    if (!req.userId) {
+      return res.status(401).json({ message: "Unauthorized" }); // Return JSON response for consistency
     }
+
+    const curUserId = req.userId;
+    const targetUserId = req.params.id;
+
+    const targetUser = await User.findById(targetUserId);
+    if (!targetUser) {
+      return res.status(404).json({ message: "Target user not found" });
+    }
+
+    const currentUser = await User.findById(curUserId);
+    if (!currentUser) {
+      return res.status(404).json({ message: "Current user not found" });
+    }
+
+    const isFollowing = targetUser.followers.some((follower) =>
+      follower.equals(curUserId)
+    );
+
+    if (isFollowing) {
+      // Unfollow
+      await User.findByIdAndUpdate(curUserId, {
+        $pull: { following: targetUserId },
+      });
+      await User.findByIdAndUpdate(targetUserId, {
+        $pull: { followers: curUserId },
+      });
+      return res
+        .status(200)
+        .json({ message: "Unfollowed successfully", action: "unfollow" });
+    } else {
+      // Follow
+      await User.findByIdAndUpdate(curUserId, {
+        $push: { following: targetUserId },
+      });
+      await User.findByIdAndUpdate(targetUserId, {
+        $push: { followers: curUserId },
+      });
+      return res
+        .status(200)
+        .json({ message: "Followed successfully", action: "follow" });
+    }
+  } catch (error) {
+    console.error("Error in followController:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
 };
 
 const getOtherUserProfile = async (req, res) => {
-    try {
-        const userId = req.params.id;
+  try {
+    const userId = req.params.id;
 
-        if (!mongoose.Types.ObjectId.isValid(userId)) {
-            return res.status(404).render('404', { layout: false }); // Render 404 page for invalid ID format
-        }
-        if (userId === req.userId) {
-            return res.redirect('/profile');
-        }
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).render('404', { layout: false }); // Render 404 page for non-existent user
-        }
-
-        // Check if the current user is following this user
-        let isFollowing = false;
-        const curUser = await User.findById(req.userId);
-        if (curUser) {
-            isFollowing = user.followers.some((follower) => follower.equals(curUser._id));
-        }
-
-        // Populate followers and following user details
-
-        const populatedUser = await User.findById(userId).populate('followers').populate('following');
-        const followerUsers = populatedUser.followers;
-        const followingUsers = populatedUser.following;
-        console.log('ready to render');
-        console.log(req.userId);
-
-        res.render('profile', {
-            title: user.profile.display_name,
-            header: user.profile.nick_name,
-            refreshItems: [],
-            selectedItem: null,
-            user: user,
-            username: user.username,
-            avatarSrc: user.profile.avt ? user.profile.avt : '/Img/UserIcon.jpg',
-            followerUsers: followerUsers,
-            followingUsers: followingUsers,
-            type: 'guest',
-            isFollowing: isFollowing, // Pass a boolean indicating if the current user is following this user
-            isAuthenticated: !!req.userId,
-            curUserId: curUser._id ? curUser._id : null, // Pass a boolean indicating if the user is authenticated
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(404).render("404", { layout: false }); // Render 404 page for invalid ID format
     }
+    if (userId === req.userId) {
+      return res.redirect("/profile");
+    }
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).render("404", { layout: false }); // Render 404 page for non-existent user
+    }
+
+    // Check if the current user is following this user
+    let isFollowing = false;
+    const curUser = await User.findById(req.userId);
+    if (curUser) {
+      isFollowing = user.followers.some((follower) =>
+        follower.equals(curUser._id)
+      );
+    }
+
+    // Populate followers and following user details
+
+    const populatedUser = await User.findById(userId)
+      .populate("followers")
+      .populate("following");
+    const followerUsers = populatedUser.followers;
+    const followingUsers = populatedUser.following;
+    console.log("ready to render");
+    console.log(req.userId);
+
+    res.render("profile", {
+      title: user.profile.display_name,
+      header: user.profile.nick_name,
+      refreshItems: [],
+      selectedItem: null,
+      user: user,
+      username: user.username,
+      avatarSrc: user.profile.avt ? user.profile.avt : "/Img/UserIcon.jpg",
+      followerUsers: followerUsers,
+      followingUsers: followingUsers,
+      type: "guest",
+      isFollowing: isFollowing, // Pass a boolean indicating if the current user is following this user
+      isAuthenticated: !!req.userId,
+      curUserId: curUser._id ? curUser._id : null, // Pass a boolean indicating if the user is authenticated
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
 };
 
 const updateProfileController = async (req, res) => {
-    try {
-        if (!req.userId) {
-            return res.status(401).send('Unauthorized');
-        }
-        // Fetch user data from the database using the userId from the JWT token
-        const user = await User.findById(req.userId);
-        if (!user) {
-            return res.status(404).send('User not found');
-        }
-
-        // Update user profile with form data
-        user.profile.display_name = req.body.name;
-        user.profile.nick_name = req.body.nickname;
-        user.profile.bio = req.body.bio;
-        await user.save();
-
-        res.redirect('/profile');
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+  try {
+    if (!req.userId) {
+      return res.status(401).send("Unauthorized");
     }
+    // Fetch user data from the database using the userId from the JWT token
+    const user = await User.findById(req.userId);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    // Update user profile with form data
+    user.profile.display_name = req.body.name;
+    user.profile.nick_name = req.body.nickname;
+    user.profile.bio = req.body.bio;
+    await user.save();
+
+    res.redirect("/profile");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
 };
 
 const profileController = async (req, res) => {
-    try {
-        // Fetch user data from the database using the userId from the JWT token
-        if (!req.userId) {
-            return res.status(401).send('Unauthorized');
-        }
-        const userId = req.userId;
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).send('User not found');
-        }
-
-        // Find all followers for the user
-        const populatedUser = await User.findById(userId).populate('followers').populate('following');
-        const followerUsers = populatedUser.followers;
-        const followingUsers = populatedUser.following;
-
-        const posts = await Post.find({ 'user.user_profile_link': `/profile/${userId}` }).sort({ createdAt: -1 });
-
-        res.render('profile', {
-            title: user.profile.display_name,
-            header: 'Personal profile',
-            refreshItems: [],
-            selectedItem: null,
-            user: user,
-            username: user.username,
-            avatarSrc: user.profile.avt ? `/profile/avatar/${user._id}` : '/Img/UserIcon.jpg',
-            followerUsers: followerUsers,
-            followingUsers: followingUsers,
-            type: 'owner',
-            posts: posts,
-            curUserId: user._id || null,
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+  try {
+    // Fetch user data from the database using the userId from the JWT token
+    if (!req.userId) {
+      return res.status(401).send("Unauthorized");
     }
+    const userId = req.userId;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    // Find all followers for the user
+    const populatedUser = await User.findById(userId)
+      .populate("followers")
+      .populate("following");
+    const followerUsers = populatedUser.followers;
+    const followingUsers = populatedUser.following;
+
+    const posts = await Post.find({
+      "user.user_profile_link": `/profile/${userId}`,
+    }).sort({ createdAt: -1 });
+
+    res.render("profile", {
+      title: user.profile.display_name,
+      header: "Personal profile",
+      refreshItems: [],
+      selectedItem: null,
+      user: user,
+      username: user.username,
+      avatarSrc: user.profile.avt
+        ? `/profile/avatar/${user._id}`
+        : "/Img/UserIcon.jpg",
+      followerUsers: followerUsers,
+      followingUsers: followingUsers,
+      type: "owner",
+      posts: posts,
+      curUserId: user._id || null,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
 };
 
 // //hàm cũ setup cho gfs
@@ -230,8 +254,8 @@ const profileController = async (req, res) => {
 // };
 
 module.exports = {
-    profileController,
-    updateProfileController,
-    getOtherUserProfile,
-    followController,
+  profileController,
+  updateProfileController,
+  getOtherUserProfile,
+  followController,
 };

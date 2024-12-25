@@ -45,4 +45,6 @@ router.post("/changePassword", updatePassword);
 
 router.get("/verify", verifyController);
 
+// lấy access token mới
+router.post("/newAccessToken", requestRefreshToken);
 module.exports = router;

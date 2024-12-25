@@ -13,7 +13,7 @@ generateAccessToken = (user) => {
     // key bí mật
     process.env.JWT_ACCESS_KEY,
     // hạn sử dụng token
-    { expiresIn: "1h" }
+    { expiresIn: "1m" }
   );
 };
 // GENERATE REFRESH TOKEN
@@ -222,11 +222,12 @@ requestRefreshToken = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
 
   // Nếu không có refreshToken (chưa đăng nhập,...)
-  if (!refreshToken) return res.status(401).json("You are not authenticated");
+  if (!refreshToken)
+    return res.status(401).json({ message: "You are not authenticated" });
 
   // Verify refreshToken
   jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, (err, user) => {
-    if (err) return res.status(403).json("Token is not valid");
+    if (err) return res.status(403).json({ message: "Token is not valid" });
 
     // không lỗi -> tạo token mới
     const newAccessToken = generateAccessToken(user);
@@ -353,7 +354,6 @@ const updatePassword = async (req, res) => {
 
 // verify email
 const verifyController = async (req, res) => {
-  
   try {
     const { token } = req.query;
 
@@ -389,7 +389,6 @@ const verifyController = async (req, res) => {
     });
   } catch (err) {
     console.error("Error verifying account:", err);
-    
 
     return res.status(200).render("verify/verify_expired", {
       message: "Your account has been successfully verified!",
@@ -405,4 +404,5 @@ module.exports = {
   resetPassword,
   updatePassword,
   verifyController,
+  requestRefreshToken,
 };
