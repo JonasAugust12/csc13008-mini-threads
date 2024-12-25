@@ -3,10 +3,11 @@
 // sử dụng CDN
 
 var signUpButton = document.querySelector('.sign-up__text-wrapper');
-
-signUpButton.addEventListener('click', function () {
-    window.location.href = '/go-to-signup';
-});
+if (signUpButton) {
+    signUpButton.addEventListener('click', function () {
+        window.location.href = '/go-to-signup';
+    });
+}
 
 // Lấy các phần tử input và nút login
 const emailOrUsernameInput = document.querySelector('[name="username"]');

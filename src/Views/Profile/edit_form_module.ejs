@@ -1,73 +1,101 @@
-<div class="edit-profile tbl:bg-black bg-main-bg w-full text-white p-4 mt-20 rounded-3xl hidden fixed inset-0 m-auto tbl:bottom-auto bottom-auto tbl:border tbl:border-[rgba(147,140,140,0.4)] pc:w-[580px] z-[10] tbl:w-[calc(80%)]">
-  <form action="/profile/edit" method="POST" class="w-full">
+<div
+    class="edit-profile hidden fixed top-0 left-0 flex flex-col w-screen min-h-screen bg-content-bg z-[4] text-primary-text tbl:top-1/2 tbl:left-1/2 tbl:transform tbl:-translate-x-1/2 tbl:-translate-y-1/2 tbl:animate-zoomIn tbl:bg-transparent tbl:w-auto tbl:min-h-px">
     <div
-      class="edit-profile__avatar h-12 w-12 bg-cover absolute rounded-full right-8"
-      style="background-image: url('<%= user.profile.avt %>'); z-index: 2;"
-    ></div>
-    <div
-      class="avatar-mask tbl:bg-black bg-main-bg h-20 w-20 bg-cover absolute right-8"
-      style="z-index: 1"
-    ></div>
-    <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-      <div class="field__title font-bold mb-1">Name</div>
-      <div class="field__content field__content__name font-normal">
-        <input type="text" name="name" value="<%= user.profile.display_name %>" class="bg-transparent border-none outline-none w-full" />
-      </div>
-      <div
-        class="line mt-2"
-        style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"
-      ></div>
+        class="edit-info__header grid px-6 h-14 grid-cols-[64px_minmax(0,1fr)_64px] items-center tbl:border-b-[0.5px] tbl:border-[#f3f5f726] tbl:hidden">
+        <button
+            class="edit-info__cancel text-primary-text font-normal text-[16px] p-2 tbl:overflow-hidden">Cancel</button>
+        <div class="edit-info__header__title text-[16px] font-bold text-center">Edit Profile</div>
+        <button
+            class="edit-info__done text-primary-text font-normal text-[16px] p-2 tbl:overflow-hidden done-btn">Done</button>
     </div>
-    <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6 mt-4">
-      <div class="field__title font-bold mb-1">Nick Name</div>
-      <div class="field__content field__content__name font-normal">
-        <input type="text" name="nickname" value="<%= user.profile.nick_name %>" class="bg-transparent border-none outline-none w-full" />
-      </div>
-      <div
-        class="line mt-2"
-        style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"
-      ></div>
+    <div class="flex justify-center items-center flex-grow">
+        <div
+            class="mx-5 bg-main-bg w-full text-white p-4 rounded-3xl border border-border-color pc:w-[580px] z-[10] tbl:min-w-[518px] tbl:mx-0 tbl:bg-black">
+            <form id="edit-profile-form" class="w-full">
+                <div class="flex flex-nowrap ml-6">
+                    <div
+                        class="edit-profile__field text-base flex flex-col justify-center flex-grow pb-3 border-b border-border-color">
+                        <div class="field__title font-bold mb-1">Name</div>
+                        <div class="field__content field__content__name font-normal">
+                            <input type="text" name="name" value="<%= user.profile.display_name %>"
+                                class="bg-transparent border-none outline-none w-full" />
+                        </div>
+                    </div>
+                    <div class="ml-3 mt-2 relative">
+                        <img src="<%= user.profile.avt %>" id="avatar-preview" alt="User Avatar"
+                            class="edit-profile__avatar box-content h-12 w-12 bg-cover rounded-full">
+                        <input type="file" accept="image/*" id="avatar-input" name="post_image"
+                            class="absolute top-0 left-[-4px] w-full h-full opacity-0 cursor-pointer" />
+                    </div>
+                </div>
+                <div
+                    class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6 mt-4 pb-3 border-b border-border-color">
+                    <div class="field__title font-bold mb-1">Nick Name</div>
+                    <div class="field__content field__content__name font-normal">
+                        <input type="text" name="nickname" value="<%= user.profile.nick_name %>"
+                            class="bg-transparent border-none outline-none w-full" />
+                    </div>
+                </div>
+                <div
+                    class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6 pb-3 border-b border-border-color">
+                    <div class="field__title font-bold mt-4">Bio</div>
+                    <div class="field__content field__content__bio mt-2">
+                        <textarea name="bio"
+                            class="bg-transparent border-none outline-none w-full"><%= user.profile.bio %></textarea>
+                    </div>
+                </div>
+                <div
+                    class="edit-profile__button tbl:flex h-12 mt-8 bg-white text-black text-base font-semibold hidden justify-center items-center cursor-pointer rounded-lg">
+                    <button type="button" class="w-full h-full flex justify-center items-center done-btn">Done</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-      <div class="field__title font-bold mt-4">Bio</div>
-      <div class="field__content field__content__bio mt-2">
-        <textarea name="bio" class="bg-transparent border-none outline-none w-full"><%= user.profile.bio %></textarea>
-      </div>
-      <div
-        class="line mt-2"
-        style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"
-      ></div>
-    </div>
-    <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-      <div class="field__title font-bold mt-4">Link</div>
-      <div class="field__content field__content__link">
-        <input type="text" name="link" placeholder="+ Add link" class="bg-transparent border-none outline-none w-full" />
-      </div>
-      <div
-        class="line mt-4"
-        style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"
-      ></div>
-    </div>
-    <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-      <div class="field__title font-bold mt-4">Show Instagram badge</div>
-      <div class="field__content field__content__ig text-xs">
-        <p>When turned off, the Threads badge on your Instagram profile will also disappear.</p>
-      </div>
-      <div
-        class="line mt-4"
-        style="border-bottom: 1px solid rgba(147, 140, 140, 0.4)"
-      ></div>
-    </div>
-    <div class="edit-profile__field text-base flex flex-col justify-center ml-6 mr-6">
-      <div class="field__title font-bold mt-4">Private profile</div>
-      <div class="field__content field__content__private text-xs">
-        <p>If you switch to private, you won't be able to reply to others unless they follow you.</p>
-      </div>
-    </div>
-    <div
-      class="edit-profile__button tbl:flex pc:flex h-12 mt-8 bg-white text-black text-base font-semibold flex justify-center items-center cursor-pointer rounded-lg"
-    >
-      <button type="submit" class="w-full h-full flex justify-center items-center">Done</button>
-    </div>
-  </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const avatarInput = document.getElementById('avatar-input');
+        const avatarPreview = document.getElementById('avatar-preview');
+        const editProfileForm = document.getElementById('edit-profile-form');
+        const doneButtons = document.querySelectorAll('.done-btn');
+
+        // Preview avatar
+        avatarInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                avatarPreview.src = reader.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Handle form submission
+        doneButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default form submission
+                const formData = new FormData(editProfileForm);
+                
+                const loadingToast = document.querySelector('.loading-post-toast');
+                const toastContent = document.querySelector('.toast__loading-content');
+                loadingToast.classList.remove('hidden');
+                toastContent.textContent = 'Updating profile...';
+
+                // Example: Send data to the server via fetch API
+                fetch('/profile/edit', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            loadingToast.classList.add('hidden');
+                            location.reload(); // Reload page if needed
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    });
+</script>

@@ -4,8 +4,9 @@ const Follow = require('../Models/Follow'); // model follow
 const jwt = require('jsonwebtoken'); // token
 const { default: mongoose } = require('mongoose');
 const env = require('dotenv').config(); // biến môi trường
-const Post1 = require('../Models/Post1');
+const Post = require('../Models/Post');
 const Notification = require('../Models/Notification');
+const { uploadAvatar } = require('../Config/cloudinary');
 
 // Initialize GridFS
 // let gfs;
@@ -41,11 +42,27 @@ const followController = async (req, res) => {
             // Unfollow
             await User.findByIdAndUpdate(curUserId, { $pull: { following: targetUserId } });
             await User.findByIdAndUpdate(targetUserId, { $pull: { followers: curUserId } });
+
+            // Xóa thông báo follow
+            await Notification.findOneAndDelete({
+                action_user_id: curUserId,
+                user_id: targetUserId,
+                type: 'follow',
+            });
+
             return res.status(200).json({ message: 'Unfollowed successfully', action: 'unfollow' });
         } else {
             // Follow
             await User.findByIdAndUpdate(curUserId, { $push: { following: targetUserId } });
             await User.findByIdAndUpdate(targetUserId, { $push: { followers: curUserId } });
+
+            // Tạo thông báo follow
+            await Notification.create({
+                action_user_id: curUserId,
+                user_id: targetUserId,
+                type: 'follow',
+            });
+
             return res.status(200).json({ message: 'Followed successfully', action: 'follow' });
         }
     } catch (error) {
@@ -82,7 +99,7 @@ const getOtherUserProfile = async (req, res) => {
         const followerUsers = populatedUser.followers;
         const followingUsers = populatedUser.following;
 
-        const post = await Post1.find({ user_id: userId })
+        const post = await Post.find({ user_id: userId })
             .populate('user_id', 'profile.nick_name profile.display_name profile.avt')
             .sort({ createdAt: -1 });
 
@@ -104,7 +121,6 @@ const getOtherUserProfile = async (req, res) => {
             followerUsers: followerUsers,
             followingUsers: followingUsers,
             type: 'guest',
-            posts: posts,
             isFollowing: isFollowing, // Pass a boolean indicating if the current user is following this user
             curUserId: curUser._id ? curUser._id : null, // Pass a boolean indicating if the user is authenticated
             posts: post,
@@ -121,10 +137,16 @@ const updateProfileController = async (req, res) => {
         if (!req.userId) {
             return res.status(401).send('Unauthorized');
         }
+
         // Fetch user data from the database using the userId from the JWT token
         const user = await User.findById(req.userId);
         if (!user) {
             return res.status(404).send('User not found');
+        }
+
+        if (req.file) {
+            const uploadResult = await uploadAvatar(req.file, req.userId);
+            user.profile.avt = uploadResult.secure_url;
         }
 
         // Update user profile with form data
@@ -157,7 +179,7 @@ const profileController = async (req, res) => {
         const followerUsers = populatedUser.followers;
         const followingUsers = populatedUser.following;
 
-        const posts = await Post1.find({ user_id: userId })
+        const posts = await Post.find({ user_id: userId })
             .populate('user_id', 'profile.nick_name profile.display_name profile.avt')
             .sort({ createdAt: -1 });
 

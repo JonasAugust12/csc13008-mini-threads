@@ -75,6 +75,9 @@ app.get('/go-to-signup', (req, res) => {
     res.redirect('/auth/signup');
 });
 app.use('/upload', uploadRoutes);
+app.use((req, res, next) => {
+    res.status(404).render('404', { layout: false });
+});
 // Khởi động server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

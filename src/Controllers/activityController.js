@@ -3,6 +3,19 @@ let activityController = {};
 
 activityController.renderActivity = async (req, res) => {
     try {
+        const typeMapping = {
+            all: 'all',
+            follows: 'follow',
+            likes: 'like',
+            replies: 'comment',
+        };
+        const type = req.params.type || 'all';
+        const selectedItem = typeMapping[type.toLowerCase()];
+
+        if (!['all', 'follow', 'like', 'comment'].includes(selectedItem)) {
+            return res.status(404).render('404', { layout: false });
+        }
+
         const noti = await Notification.find({ user_id: req.userId })
             .populate('action_user_id', 'profile.display_name profile.avt')
             .populate('post_id', 'post_image post_quote')
@@ -10,15 +23,6 @@ activityController.renderActivity = async (req, res) => {
             .sort({ createdAt: -1 });
 
         const unreadCount = noti.filter((notification) => !notification.is_read).length;
-
-        const typeMapping = {
-            all: 'all',
-            follows: 'follow',
-            likes: 'like',
-            replies: 'comment',
-        };
-
-        const selectedItem = typeMapping[(req.params.type || 'all').toLowerCase()] || 'all';
 
         const filteredNoti = selectedItem === 'all' ? noti : noti.filter((notification) => notification.type.toLowerCase() === selectedItem);
 

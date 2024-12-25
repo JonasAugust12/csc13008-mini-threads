@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     svg.setAttribute('stroke', 'currentColor');
                     likeNum.textContent = currentLikes - 1;
                     if (currentLikes - 1 === 0) likeNum.classList.add('hidden');
+                    likeNum.style.color = '#ccc';
                 });
             } else {
                 // Like comment
@@ -114,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     svg.setAttribute('stroke', 'red');
                     likeNum.textContent = currentLikes + 1;
                     likeNum.classList.remove('hidden');
+                    likeNum.style.color = 'red';
                 });
             }
         });

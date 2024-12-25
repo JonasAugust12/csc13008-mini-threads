@@ -1,4 +1,4 @@
-<div class="post-container flex px-6 py-4 border-t border-border-color cursor-pointer" post-id="post-id-<%= post._id.toString() %>">
+<div class="post-container flex px-6 py-4 border-b border-border-color cursor-pointer" post-id="post-id-<%= post._id.toString() %>">
     <img
         src="<%= post.user_id.profile.avt %>"
         class="w-9 h-9 rounded-full mt-1 select-none"
@@ -13,7 +13,7 @@
                 </a>
                 <div class="post-time-stamp text-[15px] text-secondary-text" data-created-at="<%= post.createdAt %>"></div>
             </div>
-            <div class="main-post-more-btn p-1 hover:bg-[#222222] rounded-[20   px] relative">
+            <div class="main-post-more-btn p-1 hover:bg-[#222222] rounded-[20px] relative">
                 <svg
                     aria-label="Xem thêm"
                     role="img"
@@ -95,7 +95,7 @@
             </div>
         </div>
         <div class="post-content-container flex flex-col">
-            <div class="post-text w-full"><%= post.post_quote%></div>
+            <div class="post-text w-full break-words"><%= post.post_quote%></div>
             <div
                 class="replies-img max-w-full mt-2 overflow-x-auto custom-scrollbar object-cover "
             >

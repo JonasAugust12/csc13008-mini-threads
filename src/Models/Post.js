@@ -1,23 +1,34 @@
 const mongoose = require('mongoose');
+const objectId = mongoose.Schema.Types.ObjectId;
+const Schema = mongoose.Schema;
 
-const postSchema = new mongoose.Schema({
-    user: {
-        username: { type: String, required: true },
-        user_display_name: { type: String, required: true },
-        user_nick_name: { type: String, required: true },
-        user_bio: { type: String, required: true },
-        avatarSrc: { type: String, required: true },
-        user_profile_link: { type: String, required: true },
-        user_followers_count: { type: Number, required: true },
+const postSchema = new Schema(
+    {
+        user_id: {
+            type: objectId,
+            ref: 'User',
+            required: true,
+        },
+        post_quote: {
+            type: String,
+        },
+        post_image: {
+            type: String,
+        },
+        post_likes: {
+            type: [objectId],
+            ref: 'User',
+            default: [],
+        },
+        post_comments: {
+            type: [objectId],
+            ref: 'Comment',
+            default: [],
+        },
     },
-    createdAt: { type: Date, default: Date.now },
-    post_quote: { type: String, required: true },
-    post_images: { type: [String], default: [] },
-    post_likes: { type: [String], default: [] },
-    post_comments: { type: [String], default: [] },
-    post_repost: { type: [String], default: [] },
-});
+    {
+        timestamps: true,
+    },
+);
 
-const Post = mongoose.model('Post', postSchema);
-
-module.exports = Post;
+module.exports = mongoose.model('Post', postSchema);

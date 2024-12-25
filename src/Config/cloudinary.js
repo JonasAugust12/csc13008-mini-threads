@@ -16,7 +16,6 @@ const uploadImage = async (file, folder) => {
             .upload_stream(
                 {
                     resource_type: 'image',
-                    folder: 'phy000007',
                     overwrite: true,
                     folder,
                 },
@@ -30,6 +29,30 @@ const uploadImage = async (file, folder) => {
     return uploadedImage;
 };
 
+const uploadAvatar = async (file, userId) => {
+    if (!file) {
+        throw new Error('File not found');
+    }
+    const uploadedImage = await new Promise((resolve, reject) => {
+        cloudinary.uploader
+            .upload_stream(
+                {
+                    public_id: `avatars_${userId}`,
+                    resource_type: 'image',
+                    folder: 'csc13008/avatar',
+                    overwrite: true,
+                },
+                (error, result) => {
+                    if (error) return reject(error);
+                    resolve(result);
+                },
+            )
+            .end(file.buffer);
+    });
+    return uploadedImage;
+};
+
 module.exports = {
     uploadImage,
+    uploadAvatar,
 };

@@ -1,11 +1,10 @@
-const Follow = require('../Models/Follow'); // Import model Follow
-const Post1 = require('../Models/Post1'); // Import model Post1
+const Post = require('../Models/Post'); // Import model Post
 const Notification = require('../Models/Notification'); // Import model Notification
 const User = require('../Models/User'); // Import model User
 let homeController = {};
 
 homeController.renderHome = async (req, res) => {
-    const posts = await Post1.find().populate('user_id', 'profile').sort({ createdAt: -1 });
+    const posts = await Post.find().populate('user_id', 'profile').sort({ createdAt: -1 });
     const unreadCount = await Notification.countDocuments({
         user_id: req.userId,
         is_read: false,
@@ -32,19 +31,24 @@ homeController.renderHome = async (req, res) => {
 
 homeController.filterFollowing = async (req, res) => {
     try {
-        // Lấy danh sách user mà user hiện tại đang follow
-        const followingUsers = await Follow.find({ followerId: req.user._id }).select('userId');
-        const followingUserIds = followingUsers.map((follow) => follow.userId);
+        const user = await User.findById(req.userId).select('following').populate('following', 'profile');
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
 
-        // Lấy bài viết từ những người được follow
-        const posts = await Post1.find({ user_id: { $in: followingUserIds } })
-            .populate('user_id', 'profile')
+        const followingUserIds = user.following.map((followedUser) => followedUser._id);
+
+        const posts = await Post.find({ user_id: { $in: followingUserIds } })
+            .populate('user_id', 'profile.display_name profile.avt')
             .sort({ createdAt: -1 });
+
         const unreadCount = await Notification.countDocuments({
             user_id: req.userId,
             is_read: false,
         });
-        const users = await User.find().select('username user_display_name avatarSrc user_followers_count').limit(5);
+
+        const users = await User.find().select('username profile.display_name profile.avt followers').limit(5);
+
         const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Mini Threads - Following`;
 
         res.render('home/home', {
@@ -72,7 +76,7 @@ homeController.filterFollowing = async (req, res) => {
 homeController.filterLiked = async (req, res) => {
     try {
         // Lấy bài viết đã được user hiện tại like
-        const posts = await Post1.find({ post_likes: req.user._id }) // Assume 'liked' là mảng chứa userId
+        const posts = await Post.find({ post_likes: req.user._id }) // Assume 'liked' là mảng chứa userId
             .populate('user_id', 'profile')
             .sort({ createdAt: -1 });
         const unreadCount = await Notification.countDocuments({

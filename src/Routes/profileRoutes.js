@@ -6,7 +6,7 @@ const upload = require('../Middleware/multer');
 
 // Route cho trang Home
 router.get('/', authenticateToken, profileController);
-router.post('/edit', authenticateToken, updateProfileController);
+router.post('/edit', authenticateToken, upload.single('post_image'), updateProfileController);
 router.get('/:id', authenticateToken, getOtherUserProfile);
 
 router.post('/follow/:id', authenticateToken, followController);

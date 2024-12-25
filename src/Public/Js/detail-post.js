@@ -4,28 +4,31 @@ const postActivityWrapper = document.querySelector('.post-activity-wrapper');
 const postActivityBackBtn = document.querySelector('.post-activity-back-btn');
 
 // Hiển thị `post-activity-wrapper` khi bấm vào `view-activity-btn`
-mainPostMoreBtn.addEventListener('click', () => {
-    postActivityWrapper.classList.remove('hidden'); // Bỏ `hidden`
-    postActivityWrapper.classList.add('flex'); // Thêm `flex`
+if (mainPostMoreBtn) {
+    mainPostMoreBtn.addEventListener('click', () => {
+        postActivityWrapper.classList.remove('hidden'); // Bỏ `hidden`
+        postActivityWrapper.classList.add('flex'); // Thêm `flex`
 
-    // Thêm class `overflow-hidden` vào <body> để chặn cuộn trang
-    document.body.classList.add('overflow-hidden');
-});
-
+        // Thêm class `overflow-hidden` vào <body> để chặn cuộn trang
+        document.body.classList.add('overflow-hidden');
+    });
+}
 // Ẩn `post-activity-wrapper` khi bấm vào `post-activity-back-btn` hoặc ngoài `post-activity`
-postActivityWrapper.addEventListener('click', (event) => {
-    // Kiểm tra nếu bấm ngoài vùng `post-activity` hoặc bấm vào nút Back
-    if (
-        event.target === postActivityWrapper || // Bấm ngoài vùng `post-activity`
-        event.target.closest('.post-activity-back-btn') // Bấm vào nút Back
-    ) {
-        postActivityWrapper.classList.add('hidden'); // Thêm `hidden`
-        postActivityWrapper.classList.remove('flex'); // Bỏ `flex`
+if (postActivityWrapper) {
+    postActivityWrapper.addEventListener('click', (event) => {
+        // Kiểm tra nếu bấm ngoài vùng `post-activity` hoặc bấm vào nút Back
+        if (
+            event.target === postActivityWrapper || // Bấm ngoài vùng `post-activity`
+            event.target.closest('.post-activity-back-btn') // Bấm vào nút Back
+        ) {
+            postActivityWrapper.classList.add('hidden'); // Thêm `hidden`
+            postActivityWrapper.classList.remove('flex'); // Bỏ `flex`
 
-        // Xóa class `overflow-hidden` khỏi <body> khi đóng modal
-        document.body.classList.remove('overflow-hidden');
-    }
-});
+            // Xóa class `overflow-hidden` khỏi <body> khi đóng modal
+            document.body.classList.remove('overflow-hidden');
+        }
+    });
+}
 
 // Lấy các phần tử cần dùng
 const moreButton = document.querySelector('.main-post-more-btn');

@@ -23,7 +23,7 @@ const notificationSchema = new Schema(
         post_id: {
             // nếu là like
             type: objectId,
-            ref: 'Post1',
+            ref: 'Post',
         },
         comment_id: {
             // nếu là comment

@@ -6,7 +6,7 @@ const commentSchema = new Schema(
     {
         post_id: {
             type: objectId,
-            ref: 'Post1',
+            ref: 'Post',
             required: true,
         },
         user_id: {

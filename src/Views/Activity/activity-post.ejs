@@ -15,7 +15,7 @@
 <div
     id="activity-post-<%= noti._id %>"
     class="activity-post w-full flex mt-4px relative cursor-pointer <%= noti.is_read ? '' : 'bg-[#222222]' %> tbl:bg-transparent transition duration-300 ease-in-out"
-    onclick="handleMarkAsReadAndNavigate('<%= noti._id %>', '/post/<%= noti.post_id._id %><% if (noti.type === 'comment' || (noti.type === 'like' && (noti.comment_id?.comment_content || noti.comment_id?.comment_image))) { %>#comment-<%= noti.comment_id._id %><% } %>')">
+    onclick="handleMarkAsReadAndNavigate('<%= noti._id %>', '<% if (noti.type === 'follow') { %>/profile/<%= noti.action_user_id._id %><% } else { %>/post/<%= noti.post_id._id %><% if (noti.type === 'comment' || (noti.type === 'like' && (noti.comment_id?.comment_content || noti.comment_id?.comment_image))) { %>#comment-<%= noti.comment_id._id %><% } %><% } %>')">
     <div class="activity-post__more-btn absolute w-4 h-4 top-0 right-0 box-content pt-3 pb-4 pr-3 pl-2 tbl:hidden">
         <svg aria-label="More" role="img" viewBox="0 0 12 12">
             <title>More</title>
@@ -30,27 +30,26 @@
                 <div class="w-full py-3 flex justify-center">
                     <div class="w-10 h-1 bg-secondary-text rounded-full"></div>
                 </div>
-                <div
-                    class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4">
-                    <div
-                        activity-id="mark-as-read-<%= noti._id %>"
-                        class="mark-as-red min-h-[20px] box-content p-5 flex items-center justify-between cursor-pointer hover:bg-[#212121]"
-                        onclick="handleMarkAsRead('<%= noti._id %>')"
-                        >
-                        <span>Mark as read</span>
-                        <svg aria-label="" role="img" viewBox="0 0 20 20" class="w-5 h-5">
-                            <title></title>
-                            <path d="M1.5 1.75L18.5 18.25" stroke="white" stroke-linecap="round" stroke-width="1.5">
-                            </path>
-                            <path
-                                d="M3.47414 6.27892C3.20456 6.01727 2.78029 5.99602 2.50117 6.24747C1.41059 7.22999 0.587673 8.33683 0.139959 9.36712C-0.0338603 9.76712 -0.0300002 10.2108 0.129836 10.601C1.24049 13.3126 4.48326 16.75 10.0001 16.75C10.8741 16.75 11.68 16.6639 12.4235 16.5086C13.0002 16.3882 13.1633 15.6831 12.7405 15.2728V15.2728C12.5453 15.0833 12.2667 15.0101 11.9998 15.0626C11.3839 15.1836 10.7188 15.25 10.0001 15.25C5.18515 15.25 2.43521 12.272 1.51791 10.0325C1.50596 10.0033 1.50888 9.98059 1.51568 9.96494C1.85715 9.17913 2.51757 8.26748 3.43478 7.42578C3.76747 7.12048 3.79816 6.59341 3.47414 6.27892V6.27892ZM16.5428 13.7373C16.2272 13.431 16.2465 12.9204 16.5569 12.6088C17.3554 11.8075 17.9704 10.9194 18.4571 10.0897C18.4939 10.0269 18.489 9.95912 18.4597 9.91192C17.0155 7.58585 14.0306 4.75 10.0001 4.75C9.33037 4.75 8.67997 4.82776 8.05567 4.96835C7.78456 5.02941 7.49807 4.95861 7.29866 4.76506V4.76506C6.8837 4.36231 7.03604 3.66842 7.59858 3.53444C8.36334 3.35229 9.16684 3.25 10.0001 3.25C14.7628 3.25 18.1518 6.57225 19.734 9.12072C20.066 9.65543 20.0607 10.3204 19.7509 10.8485C19.206 11.7776 18.4889 12.8103 17.5356 13.7488C17.26 14.0201 16.8203 14.0067 16.5428 13.7373V13.7373Z"
-                                fill="white"></path>
-                            <path
-                                d="M6.36296 9.08288C6.28918 9.37637 6.25 9.68361 6.25 10C6.25 12.0711 7.92893 13.75 10 13.75C10.3555 13.75 10.6994 13.7005 11.0253 13.6081L6.36296 9.08288ZM13.637 10.9171C13.7108 10.6236 13.75 10.3164 13.75 10C13.75 7.92893 12.0711 6.25 10 6.25C9.6445 6.25 9.30056 6.29947 8.97468 6.39189L13.637 10.9171Z"
-                                fill="white"></path>
-                        </svg>
+                <% if (!noti.is_read) { %>
+                    <div class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4">
+                        <div activity-id="mark-as-read-<%= noti._id %>"
+                            class="mark-as-red min-h-[20px] box-content p-5 flex items-center justify-between cursor-pointer hover:bg-[#212121]"
+                            onclick="handleMarkAsRead('<%= noti._id %>')">
+                            <span>Mark as read</span>
+                            <svg aria-label="" role="img" viewBox="0 0 20 20" class="w-5 h-5">
+                                <title></title>
+                                <path d="M1.5 1.75L18.5 18.25" stroke="white" stroke-linecap="round" stroke-width="1.5">
+                                </path>
+                                <path
+                                    d="M3.47414 6.27892C3.20456 6.01727 2.78029 5.99602 2.50117 6.24747C1.41059 7.22999 0.587673 8.33683 0.139959 9.36712C-0.0338603 9.76712 -0.0300002 10.2108 0.129836 10.601C1.24049 13.3126 4.48326 16.75 10.0001 16.75C10.8741 16.75 11.68 16.6639 12.4235 16.5086C13.0002 16.3882 13.1633 15.6831 12.7405 15.2728V15.2728C12.5453 15.0833 12.2667 15.0101 11.9998 15.0626C11.3839 15.1836 10.7188 15.25 10.0001 15.25C5.18515 15.25 2.43521 12.272 1.51791 10.0325C1.50596 10.0033 1.50888 9.98059 1.51568 9.96494C1.85715 9.17913 2.51757 8.26748 3.43478 7.42578C3.76747 7.12048 3.79816 6.59341 3.47414 6.27892V6.27892ZM16.5428 13.7373C16.2272 13.431 16.2465 12.9204 16.5569 12.6088C17.3554 11.8075 17.9704 10.9194 18.4571 10.0897C18.4939 10.0269 18.489 9.95912 18.4597 9.91192C17.0155 7.58585 14.0306 4.75 10.0001 4.75C9.33037 4.75 8.67997 4.82776 8.05567 4.96835C7.78456 5.02941 7.49807 4.95861 7.29866 4.76506V4.76506C6.8837 4.36231 7.03604 3.66842 7.59858 3.53444C8.36334 3.35229 9.16684 3.25 10.0001 3.25C14.7628 3.25 18.1518 6.57225 19.734 9.12072C20.066 9.65543 20.0607 10.3204 19.7509 10.8485C19.206 11.7776 18.4889 12.8103 17.5356 13.7488C17.26 14.0201 16.8203 14.0067 16.5428 13.7373V13.7373Z"
+                                    fill="white"></path>
+                                <path
+                                    d="M6.36296 9.08288C6.28918 9.37637 6.25 9.68361 6.25 10C6.25 12.0711 7.92893 13.75 10 13.75C10.3555 13.75 10.6994 13.7005 11.0253 13.6081L6.36296 9.08288ZM13.637 10.9171C13.7108 10.6236 13.75 10.3164 13.75 10C13.75 7.92893 12.0711 6.25 10 6.25C9.6445 6.25 9.30056 6.29947 8.97468 6.39189L13.637 10.9171Z"
+                                    fill="white"></path>
+                            </svg>
+                        </div>
                     </div>
-                </div>
+                <% } %>
                 <div
                     class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4">
                     <div
@@ -87,7 +86,14 @@
             </div>
         </a>
     </div>
-    <div class="activity__post-content-container-1 w-full border-b-[1px] border-border-color pr-6">
+    <div class="activity__post-content-container-1 w-full border-b-[1px] border-border-color pr-6 tbl:relative">
+        <% if (!noti.is_read) { %>
+            <svg width="24" height="24" viewBox="0 0 24 24"
+                class="w-3 h-3 absolute top-1/2 right-1 transform -translate-x-1/2 -translate-y-1/2 hidden tbl:block"
+                style="fill: #5aa7ff">
+                <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2z"></path>
+            </svg>
+        <% } %>
         <div class="activity__post-content-container-2 py-3 pl-1">
             <div class="flex justify-between items-center">
                 <div class="flex-grow">
@@ -141,6 +147,5 @@
                 </div>
             <% } %>
         </div>
-
     </div>
 </div>
