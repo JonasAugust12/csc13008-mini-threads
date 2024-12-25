@@ -193,10 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
             postButton.classList.replace('cursor-not-allowed', 'cursor-pointer');
             postButton.classList.replace('tbl:cursor-not-allowed', 'tbl:cursor-pointer');
             postButton.classList.remove('opacity-30');
+            postButton.classList.remove('pointer-events-none');
+            postButton.classList.add('pointer-events-auto');
         } else {
             postButton.classList.replace('tbl:cursor-pointer', 'tbl:cursor-not-allowed');
             postButton.classList.replace('cursor-pointer', 'cursor-not-allowed');
             postButton.classList.add('opacity-30');
+            postButton.classList.remove('pointer-events-auto');
+            postButton.classList.add('pointer-events-none');
         }
     };
 

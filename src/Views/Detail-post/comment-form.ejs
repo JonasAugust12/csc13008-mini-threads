@@ -102,13 +102,15 @@
         
             const loadingToast = document.querySelector('.loading-post-toast');
             const toastContent = document.querySelector('.toast__loading-content');
-            loadingToast.classList.remove('hidden');
-            toastContent.textContent = 'Posting comment...';
 
             // Make sure the input is not empty
             if (replyContent.trim() === '' && !commentImg.files[0]) {
                 return;
             }
+            
+            loadingToast.classList.remove('hidden');
+            toastContent.textContent = 'Posting comment...';
+
             const formData = new FormData();
             formData.append('post_id', postId);
             formData.append('comment_content', replyContent);

@@ -40,7 +40,7 @@
         <div class="flex flex-col pl-3 w-[calc(100%-36px)]">
             <div class="block">
                 <a href="/profile/<%= comment.user_id._id %>"
-                    class="replies-post-username inline-block text-[15px] font-user-weight hover:underline"><%= comment.user_id.profile.nick_name %></a>
+                    class="replies-post-username inline-block text-[15px] font-user-weight hover:underline"><%= comment.user_id.profile.display_name %></a>
                 <p data-created-at="<%= comment.createdAt %>" class="post-time-stamp inline-block text-[15px] text-secondary-text"></p>
             </div>
 

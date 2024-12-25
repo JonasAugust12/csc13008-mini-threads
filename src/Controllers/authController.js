@@ -37,7 +37,6 @@ const loginController = async (req, res) => {
         const user = await User.findOne({
             $or: [{ username: req.body.username }, { email: req.body.username }],
         });
-        console.log(user);
         // nếu không tìm thấy
         if (!user) {
             return res.status(404).json({ message: 'Incorrect username or email.' });
