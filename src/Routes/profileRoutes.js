@@ -1,14 +1,24 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { profileController, updateProfileController, getOtherUserProfile, followController } = require('../Controllers/profileController');
-const authenticateToken = require('../Middleware/auth');
-const authenticateToken2 = require('../Middleware/auth2');
-const upload = require('../Middleware/multer');
+const {
+  profileController,
+  updateProfileController,
+  getOtherUserProfile,
+  followController,
+} = require("../Controllers/profileController");
+const authenticateToken = require("../Middleware/auth");
+
+const upload = require("../Middleware/multer");
 
 // Route cho trang Home
-router.get('/', authenticateToken, profileController);
-router.post('/edit', authenticateToken, upload.single('post_image'), updateProfileController);
-router.get('/:id', authenticateToken, getOtherUserProfile);
-router.post('/follow/:id', authenticateToken, followController);
+router.get("/", authenticateToken, profileController);
+router.post(
+  "/edit",
+  authenticateToken,
+  upload.single("post_image"),
+  updateProfileController
+);
+router.get("/:id", authenticateToken, getOtherUserProfile);
+router.post("/follow/:id", authenticateToken, followController);
 
 module.exports = router;
