@@ -75,7 +75,7 @@
             <% } %>
             <div class="main-post-action ml-[-12px] select-none">
                 <button
-                    class="post-like h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]"
+                    class="post-like h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer tbl:hover:bg-[#222222]"
                     id="like-button-<%= post._id.toString() %>"
                 >
                     <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
@@ -88,7 +88,7 @@
                     <span class="like-num text-[#<%= userid && post.post_likes.some(like => like._id.toString() === userid.toString()) ? 'ff0000' : 'ccc' %>] text-[13px] font-normal pl-1 <%= post.post_likes.length === 0 ? 'hidden' : '' %>"> <%= post.post_likes.length %> </span>
                 </button>
                 <button
-                    class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]">
+                    class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer tbl:hover:bg-[#222222]">
                     <svg aria-label="Reply" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                         <title>Reply</title>
                         <path stroke="#ccc" fill="none"

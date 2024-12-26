@@ -58,7 +58,7 @@
             <div class="replies-post-action ml-[-12px] mt-[3px] select-none">
                 <button
                     id="like-comment-<%= comment._id.toString() %>"
-                    class="like-comment h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]">
+                    class="like-comment h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer tbl:hover:bg-[#222222]">
                     <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                         <title>Like</title>
                         <path  <%= comment.comment_likes.includes(userid) ? 'fill=red stroke=red' : 'fill=none stroke=currentColor' %>

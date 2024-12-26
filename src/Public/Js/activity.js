@@ -182,8 +182,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (response.ok) {
                         if (followText === 'Follow') {
                             btn.innerText = 'Following';
+                            btn.style.color = '#777777';
                         } else {
                             btn.innerText = 'Follow';
+                            btn.style.color = '#f3f5f7';
                         }
                     }
                 })

@@ -28,7 +28,7 @@
             <% if (userid && curUserId.toString() !== user._id.toString()) { %>
                 <button
                     type="button"
-                    class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[#f3f5f7] cursor-pointer text-[15px] leading-[1.4em]"
+                    class="user-profile__follow-btn inline-flex min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] cursor-pointer text-[15px] leading-[1.4em] <%= user.followers.some(follower => follower.equals(curUserId)) ? 'text-[#777777]' : 'text-[#f3f5f7]' %>"
                     id="follow-<%= user._id %>"
                 ><% if (user.followers.some(follower => follower.equals(curUserId))) { %>Following<% } else { %>Follow<% } %></button>
             <% } %>

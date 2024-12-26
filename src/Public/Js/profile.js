@@ -84,9 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                             if (buttonText.textContent === 'Following') {
                                 buttonText.textContent = 'Follow';
+                                button.style.color = '#f3f5f7';
                                 followersCountText.textContent = `${currentFollowersCount - 1} followers`;
                             } else {
                                 buttonText.textContent = 'Following';
+                                button.style.color = '#777777';
                                 followersCountText.textContent = `${currentFollowersCount + 1} followers`;
                             }
                         });

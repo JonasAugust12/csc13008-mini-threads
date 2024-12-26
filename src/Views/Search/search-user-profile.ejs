@@ -21,7 +21,7 @@
                     </span>
                 </div>
             </div>
-            <button type="button" class="user-profile__follow-button <%= userid ? 'inline-flex' : 'hidden' %> min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[15px] leading-[1.4em] 
+            <button type="button" class="user-profile__follow-button <%= userid && user._id.toString() != userid.toString() ? 'inline-flex' : 'hidden' %> min-w-[104px] max-w-full h-[34px] border border-[#f3f5f726] justify-center bg-transparent user-select-none items-center flex-shrink-0 px-4 font-semibold rounded-[10px] text-[15px] leading-[1.4em] 
                     <% if (user.followers.some(follower => follower.equals(curUserId))) { %>
                         text-[#777777] cursor-pointer
                     <% } else { %>

@@ -143,10 +143,10 @@ document
 
       if (response.status === 200) {
         // Đăng nhập thành công
-         localStorage.setItem('accessToken', response.data.accessToken); // Lưu token
+        localStorage.setItem("accessToken", response.data.accessToken); // Lưu token
         // lưu accesstoken vào Cookie
         // document.cookie = `accessToken=${response.data.accessToken}`;
-        
+
         showModal(response.data.message);
         // Chuyển hướng về trang chính
         setTimeout(() => (window.location.href = "/"), 1000);

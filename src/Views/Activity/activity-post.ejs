@@ -124,7 +124,7 @@
                 <% if (noti.type === 'follow') {%>
                     <div
                         follow-id="follow-<%= noti.action_user_id._id %>"
-                        class="activity__post-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight px-4 mr-5 select-none whitespace-nowrap">
+                        class="activity__post-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight px-4 mr-5 select-none whitespace-nowrap <%= following.includes(noti.action_user_id._id) ? 'text-[#777777]' : 'text-[#f3f5f7]' %>">
                         <% if (following.includes(noti.action_user_id._id)) { %>Following<% } else { %>Follow<% } %>
                     </div>
                 <% } %>
@@ -133,7 +133,7 @@
                 <div class="activity__post-action ml-[-12px] mt-[3px] select-none">
                     <button
                         id="like-comment-<%= noti.comment_id._id.toString() %>"
-                        class="like-comment h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]">
+                        class="like-comment h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer tbl:hover:bg-[#222222]">
                         <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                             <title>Like</title>
                             <path 
@@ -142,7 +142,7 @@
                                 stroke-width="1.25"></path>
                         </svg>
                         <span
-                            class="like-comment-num text-[#ff0000] text-[#<%= noti.comment_id.comment_likes.includes(userid) ? '' : 'ccc' %>] text-[13px] font-normal pl-1 <%= noti.comment_id.comment_likes.length === 0 ? 'hidden' : '' %>">
+                            class="like-comment-num <%= noti.comment_id.comment_likes.includes(userid) ? 'text-[#ff0000]' : 'text-[#ccc]' %> text-[13px] font-normal pl-1 <%= noti.comment_id.comment_likes.length === 0 ? 'hidden' : '' %>">
                             <%= noti.comment_id.comment_likes.length %>
                         </span>
                     </button>
