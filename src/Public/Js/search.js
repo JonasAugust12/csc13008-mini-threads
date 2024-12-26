@@ -66,11 +66,9 @@ followBtns.forEach(function (followBtn) {
         if (action === 'follow') {
             followBtn.innerText = 'Following';
             followBtn.style.color = '#777777';
-            console.log('Button text updated to: Following');
         } else {
             followBtn.innerText = 'Follow';
             followBtn.style.color = '#f3f5f7';
-            console.log('Button text updated to: Follow');
         }
 
         try {
@@ -84,9 +82,6 @@ followBtns.forEach(function (followBtn) {
             });
 
             if (response.ok) {
-                const data = await response.json();
-                console.log('Response received:', data);
-
                 const followerCountElement = followBtn.closest('.user-profile').querySelector('.user-profile__followers-count');
                 const newFollowerCount = parseInt(followerCountElement.textContent.trim(), 10);
 

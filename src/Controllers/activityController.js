@@ -3,6 +3,10 @@ let activityController = {};
 
 activityController.renderActivity = async (req, res) => {
     try {
+        if (!req.userId) {
+            return res.redirect('/auth/login');
+        }
+
         const typeMapping = {
             all: 'all',
             follows: 'follow',

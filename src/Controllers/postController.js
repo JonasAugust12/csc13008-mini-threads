@@ -286,10 +286,7 @@ postController.renderpost = async (req, res) => {
             .populate('post_id', 'user_id')
             .sort({ createdAt: -1 });
 
-        const unreadCount = await Notification.countDocuments({
-            user_id: req.user._id,
-            is_read: false,
-        });
+        const unreadCount = req.user?._id ? await Notification.countDocuments({ user_id: req.user._id, is_read: false }) : 0;
 
         // Render dữ liệu bài viết với các tham số cần thiết
         res.render('Detail-post/post', {
@@ -297,10 +294,10 @@ postController.renderpost = async (req, res) => {
             header: 'Thread',
             refreshItems: null,
             selectedItem: null,
-            userid: req.user._id,
-            username: req.user.profile.display_name,
-            avatarSrc: req.user.profile.avt,
-            following: req.user.following,
+            userid: req.user?._id || null,
+            username: req.user?.profile.display_name || null,
+            avatarSrc: req.user?.profile.avt || null,
+            following: req.user?.following || [],
             post: post,
             comments: comment,
             unreadCount,

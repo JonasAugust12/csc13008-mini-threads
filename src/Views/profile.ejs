@@ -25,7 +25,9 @@
                     id="tab-followers"
                     >
                     <div class="item-follower__text">Followers</div>
-                    <div class="item-follower__number text-sm"><%= user.followers.length %></div>
+                    <div class="item-follower__number text-sm">
+                        <%= user.followers.length %>
+                    </div>
                     <div
                         class="item-follower__line w-full mt-4 border-b-[rgba(243,245,247,0.15)] border-b border-solid border-b-[white]">
                     </div>
@@ -74,9 +76,15 @@
             <div class="profile__info mt-8 border-b border-border-color pb-4">
                 <div class="content__heading flex justify-between">
                     <div class="information flex flex-col ml-6 font-bold">
-                        <div class="information__name text-2xl mb-1"><%=user.profile.display_name%></div>
-                        <div class="information__nickname text-sm font-normal mb-6"><%=user.profile.nick_name%></div>
-                        <div class="information__bio text-sm font-normal mb-4"><%=user.profile.bio%></div>
+                        <div class="information__name text-2xl mb-1">
+                            <%=user.profile.display_name%>
+                        </div>
+                        <div class="information__nickname text-sm font-normal mb-6">
+                            <%=user.profile.nick_name%>
+                        </div>
+                        <div class="information__bio text-sm font-normal mb-4">
+                            <%=user.profile.bio%>
+                        </div>
                         <div class="information__follower flex flex-row gap-1 mb-8 text-gray-500">
                             <ul class="follower__img flex flex-row cursor-pointer">
                                 <!-- không tạo loop vì truyền biến theo loop vô style khá khó không tối ưu nếu để nó lồng if vô thì sẽ tối ưu hơn một xíu nhưng không đáng kể kiểu này dễ đọc code hơn -->
@@ -100,7 +108,9 @@
                                 <% } %>
 
                             </ul>
-                            <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer"><%=user.followers.length%></div>
+                            <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer">
+                                <%=user.followers.length%>
+                            </div>
                             <div class="follower__text text-sm font-normal relative cursor-pointer">followers</div>
                         </div>
                     </div>
@@ -212,7 +222,7 @@
                 tabFollowers.classList.remove('text-[rgb(153,153,153)]');
                 tabFollowing.classList.add('text-[rgb(153,153,153)]');
                 tabFollowing.classList.remove('text-[white]');
-                tabFollowing.querySelector('.item-follower__line').classList.remove('border-b-[white]'); 
+                tabFollowing.querySelector('.item-follower__line').classList.remove('border-b-[white]');
                 tabFollowers.querySelector('.item-follower__line').classList.add('border-b-[white]');
             } else if (followType === 'following') {
                 followersList.classList.add('hidden');
@@ -221,7 +231,7 @@
                 tabFollowers.classList.remove('text-[white]');
                 tabFollowing.classList.add('text-[white]');
                 tabFollowing.classList.remove('text-[rgb(153,153,153)]');
-                tabFollowing.querySelector('.item-follower__line').classList.add('border-b-[white]'); 
+                tabFollowing.querySelector('.item-follower__line').classList.add('border-b-[white]');
                 tabFollowers.querySelector('.item-follower__line').classList.remove('border-b-[white]');
                 tabFollowers.querySelector('.item-follower__line').classList.add('border-b-[rgba(243,245,247,0.15)]');
             }

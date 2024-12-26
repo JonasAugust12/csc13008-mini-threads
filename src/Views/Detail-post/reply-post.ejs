@@ -1,6 +1,6 @@
 <div class="replies-post p-3 border-t-[1px] border-border-color tbl:px-6" id="comment-<%= comment._id.toString() %>">
     <div class="replies-post-info flex flex-nowrap items-center relative">
-        <% if (comment.user_id._id.toString() === userid.toString() || post.user_id._id.toString() === userid.toString()) { %>
+        <% if (userid && (comment.user_id._id.toString() === userid.toString() || post.user_id._id.toString() === userid.toString())) { %>
             <div class="replies-post-more-btn w-5 h-5 absolute top-0 right-0 cursor-pointer">
                 <svg aria-label="More" role="img" viewBox="0 0 24 24" fill="#777">
                     <title>More</title>

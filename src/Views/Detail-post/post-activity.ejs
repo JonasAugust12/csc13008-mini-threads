@@ -70,7 +70,7 @@
                                     class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"><%= user.profile.nick_name %></a>
                                 <p class="user-liked-pickedtag text-[15px] font-normal text-secondary-text"> <%= user.profile.display_name %></p>
                             </div>
-                            <% if (user._id.toString() !== userid.toString()) { %>
+                            <% if (userid && user._id.toString() !== userid.toString()) { %>
                                 <div
                                     follow-id="follow-<%= user._id %>"
                                     class="user-liked-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight text-primary-text select-none">

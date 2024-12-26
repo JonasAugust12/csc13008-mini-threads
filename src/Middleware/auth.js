@@ -5,7 +5,9 @@ const authenticateToken = async (req, res, next) => {
     try {
         const token = req.cookies.refreshToken;
         if (!token) {
-            return res.redirect('/auth/login'); // Điều hướng đến trang đăng nhập nếu không có token
+            req.userId = null;
+            req.user = null;
+            return next();
         }
 
         // Xác minh token

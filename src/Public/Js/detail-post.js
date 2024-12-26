@@ -97,6 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     commentLikes.forEach((likeButton) => {
         likeButton.addEventListener('click', () => {
+            const accessToken = localStorage.getItem('accessToken');
+            if (!accessToken) {
+                showPopup('popup');
+                return;
+            }
+
             const commentId = likeButton.id.replace('like-comment-', '');
             const svg = likeButton.querySelector('svg path');
             const likeNum = likeButton.querySelector('.like-comment-num');

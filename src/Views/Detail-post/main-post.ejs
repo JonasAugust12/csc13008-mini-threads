@@ -24,7 +24,7 @@
                         <div class="w-full py-3 flex justify-center tbl:hidden">
                             <div class="w-10 h-1 bg-secondary-text rounded-full"></div>
                         </div>
-                        <% if (post.user_id._id.toString() === userid.toString()) { %>
+                        <% if (userid && post.user_id._id.toString() === userid.toString()) { %>
                             <div
                                 class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent">
                                 <div post-id = "delete-post-<%= post._id %>"
@@ -43,7 +43,7 @@
                         <% } %>
                         <div
                             onclick="copyLinkToClipboard('/post/<%= post._id %>')"
-                            class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-border-color <%= post.user_id._id.toString() === userid.toString() ? 'tbl:border-t-[1px]' : '' %>">
+                            class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-border-color <%= userid && post.user_id._id.toString() === userid.toString() ? 'tbl:border-t-[1px]' : '' %>">
                             <div
                                 class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] tbl:p-3">
                                 <span>Copy link</span>
@@ -81,11 +81,11 @@
                     <svg aria-label="Like" role="img" viewBox="0 0 18 18" class="w-[18px] h-[18px]">
                         <title>Like</title>
                         <path 
-                            <%= post.post_likes.some(like => like._id.toString() === userid.toString()) ? 'fill=red stroke=red' : 'fill=none stroke=currentColor' %>
+                            <%= userid && post.post_likes.some(like => like._id.toString() === userid.toString()) ? 'fill=red stroke=red' : 'fill=none stroke=currentColor' %>
                             d="M1.34375 7.53125L1.34375 7.54043C1.34374 8.04211 1.34372 8.76295 1.6611 9.65585C1.9795 10.5516 2.60026 11.5779 3.77681 12.7544C5.59273 14.5704 7.58105 16.0215 8.33387 16.5497C8.73525 16.8313 9.26573 16.8313 9.66705 16.5496C10.4197 16.0213 12.4074 14.5703 14.2232 12.7544C15.3997 11.5779 16.0205 10.5516 16.3389 9.65585C16.6563 8.76296 16.6563 8.04211 16.6562 7.54043V7.53125C16.6562 5.23466 15.0849 3.25 12.6562 3.25C11.5214 3.25 10.6433 3.78244 9.99228 4.45476C9.59009 4.87012 9.26356 5.3491 9 5.81533C8.73645 5.3491 8.40991 4.87012 8.00772 4.45476C7.35672 3.78244 6.47861 3.25 5.34375 3.25C2.9151 3.25 1.34375 5.23466 1.34375 7.53125Z"
                             stroke-width="1.25"></path>
                     </svg>
-                    <span class="like-num text-[#<%= post.post_likes.some(like => like._id.toString() === userid.toString()) ? 'ff0000' : 'ccc' %>] text-[13px] font-normal pl-1 <%= post.post_likes.length === 0 ? 'hidden' : '' %>"> <%= post.post_likes.length %> </span>
+                    <span class="like-num text-[#<%= userid && post.post_likes.some(like => like._id.toString() === userid.toString()) ? 'ff0000' : 'ccc' %>] text-[13px] font-normal pl-1 <%= post.post_likes.length === 0 ? 'hidden' : '' %>"> <%= post.post_likes.length %> </span>
                 </button>
                 <button
                     class="main-post-action-btn h-9 inline-flex flex-nowrap items-center justify-center px-3 rounded-[20px] cursor-pointer hover:bg-[#222222]">
