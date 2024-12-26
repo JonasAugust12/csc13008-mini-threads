@@ -75,11 +75,11 @@ const loginController = async (req, res) => {
                 to: email,
                 subject: 'Verify your email',
                 html: `
-    <h2>Welcome to Our Service</h2>
-    <p>To complete your registration, please verify your email by clicking the link below:</p>
-    <a href="${verificationLink}">Verify Email</a>
-    <p>If you didn't register for this service, please ignore this email.</p>
-  `,
+                        <h2>Welcome to Our Service</h2>
+                        <p>To complete your registration, please verify your email by clicking the link below:</p>
+                        <a href="${verificationLink}">Verify Email</a>
+                        <p>If you didn't register for this service, please ignore this email.</p>
+                    `,
             };
 
             await transporter.sendMail(mailOptions, (error, info) => {
@@ -170,11 +170,11 @@ const signupController = async (req, res) => {
             to: email,
             subject: 'Verify your email',
             html: `
-    <h2>Welcome to Mini Threads</h2>
-    <p>To complete your registration, please verify your email by clicking the link below:</p>
-    <a href="${verificationLink}">Verify Email</a>
-    <p>If you didn't register for this service, please ignore this email.</p>
-  `,
+                    <h2>Welcome to Mini Threads</h2>
+                    <p>To complete your registration, please verify your email by clicking the link below:</p>
+                    <a href="${verificationLink}">Verify Email</a>
+                    <p>If you didn't register for this service, please ignore this email.</p>
+                `,
         };
 
         await transporter.sendMail(mailOptions, async (error, info) => {
@@ -199,16 +199,16 @@ const signupController = async (req, res) => {
 };
 
 //REFRESH TOKEN
-requestRefreshToken = async (req, res) => {
+const requestRefreshToken = async (req, res) => {
     // Lấy refreshToken từ cookie
     const refreshToken = req.cookies.refreshToken;
 
     // Nếu không có refreshToken (chưa đăng nhập,...)
-    if (!refreshToken) return res.status(401).json('You are not authenticated');
+    if (!refreshToken) return res.status(401).json({ message: 'You are not authenticated' });
 
     // Verify refreshToken
     jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, (err, user) => {
-        if (err) return res.status(403).json('Token is not valid');
+        if (err) return res.status(403).json({ message: 'Token is not valid' });
 
         // không lỗi -> tạo token mới
         const newAccessToken = generateAccessToken(user);
@@ -267,12 +267,12 @@ const resetPassword = async (req, res) => {
             to: user.email,
             subject: 'Reset password',
             html: `
-        <h2>We received a request to reset your password.</h2>
-        <p>Please click the link below to reset your password. The link will expire in 10 minutes.</p>
-        <p><a href="${process.env.API_URL}/auth/changePassword?email=${user.email}&token=${token}">Reset Password</a></p>
-       
-        <p>If you didn't request a password reset, please ignore this email.</p>
-      `,
+                    <h2>We received a request to reset your password.</h2>
+                    <p>Please click the link below to reset your password. The link will expire in 10 minutes.</p>
+                    <p><a href="${process.env.API_URL}/auth/changePassword?email=${user.email}&token=${token}">Reset Password</a></p>
+                
+                    <p>If you didn't request a password reset, please ignore this email.</p>
+                `,
         };
 
         // Gửi email
