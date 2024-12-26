@@ -4,28 +4,31 @@ const postActivityWrapper = document.querySelector('.post-activity-wrapper');
 const postActivityBackBtn = document.querySelector('.post-activity-back-btn');
 
 // Hiển thị `post-activity-wrapper` khi bấm vào `view-activity-btn`
-mainPostMoreBtn.addEventListener('click', () => {
-    postActivityWrapper.classList.remove('hidden'); // Bỏ `hidden`
-    postActivityWrapper.classList.add('flex'); // Thêm `flex`
+if (mainPostMoreBtn) {
+    mainPostMoreBtn.addEventListener('click', () => {
+        postActivityWrapper.classList.remove('hidden'); // Bỏ `hidden`
+        postActivityWrapper.classList.add('flex'); // Thêm `flex`
 
-    // Thêm class `overflow-hidden` vào <body> để chặn cuộn trang
-    document.body.classList.add('overflow-hidden');
-});
-
+        // Thêm class `overflow-hidden` vào <body> để chặn cuộn trang
+        document.body.classList.add('overflow-hidden');
+    });
+}
 // Ẩn `post-activity-wrapper` khi bấm vào `post-activity-back-btn` hoặc ngoài `post-activity`
-postActivityWrapper.addEventListener('click', (event) => {
-    // Kiểm tra nếu bấm ngoài vùng `post-activity` hoặc bấm vào nút Back
-    if (
-        event.target === postActivityWrapper || // Bấm ngoài vùng `post-activity`
-        event.target.closest('.post-activity-back-btn') // Bấm vào nút Back
-    ) {
-        postActivityWrapper.classList.add('hidden'); // Thêm `hidden`
-        postActivityWrapper.classList.remove('flex'); // Bỏ `flex`
+if (postActivityWrapper) {
+    postActivityWrapper.addEventListener('click', (event) => {
+        // Kiểm tra nếu bấm ngoài vùng `post-activity` hoặc bấm vào nút Back
+        if (
+            event.target === postActivityWrapper || // Bấm ngoài vùng `post-activity`
+            event.target.closest('.post-activity-back-btn') // Bấm vào nút Back
+        ) {
+            postActivityWrapper.classList.add('hidden'); // Thêm `hidden`
+            postActivityWrapper.classList.remove('flex'); // Bỏ `flex`
 
-        // Xóa class `overflow-hidden` khỏi <body> khi đóng modal
-        document.body.classList.remove('overflow-hidden');
-    }
-});
+            // Xóa class `overflow-hidden` khỏi <body> khi đóng modal
+            document.body.classList.remove('overflow-hidden');
+        }
+    });
+}
 
 // Lấy các phần tử cần dùng
 const moreButton = document.querySelector('.main-post-more-btn');
@@ -33,10 +36,12 @@ const moreList = document.querySelector('.main-post-more-list');
 
 // Hàm để hiển thị và ẩn danh sách
 function toggleMoreList(event) {
-    if (moreList.style.display === 'flex') {
-        moreList.style.display = 'none';
+    if (moreList.classList.contains('flex')) {
+        moreList.classList.remove('flex');
+        moreList.classList.add('hidden');
     } else {
-        moreList.style.display = 'flex';
+        moreList.classList.remove('hidden');
+        moreList.classList.add('flex');
     }
 }
 
@@ -86,45 +91,146 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Like và unlike comment
 document.addEventListener('DOMContentLoaded', () => {
-    const followButtons = document.querySelectorAll('.user-liked-follow-btn');
+    const commentLikes = document.querySelectorAll('.like-comment');
 
-    followButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            if (button.textContent.trim() === 'Following') {
-                button.textContent = 'Follow';
-                button.classList.remove('text-secondary-text');
-                button.classList.add('text-primary-text');
+    commentLikes.forEach((likeButton) => {
+        likeButton.addEventListener('click', () => {
+            const accessToken = localStorage.getItem('accessToken');
+            if (!accessToken) {
+                showPopup('popup');
+                return;
+            }
+
+            const commentId = likeButton.id.replace('like-comment-', '');
+            const svg = likeButton.querySelector('svg path');
+            const likeNum = likeButton.querySelector('.like-comment-num');
+            const currentLikes = parseInt(likeNum.textContent.trim(), 10) || 0;
+
+            if (svg.getAttribute('fill') === 'red') {
+                // Unlike comment
+                fetch(`/post/like-comment/${commentId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'unlike' }),
+                }).then(() => {
+                    svg.setAttribute('fill', 'none');
+                    svg.setAttribute('stroke', 'currentColor');
+                    likeNum.textContent = currentLikes - 1;
+                    likeNum.style.color = '#ccc';
+                    if (currentLikes - 1 === 0) likeNum.classList.add('hidden');
+                });
             } else {
-                button.textContent = 'Following';
-                button.classList.remove('text-primary-text');
-                button.classList.add('text-secondary-text');
+                // Like comment
+                fetch(`/post/like-comment/${commentId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'like' }),
+                }).then(() => {
+                    svg.setAttribute('fill', 'red');
+                    svg.setAttribute('stroke', 'red');
+                    likeNum.textContent = currentLikes + 1;
+                    likeNum.style.color = 'red';
+                    likeNum.classList.remove('hidden');
+                });
             }
         });
     });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const postLikes = document.querySelectorAll('.post-action-like');
+// Xoá comment
+document.querySelectorAll('.delete-comment').forEach((deleteCommentButton) => {
+    deleteCommentButton.addEventListener('click', (e) => {
+        const commentNum = document.querySelector('.comment-num');
 
-    postLikes.forEach((postLike) => {
-        postLike.addEventListener('click', () => {
-            const svg = postLike.querySelector('svg path');
-            const likeNum = postLike.querySelector('.like-num');
-            const currentLikes = parseInt(likeNum.textContent.trim(), 10);
+        // Lấy các phần tử liên quan đến confirm delete và overlay
+        const confirmDeleteBox = document.querySelector('.confirm-delete');
+        const overlay = document.querySelector('.overlay');
+        const confirmTitle = document.querySelector('.delete-title');
+        confirmTitle.textContent = 'Delete comment';
+        const confirmContent = document.querySelector('.delete-content');
+        confirmContent.textContent = "If you delete this comment, you won't be able to restore it.";
+        const confirmCancelBtn = document.querySelector('.confirm-cancel-btn');
+        const confirmDeleteBtn = document.querySelector('.confirm-delete-btn');
+        const loadingToast = document.querySelector('.loading-post-toast');
+        const toastContent = document.querySelector('.toast__loading-content');
 
-            // Kiểm tra trạng thái hiện tại của nút
-            if (svg.getAttribute('fill') === 'red') {
-                // Nếu đang thích -> Bỏ thích
-                svg.setAttribute('fill', 'none');
-                svg.setAttribute('stroke', 'currentColor');
-                likeNum.textContent = currentLikes - 1;
-            } else {
-                // Nếu chưa thích -> Thích
-                svg.setAttribute('fill', 'red');
-                svg.setAttribute('stroke', 'red');
-                likeNum.textContent = currentLikes + 1;
+        // Hiển thị hộp xác nhận
+        confirmDeleteBox.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+
+        const commentId = e.target.closest('.delete-comment').getAttribute('comment-id').split('-')[2];
+
+        // Sự kiện hủy bỏ
+        confirmCancelBtn.addEventListener('click', () => {
+            confirmDeleteBox.classList.add('hidden');
+            overlay.classList.add('hidden');
+        });
+
+        // Thêm sự kiện chỉ một lần cho button delete
+        const handleDelete = async () => {
+            loadingToast.classList.remove('hidden');
+            toastContent.textContent = 'Deleting comment...';
+
+            try {
+                // Gửi yêu cầu DELETE đến server
+                await fetch(`/post/delete-comment/${commentId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }).then(() => {
+                    loadingToast.classList.add('hidden');
+                    const commentContainer = document.querySelector(`#comment-${commentId}`);
+                    if (commentContainer) {
+                        commentContainer.remove();
+                    }
+                    confirmDeleteBox.classList.add('hidden');
+                    overlay.classList.add('hidden');
+                    commentNum.textContent = parseInt(commentNum.textContent, 10) - 1;
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while deleting the comment.');
             }
+        };
+
+        confirmDeleteBtn.addEventListener('click', handleDelete, { once: true });
+    });
+});
+
+// Xử lý sự kiện click vào nút follow/unfollow
+document.addEventListener('DOMContentLoaded', () => {
+    const followBtn = document.querySelectorAll('.user-liked-follow-btn');
+    followBtn.forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const userId = btn.getAttribute('follow-id').replace('follow-', '');
+            const followText = btn.innerText;
+            fetch(`/profile/follow/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        if (followText === 'Follow') {
+                            btn.innerText = 'Following';
+                        } else {
+                            btn.innerText = 'Follow';
+                        }
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         });
     });
 });

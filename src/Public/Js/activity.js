@@ -1,113 +1,195 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const refreshOption = document.getElementById('refresh-option');
-    const refreshList = document.getElementById('refresh-list');
+    // Lấy tất cả các nút và danh sách liên quan
+    const buttons = document.querySelectorAll('.activity-post__more-btn');
 
-    // Hiển thị hoặc ẩn danh sách khi nhấn vào nút
-    refreshOption.addEventListener('click', (event) => {
-        event.stopPropagation(); // Ngăn không cho sự kiện lan ra ngoài
-        const isVisible = refreshList.classList.contains('opacity-100');
+    buttons.forEach((button) => {
+        const dropdown = button.querySelector('.activity-post-more-list');
 
-        // Đặt trạng thái ẩn/hiện
-        if (isVisible) {
-            refreshList.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            refreshList.classList.add('opacity-0', '-translate-y-2', 'pointer-events-none');
-        } else {
-            refreshList.classList.remove('opacity-0', '-translate-y-2', 'pointer-events-none');
-            refreshList.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-        }
+        // Gắn sự kiện click vào nút
+        button.addEventListener('click', (event) => {
+            event.stopPropagation();
+
+            // Ẩn tất cả các danh sách khác
+            buttons.forEach((btn) => {
+                const otherDropdown = btn.querySelector('.activity-post-more-list');
+                if (otherDropdown !== dropdown) {
+                    otherDropdown.style.display = 'none'; // Ẩn danh sách khác
+                }
+            });
+
+            // Toggle trạng thái hiện/ẩn danh sách của nút hiện tại
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
     });
 
-    // Ẩn danh sách khi nhấn ra ngoài
+    // Khi bấm ra ngoài, ẩn tất cả danh sách
     document.addEventListener('click', () => {
-        refreshList.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-        refreshList.classList.add('opacity-0', '-translate-y-2', 'pointer-events-none');
+        buttons.forEach((button) => {
+            const dropdown = button.querySelector('.activity-post-more-list');
+            dropdown.style.display = 'none'; // Ẩn tất cả danh sách
+        });
     });
 });
 
-// Lấy các phần tử
-const moreButtons = document.querySelectorAll('.activity-post__more-btn');
-const actionsWrapper = document.querySelector('.activity-actions-wrapper');
-const actions = document.querySelector('.activity-actions');
-const actionItems = document.querySelectorAll('.activity-actions-opt > div');
-
-// Xử lý khi bấm vào từng nút More
-moreButtons.forEach((button) => {
-    button.addEventListener('click', (event) => {
-        event.stopPropagation(); // Ngăn sự kiện lan truyền
-        actionsWrapper.classList.add('flex'); // Hiển thị modal
-        actionsWrapper.classList.remove('hidden'); // Loại bỏ lớp hidden
-
-        // Thêm class `overflow-hidden` vào <body> để chặn cuộn trang
-        document.body.classList.add('overflow-hidden');
-    });
-});
-
-// Ẩn modal khi bấm ra ngoài activity-actions
-document.addEventListener('click', (event) => {
-    if (!actions.contains(event.target)) {
-        actionsWrapper.classList.add('hidden'); // Thêm lớp hidden
-        actionsWrapper.classList.remove('flex'); // Loại bỏ lớp flex
-
-        // Xóa class `overflow-hidden` khỏi <body> khi đóng modal
-        document.body.classList.remove('overflow-hidden');
+// Đánh dấu thông báo là đã đọc
+async function handleMarkAsRead(notificationId) {
+    try {
+        const response = await fetch(`/activity/mark-as-read/${notificationId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+        });
+        // Kiểm tra nếu API trả về lỗi
+        if (!response.ok) {
+            console.error('Failed to mark as read');
+            return;
+        }
+        // Xóa class `bg-[#222222]` nếu element tồn tại
+        const notiElement = document.getElementById(`activity-post-${notificationId}`);
+        if (notiElement) {
+            notiElement.classList.remove('bg-[#222222]');
+        }
+    } catch (error) {
+        console.error('Error marking notification as read:', error);
     }
-});
+}
+async function handleMarkAsReadAndNavigate(notificationId, url) {
+    await handleMarkAsRead(notificationId);
+    window.location.href = url;
+}
 
-// Ngăn modal bị ẩn khi bấm vào bên trong activity-actions
-actions.addEventListener('click', (event) => {
-    event.stopPropagation();
-});
-
-// Ẩn modal khi chọn một mục bên trong
-actionItems.forEach((item) => {
-    item.addEventListener('click', () => {
-        actionsWrapper.classList.add('hidden'); // Thêm lớp hidden
-        actionsWrapper.classList.remove('flex'); // Loại bỏ lớp flex
-
-        // Xóa class `overflow-hidden` khỏi <body> khi đóng modal
-        document.body.classList.remove('overflow-hidden');
-    });
-});
-
+// Like và unlike comment (tương tự với cái bên detail-post.js)
 document.addEventListener('DOMContentLoaded', () => {
-    const followButtons = document.querySelectorAll('.activity__post-follow-btn');
+    const commentLikes = document.querySelectorAll('.like-comment');
 
-    followButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            if (button.textContent.trim() === 'Following') {
-                button.textContent = 'Follow';
-                button.classList.remove('text-secondary-text');
-                button.classList.add('text-primary-text');
+    commentLikes.forEach((likeButton) => {
+        likeButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const commentId = likeButton.id.replace('like-comment-', '');
+            const svg = likeButton.querySelector('svg path');
+            const likeNum = likeButton.querySelector('.like-comment-num');
+            const currentLikes = parseInt(likeNum.textContent.trim(), 10) || 0;
+
+            if (svg.getAttribute('fill') === 'red') {
+                // Unlike comment
+                fetch(`/post/like-comment/${commentId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'unlike' }),
+                }).then(() => {
+                    svg.setAttribute('fill', 'none');
+                    svg.setAttribute('stroke', 'currentColor');
+                    likeNum.textContent = currentLikes - 1;
+                    if (currentLikes - 1 === 0) likeNum.classList.add('hidden');
+                    likeNum.style.color = '#ccc';
+                });
             } else {
-                button.textContent = 'Following';
-                button.classList.remove('text-primary-text');
-                button.classList.add('text-secondary-text');
+                // Like comment
+                fetch(`/post/like-comment/${commentId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'like' }),
+                }).then(() => {
+                    svg.setAttribute('fill', 'red');
+                    svg.setAttribute('stroke', 'red');
+                    likeNum.textContent = currentLikes + 1;
+                    likeNum.classList.remove('hidden');
+                    likeNum.style.color = 'red';
+                });
             }
         });
     });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const postLikes = document.querySelectorAll('.activity__post-action-like');
+// xoá notification
+const deleteNotiButtons = document.querySelectorAll('.delete-noti');
+deleteNotiButtons.forEach((deleteNotiButton) => {
+    deleteNotiButton.addEventListener('click', async (e) => {
+        // Lấy thông tin ID của thông báo
+        const notiId = e.target.closest('.delete-noti').getAttribute('activity-id').split('-')[2];
 
-    postLikes.forEach((postLike) => {
-        postLike.addEventListener('click', () => {
-            const svg = postLike.querySelector('svg path');
-            const likeNum = postLike.querySelector('.like-num');
-            const currentLikes = parseInt(likeNum.textContent.trim(), 10);
+        // Hiển thị hộp xác nhận
+        const confirmDeleteBox = document.querySelector('.confirm-delete');
+        const overlay = document.querySelector('.overlay');
+        const confirmTitle = document.querySelector('.delete-title');
+        const confirmContent = document.querySelector('.delete-content');
+        const confirmCancelBtn = document.querySelector('.confirm-cancel-btn');
+        const confirmDeleteBtn = document.querySelector('.confirm-delete-btn');
 
-            // Kiểm tra trạng thái hiện tại của nút
-            if (svg.getAttribute('fill') === 'red') {
-                // Nếu đang thích -> Bỏ thích
-                svg.setAttribute('fill', 'none');
-                svg.setAttribute('stroke', 'currentColor');
-                likeNum.textContent = currentLikes - 1;
-            } else {
-                // Nếu chưa thích -> Thích
-                svg.setAttribute('fill', 'red');
-                svg.setAttribute('stroke', 'red');
-                likeNum.textContent = currentLikes + 1;
+        confirmTitle.textContent = 'Delete Notification';
+        confirmContent.textContent = 'Are you sure you want to delete this notification?';
+        confirmDeleteBox.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+
+        // Sự kiện hủy
+        confirmCancelBtn.addEventListener('click', () => {
+            confirmDeleteBox.classList.add('hidden');
+            overlay.classList.add('hidden');
+        });
+
+        // Thêm sự kiện chỉ một lần cho nút delete
+        const handleDelete = async () => {
+            try {
+                const response = await fetch(`/activity/delete/${notiId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    // Xoá thông báo khỏi giao diện
+                    const notiContainer = e.target.closest('.activity-post');
+                    if (notiContainer) {
+                        notiContainer.remove();
+                    }
+
+                    confirmDeleteBox.classList.add('hidden');
+                    overlay.classList.add('hidden');
+                } else {
+                    console.error('Failed to delete notification.');
+                    alert('An error occurred while deleting the notification.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while deleting the notification.');
             }
+        };
+
+        confirmDeleteBtn.addEventListener('click', handleDelete, { once: true });
+    });
+});
+
+// Xử lý sự kiện click vào nút follow/unfollow
+document.addEventListener('DOMContentLoaded', () => {
+    const followBtn = document.querySelectorAll('.activity__post-follow-btn');
+    followBtn.forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const userId = btn.getAttribute('follow-id').replace('follow-', '');
+            const followText = btn.innerText;
+            fetch(`/profile/follow/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        if (followText === 'Follow') {
+                            btn.innerText = 'Following';
+                        } else {
+                            btn.innerText = 'Follow';
+                        }
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         });
     });
 });
