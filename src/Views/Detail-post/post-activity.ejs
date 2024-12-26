@@ -46,7 +46,7 @@
             <% post.post_likes.forEach((user, index) => { %>
                 <div class="post-user-liked w-full flex mt-4px relative cursor-pointer">
                     <div class="user-liked-avatar py-3 pl-6 pr-0 tbl:pl-6 select-none">
-                        <a href="" class="block w-[41px] pt-1">
+                        <a href="/profile/<%= user._id %>" class="block w-[41px] pt-1">
                             <div class="w-9 h-9 relative">
                                 <img src="<%= user.profile.avt %>"
                                     alt="avatar" class="w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover" />
@@ -66,14 +66,14 @@
                     <div class="user-liked-content-container-1 w-full border-t-[1px] border-border-color pr-6">
                         <div class="user-liked-content-container-2 py-3 pl-1 flex justify-between items-center">
                             <div class="flex-grow">
-                                <a href="#"
+                                <a href="/profile/<%= user._id %>"
                                     class="activity__post-username leading-[22.5px] max-w-[115px] tbl:max-w-[285px] pc:max-w-[370px] inline-block text-[15px] font-user-weight break-words hover:underline"><%= user.profile.nick_name %></a>
                                 <p class="user-liked-pickedtag text-[15px] font-normal text-secondary-text"> <%= user.profile.display_name %></p>
                             </div>
                             <% if (userid && user._id.toString() !== userid.toString()) { %>
                                 <div
                                     follow-id="follow-<%= user._id %>"
-                                    class="user-liked-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight text-primary-text select-none">
+                                    class="user-liked-follow-btn min-w-[120px] h-[34px] border-[1px] border-border-color rounded-[10px] text-center leading-[34px] font-user-weight select-none <%= following.includes(user._id) ? 'text-[#777777]' : 'text-[#f3f5f7]' %>">
                                     <%= following.includes(user._id) ? 'Following' : 'Follow' %>
                                 </div>
                             <% } %>

@@ -92,8 +92,8 @@
                     return;
                 }
 
-                if (nickname.length > 20 || nickname.length === 0) {
-                    toastContent.textContent = 'Nickname must be between 1 and 20 characters';
+                if (nickname.length > 30 || nickname.length === 0) {
+                    toastContent.textContent = 'Nickname must be between 1 and 30 characters';
                     toastIcon.classList.add('hidden');
                     loadingToast.classList.remove('hidden');
                     setInterval(() => {
@@ -103,8 +103,8 @@
                     return;
                 }
 
-                if (name.length > 25 || name.length === 0) {
-                    toastContent.textContent = 'Name must be between 1 and 25 characters';
+                if (name.length > 35 || name.length === 0) {
+                    toastContent.textContent = 'Name must be between 1 and 35 characters';
                     toastIcon.classList.add('hidden');
                     loadingToast.classList.remove('hidden');
                     setInterval(() => {
