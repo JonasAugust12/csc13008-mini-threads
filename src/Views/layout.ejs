@@ -74,14 +74,15 @@
 
             <%- include('Partials/bottom-navbar') %>
 
-                <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[3] hidden select-none tbl:block">
-                    <button type="button"
-                        class="login-btn__inner h-[34px] leading-[34px] w-[82px] bg-[#ffffff] rounded-[10px] font-medium text-[16px] p-0 border-none cursor-pointer"
-                        data-bs-toggle="modal" data-bs-target="#loginModal"
-                        onclick="window.location.href='/auth/login';">
-                        Log in
-                    </button>
-                </div>
+                <% if (!userid) { %>
+                    <div class="login-btn fixed tbl:top-3 pc:top-6 right-7 z-[3] hidden select-none tbl:block">
+                        <button type="button"
+                            class="login-btn__inner h-[34px] leading-[34px] w-[82px] bg-[#ffffff] rounded-[10px] font-medium text-[16px] p-0 border-none cursor-pointer"
+                            data-bs-toggle="modal" data-bs-target="#loginModal" onclick="window.location.href='/auth/login';">
+                            Log in
+                        </button>
+                    </div>
+                <% } %>
 
                 <div
                     class="create-btn fixed bottom-6 right-7 hidden tbl:flex justify-center items-center h-[68px] w-[82px] bg-content-bg border-[1px] border-[#353636] rounded-xl p-0 z-[2] cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-105">
@@ -109,8 +110,6 @@
                     <%- include('Partials/partial_popup') %>
                     <%- include('Partials/confirm-deletion') %>
     </div>
-
-
     <script src="/Js/layout.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {

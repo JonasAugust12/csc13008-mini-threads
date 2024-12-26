@@ -403,12 +403,11 @@ function copyLinkToClipboard(path) {
     toastIcon.classList.add('hidden');
     loadingToast.classList.remove('hidden');
     toastContent.innerText = 'Link copied to clipboard';
-    navigator.clipboard.writeText(link).then(() => {
-        setTimeout(() => {
-            loadingToast.classList.add('hidden');
-            toastIcon.classList.remove('hidden');
-        }, 1000);
-    });
+    setTimeout(() => {
+        loadingToast.classList.add('hidden');
+        toastIcon.classList.remove('hidden');
+    }, 1000);
+    navigator.clipboard.writeText(link);
 }
 
 //Like post

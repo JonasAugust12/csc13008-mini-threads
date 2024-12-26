@@ -35,6 +35,14 @@
             </svg>
         </div>
     </div>
+
+    <div class="login-btn items-center justify-center <%= userid ? 'hidden' : 'flex' %>">
+        <button type="button"
+            class="login-btn__inner h-[34px] leading-[34px] w-[82px] bg-[#ffffff] rounded-[10px] font-medium text-[16px] p-0 border-none cursor-pointer"
+            data-bs-toggle="modal" data-bs-target="#loginModal" onclick="window.location.href='/auth/login';">
+            Log in
+        </button>
+    </div>
     
     <div class="top-nav__setting-more-menu hidden absolute left-0 top-0 w-fit <%= userid ? 'block' : 'hidden' %>">
         <div class="menu bg-[#181818]">

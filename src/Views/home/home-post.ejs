@@ -11,7 +11,7 @@
                 </a>
                 <div class="post-time-stamp text-[15px] text-secondary-text" data-created-at="<%= post.createdAt %>"></div>
             </div>
-            <div class="main-post-more-btn p-1 hover:bg-[#222222] rounded-[20px] relative">
+            <div class="main-post-more-btn p-1 tbl:hover:bg-[#222222] rounded-[20px] relative">
                 <svg
                     aria-label="Xem thêm"
                     role="img"
@@ -106,7 +106,7 @@
         </div>
             <div class="post-actions flex gap-1 mt-2 ml-[-12px] select-none">
                 <div
-                    class="post-like flex gap-1 justify-center items-center cursor-pointer hover:bg-[#222222] px-3 py-2 rounded-[20px]"
+                    class="post-like flex gap-1 justify-center items-center cursor-pointer tbl:hover:bg-[#222222] px-3 py-2 rounded-[20px]"
                     id="like-button-<%= post._id.toString() %>"
                 >
                     <svg
@@ -126,7 +126,7 @@
                     <div class="like-num text-[#<%= post.post_likes.includes(userid) ? 'ff0000' : 'ccc' %>] text-[13px] font-normal pl-1 <%= post.post_likes.length===0 ? 'hidden' : '' %>"><%= post.post_likes.length%></div>
                 </div>
             <div
-                class="post-comment flex gap-1 justify-center items-center cursor-pointer hover:bg-[#222222] px-3 py-2 rounded-[20px]"
+                class="post-comment flex gap-1 justify-center items-center cursor-pointer tbl:hover:bg-[#222222] px-3 py-2 rounded-[20px]"
             >
                 <svg
                     aria-label="Trả lời"
