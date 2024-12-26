@@ -4,35 +4,52 @@ const User = require('../Models/User'); // Import model User
 let homeController = {};
 
 homeController.renderHome = async (req, res) => {
-    const posts = await Post.find().populate('user_id', 'profile').sort({ createdAt: -1 });
-    const unreadCount = await Notification.countDocuments({
-        user_id: req.userId,
-        is_read: false,
-    });
-    const users = await User.find({
-        _id: { $nin: [...req.user.following, req.user._id] },
-    }).limit(10);
-    const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Mini Threads`;
-    res.render('home/home', {
-        title,
-        header: 'Home',
-        refreshItems: [
-            { name: 'For you', link: '/' },
-            { name: 'Following', link: '/home/following' },
-            { name: 'Liked', link: '/home/liked' },
-        ],
-        selectedItem: 'For you',
-        userid: req.user._id,
-        username: req.user.profile.nick_name,
-        avatarSrc: req.user.profile.avt,
-        posts: posts,
-        users,
-        unreadCount,
-    });
+    try {
+        const posts = await Post.find().populate('user_id', 'profile').sort({ createdAt: -1 });
+
+        const unreadCount = req.userId
+            ? await Notification.countDocuments({
+                  user_id: req.userId,
+                  is_read: false,
+              })
+            : 0;
+
+        const users = req.user
+            ? await User.find({
+                  _id: { $nin: [...req.user.following, req.user._id] },
+              }).limit(10)
+            : [];
+
+        const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Mini Threads`;
+
+        res.render('home/home', {
+            title,
+            header: 'Home',
+            refreshItems: [
+                { name: 'For you', link: '/' },
+                { name: 'Following', link: '/home/following' },
+                { name: 'Liked', link: '/home/liked' },
+            ],
+            selectedItem: 'For you',
+            userid: req.user?._id || null,
+            username: req.user?.profile.nick_name || 'Guest',
+            avatarSrc: req.user?.profile.avt || null,
+            posts: posts,
+            users,
+            unreadCount,
+        });
+    } catch (error) {
+        console.error('Error rendering home:', error);
+        res.status(500).send('Internal Server Error');
+    }
 };
 
 homeController.filterFollowing = async (req, res) => {
     try {
+        if (!req.userId) {
+            return res.redirect('/auth/login'); // Redirect nếu chưa đăng nhập
+        }
+
         const user = await User.findById(req.userId).select('following').populate('following', 'profile');
         if (!user) {
             return res.status(404).send('User not found');
@@ -52,6 +69,7 @@ homeController.filterFollowing = async (req, res) => {
         const users = await User.find({
             _id: { $nin: [...req.user.following, req.user._id] },
         }).limit(10);
+
         const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Mini Threads - Following`;
 
         res.render('home/home', {
@@ -63,9 +81,9 @@ homeController.filterFollowing = async (req, res) => {
                 { name: 'Liked', link: '/home/liked' },
             ],
             selectedItem: 'Following',
-            userid: req.user._id,
-            username: req.user.profile.nick_name,
-            avatarSrc: req.user.profile.avt,
+            userid: req.user?._id || null,
+            username: req.user?.profile.nick_name || 'Guest',
+            avatarSrc: req.user?.profile.avt || null,
             posts: posts,
             users: users,
             unreadCount,
@@ -78,17 +96,21 @@ homeController.filterFollowing = async (req, res) => {
 
 homeController.filterLiked = async (req, res) => {
     try {
-        // Lấy bài viết đã được user hiện tại like
-        const posts = await Post.find({ post_likes: req.user._id }) // Assume 'liked' là mảng chứa userId
-            .populate('user_id', 'profile')
-            .sort({ createdAt: -1 });
+        if (!req.userId) {
+            return res.redirect('/auth/login'); // Redirect nếu chưa đăng nhập
+        }
+
+        const posts = await Post.find({ post_likes: req.user._id }).populate('user_id', 'profile').sort({ createdAt: -1 });
+
         const unreadCount = await Notification.countDocuments({
             user_id: req.userId,
             is_read: false,
         });
+
         const users = await User.find({
             _id: { $nin: [...req.user.following, req.user._id] },
         }).limit(10);
+
         const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}Mini Threads - Liked`;
 
         res.render('home/home', {
@@ -100,9 +122,9 @@ homeController.filterLiked = async (req, res) => {
                 { name: 'Liked', link: '/home/liked' },
             ],
             selectedItem: 'Liked',
-            userid: req.user._id,
-            username: req.user.profile.nick_name,
-            avatarSrc: req.user.profile.avt,
+            userid: req.user?._id || null,
+            username: req.user?.profile.nick_name || 'Guest',
+            avatarSrc: req.user?.profile.avt || null,
             posts: posts,
             users,
             unreadCount,

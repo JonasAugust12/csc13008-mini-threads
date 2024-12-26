@@ -85,7 +85,6 @@ const getOtherUserProfile = async (req, res) => {
         if (!user) {
             return res.status(404).render('404', { layout: false }); // Render 404 page for non-existent user
         }
-
         // Check if the current user is following this user
         let isFollowing = false;
         const curUser = await User.findById(req.userId);
@@ -103,10 +102,7 @@ const getOtherUserProfile = async (req, res) => {
             .populate('user_id', 'profile.nick_name profile.display_name profile.avt')
             .sort({ createdAt: -1 });
 
-        const unreadCount = await Notification.countDocuments({
-            user_id: req.userId,
-            is_read: false,
-        });
+        const unreadCount = req.user ? await Notification.countDocuments({ user_id: req.userId, is_read: false }) : 0;
         const title = `${unreadCount > 0 ? `(${unreadCount}) ` : ''}${user.profile.display_name}`;
 
         res.render('profile', {
@@ -116,13 +112,13 @@ const getOtherUserProfile = async (req, res) => {
             selectedItem: null,
             user: user,
             username: user.nick_name,
-            userid: req.user._id,
+            userid: req.user?._id || null,
             avatarSrc: user.profile.avt ? user.profile.avt : '/Img/UserIcon.jpg',
             followerUsers: followerUsers,
             followingUsers: followingUsers,
             type: 'guest',
             isFollowing: isFollowing, // Pass a boolean indicating if the current user is following this user
-            curUserId: curUser._id ? curUser._id : null, // Pass a boolean indicating if the user is authenticated
+            curUserId: curUser?._id ? curUser._id : null, // Pass a boolean indicating if the user is authenticated
             posts: post,
             unreadCount: unreadCount,
         });
@@ -177,7 +173,7 @@ const profileController = async (req, res) => {
     try {
         // Fetch user data from the database using the userId from the JWT token
         if (!req.userId) {
-            return res.status(401).send('Unauthorized');
+            return res.redirect('/auth/login');
         }
         const userId = req.userId;
         const user = await User.findById(userId);

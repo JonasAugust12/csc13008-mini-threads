@@ -83,52 +83,22 @@
         </div>
     </div>
 
-    <div class="navbar__setting mb-[22px] h-fit hidden tbl:block ">
-        <div
-            class="navbar__setting-btn  navbar__setting-btn--more w-[54px] h-[54px] flex items-center justify-center group ">
-            <svg aria-label="More" role="img" viewBox="0 0 24 24" class="w-6 h-6">
-                <title>More</title>
-                <rect width="24" height="2.5" rx="1.25" x="3" y="7" fill="#4d4d4d" class="group-hover:fill-white">
-                </rect>
-                <rect width="14" height="2.5" rx="1.25" x="3" y="15" fill="#4d4d4d" class="group-hover:fill-white">
-                </rect>
-            </svg>
-        </div>
-    </div>
-
-    <div class="navbar__setting-more-menu hidden absolute left-0 top-0 w-fit">
-        <div class="menu bg-[#181818]">
-            <div class="menu__upper p-2 border-b border-[#333638]">
-                <div
-                    class="menu__btn menu__btn--appearance flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]">
-                    <span
-                        class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative">
-                        Appearance
-                    </span>
-                    <div class="menu__btn-icon flex items-center ml-2 rotate-180">
-                        <svg class="w-[16px] h-[16px] stroke-[2px] fill-none stroke-[#777]"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <title>Next</title>
-                            <polyline points="16.502 3 7.498 12 16.502 21"></polyline>
-                        </svg>
-                    </div>
-                </div>
-                <div class="menu__btn menu__btn--settings flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]"
-                    onclick="window.location.href='/settings/privacy'">
-                    <span
-                        class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] break-words relative">
-                        Settings
-                    </span>
-                </div>
+    <% if (userid) { %>
+        <div class="navbar__setting mb-[22px] h-fit hidden tbl:block ">
+            <div
+                class="navbar__setting-btn  navbar__setting-btn--more w-[54px] h-[54px] flex items-center justify-center group ">
+                <svg aria-label="More" role="img" viewBox="0 0 24 24" class="w-6 h-6">
+                    <title>More</title>
+                    <rect width="24" height="2.5" rx="1.25" x="3" y="7" fill="#4d4d4d" class="group-hover:fill-white">
+                    </rect>
+                    <rect width="14" height="2.5" rx="1.25" x="3" y="15" fill="#4d4d4d" class="group-hover:fill-white">
+                    </rect>
+                </svg>
             </div>
-            <div class="menu__lower p-2">
-                <div
-                    class="menu__btn menu__btn--report flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]">
-                    <span
-                        class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative">
-                        Report a problem
-                    </span>
-                </div>
+        </div>
+        
+        <div class="navbar__setting-more-menu hidden absolute left-0 top-0 w-fit">
+            <div class="menu bg-[#181818]">
                 <div id="menu-logout"
                     class="menu__btn menu__btn--logout flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]">
                     <span
@@ -138,7 +108,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    <% } %>
 
 </nav>
 

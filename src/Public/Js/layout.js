@@ -58,47 +58,54 @@ cancelBtn.addEventListener('click', hideModal);
 
 const moreBtn = document.querySelector('.navbar__setting-btn--more');
 const moreMenu = document.querySelector('.navbar__setting-more-menu');
-moreBtn.addEventListener('click', function () {
-    moreMenu.style.display = 'flex';
-});
-document.addEventListener('click', function (event) {
-    if (!moreMenu.contains(event.target) && !moreBtn.contains(event.target)) {
-        moreMenu.style.display = 'none';
-    }
-});
+if (moreBtn) {
+    moreBtn.addEventListener('click', function () {
+        moreMenu.style.display = 'flex';
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!moreMenu.contains(event.target) && !moreBtn.contains(event.target)) {
+            moreMenu.style.display = 'none';
+        }
+    });
+}
 const moreBtnTbl = document.querySelector('.top-nav__right-setting');
 const moreMenuTbl = document.querySelector('.top-nav__setting-more-menu');
-moreBtnTbl.addEventListener('click', function () {
-    moreMenuTbl.style.display = 'flex';
-});
-document.addEventListener('click', function (event) {
-    if (!moreMenuTbl.contains(event.target) && !moreBtnTbl.contains(event.target)) {
-        moreMenuTbl.style.display = 'none';
-    }
-});
+if (moreBtnTbl) {
+    moreBtnTbl.addEventListener('click', function () {
+        moreMenuTbl.style.display = 'flex';
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!moreMenuTbl.contains(event.target) && !moreBtnTbl.contains(event.target)) {
+            moreMenuTbl.style.display = 'none';
+        }
+    });
+}
 
 // query theo id
 const logoutBtn = document.getElementById('menu-logout');
-
-logoutBtn.addEventListener('click', async function () {
-    // fetch api logout
-    try {
-        const response = await fetch('/auth/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        const data = await response.json();
-        if (data) {
-            // xóa access token và chuyển hướng về trang login
-            localStorage.removeItem('accessToken');
-            window.location.href = '/auth/login';
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', async function () {
+        // fetch api logout
+        try {
+            const response = await fetch('/auth/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            if (data) {
+                // xóa access token và chuyển hướng về trang login
+                localStorage.removeItem('accessToken');
+                window.location.href = '/auth/login';
+            }
+        } catch (error) {
+            console.error(error);
         }
-    } catch (error) {
-        console.error(error);
-    }
-});
+    });
+}
 
 // show popup
 const showPopup = (id) => {
@@ -168,7 +175,7 @@ if (accessToken) {
 const thread_start = document.querySelector('.start-thread');
 // const accessToken = localStorage.getItem("accessToken");
 
-if (!accessToken) {
+if (thread_start && !accessToken) {
     thread_start.classList.add('hidden');
 }
 const create_btn = document.querySelector('.create-btn');
@@ -369,6 +376,12 @@ document.addEventListener('DOMContentLoaded', () => {
     postLikes.forEach((postLike) => {
         postLike.addEventListener('click', (e) => {
             e.stopPropagation();
+            const accessToken = localStorage.getItem('accessToken');
+            if (!accessToken) {
+                showPopup('popup');
+                return;
+            }
+
             const postId = postLike.id.replace('like-button-', ''); // Sửa biến `button` thành `postLike`
             const svg = postLike.querySelector('svg path');
             const likeNum = postLike.querySelector('.like-num');

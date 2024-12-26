@@ -12,9 +12,9 @@ const searchController = async (req, res) => {
         if (query) {
             filteredUsers = await User.find({
                 $or: [{ username: { $regex: query, $options: 'i' } }, { fullname: { $regex: query, $options: 'i' } }],
-            }).select('username fullname profile.avt followers');
+            }).select('profile.avt profile.display_name profile.nick_name followers');
         } else {
-            filteredUsers = await User.find().select('username fullname profile.avt followers');
+            filteredUsers = await User.find().select('profile.avt profile.display_name profile.nick_name followers');
         }
 
         if (userId) {
@@ -24,7 +24,6 @@ const searchController = async (req, res) => {
             filteredUsers = filteredUsers.map((user) => ({
                 ...user.toObject(),
                 isFollowing: followingIds.includes(user._id.toString()),
-                followers_count: user.followers.length,
             }));
         }
 
@@ -37,6 +36,7 @@ const searchController = async (req, res) => {
             header: 'Search',
             refreshItems: null,
             selectedItem: null,
+            userid: userId,
             username: req.username || null,
             avatarSrc: req.avatarSrc || null,
             users: filteredUsers,

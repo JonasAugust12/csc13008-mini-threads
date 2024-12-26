@@ -9,6 +9,6 @@ const upload = require('../Middleware/multer');
 router.get('/', authenticateToken, profileController);
 router.post('/edit', authenticateToken, upload.single('post_image'), updateProfileController);
 router.get('/:id', authenticateToken, getOtherUserProfile);
-router.post('/follow/:id', authenticateToken2, followController);
+router.post('/follow/:id', authenticateToken, followController);
 
 module.exports = router;

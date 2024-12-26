@@ -2,7 +2,9 @@
     <%- include('post-activity', { post, following }) %>
 
     <%- include('main-post', {post}) %>
-    <%- include('comment-form', { postId: post._id.toString(), avatarSrc }) %>
+    <% if (userid) { %>
+        <%- include('comment-form', { postId: post._id.toString(), avatarSrc }) %>
+    <% } %>
     <div class="comment-wrapper">
         <% if(comments.length> 0) { %>
             <% comments.forEach(comment=> { %>

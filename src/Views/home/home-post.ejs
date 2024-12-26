@@ -34,7 +34,7 @@
                         <div class="w-full py-3 flex justify-center tbl:hidden">
                             <div class="w-10 h-1 bg-secondary-text rounded-full"></div>
                         </div>
-                        <% if (post.user_id._id.toString() === userid.toString()) { %>
+                        <% if (userid !== null && post.user_id._id.toString() === userid.toString()) { %>
                             <div
                                 class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent"
                             >
@@ -56,7 +56,7 @@
                         <% } %>
                         <div
                             onclick="copyLinkToClipboard('/post/<%= post._id %>')"
-                            class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-border-color <%= post.user_id._id.toString()===userid.toString() ? 'tbl:border-t-[1px]' : '' %>"
+                            class="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] mb-4 tbl:p-2 tbl:mb-0 tbl:rounded-none tbl:bg-transparent tbl:border-border-color <%= userid !== null && post.user_id._id.toString()===userid.toString() ? 'tbl:border-t-[1px]' : '' %>"
                         >
                             <div
                                 class="main-post-more-list__item min-h-[20px] box-content p-5 flex items-center justify-between tbl:rounded-xl cursor-pointer hover:bg-[#212121] tbl:p-3"

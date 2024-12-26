@@ -103,6 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function handleFollowClick(userId, event) {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+        showPopup('popup');
+        return;
+    }
+
     event.stopPropagation();
     fetch(`/profile/follow/${userId}`, {
         method: 'POST',
