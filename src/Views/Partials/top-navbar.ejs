@@ -2,15 +2,17 @@
     class="top-nav fixed top-0 left-0 w-screen h-[60px] z-[1] bg-mobile-nav backdrop-blur-lg grid grid-cols-[1fr_50vw_1fr] grid-rows-1 tbl:hidden">
     <div class="top-nav__left">
         <div class="top-nav__left-back-btn flex h-full items-center justify-start">
-            <% if (header === 'Thread') { %>
-                <div onclick="window.history.back()" class="top-nav__left-back-btn flex h-full items-center justify-start">
+            <% if (header==='Thread' ) { %>
+                <div onclick="window.history.back()"
+                    class="top-nav__left-back-btn flex h-full items-center justify-start">
                     <svg aria-label="Back" role="img" viewBox="0 0 24 24" class="ml-7 w-6 h-6">
                         <title>Back</title>
                         <line x1="2.909" x2="22.001" y1="12.004" y2="12.004" stroke="white"></line>
-                        <polyline points="9.276 4.726 2.001 12.004 9.276 19.274" stroke="white" fill="transparent"></polyline>
+                        <polyline points="9.276 4.726 2.001 12.004 9.276 19.274" stroke="white" fill="transparent">
+                        </polyline>
                     </svg>
                 </div>
-            <% } %>
+                <% } %>
         </div>
     </div>
     <div class="top-nav__middle flex justify-center items-center">
@@ -77,17 +79,21 @@
                 <div
                     class="menu__btn menu__btn--report flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]">
                     <span
-                        class="menu__btn-text max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative">
+                        class="menu__btn-text_problem max-w-full text-[#f3f5f7] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative">
                         Report a problem
                     </span>
+
                 </div>
-                <div
+                <div id="menu-logout-mb"
                     class="menu__btn menu__btn--logout flex items-center justify-between px-3 py-3 h-[52px] bg-transparent cursor-pointer rounded-[12px] relative transition-transform duration-100 z-10 hover:bg-[rgba(255,_255,_255,_0.04)]">
-                    <span
-                        class="menu__btn-text menu__btn-text--logout max-w-full text-[#ff3040] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative"
-                        onclick="window.location.href='/login'">
+                    <div
+                        class="menu__btn-text menu__btn-text--logout max-w-full text-[#ff3040] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative">
                         Log out
-                    </span>
+                    </div>
+                    <div class="menu__btn-text menu__btn-text--login max-w-full text-[#ffffff] text-[15px] font-semibold leading-[calc(1.4*1em)] font-[system-ui] break-words relative"
+                        onclick="window.location.href='/auth/login';">
+                        Log in
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,17 +101,17 @@
     <% if (title.includes('Activity')) { %>
         <div
             class="activity-filter bg-main-bg fixed top-[60px] left-0 w-full h-[42px] overflow-x-auto overflow-y-hidden custom-scrollbar py-1 px-3 flex justify-center z-[1] box-border gap-x-[6px] self-center flex-nowrap tbl:hidden">
-            <% if (refreshItems && refreshItems.length > 0) { %>
-                <% refreshItems.forEach(item => { %>
-                    <a href="<%= item.link %>"
-                        class="activity-option min-w-[100px] h-[34px] inline-flex justify-center items-center border-border-color border-[1px]
+            <% if (refreshItems && refreshItems.length> 0) { %>
+                <% refreshItems.forEach(item=> { %>
+                    <a href="<%= item.link %>" class="activity-option min-w-[100px] h-[34px] inline-flex justify-center items-center border-border-color border-[1px]
                         rounded-[10px] px-4 <%= selectedItem===item.type ? 'bg-white' : 'bg-main-bg' %>">
-                            <div class="font-semibold select-none <%= selectedItem === item.type ? 'text-black' : 'text-white' %>">
-                                <%= item.name %>
-                            </div>
+                        <div
+                            class="font-semibold select-none <%= selectedItem === item.type ? 'text-black' : 'text-white' %>">
+                            <%= item.name %>
+                        </div>
                     </a>
-                <% }) %>
-            <% } %>
+                    <% }) %>
+                        <% } %>
         </div>
-    <% } %>
+        <% } %>
 </nav>
