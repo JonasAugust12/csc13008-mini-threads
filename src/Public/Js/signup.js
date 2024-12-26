@@ -45,6 +45,18 @@ document
 
     // Validation logic
     const validations = [
+      // Should contain exactly one '@'
+      {
+        condition: email.split("@").length !== 2,
+        message: "Email format is invalid",
+      },
+      // Should match general email format
+      {
+        condition: !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+          email
+        ),
+        message: "Email format is invalid",
+      },
       {
         condition: password.length < 8 || password.length > 20,
         message: "Password must be between 8 and 20 characters long",
@@ -56,12 +68,7 @@ document
         message:
           "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
       },
-      {
-        condition: !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-          email
-        ),
-        message: "Email contains invalid characters",
-      },
+
       {
         condition: password !== password_confirm,
         message: "Password and Confirm Password do not match",
@@ -71,8 +78,11 @@ document
         message: "Username cannot contain spaces",
       },
       {
-        condition: username.length < 6,
-        message: "Username must be at least 6 characters long",
+        //Username should be alpha digit with dash, hyphen or dot only and limit in length (30 characters)
+        condition: !/^[a-zA-Z0-9._-]{6,30}$/.test(username),
+
+        message:
+          "Username must be 6-30 characters with letters, numbers, dashes, hyphen, or dots only",
       },
     ];
 
