@@ -176,7 +176,7 @@ const signupController = async (req, res) => {
     const token = jwt.sign(
       { id: newUser._id, email: newUser.email },
       process.env.JWT_VERIFY_KEY, // Secret key
-      { expiresIn: "1m" } // Thời gian hết hạn
+      { expiresIn: "1h" } // Thời gian hết hạn
     );
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -275,7 +275,7 @@ const resetPassword = async (req, res) => {
     // Tạo token để reset mật khẩu
     const token = jwt.sign({ id: user.id }, process.env.JWT_RESET_KEY, {
       // token hết hạn trong 1m
-      expiresIn: "1m",
+      expiresIn: "1h",
     });
 
     // Tạo transporter để gửi email
