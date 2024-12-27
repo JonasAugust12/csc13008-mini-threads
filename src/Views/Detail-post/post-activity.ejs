@@ -19,7 +19,7 @@
                     <img src="<%= post.user_id.profile.avt %>" alt="avatar"
                         class="main-user-img w-9 h-9 rounded-full border-border-color border-[0.5px] object-cover select-none" />
                     <div class="inline-block pl-3 flex-grow">
-                        <a href="#"
+                        <a href="/profile/<%= post.user_id._id %>"
                             class="mini-post-username inline-block text-[15px] font-user-weight hover:underline"><%= post.user_id.profile.nick_name %></a>
                         <p data-created-at="<%= post.createdAt %>" class="post-time-stamp inline-block text-[15px] text-secondary-text"></p>
                     </div>

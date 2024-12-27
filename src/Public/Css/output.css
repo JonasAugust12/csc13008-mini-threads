@@ -1203,6 +1203,10 @@ video {
     height: 70px;
 }
 
+.h-\[84px\] {
+    height: 84px;
+}
+
 .h-auto {
     height: auto;
 }
@@ -1374,6 +1378,10 @@ video {
 
 .w-\[82px\] {
     width: 82px;
+}
+
+.w-\[84px\] {
+    width: 84px;
 }
 
 .w-\[calc\(100\%-36px\)\] {
