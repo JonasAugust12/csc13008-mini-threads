@@ -74,49 +74,46 @@
 
 
             <div class="profile__info mt-8 border-b border-border-color pb-4">
-                <div class="content__heading flex justify-between">
-                    <div class="information flex flex-col ml-6 font-bold">
-                        <div class="information__name text-2xl mb-1">
-                            <%=user.profile.display_name%>
+                <div class="profile__info__header flex flex-col px-6">
+                    <div class="content__heading flex justify-between">
+                        <div class="information flex-grow flex flex-col font-bold">
+                            <div class="information__name text-2xl mb-1">
+                                <%=user.profile.display_name%>
+                            </div>
+                            <div class="information__nickname text-sm font-normal">
+                                <%=user.profile.nick_name%>
+                            </div>
                         </div>
-                        <div class="information__nickname text-sm font-normal mb-6">
-                            <%=user.profile.nick_name%>
+                        <div class="utility flex flex-col items-end">
+                            <img src="<%= user.profile.avt %>" alt="User Avatar"
+                                class="utility__avatar w-[84px] h-[84px] bg-cover rounded-full cursor-pointer">
                         </div>
-                        <div class="information__bio text-sm font-normal mb-4">
+                    </div>
+                    <div class="flex flex-col mt-3">
+                        <div class="information__bio text-sm font-normal mb-4 break-all">
                             <%=user.profile.bio%>
                         </div>
                         <div class="information__follower flex flex-row gap-1 mb-8 text-gray-500">
                             <ul class="follower__img flex flex-row cursor-pointer">
                                 <!-- không tạo loop vì truyền biến theo loop vô style khá khó không tối ưu nếu để nó lồng if vô thì sẽ tối ưu hơn một xíu nhưng không đáng kể kiểu này dễ đọc code hơn -->
                                 <% if (followerUsers[0]?.profile?.avt) { %>
-                                    <li 
-                                        class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
-                                        style="background-image: url('<%= followerUsers[0].profile.avt %>'); left: 2px;"
-                                    ></li>
+                                    <li class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
+                                        style="background-image: url('<%= followerUsers[0].profile.avt %>'); left: 2px;"></li>
                                 <% } %>
                                 <% if (followerUsers[1]?.profile?.avt) { %>
-                                    <li 
-                                        class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
-                                        style="background-image: url('<%= followerUsers[1].profile.avt %>'); left: -10px;"
-                                    ></li>
-                                <% } %>
+                                    <li class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
+                                        style="background-image: url('<%= followerUsers[1].profile.avt %>'); left: -10px;"></li>
+                                    <% } %>
                                 <% if (followerUsers[2]?.profile?.avt) { %>
-                                    <li 
-                                        class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
-                                        style="background-image: url('<%= followerUsers[2].profile.avt %>'); left: -20px;"
-                                    ></li>
+                                    <li class="follower__img__item h-4 w-4 bg-cover mr-1 relative rounded-full"
+                                        style="background-image: url('<%= followerUsers[2].profile.avt %>'); left: -20px;"></li>
                                 <% } %>
-
                             </ul>
                             <div class="follower__number text-sm font-normal mr-1 relative cursor-pointer">
                                 <%=user.followers.length%>
                             </div>
                             <div class="follower__text text-sm font-normal relative cursor-pointer">followers</div>
                         </div>
-                    </div>
-                    <div class="utility flex flex-col items-end h-48 mr-6">
-                        <img src="<%= user.profile.avt %>" alt="User Avatar"
-                            class="utility__avatar h-20 w-20 bg-cover mb-8 rounded-full cursor-pointer">
                     </div>
                 </div>
                 <% if (type === "guest") { %>
