@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="src/Public/Img/threads-app-icon.svg" alt="Mini Threads Logo" width="120" height="120">
+  <img src="src/Public/Img/threads-app-icon.svg" alt="Mini Threads Logo" width="60" height="60">
   
   # Mini Threads
   
@@ -11,9 +11,9 @@
   
   ## 📱 Demo
   
+  <div align="center">
   [![Mini Threads Demo](https://img.youtube.com/vi/RmAZqZE8T0Y/maxresdefault.jpg)](https://www.youtube.com/watch?v=RmAZqZE8T0Y)
-  
-  *Click the image above to watch the full demo*
+  </div>
   
 </div>
 
