@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="src/Public/Img/threads-app-icon.svg" alt="Mini Threads Logo" width="60" height="60">
+  <img src="src/Public/Img/threads-app-icon.svg" alt="Mini Threads Logo" width="50" height="50">
   
   # Mini Threads
   
@@ -8,16 +8,15 @@
   <div align="center">
     <img src="img/thread.png" width="650">
   </div>
-  
+    
+</div>
   ## Demo
   
-  **[Xem Demo Video tại đây](https://www.youtube.com/watch?v=RmAZqZE8T0Y)**
-  
-</div>
+  **[Watch Demo](https://www.youtube.com/watch?v=RmAZqZE8T0Y)**
 
 ---
 
-## ✨ Features
+## Features
 
 - **Authentication** - Sign up, login, password reset
 - **User Profiles** - Edit profile, view user threads
@@ -29,7 +28,7 @@
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Frontend
 
