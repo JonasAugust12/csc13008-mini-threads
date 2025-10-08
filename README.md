@@ -9,11 +9,9 @@
     <img src="img/thread.png" width="650">
   </div>
   
-  ## 📱 Demo
+  ## Demo
   
-  <div align="center">
-  [![Mini Threads Demo](https://img.youtube.com/vi/RmAZqZE8T0Y/maxresdefault.jpg)](https://www.youtube.com/watch?v=RmAZqZE8T0Y)
-  </div>
+  **[Xem Demo Video tại đây](https://www.youtube.com/watch?v=RmAZqZE8T0Y)**
   
 </div>
 
